@@ -2,6 +2,9 @@
     "name": "bridge-lang-v2",
     "version": "6.2.0",
     "private": true,
+    "engines": {
+        "node": "18.x"
+      },
     "dependencies": {
         "@date-io/core": "3.2.0",
         "@date-io/date-fns": "3.2.1",
@@ -29,6 +32,7 @@
         "autosuggest-highlight": "3.3.4",
         "axios": "1.9.0",
         "axios-mock-adapter": "2.1.0",
+        "browserify": "^17.0.1",
         "browserify-zlib": "^0.2.0",
         "buffer": "^6.0.3",
         "chart.js": "4.4.9",
