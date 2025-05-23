@@ -23,6 +23,7 @@ module.exports = function override(config, env) {
       // Add fallback for Node.js 'crypto' module
  config.resolve = {
     ...config.resolve,
+   
     fallback: {
       ...config.resolve?.fallback,
       process: require.resolve("process/browser.js"),
@@ -39,6 +40,11 @@ module.exports = function override(config, env) {
       zlib: require.resolve("browserify-zlib"),
       fs: false, // Not available in browsers
     },
+  };
+
+  config.resolve.alias = {
+    ...config.resolve.alias,
+    src: path.resolve(__dirname, 'src'),
   };
   // Inject global variables for browser compatibility
   config.plugins = [
