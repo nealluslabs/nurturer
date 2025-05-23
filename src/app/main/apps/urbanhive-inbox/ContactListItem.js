@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import format from 'date-fns/format';
 import StatusIcon from './StatusIcon';
-import { unMatchConnect, updateConnection } from 'redux/actions/user.action';
+import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {

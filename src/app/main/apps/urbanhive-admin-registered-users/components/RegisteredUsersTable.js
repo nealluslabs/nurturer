@@ -21,7 +21,7 @@ import { AddBoxOutlined } from '@material-ui/icons';
 
 /*REDUX ACTIONS AND FIREBASE */
 import { fetchAllAdminUsers, fetchRealTimeConnections, fetchRealTimeConnections2, initiateConnection } from 'redux/actions/adminUser.action';
-import {rollOverConnections } from 'redux/actions/user.action';
+import {rollOverConnections } from 'src/redux/actions/user.action';
 import { fb } from 'config/firebase';
 /*REDUX ACTIONS AND FIREBASE */
 

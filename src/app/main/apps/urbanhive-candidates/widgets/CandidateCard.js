@@ -21,7 +21,7 @@ import '../style/swipe.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllUsers, fetchRealTimeConnections, fetchRealTimeConnections2, initiateConnection, rollOverConnections } from 'redux/actions/user.action';
+import { fetchAllUsers, fetchRealTimeConnections, fetchRealTimeConnections2, initiateConnection, rollOverConnections } from 'src/redux/actions/user.action';
 import { fb } from 'config/firebase';
 import { timeSince } from 'config/getTimeStamp';
 import { updateLastActive } from 'redux/actions/auth.action';

@@ -34,7 +34,7 @@ import {
 } from './store/sidebarsSlice';
 
 import UserSidebar from './UserSidebar';
-import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'redux/actions/user.action';
+import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
 
 const drawerWidth = 400;
 const headerHeight = 200;

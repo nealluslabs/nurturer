@@ -18,7 +18,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { motion } from 'framer-motion';
 import { useMemo, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchRealTimeUsers } from 'redux/actions/user.action';
+import { fetchRealTimeUsers } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
 import ContactListItem2 from './ContactListItem2';
 import StatusIcon from './StatusIcon';
