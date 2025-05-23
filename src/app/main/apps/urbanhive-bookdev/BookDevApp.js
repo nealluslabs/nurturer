@@ -8,7 +8,7 @@ import _ from '@lodash';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory, Redirect } from 'react-router-dom';
-import { logout } from '.src/redux/actions/auth.action';
+import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
 import Icon from '@material-ui/core/Icon';
 import Typography from '@material-ui/core/Typography';
