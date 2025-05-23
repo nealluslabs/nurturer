@@ -17,6 +17,34 @@ module.exports = function override(config, env) {
         resolveApp("node_modules/react-spring")
     );
 
+      // Add fallback for Node.js 'crypto' module
+ config.resolve = {
+    ...config.resolve,
+    fallback: {
+      ...config.resolve?.fallback,
+      crypto: require.resolve("crypto-browserify"),
+      stream: require.resolve("stream-browserify"),
+      buffer: require.resolve("buffer"),
+      util: require.resolve("util"),
+      assert: require.resolve("assert"),
+      http: require.resolve("stream-http"),
+      https: require.resolve("https-browserify"),
+      os: require.resolve("os-browserify/browser"),
+      url: require.resolve("url"),
+      path: require.resolve("path-browserify"),
+      zlib: require.resolve("browserify-zlib"),
+      fs: false, // Not available in browsers
+    },
+  };
+  // Inject global variables for browser compatibility
+  config.plugins = [
+    ...(config.plugins || []),
+    new webpack.ProvidePlugin({
+      process: "process/browser",
+      Buffer: ["buffer", "Buffer"],
+    }),
+  ];
+
 
     // Explicitly handle CSS and PostCSS files
   const cssRule = config.module.rules.find((rule) =>
