@@ -135,7 +135,7 @@ export const logoutUser = () => async (dispatch, getState) => {
     case 'auth0': {
       auth0Service.logout();
       break;
-    }
+    } 
     default: {
       jwtService.logout();
     }

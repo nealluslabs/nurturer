@@ -14,7 +14,7 @@ class Auth0Service {
         );
       }
       success(false);
-      return;
+      return; 
     }
 
     this.lock = new Auth0Lock(AUTH_CONFIG.clientId, AUTH_CONFIG.domain, {
