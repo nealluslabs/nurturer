@@ -1,4 +1,4 @@
-import { fetchChatsPending, fetchChatsSuccess, setCurrentChat } from "redux/reducers/chat.slice";
+import { fetchChatsPending, fetchChatsSuccess, setCurrentChat } from "src/redux/reducers/chat.slice";
 import { db, fb, auth, storage } from '../../config/firebase';
 
 

@@ -1,11 +1,11 @@
 import {fetchAppointmentsPending, fetchAppointmentsSuccess, fetchAppointmentsFailed,
          updateAppointmentPending,updateAppointmentSuccess,updateAppointmentFailed,
          fetchSelectedAppointmentPending, fetchSelectedAppointmentSuccess, fetchSelectedAppointmentFailed,
-         clearAppointments} from '../reducers/appointments.slice';
+         clearAppointments} from 'src/redux/reducers/appointments.slice';
   import { db, fb, auth, storage } from '../../config/firebase';
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
-import { clearChat } from 'redux/reducers/chat.slice';
+import { clearChat } from 'src/redux/reducers/chat.slice';
   
     export const fetchAppointments = ( ) => async (dispatch) => {
             dispatch(fetchAppointmentsPending());

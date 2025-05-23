@@ -14,9 +14,9 @@ import CropEasy from './crop/CropEasy';
 import '../../app.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory,useParams } from 'react-router-dom';
-import { createProfile, fetchProfile, uploadImage } from 'redux/actions/profile.action';
-import { updateAppointment,fetchSelectedAppointment,deleteSelectedAppointment  } from 'redux/actions/appointments.action';
-import { resetMsg } from 'redux/reducers/profile.slice';
+import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/profile.action';
+import { updateAppointment,fetchSelectedAppointment,deleteSelectedAppointment  } from 'src/redux/actions/appointments.action';
+import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
 
 

@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllUsers, fetchRealTimeConnections, fetchRealTimeConnections2, initiateConnection, rollOverConnections } from 'src/redux/actions/user.action';
 import { fb } from 'config/firebase';
 import { timeSince } from 'config/getTimeStamp';
-import { updateLastActive } from 'redux/actions/auth.action';
+import { updateLastActive } from 'src/redux/actions/auth.action';
 
 const useStyles = makeStyles((theme) => ({
     root: {

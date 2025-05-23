@@ -1,10 +1,10 @@
 import {fetchUsersPending, fetchUsersSuccess, fetchUsersFailed, fetchRealTimeUsersSuccess, fetchConnectedUserSuccess,
-    initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearUser, resetConnects} from '../reducers/user.slice';
- import { updateUsedConnection } from 'redux/reducers/auth.slice';
+    initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearUser, resetConnects} from 'src/redux/reducers/user.slice';
+ import { updateUsedConnection } from 'src/redux/reducers/auth.slice';
     import { db, fb, auth, storage } from '../../config/firebase';
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
-import { clearChat } from 'redux/reducers/chat.slice';
+import { clearChat } from 'src/redux/reducers/chat.slice';
   
 
 export const fetchAllUsers = (uid) => async (dispatch) => {

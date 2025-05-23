@@ -10,7 +10,7 @@ import Slide from '@mui/material/Slide';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import '../../app.css';
-import { closeModal, logoutSuccess } from '../../../../../redux/reducers/auth.slice';
+import { closeModal, logoutSuccess } from 'src/redux/reducers/auth.slice';
 
 
 const Transition = React.forwardRef(function Transition(props, ref) {

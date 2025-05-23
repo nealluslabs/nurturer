@@ -13,9 +13,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { submitLogin } from 'app/auth/store/loginSlice';
-import { signin, logout } from '../../../../../redux/actions/auth.action';
+import { signin, logout } from 'src/redux/actions/auth.action';
 
-import { logoutSuccess } from 'redux/reducers/auth.slice';
+import { logoutSuccess } from 'src/redux/reducers/auth.slice';
 
 /**
  * Form Validation Schema

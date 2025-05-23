@@ -12,7 +12,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
-import { sendChat } from 'redux/actions/chat.action';
+import { sendChat } from 'src/redux/actions/chat.action';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {

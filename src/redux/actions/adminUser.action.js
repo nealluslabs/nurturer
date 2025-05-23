@@ -1,9 +1,9 @@
 import {fetchAdminUsersPending, fetchAdminUsersSuccess, fetchAdminUsersFailed, fetchRealTimeAdminUsersSuccess, fetchConnectedAdminUserSuccess,
-    initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearUser} from '../reducers/adminUser.slice';
+    initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearUser} from 'src/redux/reducers/adminUser.slice';
   import { db, fb, auth, storage } from '../../config/firebase';
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
-import { clearChat } from 'redux/reducers/chat.slice';
+import { clearChat } from 'src/redux/reducers/chat.slice';
   
     export const fetchAllAdminUsers = (uid) => async (dispatch) => {
             dispatch(fetchAdminUsersPending());

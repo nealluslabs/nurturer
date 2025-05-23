@@ -18,7 +18,7 @@ import Paper from '@mui/material/Paper';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 import { AddBoxOutlined } from '@material-ui/icons';
 /*REDUX ACTIONS AND FIREBASE */
-import { fetchAppointments } from 'redux/actions/appointments.action';
+import { fetchAppointments } from 'src/redux/actions/appointments.action';
 
 /*REDUX ACTIONS AND FIREBASE */
 

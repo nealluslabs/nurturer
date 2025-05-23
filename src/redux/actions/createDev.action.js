@@ -1,5 +1,5 @@
 import {createDevPending, createDevSuccess, createDevFailed, 
-/*fetchProfilePending, fetchProfileSuccess, fetchProfileFailed*/} from '../reducers/createDev.slice';
+/*fetchProfilePending, fetchProfileSuccess, fetchProfileFailed*/} from 'src/redux/reducers/createDev.slice';
 import { v4 as uuidv4 } from 'uuid';
 import { db, fb, auth, storage } from '../../config/firebase';
 import uploadFile from 'config/uploadFile';

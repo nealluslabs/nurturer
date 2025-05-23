@@ -2,9 +2,9 @@
 import {loginPending,loginSuccess,loginFailed,signupSuccess,signupPending,signupFailed,logoutPending,logoutSuccess} from '../reducers/auth.slice';
 import { db, fb, auth, static_img } from '../../config/firebase';
 import { fetchProfile } from './profile.action';
-import { clearProfile } from 'redux/reducers/profile.slice';
-import { clearUser } from 'redux/reducers/user.slice';
-import { clearChat } from 'redux/reducers/chat.slice';
+import { clearProfile } from 'src/redux/reducers/profile.slice';
+import { clearUser } from 'src/redux/reducers/user.slice';
+import { clearChat } from 'src/redux/reducers/chat.slice';
 // import { clearSlice } from '../reducers/transaction.slice';
 // import { clearBank } from '../reducers/bank.slice';
 // import { createBankAcc } from './bank.action';

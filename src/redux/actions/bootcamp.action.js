@@ -1,4 +1,4 @@
-import {} from '../reducers/bootcamp.slice';
+import {} from 'src/redux/reducers/bootcamp.slice';
 import { db, fb, auth, storage } from '../../config/firebase';
 
 export const buyBootcamp = (courses, uid, today, history) => async (dispatch) => {

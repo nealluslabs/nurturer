@@ -11,9 +11,9 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { submitRegister } from 'app/auth/store/registerSlice';
 import * as yup from 'yup';
 import _ from '@lodash';
-import { signup } from '../../../../../redux/actions/auth.action';
+import { signup } from 'src/redux/actions/auth.action';
 import { db, fb } from '../../../../../config/firebase';
-import { logoutSuccess } from 'redux/reducers/auth.slice';
+import { logoutSuccess } from 'src/redux/reducers/auth.slice';
 
 
 const schema = yup.object().shape({

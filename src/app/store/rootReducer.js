@@ -1,8 +1,8 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import auth from 'app/auth/store';
 import { persistReducer } from 'redux-persist';
-import loginReducer from '../../redux/reducers/auth.slice';
-import storage from '../../redux/storage';
+import loginReducer from 'src/redux/reducers/auth.slice';
+import storage from 'src/redux/storage';
 import fuse from './fuse';
 import i18n from './i18nSlice';
 

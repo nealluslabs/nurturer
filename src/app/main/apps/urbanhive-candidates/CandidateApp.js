@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import reducer from './store';
 import CandidateCard from './widgets/CandidateCard';
 import { Link, useHistory, Redirect } from 'react-router-dom';
-import { logout } from '../../../../redux/actions/auth.action';
+import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
 
 const useStyles = makeStyles((theme) => ({

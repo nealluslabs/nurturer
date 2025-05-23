@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import TNAIL1 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
 import { usePaystackPayment, PaystackButton, PaystackConsumer } from 'react-paystack';
 import Modal from '@mui/material/Modal';
-import { buyBootcamp } from 'redux/actions/bootcamp.action';
+import { buyBootcamp } from 'src/redux/actions/bootcamp.action';
 
 const style = {
   position: 'absolute',

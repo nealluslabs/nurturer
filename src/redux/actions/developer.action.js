@@ -1,9 +1,9 @@
 import {fetchDevelopersPending, fetchDevelopersSuccess, fetchDevelopersFailed, fetchRealTimeDevelopersSuccess, fetchConnectedDeveloperSuccess,
-    initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearDeveloper} from '../reducers/developer.slice';
+    initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearDeveloper} from 'src/redux/reducers/developer.slice';
   import { db, fb, auth, storage } from '../../config/firebase';
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
-import { clearChat } from 'redux/reducers/chat.slice';
+import { clearChat } from 'src/redux/reducers/chat.slice';
  
 
 

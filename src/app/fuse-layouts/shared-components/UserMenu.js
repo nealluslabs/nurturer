@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import { logout } from '../../../redux/actions/auth.action';
+import { logout } from 'src/redux/actions/auth.action';
 
 function UserMenu(props) {
   const dispatch = useDispatch();
