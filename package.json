@@ -121,6 +121,7 @@
         "velocity-animate": "1.5.2",
         "velocity-react": "1.4.3",
         "web-vitals": "5.0.1",
+        "webpack": "^5.99.9",
         "yup": "1.6.1"
     },
     "peerDependencies": {

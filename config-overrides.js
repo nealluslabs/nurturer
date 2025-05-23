@@ -3,6 +3,9 @@
 const path = require("path");
 const fs = require("fs");
 const rewireBabelLoader = require("react-app-rewire-babel-loader");
+
+const webpack = require("webpack");
+
  
 const appDirectory = fs.realpathSync(process.cwd());
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
