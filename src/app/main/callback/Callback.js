@@ -9,8 +9,11 @@ function Callback(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+    console.log("I AM IN CALBACK SCREEN, PRE AUTHENTICATED")
     auth0Service.onAuthenticated(() => {
       dispatch(showMessage({ message: 'Logging in with Auth0' }));
+      console.log("I AM IN CALBACK SCREEN, JUST GOT AUTHENTICATED")
 
       /**
        * Retrieve user data from Auth0
@@ -22,7 +25,9 @@ function Callback(props) {
     });
   }, [dispatch]);
 
-  return <FuseSplashScreen />;
+  return <>
+   <FuseSplashScreen />;
+    </>
 }
 
 export default Callback;

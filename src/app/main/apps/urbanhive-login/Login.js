@@ -152,7 +152,7 @@ function Login() {
             >
               <Typography variant="h3" color="inherit" className="font-semibold leading-tight">
                 Welcome <br />
-                to <br /> BRIDGE LANG!
+                to <br /> NURTURER!
               </Typography>
             </motion.div>
 
@@ -161,7 +161,7 @@ function Login() {
               animate={{ opacity: 1, transition: { delay: 0.3 } }}
             >
               <Typography variant="subtitle1" color="inherit" className="mt-32">
-                Your powerful and professional Co-Founder Matching Platform.
+                Your powerful and professional Nurturing Platform.
                
                 <ul style={{listStyle: "square", color:"#FFFFF", marginLeft:"40px"}}>
                 <li style={{marginTop:"5px"}}>Coding Sessions</li>

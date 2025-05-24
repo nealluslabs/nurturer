@@ -46,7 +46,9 @@ class FuseAuthorization extends Component {
     const { location, userRole, history } = this.props;
     const { pathname, state } = location;
     const redirectUrl = state && state.redirectUrl ? state.redirectUrl : '/';
+    console.log("USER ROLES IS-->",userRole)
 
+    
     /*
         User is guest
         Redirect to Login Page
