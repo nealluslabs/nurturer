@@ -91,14 +91,14 @@ module.exports = function override(config, env) {
          }
 
 
-         if (env === "production") {
+         /*if (env === "production") {*/
           // Ignore source maps from node_modules
           config.ignoreWarnings = [
             {
               message: /Failed to parse source map/,
             },
           ];
-        }
+        /*}*/
 
     return config;
 };

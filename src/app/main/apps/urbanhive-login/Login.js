@@ -76,13 +76,13 @@ function Login() {
                 <div className="border-l-1 mr-4 w-1 h-40" />
                 <div>
                   <Typography className="text-24 font-semibold logo-text" color="inherit">
-                    BRIDGE
+                    NURTURER
                   </Typography>
                   <Typography
                     className="text-16 tracking-widest -mt-8 font-700"
                     color="textSecondary"
                   >
-                    TECH
+                    {/*TECH*/}
                   </Typography>
                 </div>
               </div>
