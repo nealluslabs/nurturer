@@ -7,7 +7,7 @@ import "firebase/auth";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBJ8-kSWtcsolAmhtHZ1eTDZhov35Lo-hk",
+ 
   authDomain: "urbanhive-co-matcher.firebaseapp.com",
   projectId: "urbanhive-co-matcher",
   storageBucket: "urbanhive-co-matcher.appspot.com",
