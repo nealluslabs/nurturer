@@ -83,7 +83,7 @@ function ContactListItem(props) {
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={'Hi there, I am on brige-tech. Let\'s connect '}
+      secondary={' I hope you\'re doing well. I was thinking about our last... '}
       // secondary={props.contact.mood}
     />
 

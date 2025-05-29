@@ -238,8 +238,9 @@ function Inbox(props) {
        {/* <button onClick={testMe()}>Click Me</button> */}
       {chatMessages && (
         <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
-          <Paper className="flex items-center relative rounded-24 shadow">
+          <Paper className="flex items-center relative rounded-24 shadow" style={{height:"6rem"}}>
             <TextField
+             style={{height:"6rem"}}
               autoFocus={false}
               disabled={connectStatus == 'pending' ? true : false}
               id="message-input"
@@ -259,7 +260,7 @@ function Inbox(props) {
               onChange={onInputChange}
               value={messageText}
             />
-            <IconButton className="absolute ltr:right-0 rtl:left-0 top-0" type="submit">
+            <IconButton className="absolute ltr:right-0 rtl:left-0 top-8" type="submit">
               <Icon className="text-24" color="action">
                 send
               </Icon>

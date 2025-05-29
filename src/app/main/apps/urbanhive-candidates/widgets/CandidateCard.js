@@ -90,11 +90,11 @@ const inviteSkip = (type, user2) => {
     return
   }else{
   if(type == 1){
-    notifyInvite();
+   /* notifyInvite();*/
   }else if(type == 0){
-    notifySkip();
+    /*notifySkip();*/
   }else if(type == -1){
-    notifyUndo();
+   /* notifyUndo();*/
   }
 }
   if(type != -1){
@@ -185,11 +185,11 @@ const userList = output.length ? (
               </Typography>
               <Typography variant="body2" gutterBottom  style={{ fontSize: '13px' }}>
                 {/* Last Active • {timeSince(users.lastActive)} ago */}
-                Last Active • {timeSince(parseInt(users.lastActive))} 
+                Follow Up Date • {timeSince(parseInt(users.lastActive))} 
               </Typography>
               <br/>
               <Typography variant="body2" gutterBottom style={{ fontSize: '18px' }}>
-                <b>{'Swahili'/*users.city*/}</b>
+                <b>{'Boeing - CFO'/*users.city*/}</b>
               </Typography>
             </Grid>
           </Grid>
@@ -205,18 +205,18 @@ const userList = output.length ? (
         <div className={classes.root}>
        {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group"> */}
        <ButtonGroup size="large" variant="contained" color="primary" aria-label="large contained primary button group">
-        <Button onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}} style={{ backgroundColor: !canSwipe && 'black' }}>Skip</Button>
-        <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Undo</Button>
+        <Button onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}} style={{ backgroundColor: !canSwipe && 'black' }}>Prev</Button>
+        <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Generate</Button>
         {users.uid != user.uid ? 
-        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: !canSwipe && 'black' }}>Invite</Button>
+        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: !canSwipe && 'black' }}>Next</Button>
         // : users.invited_amt > 0 ? <Button onClick={() => {reactSwipeEl.next(); }} style={{ backgroundColor: !canSwipe && '#1B2330' }}>Invite</Button> :
         // #0891B2
-        : <Button onClick={() => {alert('You cannot invite yourself');}} style={{ backgroundColor: '#F6F7F9', color: 'black'}}>Invite</Button>
+        : <Button onClick={() => {alert('You cannot invite yourself');}} style={{ backgroundColor: '#F6F7F9', color: 'black'}}>Next</Button>
         }
 
         </ButtonGroup>
        </div><br/>
-       <center><p>(You have <b>{user.monthlyConnection - user.usedConnection}</b> invites left this month.)</p></center>
+       {/*<center><p>(You have <b>{user.monthlyConnection - user.usedConnection}</b> invites left this month.)</p></center>*/}
        </Box>
        
         </Grid>
@@ -235,14 +235,14 @@ const userList = output.length ? (
         <p>{users.intro + ' (: ................................................... :)'}</p>
         : 'This user does not have an intro yet!'}
         <br/>
-        <h4><b>Fluent</b></h4>
+        <h4><b>Frequency</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}
-        {users.isTechnical == 'yes' ? 'Yes' : 'No'}
+        {users.isTechnical == 'yes' ? '3 Months' : '1 Day'}
         <br/><br/>
         
         <h4><b>Other Languages</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}
-        {/*users.skillset*/}Hausa, Igbo
+        {/*users.skillset */}{/*Hausa, Igbo  */}Cars
         </Box>
         </Grid></Grid>
        </Grid>

@@ -12,7 +12,7 @@ i18next.addResourceBundle('ar', 'navigation', ar);
 
 const navigationConfig = [
  
-  {
+  /*{
     id: 'learn',
     title: 'LEARN',
     type: 'group',
@@ -34,45 +34,54 @@ const navigationConfig = [
         url: '/apps/bookdev',
         // url: '/apps/coming-soon3',
       },
-     /* {
+      {
         id: 'bootcamp',
         title: 'Lessons',
         type: 'item',
         icon: 'group',
          url: '#',
         // url: '/apps/coming-soon2',
-      },*/
+      },
     ],
+  },*/
+  {
+    id: 'inbox',
+    title: 'Nurture',
+    type: 'item',
+    icon: 'chat',
+    url: '/apps/inbox',
   },
   {
+    id: 'candidates',
+    title: 'Contacts',
+    type: 'item',
+    icon: 'group_add',
+    url: '/candidates',
+  },
+  {
+    id: 'my-profile',
+    title: 'Profile',
+    type: 'item',
+    icon: 'account_circle',
+    url: '/apps/profile',
+  },
+  {
+    id: 'settings',
+    title: 'Settings',
+    type: 'item',
+    icon: 'settings',
+    url: '/apps/profile',
+  },
+ /* {
     id: 'match',
     title: 'Match',
     type: 'group',
     icon: 'web',
     children: [
-      {
-        id: 'candidates',
-        title: 'Peer',
-        type: 'item',
-        icon: 'group_add',
-        url: '/candidates',
-      },
-      {
-        id: 'inbox',
-        title: 'Inbox',
-        type: 'item',
-        icon: 'chat',
-        url: '/apps/inbox',
-      },
-      {
-        id: 'my-profile',
-        title: 'Profile',
-        type: 'item',
-        icon: 'account_circle',
-        url: '/apps/profile',
-      },
+     
+   
     ],
-  },
+  },*/
   /*{
     id: 'admin',
     title: 'Admin',
