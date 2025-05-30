@@ -189,13 +189,13 @@ const userList = output.length ? (
               </Typography>
               <br/>
               <Typography variant="body2" gutterBottom style={{ fontSize: '18px' }}>
-                <b>{'Boeing - CFO'/*users.city*/}</b>
+                <b>{users && users.jobTitle?users.jobTitle:'Boeing - CFO'/*users.city*/}</b>
               </Typography>
             </Grid>
           </Grid>
        
        
-       <Box component="span" sx={{ p: 10, mx: "3rem", border: '1px solid black', width: 480, height: 250, paddingTop: '100px', marginRight: '0px'}}>
+       <Box component="span" sx={{ p: 10, mx: "3rem", border: '1px solid black', width: 470, height: 250, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
@@ -223,8 +223,9 @@ const userList = output.length ? (
        
         <Grid>
        
-       <Grid item container>
-        <Box m={0} p={2}>
+       <Grid  item container>
+       <Grid  item xs={12} sm={12} md={12} >
+        <Box m={0} p={2} >
         {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
         
         <h4><b>Intro</b></h4>
@@ -232,7 +233,10 @@ const userList = output.length ? (
          ?
          <p>{/*users.intro*/"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"}</p>
          :
-        <p>{users.intro + ' (: ................................................... :)'}</p>
+         <>
+        <p>{users.intro }</p> 
+        <p style={{opacity:"0",userSelect:"none"}}>{' (: ................................................... :)'}</p>
+        </>
         : 'This user does not have an intro yet!'}
         <br/>
         <h4><b>Frequency</b></h4>
@@ -244,7 +248,11 @@ const userList = output.length ? (
         {/* <Divider classes={{root: classes.divider}} /> */}
         {/*users.skillset */}{/*Hausa, Igbo  */}Cars
         </Box>
-        </Grid></Grid>
+         </Grid>
+        </Grid>
+        
+        
+        </Grid>
        </Grid>
       );
   })

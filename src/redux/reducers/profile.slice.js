@@ -30,6 +30,12 @@ const profileSlice = createSlice({
         state.error = '';
         state.message = action.payload.msg;
     },
+    createProfileSuccessOnly: (state, action) => {
+      state.isLoading = false;
+      //state.profileData = action.payload.profileData;
+      state.error = '';
+      state.message = action.payload.msg;
+  },
     createProfileFailed: (state, { payload }) => {
       (state.isLoading = false);
         (state.error = payload.errorMessage);
@@ -67,6 +73,7 @@ const { actions, reducer } = profileSlice;
 export const {
   createProfilePending,
   createProfileSuccess,
+  createProfileSuccessOnly,
   createProfileFailed,
   fetchProfilePending,
   fetchProfileSuccess,

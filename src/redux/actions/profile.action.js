@@ -1,9 +1,10 @@
-import {createProfilePending, createProfileSuccess, createProfileFailed, 
+import {createProfilePending, createProfileSuccess,createProfileSuccessOnly, createProfileFailed, 
   fetchProfilePending, fetchProfileSuccess, fetchProfileFailed} from 'src/redux/reducers/profile.slice';
 import { v4 as uuidv4 } from 'uuid';
 import { db, fb, auth, storage } from '../../config/firebase';
 import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
+import { fetchAllUsers } from './user.action';
 
 
 
@@ -32,6 +33,35 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
         .then(url => {
           console.log('Image URL: ', url);
           dispatch(createProfile(profile, user, file, resetForm, url));
+        });
+    }
+  );
+}
+
+export const uploadNewImage = (profile, user, file, resetForm) => async (dispatch) => {
+  const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
+  console.log('File Name: ', imageName);
+  dispatch(createProfilePending());
+  const uploadTask = storage.ref(`profile_images/${imageName}`).put(file);
+  uploadTask.on(
+    "state_changed",
+    snapshot => {
+      const progress = Math.round(
+        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+      );
+      // setProgress(progress);
+    },
+    error => {
+      console.log(error);
+    },
+    () => {
+      storage
+        .ref("profile_images")
+        .child(imageName)
+        .getDownloadURL()
+        .then(url => {
+          console.log('Image URL: ', url);
+          dispatch(createNewProfile(profile, user, file, resetForm, url));
         });
     }
   );
@@ -67,6 +97,59 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
   });
 
 }
+
+
+export const createNewProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
+  console.log('All data: ',{profile, user, url});
+  dispatch(createProfilePending());
+ 
+  const userRef = db.collection("users");
+ 
+   userRef.add({
+   name: profile.name,
+   email: profile.email,
+    intro: profile.intro,
+   companyName: profile.companyName,
+   industry: profile.industry,
+    jobTitle: profile.jobTitle,
+    city: profile.city,
+    state: profile.state,
+    frequency: profile.frequency,
+    interests: profile.interests,
+    password:'12345678',
+    usedConnection:0,
+    lastActive:1663862737170,
+    
+  
+    skillset: '',
+   
+    skills_needed: '',
+    isTechnical: 'no',
+    lookingFor:'',
+    githubUrl: '',
+    photoUrl: url,
+  })
+  .then((docRef) => {
+    // Update the newly created document with its own ID
+    return userRef.doc(docRef.id).update({ uid: docRef.id });
+  })
+  .then(() => {
+    const msg = 'Profile successfully created!';
+    console.log(msg);
+     dispatch(createProfileSuccessOnly({ msg }));
+     dispatch(fetchAllUsers(user.uid));
+    // dispatch(fetchProfile());
+    // dispatch(fetchUserData(fb.auth().currentUser.uid));
+    // resetForm();
+  })
+  .catch((error) => {
+    var errorMessage = error.message;
+    console.log('Error creating profile', errorMessage);
+    dispatch(createProfileFailed({ errorMessage }));
+  });
+
+}
+
 
   export const fetchProfile = () => async (dispatch) => {
     var docRef = db.collection("users").doc(fb.auth().currentUser.uid);

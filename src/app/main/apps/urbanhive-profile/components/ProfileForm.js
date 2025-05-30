@@ -14,6 +14,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/profile.action';
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
+import { createNewProfile, uploadNewImage } from 'redux/actions/profile.action';
 
 
 
@@ -82,13 +83,21 @@ export default function ProfileForm() {
   
 
     const initialFValues = {
-      id: user.uid,
+      //id: user.uid,
       intro: profileData.intro == '' ? '' : profileData.intro,
-      skills_needed: profileData.skills_needed == '' ? '' : profileData.skills_needed,
-      isTechnical: profileData.isTechnical == '' ? 'nil' : profileData.isTechnical,
-      lookingFor: profileData.lookingFor == '' ? 'nil' : profileData.lookingFor,
+     // skills_needed: profileData.skills_needed == '' ? '' : profileData.skills_needed,
+     // isTechnical: profileData.isTechnical == '' ? 'nil' : profileData.isTechnical,
+     // lookingFor: profileData.lookingFor == '' ? 'nil' : profileData.lookingFor,
       city: profileData.city == '' ? '' : profileData.city,
-      skillset: profileData.skillset == '' ? '' : profileData.skillset,
+      state: profileData.state == '' ? '' : profileData.state,
+      frequency: profileData.frequency == '' ? '' : profileData.frequency,
+      jobTitle:profileData && profileData.jobTitle && profileData.jobTitle == '' ? '' : profileData.jobTitle,
+      interests: profileData.interests == '' ? '' : profileData.interests,
+      industry: profileData.industry == '' ? '' : profileData.industry,
+      companyName: profileData.companyName == '' ? '' : profileData.companyName,
+      name: profileData.name == '' ? '' : profileData.name,
+      email: profileData.email == '' ? '' : profileData.email,
+      //skillset: profileData.skillset == '' ? '' : profileData.skillset,
       // hireDate: new Date(),
       // isPermanent: false,
   }
@@ -110,14 +119,31 @@ export default function ProfileForm() {
 
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
+        if ('name' in fieldValues)
+          temp.name = fieldValues.name ? "" : "This field is required."
+        if ('email' in fieldValues)
+          temp.email = fieldValues.email ? "" : "This field is required."
+        if ('companyName' in fieldValues)
+          temp.companyName = fieldValues.companyName ? "" : "This field is required."
+      
         if ('intro' in fieldValues)
             temp.intro = fieldValues.intro ? "" : "This field is required."
-       if ('skillset' in fieldValues)
-            temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
+      // if ('skillset' in fieldValues)
+      //      temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
        if ('city' in fieldValues)
             temp.city = fieldValues.city.length != 0 ? "" : "This field is required."
-       if ('skills_needed' in fieldValues)
-            temp.skills_needed = fieldValues.skills_needed.length != 0 ? "" : "This field is required."
+       if ('jobTitle' in fieldValues)
+        temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
+       if ('state' in fieldValues)
+        temp.state = fieldValues.state.length != 0 ? "" : "This field is required."
+       if ('frequency' in fieldValues)
+        temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
+    //   if ('industry' in fieldValues)
+    //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
+    //   if ('interests' in fieldValues)
+    //    temp.interests =fieldValues.interests &&   fieldValues.interests.length != 0 ? "" : "This field is required."
+      // if ('skills_needed' in fieldValues)
+      //      temp.skills_needed = fieldValues.skills_needed.length != 0 ? "" : "This field is required."
         // if ('email' in fieldValues)
         //     temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
         // if ('mobile' in fieldValues)
@@ -155,19 +181,25 @@ export default function ProfileForm() {
           setshowError2(false);
         }
         if (validate()){
+          const name = values.name;
+          const email = values.email;
            const intro = values.intro;
-           const skillset = values.skillset;
            const city = values.city;
-           const skills_needed = values.skills_needed;
-           const isTechnical = values.isTechnical;
-           const lookingFor = values.lookingFor;
-
-          const profile = { intro, skillset, city, skills_needed, isTechnical, lookingFor, githubUrl};
-          console.log('Logged User: ', fb.auth().currentUser.uid);
+           const companyName = values.companyName;
+           const jobTitle = values.jobTitle;
+           const state = values.state;
+           const interests = values.interests;
+           const industry = values.industry;
+           const frequency = values.frequency;
+           
+          const profile = { intro, frequency, city, jobTitle,state, interests, companyName,industry,name,email};
+          //console.log('Logged User: ', fb.auth().currentUser.uid);
+          console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
-          dispatch(createProfile(profile, user, file, resetForm, photoURL));
+          dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           }else{
-            dispatch(uploadImage(profile, user, file, resetForm));
+            //dispatch(uploadNewImage(profile, user, file, resetForm));
+            dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }
     }
@@ -195,13 +227,36 @@ export default function ProfileForm() {
       >
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
       </Alert><br/></div>}
-            <p>Make sure your profile is completed to attract more connections.</p><br/>
+            <p>Fill out profile details.</p><br/>
             <Grid container spacing={4}>
+
+            <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Name"
+                        name="name"
+                        value={values.name}
+                        onChange={handleInputChange}
+                        error={errors.name}
+                    />
+                </Grid>
+
+               
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Email"
+                        name="email"
+                        value={values.email}
+                        onChange={handleInputChange}
+                        error={errors.email}
+                    />
+                </Grid>
+
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
                         name="intro"
-                        label="Write an Intro about yourself!"
-                        value={/*values.intro*/"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"}
+                        label="Intro"
+                        value={values.intro/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
                         onChange={handleInputChange}
                         error={errors.intro}
                         rows={2}
@@ -210,46 +265,83 @@ export default function ProfileForm() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
-                        name="skillset"
-                        label="What language are you most fluent in ?"
-                        value={values.skillset}
+                        name="city"
+                        label="City"
+                        value={values.city}
                         onChange={handleInputChange}
-                        options={skillSetService.getSkillset()}
-                        error={errors.skillset}
+                        options={skillSetService.getCities()}
+                        error={errors.city}
                     />
                 </Grid>
               
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
-                        label="City, Country"
-                        name="city"
-                        value={values.city}
+                        label="Job Title"
+                        name="jobTitle"
+                        value={values.jobTitle}
                         onChange={handleInputChange}
-                        error={errors.city}
+                        error={errors.jobTitle}
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
                       <Controls.Select
-                        name="skills_needed"
-                        label="What other languages are you fluent in?"
-                        value={values.skills_needed}
+                        name="state"
+                        label="State"
+                        value={values.state}
                         onChange={handleInputChange}
-                        options={skillSetService.getSkillset()}
-                        error={errors.skills_needed}
+                        options={skillSetService.getStates()}
+                        error={errors.state}
+                    />
+                </Grid>
+
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Company Name"
+                        name="companyName"
+                        value={values.companyName}
+                        onChange={handleInputChange}
+                        error={errors.companyName}
+                    />
+                </Grid>
+
+
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Industry"
+                        name="industry"
+                        value={values.industry}
+                        onChange={handleInputChange}
+                       error={errors.industry}
                     />
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                <Controls.RadioGroup
-                        name="isTechnical"
-                        label="Are you fluent?"
-                        value={values.isTechnical}
+                      <Controls.Select
+                        name="frequency"
+                        label="Frequency"
+                        value={values.frequency}
                         onChange={handleInputChange}
-                        items={isTechnical}
+                        options={skillSetService.getFrequency()}
+                        error={errors.frequency}
                     />
-                    {showError ? <p style={{color: 'red'}}>This field is required.</p> : ''}
                 </Grid>
+
+              
+
+
                 <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Interests"
+                        name="interests"
+                        value={values.interests}
+                        onChange={handleInputChange}
+                        //error={errors.city}
+                    />
+                </Grid>
+
+               {/* <Grid item xs={12} sm={6}>
                 <Controls.RadioGroup
                         name="lookingFor"
                         label="What are you looking for?"
@@ -258,7 +350,12 @@ export default function ProfileForm() {
                         items={type}
                     />
                     {showError2 ? <p style={{color: 'red'}}>This field is required.</p> : ''}
-                </Grid>
+             </Grid>*/}
+
+
+
+
+
 
         <Grid item xs={12} sm={6}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
@@ -297,15 +394,6 @@ export default function ProfileForm() {
         </Box>
          </Grid>
 
-         <Grid item xs={12} sm={6}>
-                <Controls.Input
-                        label="Other Info (Optional)"
-                        name="city"
-                        value={githubUrl}
-                        onChange={(e) => setGithubUrl(e.target.value)}
-                        error={errors.city}
-                    />
-                </Grid>
 
                 </Grid>
                 <br/>

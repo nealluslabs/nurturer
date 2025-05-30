@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
 import { sendChat } from 'src/redux/actions/chat.action';
-import { FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -213,12 +213,13 @@ function Inbox(props) {
                   )}
                   <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">
                     <div className="leading-tight whitespace-pre-wrap">{item.messageText}</div>
-                    <Typography
+                   
+                    {/*<Typography
                       className="time absolute hidden w-full text-11 mt-8 -mb-24 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
                       color="textSecondary"
                     >
                       {formatDistanceToNow(new Date(item.time), { addSuffix: true })}
-                    </Typography>
+                </Typography>*/}
                   </div>
                 </div>
 
@@ -230,40 +231,41 @@ function Inbox(props) {
 
 
            
-<div style={{display:"flex" ,justifyContent:"center",alignItems:"center",marginTop:"-10rem"}}>
+<div style={{display:"flex" ,justifyContent:"flex-start",alignItems:"center",marginLeft:"1rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"1rem",width:"50%"}}>
   <FormControl component="fieldset">
-    <RadioGroup name="car-articles">
+    {/*<RadioGroup name="car-articles">*/}
       <Stack spacing={2}>
         <FormControlLabel
           value="article1"
-          control={<Radio />}
+          control={<Checkbox />}
           label={<Typography fontSize="14px">The Evolution of Electric Supercars</Typography>}
         />
         <FormControlLabel
           value="article2"
-          control={<Radio />}
+          control={<Checkbox />}
           label={<Typography fontSize="14px">How Aerodynamics Shape Modern Vehicles</Typography>}
         />
         <FormControlLabel
           value="article3"
-          control={<Radio />}
+          control={<Checkbox />}
           label={<Typography fontSize="14px">Inside Ferrari's Hybrid Powertrain</Typography>}
         />
         <FormControlLabel
           value="article4"
-          control={<Radio />}
+          control={<Checkbox />}
           label={<Typography fontSize="14px">Why EVs Are Faster Off the Line</Typography>}
         />
         <FormControlLabel
           value="article5"
-          control={<Radio />}
+          control={<Checkbox />}
           label={<Typography fontSize="14px">Top Car Design Trends in 2025</Typography>}
-        />
+        /> 
       </Stack>
-    </RadioGroup>
+    {/*</RadioGroup>*/}
   </FormControl>
 </div>
-          </>
+
+</>
         ) : (
           <div className="flex flex-col flex-1">
             <div className="flex flex-col flex-1 items-center justify-center">
