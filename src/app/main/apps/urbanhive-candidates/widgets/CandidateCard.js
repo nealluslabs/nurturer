@@ -159,7 +159,7 @@ const userList = output.length ? (
   // allUsers.map(users => {
     output.map(users => {
       return(
-        <Grid container>
+        <Grid container >
           <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -171,7 +171,7 @@ const userList = output.length ? (
           draggable
           pauseOnHover
           />
-        <Grid item sx={{ mx: "1rem" }}>
+        <Grid item sx={{ mx: "0.3rem" }}>
           {/* <ButtonBase sx={{ width: 500, height: 500 }}> */}
           <Avatar alt="Remy Sharp" src={users.photoUrl} style={{ width: '180px', height: '180px'}} />
           {/* </ButtonBase> */}
@@ -195,7 +195,7 @@ const userList = output.length ? (
           </Grid>
        
        
-       <Box component="span" sx={{ p: 10, mx: "3rem", border: '1px solid black', width: 480, height: 250, paddingTop: '100px', marginRight: '80px'}}>
+       <Box component="span" sx={{ p: 10, mx: "3rem", border: '1px solid black', width: 480, height: 250, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
@@ -205,10 +205,10 @@ const userList = output.length ? (
         <div className={classes.root}>
        {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group"> */}
        <ButtonGroup size="large" variant="contained" color="primary" aria-label="large contained primary button group">
-        <Button onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}} style={{ backgroundColor: !canSwipe && 'black' }}>Prev</Button>
-        <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Generate</Button>
+        <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}}  style={{ backgroundColor: !canSwipe && 'black' }}>Prev</Button>
+        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Generate</Button>
         {users.uid != user.uid ? 
-        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: !canSwipe && 'black' }}>Next</Button>
+        <Button  onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}}    style={{ backgroundColor: !canSwipe && 'black' }}>Next</Button>
         // : users.invited_amt > 0 ? <Button onClick={() => {reactSwipeEl.next(); }} style={{ backgroundColor: !canSwipe && '#1B2330' }}>Invite</Button> :
         // #0891B2
         : <Button onClick={() => {alert('You cannot invite yourself');}} style={{ backgroundColor: '#F6F7F9', color: 'black'}}>Next</Button>
@@ -261,6 +261,7 @@ const userList = output.length ? (
      : 
   <ReactSwipe
      className="carousel"
+     
      swipeOptions={{ continuous: true }}
      ref={el => (reactSwipeEl = el)}
    >

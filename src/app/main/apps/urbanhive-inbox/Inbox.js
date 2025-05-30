@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
 import { sendChat } from 'src/redux/actions/chat.action';
+import { FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -183,6 +184,7 @@ function Inbox(props) {
     <div className={clsx('flex flex-col relative', props.className)}>
       <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
         {chatMessages.length || 0 && chatMessages.length > 0 ? (
+        <>
           <div className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40">
             {chatMessagesOutput.map((item, i) => {
               connectStatus = item.status;
@@ -219,9 +221,49 @@ function Inbox(props) {
                     </Typography>
                   </div>
                 </div>
+
+
+
               );
             })}
           </div>
+
+
+           
+<div style={{display:"flex" ,justifyContent:"center",alignItems:"center",marginTop:"-10rem"}}>
+  <FormControl component="fieldset">
+    <RadioGroup name="car-articles">
+      <Stack spacing={2}>
+        <FormControlLabel
+          value="article1"
+          control={<Radio />}
+          label={<Typography fontSize="14px">The Evolution of Electric Supercars</Typography>}
+        />
+        <FormControlLabel
+          value="article2"
+          control={<Radio />}
+          label={<Typography fontSize="14px">How Aerodynamics Shape Modern Vehicles</Typography>}
+        />
+        <FormControlLabel
+          value="article3"
+          control={<Radio />}
+          label={<Typography fontSize="14px">Inside Ferrari's Hybrid Powertrain</Typography>}
+        />
+        <FormControlLabel
+          value="article4"
+          control={<Radio />}
+          label={<Typography fontSize="14px">Why EVs Are Faster Off the Line</Typography>}
+        />
+        <FormControlLabel
+          value="article5"
+          control={<Radio />}
+          label={<Typography fontSize="14px">Top Car Design Trends in 2025</Typography>}
+        />
+      </Stack>
+    </RadioGroup>
+  </FormControl>
+</div>
+          </>
         ) : (
           <div className="flex flex-col flex-1">
             <div className="flex flex-col flex-1 items-center justify-center">
@@ -238,7 +280,7 @@ function Inbox(props) {
        {/* <button onClick={testMe()}>Click Me</button> */}
       {chatMessages && (
         <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
-          <Paper className="flex items-center relative rounded-24 shadow" style={{height:"6rem"}}>
+          <Paper className="flex items-center relative  shadow" style={{height:"6rem",width:"107%",position:"relative",top:"2rem",left:"-2rem"}}>
             <TextField
              style={{height:"6rem"}}
               autoFocus={false}
@@ -260,7 +302,7 @@ function Inbox(props) {
               onChange={onInputChange}
               value={messageText}
             />
-            <IconButton className="absolute ltr:right-0 rtl:left-0 top-8" type="submit">
+            <IconButton className="absolute ltr:right-20 rtl:left-0 top-8" type="submit">
               <Icon className="text-24" color="action">
                 send
               </Icon>
