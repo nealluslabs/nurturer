@@ -231,13 +231,15 @@ const userList = output.length ? (
         <h4><b>Intro</b></h4>
         {users.intro ? parseInt(users.intro.length) > 35 
          ?
-         <p>{/*users.intro*/"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"}</p>
+         <p>{users.intro}</p>
          :
          <>
-        <p>{users.intro }</p> 
-        <p style={{opacity:"0",userSelect:"none"}}>{' (: ................................................... :)'}</p>
+        <p>{users.intro } <span style={{opacity:"0",userSelect:"none"}}>{' (:............................................................................................................................................................................................................................................... ................................................... :)'}</span></p> 
+        
         </>
-        : 'This user does not have an intro yet!'}
+        : /*'This user does not have an intro yet!' */ 
+        "I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"
+        }
         <br/>
         <h4><b>Frequency</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}
@@ -267,7 +269,10 @@ const userList = output.length ? (
      {isLoading ? 
       <center> <LinearProgress color="secondary" /></center>
      : 
+     userList.length >0 && 
+     <div style={{height:"100vh",width:"70vw"}}>
   <ReactSwipe
+   key={userList.length}
      className="carousel"
      
      swipeOptions={{ continuous: true }}
@@ -276,7 +281,7 @@ const userList = output.length ? (
           {userList}
        </ReactSwipe>
      
-     
+   </div>
      }
      
      
