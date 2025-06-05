@@ -66,6 +66,20 @@ function InboxSidebar(props) {
   const { user } = useSelector((state) => state.login);
   const { allUsers, connectedUsers, connects, connects2, isLoading } = useSelector((state) => state.user);
   let unsubscribe;
+
+
+  const container = {
+    show: {
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 },
+  };
   
   useEffect(() => {
     console.log('All Users', allUsers);
@@ -150,7 +164,7 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    const connectedUsersOutput = connectedUsers && connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
       lookingFor, lastActive, isTechnical, photoUrl, password}) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
@@ -168,7 +182,7 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    const connectedUsersOutput = connectedUsers && connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
       lookingFor, lastActive, isTechnical, photoUrl, password}) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
@@ -206,38 +220,9 @@ function InboxSidebar(props) {
       {/* Chats List */}
       <FuseScrollbars className="overflow-y-auto flex-1">
         <List className="w-full">
-          {useMemo(() => {
-            function getFilteredArray(arr, _searchText) {
-              if (_searchText.length === 0) {
-                return arr;
-              }
-              return FuseUtils.filterArrayByString(arr, _searchText);
-            }
-
-            const chatListContacts =
-              contacts.length > 0 && user && user.chatList
-                ? user.chatList.map((_chat) => ({
-                    ..._chat,
-                    ...contacts.find((_contact) => _contact.id === _chat.contactId),
-                  }))
-                : [];
-            const filteredContacts = getFilteredArray([...contacts], searchText);
-            const filteredChatList = getFilteredArray([...chatListContacts], searchText);
-
-            const container = {
-              show: {
-                transition: {
-                  staggerChildren: 0.1,
-                },
-              },
-            };
-
-            const item = {
-              hidden: { opacity: 0, y: 20 },
-              show: { opacity: 1, y: 0 },
-            };
-
-            return (
+         
+        
+            
               <motion.div
                 className="flex flex-col flex-shrink-0"
                 variants={container}
@@ -273,25 +258,9 @@ function InboxSidebar(props) {
                       </div>
                     )
                 }
-                {/* {filteredContacts.length > 0 && (
-                  <motion.div variants={item}>
-                    <Typography className="font-medium text-20 px-16 py-24" color="secondary">
-                      Pending Invites
-                    </Typography>
-                  </motion.div>
-                )}
-
-                {filteredContacts.map((contact) => (
-                  <motion.div variants={item} key={contact.id}>
-                    <ContactListItem2
-                      contact={contact}
-                      onContactClick={(contactId) => dispatch(getChat({ contactId, isMobile }))}
-                    />
-                  </motion.div>
-                ))} */}
+                
               </motion.div>
-            );
-          }, [contacts, user, searchText, dispatch, isMobile])}
+         
         </List>
       </FuseScrollbars>
     </div>
