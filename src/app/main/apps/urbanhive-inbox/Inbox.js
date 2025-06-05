@@ -231,31 +231,45 @@ function Inbox(props) {
 
 
            
-<div style={{display:"flex" ,justifyContent:"flex-start",alignItems:"center",marginLeft:"1rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"1rem",width:"50%"}}>
+<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%"/*{lg:"82%",sm:"85%",xs:"89%"}*/,padding:"1rem",paddingTop:"3rem"}}>
+  
+
+     
+                    <Typography
+                     style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                    >
+                      Articles
+                </Typography>
+  
   <FormControl component="fieldset">
     {/*<RadioGroup name="car-articles">*/}
       <Stack spacing={2}>
         <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
           value="article1"
           control={<Checkbox />}
           label={<Typography fontSize="14px">The Evolution of Electric Supercars</Typography>}
         />
         <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
           value="article2"
           control={<Checkbox />}
           label={<Typography fontSize="14px">How Aerodynamics Shape Modern Vehicles</Typography>}
         />
         <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
           value="article3"
           control={<Checkbox />}
           label={<Typography fontSize="14px">Inside Ferrari's Hybrid Powertrain</Typography>}
         />
         <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
           value="article4"
           control={<Checkbox />}
           label={<Typography fontSize="14px">Why EVs Are Faster Off the Line</Typography>}
         />
         <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
           value="article5"
           control={<Checkbox />}
           label={<Typography fontSize="14px">Top Car Design Trends in 2025</Typography>}

@@ -161,12 +161,12 @@ function Login() {
               animate={{ opacity: 1, transition: { delay: 0.3 } }}
             >
               <Typography variant="subtitle1" color="inherit" className="mt-32">
-                Your powerful and professional Nurturing Platform.
+              The AI powered assistant that keeps you in the conversation.
                
                 <ul style={{listStyle: "square", color:"#FFFFF", marginLeft:"40px"}}>
-                <li style={{marginTop:"5px"}}>Coding Sessions</li>
-                <li style={{marginTop:"5px"}}>Book a Developer</li>
-                <li style={{marginTop:"5px"}}>Connect with Co-Founders</li>
+                <li style={{marginTop:"5px"}}>Stay Top-Of-Mind</li>
+                <li style={{marginTop:"5px"}}>Save Time, Close More</li>
+                <li style={{marginTop:"5px"}}>Never Miss a Lead</li>
                </ul>
               </Typography>
             </motion.div>
