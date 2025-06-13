@@ -28,6 +28,7 @@ import CreateNewDeveloperConfig from './urbanhive-admin-create-developer/CreateN
 import EditAppointmentConfig from './urbanhive-admin-edit-appointment/EditAppointmentConfig';
 import BootCampConfig from './urbanhive-bootcamp/BootcampConfig';
 import BootCampDetailsConfig from './urbanhive-bootcamp-details/BootCampDetailsConfig';
+import DashboardAppConfig from './urbanhive-dashboard/DashboardAppConfig';
 
 
 const appsConfigs = [
@@ -36,6 +37,7 @@ const appsConfigs = [
   CandidateAppConfig,
   InboxAppConfig,
   ProfileConfig,
+  DashboardAppConfig,
  
   ComingSoonPageConfig,
   Error404PageConfig,

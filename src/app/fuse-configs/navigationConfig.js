@@ -45,6 +45,13 @@ const navigationConfig = [
     ],
   },*/
   {
+    id: 'dashboard',
+    title: 'Dashboard',
+    type: 'item',
+    icon: 'dashboard',
+    url: '/apps/dashboard',
+  },
+  {
     id: 'inbox',
     title: 'Nurture',
     type: 'item',
@@ -64,6 +71,20 @@ const navigationConfig = [
     type: 'item',
     icon: 'account_circle',
     url: '/apps/profile',
+  },
+  {
+    id: 'dashboard',
+    title: 'Newsletter',
+    type: 'item',
+    icon: 'dashboard',
+    url: '/apps/dashboard',
+  },
+  {
+    id: 'dashboard',
+    title: 'Card',
+    type: 'item',
+    icon: 'dashboard',
+    url: '/apps/dashboard',
   },
   {
     id: 'settings',
