@@ -246,7 +246,7 @@ const userList = output.length ? (
         {users.isTechnical == 'yes' ? '3 Months' : '1 Day'}
         <br/><br/>
         
-        <h4><b>Other Languages</b></h4>
+        <h4><b>Interests</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}
         {/*users.skillset */}{/*Hausa, Igbo  */}Cars
         </Box>

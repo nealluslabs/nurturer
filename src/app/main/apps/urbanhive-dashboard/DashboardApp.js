@@ -25,6 +25,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import SendIcon from '@mui/icons-material/Send';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import { Mail } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -148,6 +149,91 @@ function DashboardApp(props) {
   ];
 
 
+const touchpointData = [
+  {
+    id: 1,
+    title: "Special card for Kala",
+    subtitle: "Karla G - 06/02/2025",
+    status: "Pending",
+    statusColor: "grey",
+    statusBackground: "yellow",
+    icon: CardGiftcardIcon,
+    iconColor: "#26b502",
+  },
+  {
+    id: 2,
+    title: "Happy Birthday, Tyler!",
+    subtitle: "Tyler Walker - 06/01/2025",
+    status: "Failed",
+    statusColor: "white",
+    statusBackground: "grey",
+    icon: Mail,
+    iconColor: "blue",
+  },
+  {
+    id: 3,
+    title: "Special card for Kala",
+    subtitle: "Karla G - 06/02/2025",
+    status: "Sent",
+    statusColor: "white",
+    statusBackground: "green",
+    icon: CardGiftcardIcon,
+    iconColor: "#26b502",
+  },
+  {
+    id: 4,
+    title: "Happy Birthday, Tina!",
+    subtitle: "Tina S. - 06/01/2025",
+    status: "Failed",
+    statusColor: "white",
+    statusBackground: "grey",
+    icon: Mail,
+    iconColor: "blue",
+  },
+  {
+    id: 5,
+    title: "Sales is Making a Come Back",
+    subtitle: "Karla G - 06/02/2025",
+    status: "Pending",
+    statusColor: "grey",
+    statusBackground: "yellow",
+    icon: CardGiftcardIcon,
+    iconColor: "#26b502",
+  },
+];
+
+const users = [
+  {
+    id: 1,
+    name: "Tyler Walker",
+    role: "Washup",
+    initials: "TW",
+    date: "06/01",
+    avatarBg: "#1e7a07",
+    textColor: "white"
+  },
+  {
+    id: 2,
+    name: "Tina S.",
+    role: "Svibes",
+    initials: "TS",
+    date: "06/01",
+    avatarBg: "#1e7a07",
+    textColor: "white"
+  },
+  {
+    id: 3,
+    name: "Karla G",
+    role: "EdZone, LLC",
+    initials: "KG",
+    date: "06/01",
+    avatarBg: "#1e7a07",
+    textColor: "white"
+  },
+];
+
+
+
   if (!isAuth) return <Redirect to={'/login'}/>
   return (
     <div style={{margin: "30px"}}>
@@ -250,31 +336,47 @@ function DashboardApp(props) {
 
             <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
               
-              {Array.from({ length: 4 }).map((_, index) => (
+            {touchpointData.map((item) => {
+              const IconComponent = item.icon;
+
+              return (
                 <div 
-                  key={index} 
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}
+                  key={item.id} 
+                  style={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "space-between", 
+                    marginBottom: "16px" 
+                  }}
                 >
                   <div style={{ display: "flex", alignItems: "center" }}>
-                    <CardGiftcardIcon sx={{ width: 32, height: 32, marginRight: "6px", color: "#26b502" }} />
+                    <IconComponent 
+                      sx={{ 
+                        width: 32, 
+                        height: 32, 
+                        marginRight: "6px", 
+                        color: item.iconColor 
+                      }} 
+                    />
                     <div>
-                      <p style={{ fontSize: "14px", fontWeight: "bold" }}>Special card for Kala</p>
-                      <p style={{ fontSize: "12px" }}>Karla G - 06/02/2025</p>
+                      <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
+                      <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
                     </div>
                   </div>
 
                   <p 
                     style={{ 
                       padding: "4px 12px", 
-                      background: "yellow", 
-                      color: "grey", 
+                      background: item.statusBackground, 
+                      color: item.statusColor, 
                       borderRadius: "4px" 
                     }}
                   >
-                    Pending
+                    {item.status}
                   </p>
                 </div>
-              ))}
+              );
+            })}
 
 
             </div>
@@ -298,33 +400,51 @@ function DashboardApp(props) {
 
             <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
               
-              {Array.from({ length: 4 }).map((_, index) => (
-                <div 
-                  key={index} 
-                  style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <div style={{ width: "32px", height: "32px", borderRadius: "50%", marginRight: "12px", background: "#1e7a07", color: "white" }}>
-                      <p style={{ textAlign: "center", fontWeight: "bold", fontSize: "12px", marginTop: "9px" }}>TW</p>
-                    </div>
-                    <div>
-                      <p style={{ fontSize: "14px", fontWeight: "bold" }}>Tyler Walker</p>
-                      <p style={{ fontSize: "12px" }}>Washup</p>
-                    </div>
-                  </div>
-
-                  <p 
+            {users.map((user) => (
+              <div 
+                key={user.id} 
+                style={{ 
+                  display: "flex", 
+                  alignItems: "center", 
+                  justifyContent: "space-between", 
+                  marginBottom: "16px" 
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <div 
                     style={{ 
-                      padding: "4px 12px", 
-                      // background: "yellow", 
-                      // color: "grey", 
-                      borderRadius: "4px" 
+                      width: "32px", 
+                      height: "32px", 
+                      borderRadius: "50%", 
+                      marginRight: "12px", 
+                      background: user.avatarBg, 
+                      color: user.textColor, 
+                      display: "flex", 
+                      alignItems: "center", 
+                      justifyContent: "center",
+                      fontWeight: "bold",
+                      fontSize: "12px"
                     }}
                   >
-                    06/01
-                  </p>
+                    {user.initials}
+                  </div>
+                  <div>
+                    <p style={{ fontSize: "14px", fontWeight: "bold" }}>{user.name}</p>
+                    <p style={{ fontSize: "12px" }}>{user.role}</p>
+                  </div>
                 </div>
-              ))}
+
+                <p 
+                  style={{ 
+                    padding: "4px 12px", 
+                    borderRadius: "4px" 
+                  }}
+                >
+                  {user.date}
+                </p>
+              </div>
+            ))}
+
 
 
             </div>
