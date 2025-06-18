@@ -102,6 +102,14 @@ function Inbox(props) {
   const chat = useSelector(({ chatApp }) => chatApp.chat);
   // const user = useSelector(({ chatApp }) => chatApp.user);
 
+  const editableRef = useRef(null);
+
+  const handleSave = () => {
+    const updatedContent = editableRef.current.innerHTML;
+    console.log('Saved content:', updatedContent);
+    // You can now send `updatedContent` to your backend or store it
+    }
+
   const classes = useStyles(props);
   const chatRef = useRef(null);
   const [messageText, setMessageText] = useState('');
@@ -185,7 +193,7 @@ function Inbox(props) {
       <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
         {chatMessages.length || 0 && chatMessages.length > 0 ? (
         <>
-          <div className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40">
+          <div onClick={handleSave} className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40">
             {chatMessagesOutput.map((item, i) => {
               connectStatus = item.status;
               const contact =
@@ -215,77 +223,62 @@ function Inbox(props) {
                     <div className="leading-tight whitespace-pre-wrap" style={{width:"50rem"}}>
                       {/*item.messageText*/}
                       
-                              <span>
-  <textarea
-  rows={6}
-    type="text"
-    value="I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team."
-    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit" }}
-  />
-</span>
-<br /><br /><br /><br />
-<span>
-<textarea
-  rows={6}
-    type="text"
-    value="While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:"
-    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit" }}
-  />
-</span>
-<br /><br />
- <span>
-  <input
-    type="text"
-    value="• “ A breath of fresh air for the national aviation industry”"
-    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit", fontWeight: "bold" }}
-  />
-</span>
-<br />
-<span>
-  – PwC, March 2025{" "}
-  <a
-    href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ background:"none"}}
-  >
-    PwC Link
-    
-  </a>
-</span>
-<br /><br />
- <b>
-  <input
-    type="text"
-    value="• “Deloitte Global's 2025 Airline CEO Survey”"
-    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit", fontWeight: "bold" }}
-  />
-</b>
-<br />
-<span>
-  – Deloitte, May 30, 2025{" "}
-  <a
-    href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{ background:"none" }}
-  >
-   Deloitte Link
-   
-  </a>
-</span>
-<br /><br /><br /><br />
-<span>
-  <textarea
-  rows={6}
-    type="text"
-    value="We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum."
-    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit" }}
-  />
-</span>
-
-
-
+                      <div
+        ref={editableRef}
+        contentEditable={true}
+        suppressContentEditableWarning={true}
+        
+      >
+        <span>
+          I hope you're doing well and navigating this season with clarity. I saw the
+          recent news about the leadership restructuring at Boeing and immediately
+          thought of you. I can only imagine how much is being navigated at your
+          level—balancing strategic realignment while keeping day-to-day momentum. It
+          must be a challenging but transformative time for your team.
+        </span>
+        <br /><br /><br /><br />
+        <span>
+          While reading through some industry updates, I came across a couple of
+          articles that I thought you might enjoy. They touch on themes that are
+          relevant to leadership transition, innovation under pressure, and shifting
+          talent strategies in large organizations:
+        </span>
+        <br /><br />
+        • <b>“A breath of fresh air for the national aviation industry”</b>
+        <br />
+        <span>
+          – PwC, March 2025{" "}
+          <a
+            href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+            style={{ textDecoration: "underline" }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            PwC Link
+          </a>
+        </span>
+        <br /><br />
+        • <b>“Deloitte Global's 2025 Airline CEO Survey”</b>
+        <br />
+        <span>
+          – Deloitte, May 30, 2025{" "}
+          <a
+            href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+            target="_blank"
+            style={{ textDecoration: "underline" }}
+            rel="noopener noreferrer"
+          >
+            Deloitte Link
+          </a>
+        </span>
+        <br /><br /><br /><br />
+        <span>
+          We had some great conversations previously, and I really valued the
+          opportunity to understand what you were working toward. Let me know if you
+          have time for a brief catch-up in the coming weeks. Either way, wishing you
+          continued momentum.
+        </span>
+      </div>
                       </div>
                    
                     {/*<Typography
