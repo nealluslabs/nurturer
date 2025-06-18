@@ -101,6 +101,8 @@ function Inbox(props) {
   const selectedContactId = useSelector(({ chatApp }) => chatApp.contacts.selectedContactId);
   const chat = useSelector(({ chatApp }) => chatApp.chat);
   // const user = useSelector(({ chatApp }) => chatApp.user);
+ 
+
 
   const editableRef = useRef(null);
 
@@ -121,6 +123,8 @@ function Inbox(props) {
  const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
  const { connects } = useSelector((state) => state.user);
  let connectStatus;
+
+ console.log("SELECTED CHAT USER IS--->",user)
 
   useEffect(() => {
     if (chatMessages) {
@@ -229,6 +233,17 @@ function Inbox(props) {
         suppressContentEditableWarning={true}
         
       >
+        
+
+
+
+        <span>
+          Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName  }
+        </span>
+        
+        <br /><br /><br /><br />
+
+
         <span>
           I hope you're doing well and navigating this season with clarity. I saw the
           recent news about the leadership restructuring at Boeing and immediately
@@ -278,6 +293,23 @@ function Inbox(props) {
           have time for a brief catch-up in the coming weeks. Either way, wishing you
           continued momentum.
         </span>
+
+
+        <br /><br /><br /><br />
+
+
+
+        <span>
+          Regards,
+        </span>
+         
+        <br /><br />
+
+        <span>
+          {user && user.firstName && user.lastName? user.firstName + " " + user.lastName:user && user.name && user.name !== "test user"?user.name :"Tim"}
+        </span>
+
+
       </div>
                       </div>
                    

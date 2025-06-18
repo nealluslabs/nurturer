@@ -228,7 +228,7 @@ const userList = output.length ? (
         <Box m={0} p={2} >
         {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
         
-        <h4><b>Intro</b></h4>
+        <h4><b>Notes</b></h4>
         {users.intro ? parseInt(users.intro.length) > 35 
          ?
          <p>{users.intro}</p>

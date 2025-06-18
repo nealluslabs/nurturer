@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Controls from "./controls/Controls";
 import { useForm, Form } from './useForm';
-import { TextField,InputLabel, MenuItem, Select, Grid, Button } from '@material-ui/core';
+import { TextField,InputLabel, MenuItem, Select, Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import {Avatar, Badge, Chip, Divider, Stack, Alert, IconButton } from '@mui/material';
+import {Avatar, Badge, Chip, Divider, Stack, Alert, IconButton,Button } from '@mui/material';
 import { Crop } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import * as skillSetService from "./skillSetService";
@@ -228,7 +228,51 @@ export default function ProfileForm() {
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
       </Alert><br/></div>}
             <p>Fill out profile details.</p><br/>
-            <Grid container spacing={4}>
+
+           
+
+            <Grid container spacing={4} style={{position:"relative"}}>
+
+            <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-4rem",right:"0.5rem",width:"18rem",flexDirection:"row"}}>
+               <Grid item>
+                 <Button
+                   sx={{
+                     backgroundColor: "black",
+                     color: "white",
+                     height:"4rem",
+                     width:"8rem",
+                     fontSize:"1.5rem",
+                     padding: "0.5rem 0.8rem",
+                     borderRadius: "0.3rem",
+                     textTransform: "none", // Optional: keeps text as "CSV" without uppercase
+                     "&:hover": {
+                       backgroundColor: "#333"
+                     }
+                   }}
+                 >
+                   CSV
+                 </Button>
+               </Grid>
+               <Grid item>
+                 <Button
+                   sx={{
+                     backgroundColor: "black",
+                     color: "white",
+                      height:"4rem",
+                     width:"8rem",
+                     fontSize:"1.5rem",
+                     padding: "0.5rem 0.8rem",
+                     borderRadius: "0.3rem",
+                     textTransform: "none",
+                     "&:hover": {
+                       backgroundColor: "#333"
+                     }
+                   }}
+                 >
+                   API
+                 </Button>
+               </Grid>
+             </Grid>
 
             <Grid item xs={12} sm={6}>
                 <Controls.Input
@@ -255,7 +299,7 @@ export default function ProfileForm() {
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
                         name="intro"
-                        label="Intro"
+                        label="Notes"
                         value={values.intro/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
                         onChange={handleInputChange}
                         error={errors.intro}
