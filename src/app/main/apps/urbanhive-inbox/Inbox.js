@@ -212,10 +212,96 @@ function Inbox(props) {
                     />
                   )}
                   <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">
-                    <div className="leading-tight whitespace-pre-wrap">{item.messageText}</div>
+                    <div className="leading-tight whitespace-pre-wrap" style={{width:"50rem"}}>
+                      {/*item.messageText*/}
+                      
+                              <span>
+  <textarea
+  rows={6}
+    type="text"
+    value="I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team."
+    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit" }}
+  />
+</span>
+<br /><br /><br /><br />
+<span>
+<textarea
+  rows={6}
+    type="text"
+    value="While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:"
+    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit" }}
+  />
+</span>
+<br /><br />
+ <span>
+  <input
+    type="text"
+    value="• “ A breath of fresh air for the national aviation industry”"
+    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit", fontWeight: "bold" }}
+  />
+</span>
+<br />
+<span>
+  – PwC, March 2025{" "}
+  <a
+    href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ background:"none"}}
+  >
+    PwC Link
+    
+  </a>
+</span>
+<br /><br />
+ <b>
+  <input
+    type="text"
+    value="• “Deloitte Global's 2025 Airline CEO Survey”"
+    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit", fontWeight: "bold" }}
+  />
+</b>
+<br />
+<span>
+  – Deloitte, May 30, 2025{" "}
+  <a
+    href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+    target="_blank"
+    rel="noopener noreferrer"
+    style={{ background:"none" }}
+  >
+   Deloitte Link
+   
+  </a>
+</span>
+<br /><br /><br /><br />
+<span>
+  <textarea
+  rows={6}
+    type="text"
+    value="We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum."
+    style={{ background: "transparent", border: "none", width: "100%", fontSize: "inherit" }}
+  />
+</span>
+
+
+
+                      </div>
                    
                     {/*<Typography
-                      className="time absolute hidden w-full text-11 mt-8 -mb-24 ltr:left-0 rtl:right-0 bottom-0 whitespace-nowrap"
+                      className="time absolute hidden w-full text-11 mt-8 -mb-24 ltr:left-0 rtl:I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.
+
+
+
+While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:
+
+A breath of fresh air for the national aviation industry from PwC, published in March 2025. PwC Link
+
+Deloitte Global's 2025 Airline CEO Survey from Deloitte, published on May 30, 2025. Deloitte Link
+
+
+
+We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum..right-0 bottom-0 whitespace-nowrap"
                       color="textSecondary"
                     >
                       {formatDistanceToNow(new Date(item.time), { addSuffix: true })}
@@ -231,7 +317,7 @@ function Inbox(props) {
 
 
            
-<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%"/*{lg:"82%",sm:"85%",xs:"89%"}*/,padding:"1rem",paddingTop:"3rem"}}>
+{/*<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%",padding:"1rem",paddingTop:"3rem"}}>
   
 
      
@@ -242,7 +328,7 @@ function Inbox(props) {
                 </Typography>
   
   <FormControl component="fieldset">
-    {/*<RadioGroup name="car-articles">*/}
+    
       <Stack spacing={2}>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
@@ -275,9 +361,10 @@ function Inbox(props) {
           label={<Typography fontSize="14px">Top Car Design Trends in 2025</Typography>}
         /> 
       </Stack>
-    {/*</RadioGroup>*/}
+   
   </FormControl>
-</div>
+          </div>
+          */}
 
 </>
         ) : (

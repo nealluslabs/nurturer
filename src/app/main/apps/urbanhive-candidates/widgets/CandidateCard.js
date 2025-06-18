@@ -206,7 +206,7 @@ const userList = output.length ? (
        {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group"> */}
        <ButtonGroup size="large" variant="contained" color="primary" aria-label="large contained primary button group">
         <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}}  style={{ backgroundColor: !canSwipe && 'black' }}>Prev</Button>
-        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Generate</Button>
+        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Edit</Button>
         {users.uid != user.uid ? 
         <Button  onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}}    style={{ backgroundColor: !canSwipe && 'black' }}>Next</Button>
         // : users.invited_amt > 0 ? <Button onClick={() => {reactSwipeEl.next(); }} style={{ backgroundColor: !canSwipe && '#1B2330' }}>Invite</Button> :

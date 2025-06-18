@@ -56,6 +56,8 @@ function ContactListItem(props) {
      dispatch(unMatchConnect(user1, user2, history));
   }
 
+  
+
   return (
     <ListItem
     button
@@ -95,7 +97,8 @@ function ContactListItem(props) {
           color="textSecondary"
         >
           {/* {format(new Date(props.contact.lastMessageTime), 'PP')} */}
-          {format(new Date('2022-8-20'), 'PP')}
+          {/*format(new Date('2022-8-20'), 'PP')*/}
+          {props.user.daysTo?props.user.daysTo:"15 Days" }
         </Typography>
       {/* )} */}
 

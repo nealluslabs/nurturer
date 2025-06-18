@@ -42,7 +42,7 @@ function EditAppointmentApp() {
             </Typography>
 
             <Typography className="mb-16" component="p">
-              On the process.. <b>bridge lang</b> ng
+              On the process.. <b>Nurturer</b> ng
               no1 cross matcher platform
             </Typography>
           </div> */}

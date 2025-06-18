@@ -165,9 +165,10 @@ function InboxSidebar(props) {
       );
       
     const connectedUsersOutput = connectedUsers && connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
-      lookingFor, lastActive, isTechnical, photoUrl, password}) => ({
+      lookingFor, lastActive, isTechnical, photoUrl, password},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
+        daysTo:(15*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
@@ -183,9 +184,10 @@ function InboxSidebar(props) {
       );
       
     const connectedUsersOutput = connectedUsers && connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
-      lookingFor, lastActive, isTechnical, photoUrl, password}) => ({
+      lookingFor, lastActive, isTechnical, photoUrl, password},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
+        daysTo:(15*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 

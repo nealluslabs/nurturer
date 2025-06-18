@@ -145,7 +145,7 @@ function Register() {
             >
               <Typography variant="h3" color="inherit" className="font-semibold leading-tight">
                 Welcome <br />
-                to <br /> BRIDGE LANG!
+                to <br /> NURTURER!
               </Typography>
             </motion.div>
 
