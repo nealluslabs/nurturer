@@ -246,13 +246,13 @@ function InboxApp(props) {
                   </Icon>
                 </Paper>
                 <Typography variant="h6" className="mt-24 mb-12 text-32 font-700">
-                  Chat with the world
+                  Send Email To Contact
                 </Typography>
                 <Typography
                   className="hidden md:flex px-16 pb-24 text-16 text-center"
                   color="textSecondary"
                 >
-                  Select an invited user to start a conversation!..
+                  Select a contact to review message..
                 </Typography>
                 <Button
                   variant="outlined"
@@ -260,7 +260,7 @@ function InboxApp(props) {
                   className="flex md:hidden"
                   onClick={() => dispatch(openMobileChatsSidebar())}
                 >
-                  Select an invited user to start a conversation!..
+                 Select a contact to review message..
                 </Button>
               </div>
             ) : (

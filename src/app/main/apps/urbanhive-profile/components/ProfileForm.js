@@ -97,6 +97,8 @@ export default function ProfileForm() {
       companyName: profileData.companyName == '' ? '' : profileData.companyName,
       name: profileData.name == '' ? '' : profileData.name,
       email: profileData.email == '' ? '' : profileData.email,
+      birthday: profileData.birthday == '' ? '' : profileData.birthday,
+      workAnniversary: profileData.workAnniversary == '' ? '' : profileData.workAnniversary,
       //skillset: profileData.skillset == '' ? '' : profileData.skillset,
       // hireDate: new Date(),
       // isPermanent: false,
@@ -138,6 +140,10 @@ export default function ProfileForm() {
         temp.state = fieldValues.state.length != 0 ? "" : "This field is required."
        if ('frequency' in fieldValues)
         temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
+       if ('birthday' in fieldValues)
+        temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
+       if ('workAnnniversary' in fieldValues)
+        temp.workAnnniversary = fieldValues.workAnnniversary && fieldValues.workAnnniversary.length != 0 ? "" : "This field is required."
     //   if ('industry' in fieldValues)
     //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
     //   if ('interests' in fieldValues)
@@ -191,8 +197,10 @@ export default function ProfileForm() {
            const interests = values.interests;
            const industry = values.industry;
            const frequency = values.frequency;
+           const birthday = values.birthday;
+           const workAnniversary = values.workAnniversary;
            
-          const profile = { intro, frequency, city, jobTitle,state, interests, companyName,industry,name,email};
+          const profile = { intro, frequency, city, jobTitle,state, interests, companyName,industry,name,email,birthday,workAnniversary};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
@@ -233,15 +241,15 @@ export default function ProfileForm() {
 
             <Grid container spacing={4} style={{position:"relative"}}>
 
-            <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-4rem",right:"0.5rem",width:"18rem",flexDirection:"row"}}>
+            <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-4rem",right:"0.5rem",width:"22rem",flexDirection:"row"}}>
                <Grid item>
                  <Button
                    sx={{
                      backgroundColor: "black",
                      color: "white",
-                     height:"4rem",
-                     width:"8rem",
-                     fontSize:"1.5rem",
+                     height:"4.5rem",
+                     width:"9rem",
+                     fontSize:"1.6rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
                      textTransform: "none", // Optional: keeps text as "CSV" without uppercase
@@ -258,9 +266,9 @@ export default function ProfileForm() {
                    sx={{
                      backgroundColor: "black",
                      color: "white",
-                      height:"4rem",
-                     width:"8rem",
-                     fontSize:"1.5rem",
+                      height:"4.5rem",
+                     width:"9rem",
+                     fontSize:"1.8rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
                      textTransform: "none",
@@ -380,6 +388,32 @@ export default function ProfileForm() {
                         label="Interests"
                         name="interests"
                         value={values.interests}
+                        onChange={handleInputChange}
+                        //error={errors.city}
+                    />
+                </Grid>
+
+
+
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Birthday"
+                        name="interests"
+                        value={values.birthday}
+                        onChange={handleInputChange}
+                        //error={errors.city}
+                    />
+                </Grid>
+
+
+
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Work Anniversary"
+                        name="interests"
+                        value={values.workAnniversary}
                         onChange={handleInputChange}
                         //error={errors.city}
                     />

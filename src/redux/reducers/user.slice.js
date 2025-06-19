@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   allUsers: [],
+  filteredUsers:[],
   liveUsers: [],
   connectedUsers: [],
   connects: [],
@@ -27,6 +28,10 @@ const userSlice = createSlice({
         state.error = '';
         state.message = action.payload.msg;
     },
+    saveFilteredUsers: (state, action) => { 
+      state.filteredUsers = action.payload;
+     
+  },
     fetchRealTimeUsersSuccess: (state, action) => {
       state.isLoading = false;
       state.liveUsers = action.payload;
@@ -78,6 +83,7 @@ const { actions, reducer } = userSlice;
 export const {
  fetchUsersPending,
  fetchUsersSuccess,
+ saveFilteredUsers,
  fetchRealTimeUsersSuccess,
  fetchConnectedUserSuccess,
  fetchUsersFailed,

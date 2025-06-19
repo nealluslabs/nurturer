@@ -112,6 +112,8 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,
+    birthday:profile.birthday,
+    workAnniversary:profile.workAnniversary,
     city: profile.city,
     state: profile.state,
     frequency: profile.frequency,

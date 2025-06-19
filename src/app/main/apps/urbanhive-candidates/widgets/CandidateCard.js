@@ -25,6 +25,8 @@ import { fetchAllUsers, fetchRealTimeConnections, fetchRealTimeConnections2, ini
 import { fb } from 'config/firebase';
 import { timeSince } from 'config/getTimeStamp';
 import { updateLastActive } from 'src/redux/actions/auth.action';
+import SearchIcon from '@mui/icons-material/Search';
+import { InputAdornment, TextField } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -44,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 function CandidateCard () {
   let reactSwipeEl;
   const dispatch = useDispatch();
-  const { allUsers, connects, isLoading } = useSelector((state) => state.user);
+  const { allUsers,filteredUsers, connects, isLoading } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.login);
   let unsubscribe;
   const notifyInvite = () => toast.success('🦄 Invited!', {
@@ -112,7 +114,14 @@ isFirstDayOfMonth
 }
 
   
-
+useEffect(() => {
+  setOutput(filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+    ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+  }))
+)
+ 
+}, [filteredUsers])
 
 useEffect(() => {
    dispatch(fetchAllUsers(user.uid));
@@ -146,20 +155,44 @@ useEffect(() => {
     connects.map(({ user2, type, status, invited_amt, skipped_amt }) => [user2, { type, status, invited_amt, skipped_amt }])
   );
 
-  const output = allUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city }) => ({
-    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,
+  const [output,setOutput] = useState(filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
     ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-  }));
+  }))
 
-  // console.log(output);
 
+)
+
+ console.log("OUTPUT IS --->",output);
+
+   const handleSearchResults = (searchTerm)=>{
+
+     setOutput(
+      filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+        uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+      })).filter((item) => {
+        if (!searchTerm) return true; // Show all items if searchTerm is empty
+      
+        try {
+          const regex = new RegExp(searchTerm, 'i'); // 'i' for case-insensitive matching
+          return item.name && regex.test(item.name);
+        } catch (e) {
+          return false; // If invalid regex, don't match anything
+        }
+      })
+     )
+
+
+
+    }
 
 // const userList = allUsers.length ? (
 const userList = output.length ? (
   // allUsers.map(users => {
     output.map(users => {
       return(
-        <Grid container >
+        <Grid container sx={{marginTop:"2rem"}} >
           <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -171,6 +204,10 @@ const userList = output.length ? (
           draggable
           pauseOnHover
           />
+
+   
+
+
         <Grid item sx={{ mx: "0.3rem" }}>
           {/* <ButtonBase sx={{ width: 500, height: 500 }}> */}
           <Avatar alt="Remy Sharp" src={users.photoUrl} style={{ width: '180px', height: '180px'}} />
@@ -188,14 +225,14 @@ const userList = output.length ? (
                 Follow Up Date • {timeSince(parseInt(users.lastActive))} 
               </Typography>
               <br/>
-              <Typography variant="body2" gutterBottom style={{ fontSize: '18px' }}>
-                <b>{users && users.jobTitle?users.jobTitle:'Boeing - CFO'/*users.city*/}</b>
+              <Typography variant="body2" gutterBottom style={{ fontSize: '15px',maxWidth:"15rem" }}>
+                <b>{users && users.jobTitle && users.companyName?`${users.companyName} - ${users.jobTitle}` :'Boeing - CFO'/*users.city*/}</b>
               </Typography>
             </Grid>
           </Grid>
        
        
-       <Box component="span" sx={{ p: 10, mx: "3rem", border: '1px solid black', width: 470, height: 250, paddingTop: '100px', marginRight: '0px'}}>
+       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 470, height: 250, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
@@ -206,7 +243,7 @@ const userList = output.length ? (
        {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group"> */}
        <ButtonGroup size="large" variant="contained" color="primary" aria-label="large contained primary button group">
         <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}}  style={{ backgroundColor: !canSwipe && 'black' }}>Prev</Button>
-        <Button onClick={() => {reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Edit</Button>
+        <Button onClick={() => {/*reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};*/}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Edit</Button>
         {users.uid != user.uid ? 
         <Button  onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}}    style={{ backgroundColor: !canSwipe && 'black' }}>Next</Button>
         // : users.invited_amt > 0 ? <Button onClick={() => {reactSwipeEl.next(); }} style={{ backgroundColor: !canSwipe && '#1B2330' }}>Invite</Button> :
@@ -243,12 +280,12 @@ const userList = output.length ? (
         <br/>
         <h4><b>Frequency</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}
-        {users.isTechnical == 'yes' ? '3 Months' : '1 Day'}
+        {users.frequency ? users.frequency : 'Monthly'}
         <br/><br/>
         
         <h4><b>Interests</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}
-        {/*users.skillset */}{/*Hausa, Igbo  */}Cars
+        {/*users.skillset */}{/*Hausa, Igbo  */}{users.interests? users.interests:"Cars"}
         </Box>
          </Grid>
         </Grid>
