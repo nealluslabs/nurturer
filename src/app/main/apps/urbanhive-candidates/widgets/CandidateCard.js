@@ -115,7 +115,7 @@ isFirstDayOfMonth
 
   
 useEffect(() => {
-  setOutput(filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+  setOutput(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
     uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
     ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
   }))
@@ -155,7 +155,7 @@ useEffect(() => {
     connects.map(({ user2, type, status, invited_amt, skipped_amt }) => [user2, { type, status, invited_amt, skipped_amt }])
   );
 
-  const [output,setOutput] = useState(filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+  const [output,setOutput] = useState(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
     uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
     ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
   }))
@@ -188,7 +188,7 @@ useEffect(() => {
     }
 
 // const userList = allUsers.length ? (
-const userList = output.length ? (
+const userList =output && output.length ? (
   // allUsers.map(users => {
     output.map(users => {
       return(

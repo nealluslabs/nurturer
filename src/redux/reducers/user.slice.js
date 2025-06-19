@@ -25,6 +25,7 @@ const userSlice = createSlice({
       fetchUsersSuccess: (state, action) => {
         state.isLoading = false;
         state.allUsers = action.payload;
+        state.filteredUsers = action.payload;
         state.error = '';
         state.message = action.payload.msg;
     },
