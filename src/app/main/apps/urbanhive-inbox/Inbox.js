@@ -243,24 +243,288 @@ function Inbox(props) {
         
         <br /><br /><br /><br />
 
+       {selectedChatUser && selectedChatUser.name  === "Alice Chen"?
+         <span>
+      
+      I hope you're doing well and navigating this season with clarity. It’s been about six months
+       since we last connected, and I’ve been thinking about the work you're doing at Tech Innovations
+        Inc. As a Senior Data Analyst navigating the evolving tech space, I can only imagine the pace 
+        and complexity of your role—especially as predictive modeling and business intelligence continue 
+        to shape decision-making.
+       </span>
 
+        :
+        selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
+        
+        I hope you're doing well and navigating this season with clarity. It’s been about three months
+         since we last connected, and I’ve been thinking about the pace and complexity of your role
+          as a Project Manager at Urban Developers LLC—especially in today’s construction landscape
+           where timelines, risk mitigation, and stakeholder alignment are all being pushed to evolve.
+        </span>
+
+         :
+         selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
+         <span>
+         
+         I hope you're doing well and navigating this season with clarity.
+          It’s been about three months since we last connected, and I’ve 
+          been thinking about your work as Marketing Director at Global
+           Connect Solutions—especially given how much the marketing landscape
+            continues to shift with AI, audience behavior, and global brand
+             strategies all evolving quickly.
+         </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "David Lee"?
+         <span>
+         
+         I hope you're doing well and navigating this season with clarity. 
+         It’s been about three months since we last connected, and I’ve been 
+         thinking about your role at Code Forge Labs—especially given how fast
+          backend technologies and infrastructure tools are evolving. With performance 
+          optimization and scalable architecture top of mind for so many teams,
+           your work is likely more impactful than ever.
+         </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "Emily White"?
+         <span>
+         
+         I hope you're doing well and navigating this season with clarity.
+          It’s been about six months since we last connected, and I’ve been thinking
+           about your role at Harmony Medical Center. As a Healthcare Administrator,
+            balancing patient flow, compliance demands, and staff well-being is no small
+             feat—especially in today’s ever-evolving regulatory and operational landscape.
+         </span>
+         
+
+        :
+        <span>
+      
           I hope you're doing well and navigating this season with clarity. I saw the
           recent news about the leadership restructuring at Boeing and immediately
           thought of you. I can only imagine how much is being navigated at your
           level—balancing strategic realignment while keeping day-to-day momentum. It
           must be a challenging but transformative time for your team.
         </span>
+        }
         <br /><br /><br /><br />
+        {
+
+
+selectedChatUser && selectedChatUser.name  === "Alice Chen"?
+         <span>
+        While reading through some recent insights, a couple of articles stood out to me that I thought you might enjoy. They speak to the intersection of data-driven strategy, cross-functional dashboards, and the evolving role of analytics in scaling innovation:
+     
+       </span>
+
+        :
+        selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
+        While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They focus on themes that are especially relevant to project leadership in high-growth urban environments, including proactive risk management and tech-enabled coordination:
+       </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
+         <span>
+         While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to global brand development, data-informed campaigns, and how marketers are staying agile in competitive environments:
+         </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "David Lee"?
+         <span>
+         
+         While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to backend efficiency, database design, and evolving best practices in engineering teams:
+         </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "Emily White"?
+         <span>
+         While reading through some recent updates in the healthcare space, I came across a couple of articles that I thought you might enjoy. They focus on topics like system efficiency, quality of care, and the leadership mindset needed to guide teams through transformation:
+        
+         </span>
+
+
+          :
+          <span>
           While reading through some industry updates, I came across a couple of
           articles that I thought you might enjoy. They touch on themes that are
           relevant to leadership transition, innovation under pressure, and shifting
           talent strategies in large organizations:
         </span>
-        <br /><br />
-        • <b>“A breath of fresh air for the national aviation industry”</b>
+        }
+       
+        {
+
+
+selectedChatUser && selectedChatUser.name  === "Alice Chen"?
+      
+<>
+<br /><br />
+        • <b>“The Future of Predictive Analytics in Enterprise Tech”</b>
         <br />
+<span>
+  – from McKinsey, published in April 2025. {" "}
+  <a
+    href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+    style={{ textDecoration: "underline" }}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    McKinsey Link
+  </a>
+</span>
+<br /><br />
+• <b>“Turning Dashboards into Decisions: The Analyst’s Role in 2025”</b>
+<br />
+<span>
+  –  from Harvard Business Review, published on May 15, 2025{" "}
+  <a
+    href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+    target="_blank"
+    style={{ textDecoration: "underline" }}
+    rel="noopener noreferrer"
+  >
+    HBR Link
+  </a>
+</span>
+</> 
+
+        :
+        selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
+
+        <>
+         <br /><br />
+        • <b>“Reimagining Urban Project Delivery”</b>
+        <br />
+        <span>
+          – from McKinsey, published in April 2025{" "}
+          <a
+            href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+            style={{ textDecoration: "underline" }}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            McKinsey Link
+          </a>
+        </span>
+        <br /><br />
+        • <b>“Navigating Complexity in Construction Projects”</b>
+        <br />
+        <span>
+          – from ENR, published in May 2025.{" "}
+          <a
+            href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+            target="_blank"
+            style={{ textDecoration: "underline" }}
+            rel="noopener noreferrer"
+          >
+            ENR Link
+          </a>
+        </span>
+        </> 
+       
+         :
+         selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
+
+         <>
+          <br /><br />
+        • <b>“The Evolution of Brand Building in 2025”</b>
+        <br />
+         <span>
+           – from WARC, published in April 2025.{" "}
+           <a
+             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+             style={{ textDecoration: "underline" }}
+             target="_blank"
+             rel="noopener noreferrer"
+           >
+             WARC Link
+           </a>
+         </span>
+         <br /><br />
+         • <b>“Global Marketing Trends Report”</b>
+         <br />
+         <span>
+           – from Deloitte, published in May 2025.{" "}
+           <a
+             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+             target="_blank"
+             style={{ textDecoration: "underline" }}
+             rel="noopener noreferrer"
+           >
+             Deloitte Link
+           </a>
+         </span>
+         </> 
+        
+         :
+         selectedChatUser && selectedChatUser.name  === "David Lee"?
+
+         <>
+          <br /><br />
+        • <b>“Backend Engineering Trends in 2025”</b>
+        <br />
+         <span>
+           – rom InfoQ, published in April 2025.{" "}
+           <a
+             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+             style={{ textDecoration: "underline" }}
+             target="_blank"
+             rel="noopener noreferrer"
+           >
+             InfoQ Link
+           </a>
+         </span>
+         <br /><br />
+         • <b>“Scaling Databases with AI-Augmented Indexing”</b>
+         <br />
+         <span>
+           –  from ACM TechTalks, published in May 2025{" "}
+           <a
+             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+             target="_blank"
+             style={{ textDecoration: "underline" }}
+             rel="noopener noreferrer"
+           >
+             ACM Link
+           </a>
+         </span>
+         </> 
+       
+         :
+         selectedChatUser && selectedChatUser.name  === "Emily White"?
+         
+         <>
+          <br /><br />
+        • <b>“The Future of Patient Throughput in 2025”</b>
+        <br />
+         <span>
+           – from Becker’s Hospital Review, published in April 2025. {" "}
+           <a
+             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
+             style={{ textDecoration: "underline" }}
+             target="_blank"
+             rel="noopener noreferrer"
+           >
+             Becker’s Link
+           </a>
+         </span>
+         <br /><br />
+         • <b>“Navigating Compliance and Innovation in Modern Healthcare Systems”</b>
+         <br />
+         <span>
+           – from HIMSS, published in May 2025.{" "}
+           <a
+             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
+             target="_blank"
+             style={{ textDecoration: "underline" }}
+             rel="noopener noreferrer"
+           >
+            HIMSS Link
+           </a>
+         </span>
+         </> 
+
+          :
+         
+          <>
         <span>
           – PwC, March 2025{" "}
           <a
@@ -286,13 +550,51 @@ function Inbox(props) {
             Deloitte Link
           </a>
         </span>
+        </> 
+        }
         <br /><br /><br /><br />
+
+
+       
+       {selectedChatUser && selectedChatUser.name  === "Alice Chen"?
+         <span>
+      
+      We had some great conversations in the past, and I truly appreciated your perspective on how analytics can drive smarter systems. If you're open to it, I’d love to reconnect sometime soon—just a quick check-in to hear what’s been keeping you busy (besides chess tournaments!).
+       </span>
+
+        :
+        selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
-          We had some great conversations previously, and I really valued the
-          opportunity to understand what you were working toward. Let me know if you
-          have time for a brief catch-up in the coming weeks. Either way, wishing you
-          continued momentum.
+        
+        We had some great conversations previously, and I really valued hearing how you manage both the strategic and human sides of development. Let me know if you’re available for a quick catch-up in the coming weeks. I’d enjoy hearing more about what you're working on—and maybe even which projects have made it into your photography portfolio lately.
         </span>
+
+         :
+         selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
+         <span>
+         
+         We had some great conversations previously, and I really valued hearing how you approach strategy and brand voice across markets. Let me know if you’re open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and maybe which destination is next on your travel list!). Wishing you continued momentum.
+         </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "David Lee"?
+         <span>
+         
+         We had some great conversations previously, and I really appreciated hearing how you approach clean architecture and performance at scale. Let me know if you’re up for a quick catch-up sometime soon—I’d love to hear what you’ve been building (and maybe even what your latest keyboard mod looks like). Wishing you continued momentum.
+         </span>
+         :
+         selectedChatUser && selectedChatUser.name  === "Emily White"?
+         <span>
+         
+         We had some great conversations previously, and I truly valued hearing your perspective on streamlining operations while staying patient-centered. Let me know if you’d be open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and how things are going at the animal shelter too!). Wishing you continued momentum
+         </span>
+         
+
+        :
+        <span>
+      
+      We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum.
+        </span>
+        }
 
 
         <br /><br /><br /><br />

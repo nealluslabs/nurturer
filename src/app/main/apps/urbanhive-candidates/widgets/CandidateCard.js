@@ -92,7 +92,7 @@ const inviteSkip = (type, user2) => {
     return
   }else{
   if(type == 1){
-   /* notifyInvite();*/
+   //notifyInvite();
   }else if(type == 0){
     /*notifySkip();*/
   }else if(type == -1){
@@ -100,6 +100,7 @@ const inviteSkip = (type, user2) => {
   }
 }
   if(type != -1){
+    //console.log("USER BEFORE CONNECTING--->",user2)
    dispatch(initiateConnection(type, user.uid, user2, user.usedConnection));
   }
 }

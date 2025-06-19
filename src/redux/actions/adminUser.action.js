@@ -140,7 +140,7 @@ export const fetchRealTimeConnections = (uid) => async (dispatch) => {
         // }
         });
         dispatch(initiateSuccess(connects));
-        console.log("connections fetched: ", connects);
+        console.log("connections fetched for user1: ", connects);
     });
 
     return unsubscribe;

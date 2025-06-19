@@ -166,7 +166,7 @@ export const fetchRealTimeConnections = (uid) => async (dispatch) => {
         // }
         });
         dispatch(initiateSuccess(connects));
-        console.log("connections fetched: ", connects);
+        console.log("connections fetched for user1: ", connects);
     });
 
     return unsubscribe;
@@ -205,10 +205,10 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
             // }
             });
             // dispatch(fetchRealTimeUsersSuccess(users));
-            console.log("Connected Users ID: ", users);
-            if(users.length > 0){
+            console.log("Connected Users ID for USER 1: ", users);
+            /*if(users.length > 0  ){*/
                 db.collection('users')
-                .where('uid', 'in', users)
+               // .where('uid', 'in', users)
                 .get()
                 .then((snapshot) => {
                     const connectedUsers = snapshot.docs.map((doc) => ({ ...doc.data() }));
@@ -220,7 +220,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                     dispatch(fetchUsersFailed({ errorMessage }));
             });
         
-            }
+           /* }*/
     
         });
     
@@ -244,7 +244,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                 });
                 // dispatch(fetchRealTimeUsersSuccess(users));
                 console.log("Connected Users ID for User2 : ", users);
-                if(users.length > 0){
+                /*if(users.length > 0){*/
                     db.collection('users')
                     .where('uid', 'in', users)
                     .get()
@@ -258,7 +258,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                         dispatch(fetchUsersFailed({ errorMessage }));
                 });
             
-                }
+                /*}*/
         
             });
         

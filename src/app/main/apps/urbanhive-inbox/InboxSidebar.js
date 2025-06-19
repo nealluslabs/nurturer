@@ -83,6 +83,7 @@ function InboxSidebar(props) {
   
   useEffect(() => {
     console.log('All Users', allUsers);
+    console.log('user isso--->', user.uid);
   }, [])
  
   useEffect(() => {
@@ -164,7 +165,7 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    const connectedUsersOutput = connectedUsers && connectedUsers.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
       lookingFor, lastActive, isTechnical, photoUrl, password},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
@@ -183,7 +184,7 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers.map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    const connectedUsersOutput = connectedUsers && connectedUsers.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
       lookingFor, lastActive, isTechnical, photoUrl, password},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
