@@ -79,7 +79,7 @@ function CandidateApp(props) {
              
              endAdornment: (
              <InputAdornment position="end">
-             <SearchIcon onClick={(e)=>{handleSearchResults(e.target.value)}} />
+             <SearchIcon  style={{cursor:"pointer"}} onClick={(e)=>{handleSearchResults(e.target.value)}} />
              </InputAdornment>
              ),
              sx: {
