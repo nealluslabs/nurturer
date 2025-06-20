@@ -399,7 +399,7 @@ export default function ProfileForm() {
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
                         label="Birthday"
-                        name="interests"
+                        name="birthday"
                         value={values.birthday}
                         onChange={handleInputChange}
                         //error={errors.city}
@@ -412,7 +412,7 @@ export default function ProfileForm() {
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
                         label="Work Anniversary"
-                        name="interests"
+                        name="workAnniversary"
                         value={values.workAnniversary}
                         onChange={handleInputChange}
                         //error={errors.city}

@@ -27,9 +27,9 @@ export const getStates = ()=>([
 ])
 
 export const getFrequency = ()=>([
-    { id: 'Daily', title: 'Daily' },
-    { id: 'Weekly', title: 'Weekly' },
-    { id: 'Bi-Weekly', title: 'Bi-Weekly' },
-    { id: 'Monthly', title: 'Monthly' },
-    { id: 'Annually', title: 'Annually' },
+    { id: '1 Month', title: '1 Month' },
+    { id: '2 Months', title: '2 Months' },
+    { id: '3 Months', title: '3 Months' },
+    { id: '4 Months', title: '4 Months' },
+    { id: '6 Months', title: '6 Months' },
 ])
