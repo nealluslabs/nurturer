@@ -206,8 +206,8 @@ export default function ProfileForm() {
           if(photoURL == static_img){
           dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           }else{
-            //dispatch(uploadNewImage(profile, user, file, resetForm));
-            dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
+            dispatch(uploadNewImage(profile, user, file, resetForm));
+            //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }
     }

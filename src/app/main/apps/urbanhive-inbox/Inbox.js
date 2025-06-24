@@ -246,65 +246,82 @@ function Inbox(props) {
        {selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          <span>
       
-      I hope you're doing well and navigating this season with clarity. It’s been about six months
+      {/*I hope you're doing well and navigating this season with clarity. It’s been about six months
        since we last connected, and I’ve been thinking about the work you're doing at Tech Innovations
         Inc. As a Senior Data Analyst navigating the evolving tech space, I can only imagine the pace 
         and complexity of your role—especially as predictive modeling and business intelligence continue 
-        to shape decision-making.
+        to shape decision-making.*/}
+
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
        </span>
 
         :
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
         
-        I hope you're doing well and navigating this season with clarity. It’s been about three months
+       {/* I hope you're doing well and navigating this season with clarity. It’s been about three months
          since we last connected, and I’ve been thinking about the pace and complexity of your role
           as a Project Manager at Urban Developers LLC—especially in today’s construction landscape
-           where timelines, risk mitigation, and stakeholder alignment are all being pushed to evolve.
+                where timelines, risk mitigation, and stakeholder alignment are all being pushed to evolve.*/}
+
+
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
         </span>
 
          :
          selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
          <span>
          
-         I hope you're doing well and navigating this season with clarity.
+        {/* I hope you're doing well and navigating this season with clarity.
           It’s been about three months since we last connected, and I’ve 
           been thinking about your work as Marketing Director at Global
            Connect Solutions—especially given how much the marketing landscape
             continues to shift with AI, audience behavior, and global brand
-             strategies all evolving quickly.
+             strategies all evolving quickly.*/}
+
+
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
          </span>
          :
          selectedChatUser && selectedChatUser.name  === "David Lee"?
          <span>
          
-         I hope you're doing well and navigating this season with clarity. 
+        { /*I hope you're doing well and navigating this season with clarity. 
          It’s been about three months since we last connected, and I’ve been 
          thinking about your role at Code Forge Labs—especially given how fast
           backend technologies and infrastructure tools are evolving. With performance 
           optimization and scalable architecture top of mind for so many teams,
-           your work is likely more impactful than ever.
+           your work is likely more impactful than ever.*/}
+
+
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
          </span>
          :
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
          
-         I hope you're doing well and navigating this season with clarity.
+       { /* I hope you're doing well and navigating this season with clarity.
           It’s been about six months since we last connected, and I’ve been thinking
            about your role at Harmony Medical Center. As a Healthcare Administrator,
             balancing patient flow, compliance demands, and staff well-being is no small
-             feat—especially in today’s ever-evolving regulatory and operational landscape.
+             feat—especially in today’s ever-evolving regulatory and operational landscape.*/}
+
+
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
          </span>
          
 
         :
         <span>
       
-          I hope you're doing well and navigating this season with clarity. I saw the
+         { /*I hope you're doing well and navigating this season with clarity. I saw the
           recent news about the leadership restructuring at Boeing and immediately
           thought of you. I can only imagine how much is being navigated at your
           level—balancing strategic realignment while keeping day-to-day momentum. It
-          must be a challenging but transformative time for your team.
+          must be a challenging but transformative time for your team.*/}
+
+
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
         </span>
         }
         <br /><br /><br /><br />
@@ -313,40 +330,43 @@ function Inbox(props) {
 
 selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          <span>
-        While reading through some recent insights, a couple of articles stood out to me that I thought you might enjoy. They speak to the intersection of data-driven strategy, cross-functional dashboards, and the evolving role of analytics in scaling innovation:
-     
+        {/*While reading through some recent insights, a couple of articles stood out to me that I thought you might enjoy. They speak to the intersection of data-driven strategy, cross-functional dashboards, and the evolving role of analytics in scaling innovation:*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
        </span>
 
         :
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
-        While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They focus on themes that are especially relevant to project leadership in high-growth urban environments, including proactive risk management and tech-enabled coordination:
+        {/*While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They focus on themes that are especially relevant to project leadership in high-growth urban environments, including proactive risk management and tech-enabled coordination:*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
        </span>
          :
          selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
          <span>
-         While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to global brand development, data-informed campaigns, and how marketers are staying agile in competitive environments:
+        {/* While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to global brand development, data-informed campaigns, and how marketers are staying agile in competitive environments:*/}
          </span>
          :
          selectedChatUser && selectedChatUser.name  === "David Lee"?
          <span>
          
-         While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to backend efficiency, database design, and evolving best practices in engineering teams:
-         </span>
+        {/* While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to backend efficiency, database design, and evolving best practices in engineering teams:*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
+        </span>
          :
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
-         While reading through some recent updates in the healthcare space, I came across a couple of articles that I thought you might enjoy. They focus on topics like system efficiency, quality of care, and the leadership mindset needed to guide teams through transformation:
-        
+         {/*While reading through some recent updates in the healthcare space, I came across a couple of articles that I thought you might enjoy. They focus on topics like system efficiency, quality of care, and the leadership mindset needed to guide teams through transformation:*/}
+         {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
          </span>
 
 
           :
           <span>
-          While reading through some industry updates, I came across a couple of
+          {/*While reading through some industry updates, I came across a couple of
           articles that I thought you might enjoy. They touch on themes that are
           relevant to leadership transition, innovation under pressure, and shifting
-          talent strategies in large organizations:
+        talent strategies in large organizations:*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
         </span>
         }
        
@@ -374,7 +394,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
 • <b>“Turning Dashboards into Decisions: The Analyst’s Role in 2025”</b>
 <br />
 <span>
-  –  from Harvard Business Review, published on May 15, 2025{" "}
+  –  {/*from Harvard Business Review, published on May 15, 2025*/}{" "}
   <a
     href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
     target="_blank"
@@ -391,10 +411,10 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
 
         <>
          <br /><br />
-        • <b>“Reimagining Urban Project Delivery”</b>
+        • <b>{/*“Reimagining Urban Project Delivery”*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointOneBold}</b>
         <br />
         <span>
-          – from McKinsey, published in April 2025{" "}
+          – {/*from McKinsey, published in April 2025*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointOneRest}{" "}
           <a
             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
             style={{ textDecoration: "underline" }}
@@ -405,10 +425,10 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
           </a>
         </span>
         <br /><br />
-        • <b>“Navigating Complexity in Construction Projects”</b>
+        • <b>{/*“Navigating Complexity in Construction Projects”*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoBold}</b>
         <br />
         <span>
-          – from ENR, published in May 2025.{" "}
+          – {/*from ENR, published in May 2025.*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoRest}{" "}
           <a
             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
             target="_blank"
@@ -559,40 +579,46 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
        {selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          <span>
       
-      We had some great conversations in the past, and I truly appreciated your perspective on how analytics can drive smarter systems. If you're open to it, I’d love to reconnect sometime soon—just a quick check-in to hear what’s been keeping you busy (besides chess tournaments!).
+      {/*We had some great conversations in the past, and I truly appreciated your perspective on how analytics can drive smarter systems. If you're open to it, I’d love to reconnect sometime soon—just a quick check-in to hear what’s been keeping you busy (besides chess tournaments!).*/}
+      {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
        </span>
 
         :
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
         
-        We had some great conversations previously, and I really valued hearing how you manage both the strategic and human sides of development. Let me know if you’re available for a quick catch-up in the coming weeks. I’d enjoy hearing more about what you're working on—and maybe even which projects have made it into your photography portfolio lately.
+        {/*We had some great conversations previously, and I really valued hearing how you manage both the strategic and human sides of development. Let me know if you’re available for a quick catch-up in the coming weeks. I’d enjoy hearing more about what you're working on—and maybe even which projects have made it into your photography portfolio lately.*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
         </span>
 
          :
          selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
          <span>
          
-         We had some great conversations previously, and I really valued hearing how you approach strategy and brand voice across markets. Let me know if you’re open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and maybe which destination is next on your travel list!). Wishing you continued momentum.
+        {/* We had some great conversations previously, and I really valued hearing how you approach strategy and brand voice across markets. Let me know if you’re open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and maybe which destination is next on your travel list!). Wishing you continued momentum.*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
          </span>
          :
          selectedChatUser && selectedChatUser.name  === "David Lee"?
          <span>
          
-         We had some great conversations previously, and I really appreciated hearing how you approach clean architecture and performance at scale. Let me know if you’re up for a quick catch-up sometime soon—I’d love to hear what you’ve been building (and maybe even what your latest keyboard mod looks like). Wishing you continued momentum.
+        { /*We had some great conversations previously, and I really appreciated hearing how you approach clean architecture and performance at scale. Let me know if you’re up for a quick catch-up sometime soon—I’d love to hear what you’ve been building (and maybe even what your latest keyboard mod looks like). Wishing you continued momentum.*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
          </span>
          :
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
          
-         We had some great conversations previously, and I truly valued hearing your perspective on streamlining operations while staying patient-centered. Let me know if you’d be open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and how things are going at the animal shelter too!). Wishing you continued momentum
+        {/* We had some great conversations previously, and I truly valued hearing your perspective on streamlining operations while staying patient-centered. Let me know if you’d be open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and how things are going at the animal shelter too!). Wishing you continued momentum*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
          </span>
          
 
         :
         <span>
       
-      We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum.
+      {/*We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum.*/}
+      {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
         </span>
         }
 

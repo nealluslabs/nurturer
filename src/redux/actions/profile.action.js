@@ -5,7 +5,13 @@ import { db, fb, auth, storage } from '../../config/firebase';
 import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
 import { fetchAllUsers } from './user.action';
+import { S3 } from "aws-sdk";
 
+const s3 = new S3({
+  accessKeyId:process.env.REACT_APP_ACCESSKEYID,
+  secretAccessKey:process.env.REACT_APP_SECRETACCESSKEY,
+  region:process.env.REACT_APP_REGION,
+});
 
 
 
@@ -38,7 +44,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
   );
 }
 
-export const uploadNewImage = (profile, user, file, resetForm) => async (dispatch) => {
+export const uploadNewImageOld = (profile, user, file, resetForm) => async (dispatch) => {
   const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
   console.log('File Name: ', imageName);
   dispatch(createProfilePending());
@@ -66,6 +72,48 @@ export const uploadNewImage = (profile, user, file, resetForm) => async (dispatc
     }
   );
 }
+
+
+
+
+  export const uploadNewImage = (profile, user, file, resetForm) => async (dispatch) => {
+    const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
+    const uploadToS3 = async (file) => {
+
+      console.log("PABOUT TO SEND TO S3--->",file)
+    
+    
+      const params = {
+        Body: file, // Blob
+        Bucket:process.env.REACT_APP_S3_BUCKET,
+        Key: file.name, // Unique filename
+        ContentType: 'image/png', // Ensure correct MIME type
+      };
+    
+    
+    
+       
+      
+      const data = await s3.upload({
+        Body: file, // Blob
+        Bucket:process.env.REACT_APP_S3_BUCKET,
+        Key: file.name, // Unique filename
+        ContentType: 'image/png', // Ensure correct MIME type
+      }).promise();
+      return data.Location; // S3 file URL 
+    };
+    
+    
+    
+    uploadToS3(file)
+    .then( async(url) => {
+            console.log('Image URL: ', url);
+            dispatch(createNewProfile(profile, user, file, resetForm, url));
+          });
+      
+   
+  }
+  
 
 export const createProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
   console.log('All data: ',{profile, user, url});
