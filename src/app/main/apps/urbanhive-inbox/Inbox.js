@@ -344,6 +344,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
          <span>
         {/* While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to global brand development, data-informed campaigns, and how marketers are staying agile in competitive environments:*/}
+        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
          </span>
          :
          selectedChatUser && selectedChatUser.name  === "David Lee"?
