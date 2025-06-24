@@ -7,7 +7,7 @@ export const fetchChats = (user1, user2_data) => async (dispatch) => {
     const user2 = user2_data.uid;
     const users =  {user1, user2};
     console.log('User 1: ', user1);
-    console.log('User 2: ', user2);
+    console.log('User 2 chat data: ', user2);
 
      dispatch(setCurrentChat(user2_data));
      dispatch(getRealtimeChat(users))

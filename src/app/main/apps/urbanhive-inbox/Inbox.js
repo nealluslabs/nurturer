@@ -124,7 +124,7 @@ function Inbox(props) {
  const { connects } = useSelector((state) => state.user);
  let connectStatus;
 
- console.log("SELECTED CHAT USER IS--->",user)
+ console.log("SELECTED CHAT USER IS--->",selectedChatUser)
 
   useEffect(() => {
     if (chatMessages) {
@@ -372,205 +372,38 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
        
         {
 
-
-selectedChatUser && selectedChatUser.name  === "Alice Chen"?
-      
-<>
-<br /><br />
-        • <b>“The Future of Predictive Analytics in Enterprise Tech”</b>
-        <br />
-<span>
-  – from McKinsey, published in April 2025. {" "}
-  <a
-    href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-    style={{ textDecoration: "underline" }}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    McKinsey Link
-  </a>
-</span>
-<br /><br />
-• <b>“Turning Dashboards into Decisions: The Analyst’s Role in 2025”</b>
-<br />
-<span>
-  –  {/*from Harvard Business Review, published on May 15, 2025*/}{" "}
-  <a
-    href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-    target="_blank"
-    style={{ textDecoration: "underline" }}
-    rel="noopener noreferrer"
-  >
-    HBR Link
-  </a>
-</span>
-</> 
-
-        :
-        selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
-
         <>
          <br /><br />
         • <b>{/*“Reimagining Urban Project Delivery”*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointOneBold}</b>
         <br />
         <span>
           – {/*from McKinsey, published in April 2025*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointOneRest}{" "}
-          <a
+          {/*<a
             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
             style={{ textDecoration: "underline" }}
             target="_blank"
             rel="noopener noreferrer"
           >
             McKinsey Link
-          </a>
+        </a>*/}
         </span>
         <br /><br />
         • <b>{/*“Navigating Complexity in Construction Projects”*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoBold}</b>
         <br />
         <span>
           – {/*from ENR, published in May 2025.*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoRest}{" "}
-          <a
+         {/* <a
             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
             target="_blank"
             style={{ textDecoration: "underline" }}
             rel="noopener noreferrer"
           >
             ENR Link
-          </a>
+        </a>*/}
         </span>
         </> 
+      
        
-         :
-         selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
-
-         <>
-          <br /><br />
-        • <b>“The Evolution of Brand Building in 2025”</b>
-        <br />
-         <span>
-           – from WARC, published in April 2025.{" "}
-           <a
-             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-             style={{ textDecoration: "underline" }}
-             target="_blank"
-             rel="noopener noreferrer"
-           >
-             WARC Link
-           </a>
-         </span>
-         <br /><br />
-         • <b>“Global Marketing Trends Report”</b>
-         <br />
-         <span>
-           – from Deloitte, published in May 2025.{" "}
-           <a
-             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-             target="_blank"
-             style={{ textDecoration: "underline" }}
-             rel="noopener noreferrer"
-           >
-             Deloitte Link
-           </a>
-         </span>
-         </> 
-        
-         :
-         selectedChatUser && selectedChatUser.name  === "David Lee"?
-
-         <>
-          <br /><br />
-        • <b>“Backend Engineering Trends in 2025”</b>
-        <br />
-         <span>
-           – rom InfoQ, published in April 2025.{" "}
-           <a
-             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-             style={{ textDecoration: "underline" }}
-             target="_blank"
-             rel="noopener noreferrer"
-           >
-             InfoQ Link
-           </a>
-         </span>
-         <br /><br />
-         • <b>“Scaling Databases with AI-Augmented Indexing”</b>
-         <br />
-         <span>
-           –  from ACM TechTalks, published in May 2025{" "}
-           <a
-             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-             target="_blank"
-             style={{ textDecoration: "underline" }}
-             rel="noopener noreferrer"
-           >
-             ACM Link
-           </a>
-         </span>
-         </> 
-       
-         :
-         selectedChatUser && selectedChatUser.name  === "Emily White"?
-         
-         <>
-          <br /><br />
-        • <b>“The Future of Patient Throughput in 2025”</b>
-        <br />
-         <span>
-           – from Becker’s Hospital Review, published in April 2025. {" "}
-           <a
-             href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-             style={{ textDecoration: "underline" }}
-             target="_blank"
-             rel="noopener noreferrer"
-           >
-             Becker’s Link
-           </a>
-         </span>
-         <br /><br />
-         • <b>“Navigating Compliance and Innovation in Modern Healthcare Systems”</b>
-         <br />
-         <span>
-           – from HIMSS, published in May 2025.{" "}
-           <a
-             href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-             target="_blank"
-             style={{ textDecoration: "underline" }}
-             rel="noopener noreferrer"
-           >
-            HIMSS Link
-           </a>
-         </span>
-         </> 
-
-          :
-         
-          <>
-        <span>
-          – PwC, March 2025{" "}
-          <a
-            href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-            style={{ textDecoration: "underline" }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            PwC Link
-          </a>
-        </span>
-        <br /><br />
-        • <b>“Deloitte Global's 2025 Airline CEO Survey”</b>
-        <br />
-        <span>
-          – Deloitte, May 30, 2025{" "}
-          <a
-            href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-            target="_blank"
-            style={{ textDecoration: "underline" }}
-            rel="noopener noreferrer"
-          >
-            Deloitte Link
-          </a>
-        </span>
-        </> 
         }
         <br /><br /><br /><br />
 
