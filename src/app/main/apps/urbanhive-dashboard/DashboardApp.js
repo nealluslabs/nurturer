@@ -352,8 +352,8 @@ const users = [
                   <div style={{ display: "flex", alignItems: "center" }}>
                     <IconComponent 
                       sx={{ 
-                        width: 32, 
-                        height: 32, 
+                        width: 16, 
+                        height: 16, 
                         marginRight: "6px", 
                         color: item.iconColor 
                       }} 
@@ -417,7 +417,8 @@ const users = [
                       height: "32px", 
                       borderRadius: "50%", 
                       marginRight: "12px", 
-                      background: user.avatarBg, 
+                      //background: user.avatarBg, 
+                      background:"#01bcc0",
                       color: user.textColor, 
                       display: "flex", 
                       alignItems: "center", 

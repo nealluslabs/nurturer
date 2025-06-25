@@ -78,7 +78,7 @@ export const signup = (user, history) => async (dispatch) => {
           dispatch(loginSuccess({ user, uid }));
           dispatch(fetchProfile());
           dispatch(updateLastActive(uid));
-          history.push('/candidates');
+          history.push('/apps/dashboard');
           // history.push('/apps/sessions');
           // window.location.href = '/candidates';
       })
@@ -87,8 +87,15 @@ export const signup = (user, history) => async (dispatch) => {
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log('Error Code is: ', errorCode, + ' Msg is: ', errorMessage);
-      dispatch(loginFailed({ errorMessage }));
+
+      console.log('Error Msg is:---> ', errorMessage);
+     
+     if(errorMessage){
+      dispatch(loginFailed({errorMessage:"Invalid Login Credentials"} ));
+     }
     });
+
+
  
   }
 
