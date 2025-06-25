@@ -29,6 +29,7 @@ import EditAppointmentConfig from './urbanhive-admin-edit-appointment/EditAppoin
 import BootCampConfig from './urbanhive-bootcamp/BootcampConfig';
 import BootCampDetailsConfig from './urbanhive-bootcamp-details/BootCampDetailsConfig';
 import DashboardAppConfig from './urbanhive-dashboard/DashboardAppConfig';
+import ProfileUpdateConfig from './urbanhive-profile-update/ProfileUpdateConfig';
 
 
 const appsConfigs = [
@@ -37,6 +38,7 @@ const appsConfigs = [
   CandidateAppConfig,
   InboxAppConfig,
   ProfileConfig,
+  ProfileUpdateConfig,
   DashboardAppConfig,
  
   ComingSoonPageConfig,

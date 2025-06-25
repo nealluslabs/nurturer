@@ -8,6 +8,7 @@ const initialState = {
   connects: [],
   connects2: [],
   isLoading: false,
+  candidateInFocus:{},
   info: '',
   error: '',
   message: '',
@@ -33,6 +34,10 @@ const userSlice = createSlice({
       state.filteredUsers = action.payload;
      
   },
+  saveCandidateInFocus: (state, action) => { 
+    state.candidateInFocus = action.payload;
+   
+},
     fetchRealTimeUsersSuccess: (state, action) => {
       state.isLoading = false;
       state.liveUsers = action.payload;
@@ -85,6 +90,7 @@ export const {
  fetchUsersPending,
  fetchUsersSuccess,
  saveFilteredUsers,
+ saveCandidateInFocus,
  fetchRealTimeUsersSuccess,
  fetchConnectedUserSuccess,
  fetchUsersFailed,

@@ -38,7 +38,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
         .getDownloadURL()
         .then(url => {
           console.log('Image URL: ', url);
-          dispatch(createProfile(profile, user, file, resetForm, url));
+          dispatch(createNewProfile(profile, user, file, resetForm, url));
         });
     }
   );
@@ -109,6 +109,46 @@ export const uploadNewImageOld = (profile, user, file, resetForm) => async (disp
     .then( async(url) => {
             console.log('Image URL: ', url);
             dispatch(createNewProfile(profile, user, file, resetForm, url));
+          });
+      
+   
+  }
+
+
+
+  export const updateProfileWithImage = (profile, user, file, resetForm) => async (dispatch) => {
+    const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
+    const uploadToS3 = async (file) => {
+
+      console.log("PABOUT TO SEND TO S3--->",file)
+    
+    
+      const params = {
+        Body: file, // Blob
+        Bucket:process.env.REACT_APP_S3_BUCKET,
+        Key: file.name, // Unique filename
+        ContentType: 'image/png', // Ensure correct MIME type
+      };
+    
+    
+    
+       
+      
+      const data = await s3.upload({
+        Body: file, // Blob
+        Bucket:process.env.REACT_APP_S3_BUCKET,
+        Key: file.name, // Unique filename
+        ContentType: 'image/png', // Ensure correct MIME type
+      }).promise();
+      return data.Location; // S3 file URL 
+    };
+    
+    
+    
+    uploadToS3(file)
+    .then( async(url) => {
+            console.log('Image URL: ', url);
+            dispatch(updateProfile(profile, user, file, resetForm, url));
           });
       
    
@@ -199,6 +239,59 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
   });
 
 }
+
+
+
+export const updateProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
+  console.log('All data: ',{profile, user, url});
+  dispatch(createProfilePending());
+ 
+  const userRef = db.collection("users").doc(profile.uid)
+ 
+   userRef.update({
+   name: profile.name,
+   email: profile.email,
+    intro: profile.intro,
+   companyName: profile.companyName,
+   industry: profile.industry,
+    jobTitle: profile.jobTitle,
+    birthday:profile.birthday,
+    workAnniversary:profile.workAnniversary,
+    city: profile.city,
+    state: profile.state,
+    frequency: profile.frequency,
+    interests: profile.interests,
+  
+    usedConnection:0,
+    lastActive:1663862737170,
+    
+  
+    skillset: '',
+   
+    skills_needed: '',
+    isTechnical: 'no',
+    lookingFor:'',
+    githubUrl: '',
+    photoUrl: url,
+  })
+ 
+  .then(() => {
+    const msg = 'Profile successfully updated!';
+    console.log(msg);
+     dispatch(createProfileSuccessOnly({ msg }));
+     dispatch(fetchAllUsers(user.uid));
+    // dispatch(fetchProfile());
+    // dispatch(fetchUserData(fb.auth().currentUser.uid));
+    // resetForm();
+  })
+  .catch((error) => {
+    var errorMessage = error.message;
+    console.log('Error updating profile', errorMessage);
+    dispatch(createProfileFailed({ errorMessage }));
+  });
+
+}
+
 
 
   export const fetchProfile = () => async (dispatch) => {

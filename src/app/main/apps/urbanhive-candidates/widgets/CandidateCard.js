@@ -28,6 +28,7 @@ import { updateLastActive } from 'src/redux/actions/auth.action';
 import SearchIcon from '@mui/icons-material/Search';
 import { InputAdornment, TextField } from '@mui/material';
 import { useHistory } from 'react-router';
+import { saveCandidateInFocus } from 'redux/reducers/user.slice';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -247,7 +248,7 @@ const userList =output && output.length ? (
        {/* <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group"> */}
        <ButtonGroup size="large" variant="contained" color="primary" aria-label="large contained primary button group">
         <Button onClick={() => {reactSwipeEl.prev(); inviteSkip(-1, users.uid);}}  style={{ backgroundColor: !canSwipe && 'black' }}>Prev</Button>
-        <Button onClick={() => {history.push("/apps/profile")/*reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};*/}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Edit</Button>
+        <Button onClick={() => {dispatch(saveCandidateInFocus(users));setTimeout(()=>{history.push("/apps/profile-update")},700)/*reactSwipeEl.next(); {users.invited_amt > 0 ? alert('You have already invited this user') : inviteSkip(1, users.uid)};*/}} style={{ backgroundColor: 'black', color: '#f4a50c' }} >Edit</Button>
         {users.uid != user.uid ? 
         <Button  onClick={() => {reactSwipeEl.next(); inviteSkip(0, users.uid);}}    style={{ backgroundColor: !canSwipe && 'black' }}>Next</Button>
         // : users.invited_amt > 0 ? <Button onClick={() => {reactSwipeEl.next(); }} style={{ backgroundColor: !canSwipe && '#1B2330' }}>Invite</Button> :
