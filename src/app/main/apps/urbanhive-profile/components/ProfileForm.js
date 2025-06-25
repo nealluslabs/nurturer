@@ -239,16 +239,16 @@ export default function ProfileForm() {
 
            
 
-            <Grid container spacing={4} style={{position:"relative"}}>
+            <Grid container spacing={4} style={{position:"relative",marginTop:"2rem"}}>
 
-            <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-4rem",right:"0.5rem",width:"22rem",flexDirection:"row"}}>
+            <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-8rem",right:"0.5rem",width:"23rem",flexDirection:"row",marginBottom:"1.5rem"}}>
                <Grid item>
                  <Button
                    sx={{
                      backgroundColor: "black",
                      color: "white",
                      height:"4.5rem",
-                     width:"9rem",
+                     width:"11rem",
                      fontSize:"1.6rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
@@ -267,7 +267,7 @@ export default function ProfileForm() {
                      backgroundColor: "black",
                      color: "white",
                       height:"4.5rem",
-                     width:"9rem",
+                     width:"11rem",
                      fontSize:"1.8rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
@@ -282,7 +282,7 @@ export default function ProfileForm() {
                </Grid>
              </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
                         label="Name"
                         name="name"
@@ -294,7 +294,7 @@ export default function ProfileForm() {
 
                
 
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
                         label="Email"
                         name="email"
