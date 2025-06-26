@@ -13,13 +13,14 @@ const useStyles = makeStyles((theme) => ({
       },
       '&:focus:not(.active)': {
         backgroundColor:
-          theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0,0,0,.05)',
+         theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0,0,0,.05)',
       },
     },
     '&.active-square-list': {
       '& .fuse-list-item, & .active.fuse-list-item': {
         width: '100%',
         borderRadius: '0',
+       
       },
     },
     '&.dense': {

@@ -11,7 +11,9 @@ import { useDispatch } from 'react-redux';
 import FuseNavBadge from '../../FuseNavBadge';
 
 const useStyles = makeStyles((theme) => ({
-  item: (props) => ({
+  item: (props) => {
+    console.log('STYLE PROPS IS -->',props)
+    return {
     height: 40,
     width: '100%',
     borderRadius: '6px',
@@ -20,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: props.itemPadding > 80 ? 80 : props.itemPadding,
     color: alpha(theme.palette.text.primary, 0.7),
     cursor: 'pointer',
+    
     textDecoration: 'none!important',
     '&:hover': {
       color: theme.palette.text.primary,
@@ -27,9 +30,9 @@ const useStyles = makeStyles((theme) => ({
     '&.active': {
       color: theme.palette.text.primary,
       backgroundColor:
-        theme.palette.type === 'light'
-          ? 'rgba(0, 0, 0, .05)!important'
-          : 'rgba(255, 255, 255, .1)!important',
+        /*theme.palette.type === 'light'
+          ? ((props.item && props.item.title ==='Settings' )||(props.item && props.item.title ==='Newsletter' )||(props.item )) ? "transparent":'rgba(0, 0, 0, .05)' 
+          :*/ ((props.item && props.item.url ==='#')) ?"inherit":'rgba(255, 255, 255, .1)',
       pointerEvents: 'none',
       transition: 'border-radius .15s cubic-bezier(0.4,0.0,0.2,1)',
       '& .fuse-list-item-text-primary': {
@@ -44,14 +47,18 @@ const useStyles = makeStyles((theme) => ({
       color: 'inherit',
     },
     '& .fuse-list-item-text': {},
-  }),
+  }
+
+},
 }));
 
 function FuseNavVerticalItem(props) {
   const dispatch = useDispatch();
   const { item, nestedLevel, onItemClick } = props;
+  console.log("FUSE NAV ITEM SETTING--->",props)
   const classes = useStyles({
     itemPadding: nestedLevel > 0 ? 28 + nestedLevel * 16 : 12,
+    ...props
   });
 
   return useMemo(
@@ -61,8 +68,8 @@ function FuseNavVerticalItem(props) {
         component={NavLinkAdapter}
         to={item.url}
         activeClassName="active"
-        className={clsx(classes.item, 'fuse-list-item')}
-        onClick={() => onItemClick && onItemClick(item)}
+        className={ clsx(classes.item, 'fuse-list-item')}
+        onClick={() => { /*item.url  !== '#' &&*/ (onItemClick && onItemClick(item))}}
         exact={item.exact}
       >
         {item.icon && (

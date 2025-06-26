@@ -79,14 +79,14 @@ const navigationConfig = [
   },
   
   {
-    id: 'card',
-    title: 'Card',
+    id: 'cards',
+    title: 'Cards',
     type: 'item',
     icon: 'dashboard',
     url: '#',
   },
   {
-    id: 'card',
+    id: 'newsletter',
     title: 'Newsletter',
     type: 'item',
     icon: 'dashboard',
@@ -97,7 +97,7 @@ const navigationConfig = [
     title: 'Settings',
     type: 'item',
     icon: 'settings',
-    url: '/apps/profile',
+    url: '#',
   },
  /* {
     id: 'match',
