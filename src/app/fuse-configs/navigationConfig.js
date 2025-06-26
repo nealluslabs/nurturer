@@ -5,6 +5,7 @@ import ar from './navigation-i18n/ar';
 import en from './navigation-i18n/en';
 import tr from './navigation-i18n/tr';
 import { IoMdCard } from "react-icons/io";
+import { FaNewspaper } from "react-icons/fa";
 
 
 i18next.addResourceBundle('en', 'navigation', en);
@@ -53,13 +54,7 @@ const navigationConfig = [
     icon: 'dashboard',
     url: '/apps/dashboard',
   },
-  {
-    id: 'cards',
-    title: 'Cards',
-    type: 'item',
-    icon: <IoMdCard />,
-    url: '#',
-  },
+ 
   {
     id: 'inbox',
     title: 'Nurture',
@@ -74,6 +69,7 @@ const navigationConfig = [
     icon: 'group_add',
     url: '/candidates',
   },
+ 
   {
     id: 'my-profile',
     title: 'Profile',
@@ -81,19 +77,20 @@ const navigationConfig = [
     icon: 'account_circle',
     url: '/apps/profile',
   },
+  
   {
-    id: 'dashboard',
-    title: 'Newsletter',
-    type: 'item',
-    icon: 'dashboard',
-    url: '/apps/dashboard',
-  },
-  {
-    id: 'dashboard',
+    id: 'card',
     title: 'Card',
     type: 'item',
     icon: 'dashboard',
-    url: '/apps/dashboard',
+    url: '#',
+  },
+  {
+    id: 'card',
+    title: 'Newsletter',
+    type: 'item',
+    icon: 'dashboard',
+    url: '#',
   },
   {
     id: 'settings',
