@@ -85,7 +85,7 @@ function CandidateApp(props) {
                <TextField
              placeholder="Search..."
              onChange={(e)=>{handleSearchResults(e.target.value)}}
-             sx={{ width: "29rem"}}
+             sx={{ width: "28rem"}}
              InputProps={{
              
              endAdornment: (
@@ -110,15 +110,16 @@ function CandidateApp(props) {
 
                {/*2 */}
                <Grid item>
+
                  <Button
                  onClick={()=>{history.push('/apps/profile')}}
                    sx={{
                      backgroundColor: "black",
                      color: "white",
                       height:"3rem",
-                     width:"10rem",
-                     fontSize:"1.35rem",
-                     fontWeight:"700",
+                     width:"11rem",
+                     fontSize:"1.45rem",
+                     fontWeight:"500",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
                      textTransform: "none",
