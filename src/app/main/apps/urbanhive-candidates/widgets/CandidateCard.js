@@ -120,8 +120,8 @@ isFirstDayOfMonth
 
   
 useEffect(() => {
-  setOutput(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+  setOutput(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+    uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
     ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
   }))
 )
@@ -160,8 +160,8 @@ useEffect(() => {
     connects.map(({ user2, type, status, invited_amt, skipped_amt }) => [user2, { type, status, invited_amt, skipped_amt }])
   );
 
-  const [output,setOutput] = useState(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+  const [output,setOutput] = useState(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, industry,state,photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset,industry,state, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
     ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
   }))
 
@@ -173,8 +173,8 @@ useEffect(() => {
    const handleSearchResults = (searchTerm)=>{
 
      setOutput(
-      filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-        uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+      filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+        uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive,industry,state, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       })).filter((item) => {
         if (!searchTerm) return true; // Show all items if searchTerm is empty

@@ -83,6 +83,8 @@ export default function ProfileUpdateForm() {
     const [openCrop, setOpenCrop] = useState(false);
   
 
+
+    console.log("candidate in focus is--->",candidateInFocus)
     const initialFValues = {
       //id: user.uid,
       intro: candidateInFocus.intro == '' ? '' : candidateInFocus.intro,
@@ -111,8 +113,10 @@ export default function ProfileUpdateForm() {
         const file = e.target.files[0];
         if (file) {
           setFile(file);
-          setPhotoURL(URL.createObjectURL(file));
+          setPhotoURL({selectedFile:file,selectedFileName:file.name});
           setOpenCrop(true);
+
+          console.log("photoURL isOOO-->",photoURL)
         }
       };
     
@@ -139,6 +143,8 @@ export default function ProfileUpdateForm() {
         temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
        if ('state' in fieldValues)
         temp.state = fieldValues.state &&  fieldValues.state.length != 0 ? "" : "This field is required."
+       if ('industry' in fieldValues)
+        temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
        if ('frequency' in fieldValues)
         temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
        if ('birthday' in fieldValues)
@@ -204,7 +210,7 @@ export default function ProfileUpdateForm() {
           const profile = { intro, frequency, city, jobTitle,state, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
-          if(photoURL == static_img){
+          if(!photoURL.selectedFile){
           dispatch(updateProfile(profile, user, file, resetForm, photoURL));
           }else{
             dispatch(updateProfileWithImage(profile, user, file, resetForm));

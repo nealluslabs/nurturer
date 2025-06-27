@@ -78,14 +78,14 @@ function CandidateApp(props) {
 
 
 
-<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",right:"8rem",width:"41rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",left:"65%",transform: "translateX(-50%)",top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
               
               {/*1*/}
                <Grid item>
                <TextField
              placeholder="Search..."
              onChange={(e)=>{handleSearchResults(e.target.value)}}
-             sx={{ width: "30rem"}}
+             sx={{ width: "29rem"}}
              InputProps={{
              
              endAdornment: (
@@ -117,7 +117,7 @@ function CandidateApp(props) {
                      color: "white",
                       height:"3rem",
                      width:"10rem",
-                     fontSize:"1.2rem",
+                     fontSize:"1.35rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
                      textTransform: "none",
