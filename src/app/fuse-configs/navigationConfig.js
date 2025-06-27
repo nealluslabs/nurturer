@@ -70,13 +70,7 @@ const navigationConfig = [
     url: '/candidates',
   },
  
-  {
-    id: 'my-profile',
-    title: 'Profile',
-    type: 'item',
-    icon: 'account_circle',
-    url: '/apps/profile',
-  },
+ 
   
   {
     id: 'cards',

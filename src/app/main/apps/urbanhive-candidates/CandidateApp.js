@@ -12,10 +12,11 @@ import CandidateCard from './widgets/CandidateCard';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
-import { InputAdornment, TextField } from '@mui/material';
+import { Button, Grid, InputAdornment, TextField } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers } from 'redux/reducers/user.slice';
+
 
 
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 function CandidateApp(props) {
   const dispatch = useDispatch();
+ 
   const history = useHistory();
   const { isAuth } = useSelector((state) => state.login);
   const { allUsers,filteredUsers, isLoading } = useSelector((state) => state.user);
@@ -71,10 +73,19 @@ function CandidateApp(props) {
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 
-            <TextField
+        
+
+
+
+
+<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",right:"8rem",width:"41rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+              
+              {/*1*/}
+               <Grid item>
+               <TextField
              placeholder="Search..."
              onChange={(e)=>{handleSearchResults(e.target.value)}}
-             sx={{ width: "15rem",position:"absolute",right:"60px",top:"3px",zIndex:"1000"}}
+             sx={{ width: "30rem"}}
              InputProps={{
              
              endAdornment: (
@@ -94,7 +105,31 @@ function CandidateApp(props) {
             },
              }}
             />
+              
+               </Grid>
 
+               {/*2 */}
+               <Grid item>
+                 <Button
+                 onClick={()=>{history.push('/apps/profile')}}
+                   sx={{
+                     backgroundColor: "black",
+                     color: "white",
+                      height:"3rem",
+                     width:"10rem",
+                     fontSize:"1.2rem",
+                     padding: "0.5rem 0.8rem",
+                     borderRadius: "0.3rem",
+                     textTransform: "none",
+                     "&:hover": {
+                       backgroundColor: "#333"
+                     }
+                   }}
+                 >
+                   Add Contact
+                 </Button>
+               </Grid>
+             </Grid>
 
             <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 

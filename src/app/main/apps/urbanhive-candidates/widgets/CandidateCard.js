@@ -213,12 +213,12 @@ const userList =output && output.length ? (
    
 
 
-        <Grid item sx={{ mx: "0.3rem" }}>
+        <Grid item sx={{ mx: "0.3rem",marginTop:"1rem" }}>
           {/* <ButtonBase sx={{ width: 500, height: 500 }}> */}
           <Avatar alt="Remy Sharp" src={users.photoUrl} style={{ width: '180px', height: '180px'}} />
           {/* </ButtonBase> */}
         </Grid>
-        <Grid item xs={12} sm container>
+        <Grid item xs={12} sm container sx={{marginTop:"1rem"}}>
        
           <Grid item xs container direction="column" sx={{ mx: "2rem" }}>
             <Grid item xs>
@@ -237,7 +237,7 @@ const userList =output && output.length ? (
           </Grid>
        
        
-       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 470, height: 250, paddingTop: '100px', marginRight: '0px'}}>
+       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 400, height: 210, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
