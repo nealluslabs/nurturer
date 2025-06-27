@@ -78,7 +78,7 @@ function CandidateApp(props) {
 
 
 
-<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"65%"*/left: "calc(80vw - 44%)",transform: "translateX(-50%)",top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"65%"*/left: "calc(80vw - 44%)",transform: "translateX(-55%)",top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
               
               {/*1*/}
                <Grid item>
@@ -118,6 +118,7 @@ function CandidateApp(props) {
                       height:"3rem",
                      width:"10rem",
                      fontSize:"1.35rem",
+                     fontWeight:"700",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
                      textTransform: "none",
