@@ -3,3 +3,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.candidateSearchElement {
+    left: calc(50vw + var(--custom-em-offset));
+    
+  }

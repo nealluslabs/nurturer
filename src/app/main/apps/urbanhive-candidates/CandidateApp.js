@@ -28,6 +28,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function updateZoomBasedCalc() {
+  const zoomLevel = Math.round(window.devicePixelRatio * 100); // rough zoom % estimate
+
+  let emOffset = '4em'; // default
+  if (zoomLevel === 140) emOffset = '3em';
+  else if (zoomLevel === 150) emOffset = '4em';
+  else if (zoomLevel === 133) emOffset = '2.5em';
+  else if (zoomLevel === 125) emOffset = '2em';
+
+  document.documentElement.style.setProperty('--custom-em-offset', emOffset);
+}
+
+// Run once on load
+updateZoomBasedCalc();
+// Optionally rerun on resize/zoom changes
+window.addEventListener('resize', updateZoomBasedCalc);
+
 function CandidateApp(props) {
   const dispatch = useDispatch();
  
@@ -69,7 +86,7 @@ function CandidateApp(props) {
       }}
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
-        <div className="p-12 lg:ltr:pr-0 lg:rtl:pl-0">
+        <div className="p-12 lg:ltr:pr-0 lg:rtl:pl-0" style={{position:"relative"}}>
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 
@@ -78,7 +95,7 @@ function CandidateApp(props) {
 
 
 
-<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"65%"*/left: "calc(80vw - 44%)",transform: "translateX(-55%)",top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+<Grid container spacing={0}  style={{ display: "flex", justifyContent: "space-between" ,position:"absolute"/*left:"calc(80vw - 44%)"*//*,left: "calc(30vw + 4em)"*//*,transform: "translateX(-55%)"*/,right:"3rem",top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
               
               {/*1*/}
                <Grid item>
