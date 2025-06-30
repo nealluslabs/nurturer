@@ -5,6 +5,7 @@ import {fetchUsersPending, fetchUsersSuccess, fetchUsersFailed, fetchRealTimeUse
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from 'src/redux/reducers/chat.slice';
+import { setCurrentChat } from 'redux/reducers/chat.slice';
   
 
 export const fetchAllUsers = (uid) => async (dispatch) => {
@@ -28,6 +29,48 @@ export const fetchAllUsers = (uid) => async (dispatch) => {
 });
 
 };
+
+export const updateUserChat = (selectedChatUser,newBulletPoint) => async (dispatch) => {
+
+
+  let updatedBulletPoints = [...selectedChatUser.message.bulletPoints]
+  let updatedMessage = {...selectedChatUser.message}
+
+  if(updatedBulletPoints.filter((item)=>(item.id === newBulletPoint.id)).length ){
+    console.log("ITS THERE SO WE REMOVE IT--->")
+    updatedBulletPoints = updatedBulletPoints.filter((item)=>(item.id !== newBulletPoint.id))
+  }
+  else{
+    console.log("ITS NOT THERE,SO WE ADD IT--->")
+
+    updatedBulletPoints = [...updatedBulletPoints,newBulletPoint]
+  }
+
+  updatedMessage = {...selectedChatUser.message,bulletPoints:updatedBulletPoints}
+ 
+  
+  var fetchUsers = db.collection('users').doc(selectedChatUser.uid)
+ 
+  fetchUsers.update({
+    message:updatedMessage
+  })
+  .then(() => {
+    return fetchUsers.get(); // fetch updated document
+  })
+  .then((doc) => {
+    if (doc.exists) {
+      const user = doc.data();
+      dispatch(setCurrentChat(user)); // return as array if needed
+    }
+  }).catch((error) => {
+      var errorMessage = error.message;
+      console.log('Error fetching profile', errorMessage);
+      dispatch(fetchUsersFailed({ errorMessage }));
+});
+
+};
+
+
 
 
 export const fetchRealTimeUsers = (uid) => async (dispatch) => {

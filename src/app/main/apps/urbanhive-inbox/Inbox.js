@@ -14,6 +14,7 @@ import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
 import { sendChat } from 'src/redux/actions/chat.action';
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
+import { updateUserChat } from 'redux/actions/user.action';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -375,33 +376,28 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
 
         <>
          <br /><br />
-        • <b>{/*“Reimagining Urban Project Delivery”*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointOneBold}</b>
+         {selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPoints && selectedChatUser.message.bulletPoints.map((point,index)=>( 
+          <>
+        • <b>{point.bulletPointBold}</b>
         <br />
         <span>
-          – {/*from McKinsey, published in April 2025*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointOneRest}{" "}
-          {/*<a
-            href="https://www.pwc.com/id/en/media-centre/infrastructure-news/march-2025/a-breath-of-fresh-air-for-the-national-aviation-industry.html"
-            style={{ textDecoration: "underline" }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            McKinsey Link
-        </a>*/}
+          – {point.bulletPointRest}{" "}
+          
         </span>
         <br /><br />
-        • <b>{/*“Navigating Complexity in Construction Projects”*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoBold}</b>
+        </>
+      ))
+         }
+
+       {/*
+        • <b>{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoBold}</b>
         <br />
         <span>
-          – {/*from ENR, published in May 2025.*/}{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoRest}{" "}
-         {/* <a
-            href="https://www.deloitte.com/global/en/about/press-room/deloitte-global-airline-ceo-survey.html"
-            target="_blank"
-            style={{ textDecoration: "underline" }}
-            rel="noopener noreferrer"
-          >
-            ENR Link
-        </a>*/}
+          – {selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoRest}{" "}
+         
         </span>
+        */}
+
         </> 
       
        
@@ -504,7 +500,7 @@ We had some great conversations previously, and I really valued the opportunity 
 
 
            
-{/*<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%",padding:"1rem",paddingTop:"3rem"}}>
+{<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%",padding:"1rem",paddingTop:"3rem"}}>
   
 
      
@@ -520,38 +516,48 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox />}
-          label={<Typography fontSize="14px">The Evolution of Electric Supercars</Typography>}
+          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"1",
+              bulletPointBold:"The Evolution of Electric Supercars",
+              bulletPointRest:"Supercars Link",
+              link:"https://radicalrally.com/driving/cars/the-evolution-of-hybrid-and-electric-supercars/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://radicalrally.com/driving/cars/the-evolution-of-hybrid-and-electric-supercars/" target="_blank" rel="noopener noreferrer">The Evolution of Electric Supercars</a></Typography>}
         />
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox />}
-          label={<Typography fontSize="14px">How Aerodynamics Shape Modern Vehicles</Typography>}
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"How Aerodynamics Shapes Modern Vehicles",
+              bulletPointRest:"Modern Vehicle Design Link",
+              link:"https://www.numberanalytics.com/blog/ultimate-guide-vehicle-aerodynamics"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.numberanalytics.com/blog/ultimate-guide-vehicle-aerodynamics" target="_blank" rel="noopener noreferrer">How Aerodynamics Shapes Modern Vehicles</a></Typography>}
         />
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article3"
-          control={<Checkbox />}
-          label={<Typography fontSize="14px">Inside Ferrari's Hybrid Powertrain</Typography>}
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"3",
+              bulletPointBold:"Inside Ferrari's Hybrid Powertrain",
+              bulletPointRest:"Ferrari Link",
+              link:"https://www.ferrari.com/en-EN/hypercar/articles/ferrari-499p-hybrid-powertrain-how-ers-and-4wd-work"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.ferrari.com/en-EN/hypercar/articles/ferrari-499p-hybrid-powertrain-how-ers-and-4wd-work" target="_blank" rel="noopener noreferrer">Inside Ferrari's Hybrid Powertrain</a></Typography>}
         />
-        <FormControlLabel
-        style={{display:"flex",gap:"2rem"}}
-          value="article4"
-          control={<Checkbox />}
-          label={<Typography fontSize="14px">Why EVs Are Faster Off the Line</Typography>}
-        />
-        <FormControlLabel
-        style={{display:"flex",gap:"2rem"}}
-          value="article5"
-          control={<Checkbox />}
-          label={<Typography fontSize="14px">Top Car Design Trends in 2025</Typography>}
-        /> 
+         
       </Stack>
    
   </FormControl>
           </div>
-          */}
+          }
 
 </>
         ) : (

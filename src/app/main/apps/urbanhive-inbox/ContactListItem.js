@@ -11,6 +11,7 @@ import clsx from 'clsx';
 import format from 'date-fns/format';
 import StatusIcon from './StatusIcon';
 import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
+import { saveFilteredUsers } from 'redux/reducers/user.slice';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {
@@ -33,10 +34,31 @@ function ContactListItem(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { user } = useSelector((state) => state.login);
+  const { allUsers,filteredUsers, connects, isLoading } = useSelector((state) => state.user);
   const selectedContactId = props.user.uid;
 
+ console.log("WHAT IS USER?--->",props.user)
 
 
+ const resortFilteredUsersAndPush = (userId)=>{
+    
+ const replica = [...filteredUsers]
+
+  const index = replica.findIndex(user => user.uid === userId);
+
+  if (index > -1) {
+    const [matchedUser] = replica.splice(index, 1);
+    replica.unshift(matchedUser);
+  }
+
+  
+ dispatch(saveFilteredUsers(replica))
+
+setTimeout(()=>{
+  history.push('/candidates')
+   },300)
+
+ }
 
   const accRejInvite = (users, status) => {
 
@@ -73,9 +95,12 @@ function ContactListItem(props) {
         <StatusIcon status={'online'} />
       </div>
 
+       <div onClick={()=>{resortFilteredUsersAndPush(props.user.uid)}}>
       <Avatar src={props.user.photoUrl} alt={props.user.name}>
         {!props.user.photoUrl || props.user.photoUrl === '' ? props.user.name[0] : ''}
       </Avatar>
+      </div>
+
     </div>
 
     <ListItemText

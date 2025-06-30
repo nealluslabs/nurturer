@@ -129,7 +129,11 @@ useEffect(() => {
 }, [filteredUsers])
 
 useEffect(() => {
+
+  if(!filteredUsers.length){
    dispatch(fetchAllUsers(user.uid));
+  }
+
    dispatch(updateLastActive(user.uid));
 }, [])
 
@@ -198,6 +202,8 @@ const userList =output && output.length ? (
     output.map(users => {
       return(
         <Grid container sx={{marginTop:"2rem"}} >
+
+
           <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -313,6 +319,10 @@ const userList =output && output.length ? (
      : 
      userList.length >0 && 
      <div style={{height:"100vh",width:"70vw"}}>
+
+
+
+
   <ReactSwipe
    key={userList.length}
      className="carousel"
@@ -320,6 +330,8 @@ const userList =output && output.length ? (
      swipeOptions={{ continuous: true }}
      ref={el => (reactSwipeEl = el)}
    >
+    
+
           {userList}
        </ReactSwipe>
      
