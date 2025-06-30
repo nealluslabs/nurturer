@@ -16,6 +16,9 @@ import { sendChat } from 'src/redux/actions/chat.action';
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
 import { updateUserChat } from 'redux/actions/user.action';
 
+import holiday from 'src/app/main/urbanhive-assets/holiday.png'
+import birthday1 from 'src/app/main/urbanhive-assets/birthday1.png'
+
 const useStyles = makeStyles((theme) => ({
   messageRow: {
     '&.contact': {
@@ -260,13 +263,10 @@ function Inbox(props) {
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
         
-       {/* I hope you're doing well and navigating this season with clarity. It’s been about three months
-         since we last connected, and I’ve been thinking about the pace and complexity of your role
-          as a Project Manager at Urban Developers LLC—especially in today’s construction landscape
-                where timelines, risk mitigation, and stakeholder alignment are all being pushed to evolve.*/}
+       {"Wishing you a fantastic birthday and a year ahead filled with great moments—both on and off the construction site!"}
 
 
-        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
+        {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph*/}
         </span>
 
          :
@@ -301,14 +301,10 @@ function Inbox(props) {
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
          
-       { /* I hope you're doing well and navigating this season with clarity.
-          It’s been about six months since we last connected, and I’ve been thinking
-           about your role at Harmony Medical Center. As a Healthcare Administrator,
-            balancing patient flow, compliance demands, and staff well-being is no small
-             feat—especially in today’s ever-evolving regulatory and operational landscape.*/}
+       { "Wishing you and everyone at Harmony Medical Center a safe and uplifting Fourth of July!"}
 
 
-        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph}
+        {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph*/}
          </span>
          
 
@@ -338,8 +334,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         :
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
-        {/*While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They focus on themes that are especially relevant to project leadership in high-growth urban environments, including proactive risk management and tech-enabled coordination:*/}
-        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
+        {"Hope you get a chance to unplug today and maybe spend some time behind the lens doing what you love. If you capture any incredible shots, I’d love to see one sometime."}
+        {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
        </span>
          :
          selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
@@ -357,8 +353,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          :
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
-         {/*While reading through some recent updates in the healthcare space, I came across a couple of articles that I thought you might enjoy. They focus on topics like system efficiency, quality of care, and the leadership mindset needed to guide teams through transformation:*/}
-         {selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph}
+         {"We’re grateful for all the work you do in healthcare—especially during times that remind us of the value of service, community, and care. Hope you're able to take a well-deserved break, maybe even spend some time with your four-legged friends at the shelter this weekend."}
+         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
          </span>
 
 
@@ -375,8 +371,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         {
 
         <>
-         <br /><br />
-         {selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPoints && selectedChatUser.message.bulletPoints.map((point,index)=>( 
+         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') &&<> <br /><br /> </>}
+         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') && selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPoints && selectedChatUser.message.bulletPoints.map((point,index)=>( 
           <>
         • <b>{point.bulletPointBold}</b>
         <br />
@@ -384,7 +380,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
           – {point.bulletPointRest}{" "}
           
         </span>
-        <br /><br />
+       {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') &&<> <br /><br /> </>}
         </>
       ))
          }
@@ -417,8 +413,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
         
-        {/*We had some great conversations previously, and I really valued hearing how you manage both the strategic and human sides of development. Let me know if you’re available for a quick catch-up in the coming weeks. I’d enjoy hearing more about what you're working on—and maybe even which projects have made it into your photography portfolio lately.*/}
-        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
+        {"Here’s to continued success at Urban Developers and to finding the perfect light—on the job and in your photos."}
+        {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph*/}
         </span>
 
          :
@@ -439,8 +435,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
          
-        {/* We had some great conversations previously, and I truly valued hearing your perspective on streamlining operations while staying patient-centered. Let me know if you’d be open to a quick catch-up sometime soon—I’d love to hear what’s new on your end (and how things are going at the animal shelter too!). Wishing you continued momentum*/}
-        {selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph}
+        {"Thank you again for the difference you make. Happy Independence Day!"}
+        {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph*/}
          </span>
          
 
@@ -502,8 +498,8 @@ We had some great conversations previously, and I really valued the opportunity 
            
 {<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%",padding:"1rem",paddingTop:"3rem"}}>
   
-
-     
+ {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') ?
+     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
                     >
@@ -556,6 +552,17 @@ We had some great conversations previously, and I really valued the opportunity 
       </Stack>
    
   </FormControl>
+ </>
+ :
+ <div style={{display:"flex",justifyContent:"center",gap:"2rem",width:"100%"}}>
+ 
+  {  selectedChatUser && selectedChatUser.name === "Emily White"? 
+  <img src={holiday} style={{height:"30rem",marginBottom:"2rem"}}/>
+    :
+  <img src={birthday1} style={{height:"30rem",marginBottom:"2rem"}}/>
+   }
+ </div>
+  }
           </div>
           }
 
