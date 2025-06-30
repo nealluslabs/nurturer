@@ -77,14 +77,14 @@ const navigationConfig = [
     title: 'Cards',
     type: 'item',
     icon: 'dashboard',
-    url: '#',
+    url: '/apps/cards',
   },
   {
     id: 'newsletter',
     title: 'Newsletter',
     type: 'item',
-    icon: 'dashboard',
-    url: '#',
+    icon: 'email',
+    url: '/apps/newsletter',
   },
   {
     id: 'settings',

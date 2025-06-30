@@ -30,6 +30,8 @@ import BootCampConfig from './urbanhive-bootcamp/BootcampConfig';
 import BootCampDetailsConfig from './urbanhive-bootcamp-details/BootCampDetailsConfig';
 import DashboardAppConfig from './urbanhive-dashboard/DashboardAppConfig';
 import ProfileUpdateConfig from './urbanhive-profile-update/ProfileUpdateConfig';
+import CardsAppConfig from './urbanhive-cards/CardsAppConfig';
+import NewsletterAppConfig from './urbanhive-newsletter/NewsletterAppConfig';
 
 
 const appsConfigs = [
@@ -40,7 +42,8 @@ const appsConfigs = [
   ProfileConfig,
   ProfileUpdateConfig,
   DashboardAppConfig,
- 
+  CardsAppConfig,
+  NewsletterAppConfig,
   ComingSoonPageConfig,
   Error404PageConfig,
   Error500PageConfig,
