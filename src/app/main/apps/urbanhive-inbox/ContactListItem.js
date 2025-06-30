@@ -110,7 +110,7 @@ setTimeout(()=>{
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={' I hope you\'re doing well. I was thinking about our last... '}
+      secondary={props.user.name === "Emily White"? "Happy Fourth of July!":props.user.name==="Bob Johnson"?"Happy Birthday Bob!":' I hope you\'re doing well. I was thinking about our last... '}
       // secondary={props.contact.mood}
     />
 
