@@ -5,6 +5,9 @@ import CakeIcon from '@mui/icons-material/Cake';
 import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
 
+import BirthdayOne from "../../../../images/Birthday_1.png";
+import BirthdayTwo from "../../../../images/Birthday_2.png"
+
 function CardsContent() {
   return (
     <div style={{ padding: '24px' }}>
@@ -61,7 +64,7 @@ function CardsContent() {
             
             <div style={{ width: "47%", }}>
               <img 
-                src="https://t3.ftcdn.net/jpg/02/70/35/00/360_F_270350073_WO6yQAdptEnAhYKM5GuA9035wbRnVJSr.jpg" 
+                src={BirthdayOne}
                 alt="No image"
                 style={{ borderRadius: "4px" }} 
               />
@@ -93,7 +96,7 @@ function CardsContent() {
 
             <div style={{ width: "47%", }}>
               <img 
-                src="https://t3.ftcdn.net/jpg/02/70/35/00/360_F_270350073_WO6yQAdptEnAhYKM5GuA9035wbRnVJSr.jpg" 
+                src={ BirthdayTwo }
                 alt="No image"
                 style={{ borderRadius: "4px" }} 
               />

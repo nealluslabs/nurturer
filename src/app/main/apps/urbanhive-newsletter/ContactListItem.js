@@ -3,6 +3,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
+import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import { useDispatch, useSelector } from 'react-redux';
@@ -67,6 +68,17 @@ function ContactListItem(props) {
     })}
     onClick={() => props.onContactClick(props.user.uid)}
   >
+    <Checkbox
+      color="primary"
+      size="small"
+      style={{ marginRight: '12px' }}
+      onChange={(e) => {
+        e.stopPropagation();
+        // Handle checkbox change here
+        console.log('Checkbox changed for user:', props.user.uid);
+      }}
+    />
+    
     <div className="relative">
       <div className="absolute right-0 bottom-0 -m-4 z-10">
         {/* <StatusIcon status={props.contact.status} /> */}
@@ -85,21 +97,21 @@ function ContactListItem(props) {
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={' I hope you\'re doing well. I was thinking about our last... '}
+      // secondary={' I hope you\'re doing well. I was thinking about our last... '}
       // secondary={props.contact.mood}
     />
 
     {/* {props.contact.chatId && ( */}
       <div className="flex flex-col justify-center items-end">
       {/* {props.contact.lastMessageTime && ( */}
-        <Typography
+        {/* <Typography
           className="whitespace-nowrap mb-8 font-medium text-12"
           color="textSecondary"
-        >
+        > */}
           {/* {format(new Date(props.contact.lastMessageTime), 'PP')} */}
           {/*format(new Date('2022-8-20'), 'PP')*/}
-          {props.user.daysTo?props.user.daysTo:"15 Days" }
-        </Typography>
+          {/* {props.user.daysTo?props.user.daysTo:"15 Days" }
+        </Typography> */}
       {/* )} */}
 
       {/* Show Badge if message is unread */}
