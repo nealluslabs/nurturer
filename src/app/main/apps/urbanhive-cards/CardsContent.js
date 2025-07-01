@@ -6,7 +6,8 @@ import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import BirthdayOne from "../../../../images/Birthday_1.png";
-import BirthdayTwo from "../../../../images/Birthday_2.png"
+import BirthdayTwo from "../../../../images/Birthday_2.png";
+import Holiday from "../../../../images/Holiday_1.png";
 
 function CardsContent() {
   return (
@@ -214,19 +215,13 @@ function CardsContent() {
           <div style={{ display: "flex", justifyContent: "space-between", padding: "21px 12px", paddingBottom: "24px" }}>
 
             <div style={{ width: "47%", }}>
-
-              <p  style={{ fontSize: "16px", marginTop: "10px" }}>
-                Let the Good Times Roll
-              </p>
-
-              <div style={{ padding: "21px 24px", marginTop: "24px", marginBottom: "18px", backgroundColor: "blue" }}>
-                <p style={{ color: "white", fontSize: "18px", textAlign: "center" }}>
-                  Happy 4th of July!
-                </p>
-              </div>
-
-              <p style={{ fontSize: "14px", marginTop: "10px" }}>
-                4th of July
+              <img 
+                src={Holiday}
+                alt="No image"
+                style={{ borderRadius: "4px" }} 
+              />
+              <p style={{ fontSize: "18px", marginTop: "12px" }}>
+                
               </p>
 
               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
