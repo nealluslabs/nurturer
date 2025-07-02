@@ -499,7 +499,304 @@ We had some great conversations previously, and I really valued the opportunity 
 {<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"82%",padding:"1rem",paddingTop:"3rem"}}>
   
  {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') ?
-     <>
+   
+
+    selectedChatUser.name === 'Carol Garcia'?
+    <>
+                    <Typography
+                     style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                    >
+                      Articles
+                </Typography>
+  
+  <FormControl component="fieldset">
+    
+      <Stack spacing={2}>
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article1"
+          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"1",
+              bulletPointBold:"The Future of Consumer Trust: Brand Strategy Trends in 2025",
+              bulletPointRest:" Avaans Media - The Future of Consumer Trust Link",
+              link:"https://avaansmedia.com/consumer-brand-trust-trends-for-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://avaansmedia.com/consumer-brand-trust-trends-for-2025/" target="_blank" rel="noopener noreferrer">The Future of Consumer Trust: Brand Strategy Trends in 2025</a></Typography>}
+        />
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article2"
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"Redefining Brand Value: Marketing Priorities for the 2025 Economy",
+              bulletPointRest:"Redefining Brand Value Link",
+              link:"https://martech.org/5-essential-priorities-for-marketers-in-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://martech.org/5-essential-priorities-for-marketers-in-2025/" target="_blank" rel="noopener noreferrer">Redefining Brand Value: Marketing Priorities for the 2025 Economy</a></Typography>}
+        />
+      
+         
+      </Stack>
+   
+  </FormControl>
+ </>
+    :
+    selectedChatUser.name === 'Alice Chen'?
+    <>
+                    <Typography
+                     style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                    >
+                      Articles
+                </Typography>
+  
+  <FormControl component="fieldset">
+    
+      <Stack spacing={2}>
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article1"
+          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"1",
+              bulletPointBold:"From Insight to Action: The Evolving Role of Data Scientists in 2025",
+              bulletPointRest:"-from Bain & Company, published in April 2025",
+              link:"https://ioaglobal.org/blog/essential-data-skills-data-scientists-going-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://ioaglobal.org/blog/essential-data-skills-data-scientists-going-2025/" target="_blank" rel="noopener noreferrer">From Insight to Action: The Evolving Role of Data Scientists in 2025</a></Typography>}
+        />
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article2"
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025",
+              bulletPointRest:"– from Gartner, published in April 2025",
+              link:"https://martech.org/5-essential-priorities-for-marketers-in-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.entrepreneur.com/en-in/news-and-trends/ai-agents-to-redefine-enterprise-strategy-in-2025-report/492416" target="_blank" rel="noopener noreferrer">AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025</a></Typography>}
+        />
+      
+         
+      </Stack>
+   
+  </FormControl>
+ </>
+    :
+    selectedChatUser.name === 'David Lee'?
+    <>
+                    <Typography
+                     style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                    >
+                      Articles
+                </Typography>
+  
+  <FormControl component="fieldset">
+    
+      <Stack spacing={2}>
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article1"
+          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"1",
+              bulletPointBold:"The Future of Consumer Trust: Brand Strategy Trends in 2025",
+              bulletPointRest:" Avaans Media - The Future of Consumer Trust Link",
+              link:"https://avaansmedia.com/consumer-brand-trust-trends-for-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://avaansmedia.com/consumer-brand-trust-trends-for-2025/" target="_blank" rel="noopener noreferrer">The Future of Consumer Trust: Brand Strategy Trends in 2025</a></Typography>}
+        />
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article2"
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"Redefining Brand Value: Marketing Priorities for the 2025 Economy",
+              bulletPointRest:"Redefining Brand Value Link",
+              link:"https://martech.org/5-essential-priorities-for-marketers-in-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://martech.org/5-essential-priorities-for-marketers-in-2025/" target="_blank" rel="noopener noreferrer">Redefining Brand Value: Marketing Priorities for the 2025 Economy</a></Typography>}
+        />
+      
+         
+      </Stack>
+   
+  </FormControl>
+ </>
+    :
+    selectedChatUser.name === 'Alice Chen'?
+    <>
+                    <Typography
+                     style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                    >
+                      Articles
+                </Typography>
+  
+  <FormControl component="fieldset">
+    
+      <Stack spacing={2}>
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article1"
+          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"1",
+              bulletPointBold:"From Insight to Action: The Evolving Role of Data Scientists in 2025",
+              bulletPointRest:"-from Bain & Company, published in April 2025",
+              link:"https://ioaglobal.org/blog/essential-data-skills-data-scientists-going-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://ioaglobal.org/blog/essential-data-skills-data-scientists-going-2025/" target="_blank" rel="noopener noreferrer">From Insight to Action: The Evolving Role of Data Scientists in 2025</a></Typography>}
+        />
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article2"
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025",
+              bulletPointRest:"– from Gartner, published in April 2025",
+              link:"https://martech.org/5-essential-priorities-for-marketers-in-2025/"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.entrepreneur.com/en-in/news-and-trends/ai-agents-to-redefine-enterprise-strategy-in-2025-report/492416" target="_blank" rel="noopener noreferrer">AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025</a></Typography>}
+        />
+      
+         
+      </Stack>
+   
+  </FormControl>
+ </>
+    :
+
+    selectedChatUser.name === 'David Lee'?
+    <>
+                    <Typography
+                     style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                    >
+                      Articles
+                </Typography>
+  
+  <FormControl component="fieldset">
+    
+      <Stack spacing={2}>
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article1"
+          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"1",
+              bulletPointBold:"Serverless Architectures and the Next Evolution of Cloud Backends",
+              bulletPointRest:"– from InfoQ, published in May 2025",
+              link:"https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings/" target="_blank" rel="noopener noreferrer">Serverless Architectures and the Next Evolution of Cloud Backends</a></Typography>}
+        />
+        <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article2"
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"Intelligent Load Balancing: AI Meets Infrastructure Automation",
+              bulletPointRest:"– from ACM TechTalks, published in April 2025",
+              link:"https://www.cio.com/article/3992298/ai-and-load-balancing.html"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.cio.com/article/3992298/ai-and-load-balancing.html" target="_blank" rel="noopener noreferrer">Intelligent Load Balancing: AI Meets Infrastructure Automation</a></Typography>}
+        />
+
+      <FormControlLabel
+        style={{display:"flex",gap:"2rem"}}
+          value="article2"
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+            {
+              id:"2",
+              bulletPointBold:"The Rise of Event-Driven APIs: Real-Time Systems in 2025",
+              bulletPointRest:"– from IEEE Software, published in May 2025",
+              link:"https://www.nucamp.co/blog/coding-bootcamp-backend-with-python-2025-eventdriven-architectures-how-backend-systems-are-changing-in-2025"
+            }
+          ))}}/>}
+          label={<Typography fontSize="14px"><a href="https://www.nucamp.co/blog/coding-bootcamp-backend-with-python-2025-eventdriven-architectures-how-backend-systems-are-changing-in-2025" target="_blank" rel="noopener noreferrer">The Rise of Event-Driven APIs: Real-Time Systems in 2025</a></Typography>}
+        />
+      
+         
+      </Stack>
+   
+  </FormControl>
+ </>
+       :
+
+       selectedChatUser.name === 'John Smith'?
+       <>
+                       <Typography
+                        style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                       >
+                         Articles
+                   </Typography>
+     
+     <FormControl component="fieldset">
+       
+         <Stack spacing={2}>
+           <FormControlLabel
+           style={{display:"flex",gap:"2rem"}}
+             value="article1"
+             control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+               {
+                 id:"1",
+                 bulletPointBold:"Navigating Headwinds: KPMG’s 2025 Global Aviation Outlook",
+                 bulletPointRest:"– KPMG, June 10, 2025",
+                 link:"https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings"
+               }
+             ))}}/>}
+             label={<Typography fontSize="14px"><a href="https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings/" target="_blank" rel="noopener noreferrer">Navigating Headwinds: KPMG’s 2025 Global Aviation Outlook</a></Typography>}
+           />
+           <FormControlLabel
+           style={{display:"flex",gap:"2rem"}}
+             value="article2"
+             control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+               {
+                 id:"2",
+                 bulletPointBold:"Reaching New Altitudes: Strategic Shifts in Air Travel Recovery",
+                 bulletPointRest:"– EY, May 28, 2025",
+                 link:"https://www.cio.com/article/3992298/ai-and-load-balancing.html"
+               }
+             ))}}/>}
+             label={<Typography fontSize="14px"><a href="https://www.cio.com/article/3992298/ai-and-load-balancing.html" target="_blank" rel="noopener noreferrer">Reaching New Altitudes: Strategic Shifts in Air Travel Recovery</a></Typography>}
+           />
+   
+         <FormControlLabel
+           style={{display:"flex",gap:"2rem"}}
+             value="article2"
+             control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+               {
+                 id:"2",
+                 bulletPointBold:"Flight Path 2025: The CEO Agenda for a Resilient Aviation Future",
+                 bulletPointRest:"– McKinsey & Company, June 5, 2025",
+                 link:"https://www.nucamp.co/blog/coding-bootcamp-backend-with-python-2025-eventdriven-architectures-how-backend-systems-are-changing-in-2025"
+               }
+             ))}}/>}
+             label={<Typography fontSize="14px"><a href="https://www.nucamp.co/blog/coding-bootcamp-backend-with-python-2025-eventdriven-architectures-how-backend-systems-are-changing-in-2025" target="_blank" rel="noopener noreferrer">Flight Path 2025: The CEO Agenda for a Resilient Aviation Future</a></Typography>}
+           />
+         
+            
+         </Stack>
+      
+     </FormControl>
+    </>
+
+     :
+   <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
                     >
@@ -553,6 +850,8 @@ We had some great conversations previously, and I really valued the opportunity 
    
   </FormControl>
  </>
+      
+
  :
  <>
  <Typography
