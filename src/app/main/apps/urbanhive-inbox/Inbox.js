@@ -866,7 +866,7 @@ We had some great conversations previously, and I really valued the opportunity 
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Checkbox style={{display:"none"}}
+control={<Checkbox/> }
 />}
 label={<Typography fontSize="14px">
   <div style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/birthdayone', '_blank')}}>Happy Birthday 1</div>
@@ -875,7 +875,7 @@ label={<Typography fontSize="14px">
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article2"
-control={<Checkbox style={{display:"none"}} />}
+control={<Checkbox />}
 label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/birthdaytwo', '_blank')}}>Happy Birthday 2</div></Typography>}
 />
 
