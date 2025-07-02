@@ -32,6 +32,9 @@ import DashboardAppConfig from './urbanhive-dashboard/DashboardAppConfig';
 import ProfileUpdateConfig from './urbanhive-profile-update/ProfileUpdateConfig';
 import CardsAppConfig from './urbanhive-cards/CardsAppConfig';
 import NewsletterAppConfig from './urbanhive-newsletter/NewsletterAppConfig';
+import BirthdayOneAppConfig from './urbanhive-birthday-1/BirthdayAppConfig';
+import BirthdayTwoAppConfig from './urbanhive-birthday-two/BirthdayAppConfig';
+import HolidayOneAppConfig from './urbanhive-holiday-one/HolidayAppConfig';
 
 
 const appsConfigs = [
@@ -42,6 +45,9 @@ const appsConfigs = [
   ProfileConfig,
   ProfileUpdateConfig,
   DashboardAppConfig,
+  BirthdayOneAppConfig,
+  BirthdayTwoAppConfig,
+  HolidayOneAppConfig,
   CardsAppConfig,
   NewsletterAppConfig,
   ComingSoonPageConfig,

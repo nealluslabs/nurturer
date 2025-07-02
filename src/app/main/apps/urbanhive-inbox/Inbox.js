@@ -554,14 +554,55 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
  :
- <div style={{display:"flex",justifyContent:"center",gap:"2rem",width:"100%"}}>
- 
-  {  selectedChatUser && selectedChatUser.name === "Emily White"? 
-  <img src={holiday} style={{height:"30rem",marginBottom:"2rem"}}/>
-    :
-  <img src={birthday1} style={{height:"30rem",marginBottom:"2rem"}}/>
-   }
- </div>
+ <>
+ <Typography
+  style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+ >
+   Cards
+</Typography>
+
+<FormControl component="fieldset">
+{selectedChatUser.name === 'Bob Johnson' ?
+<Stack spacing={2}>
+<FormControlLabel
+style={{display:"flex",gap:"2rem"}}
+value="article1"
+control={<Checkbox style={{display:"none"}}
+/>}
+label={<Typography fontSize="14px">
+  <div style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/birthdayone', '_blank')}}>Happy Birthday 1</div>
+  </Typography>}
+/>
+<FormControlLabel
+style={{display:"flex",gap:"2rem"}}
+value="article2"
+control={<Checkbox style={{display:"none"}} />}
+label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/birthdaytwo', '_blank')}}>Happy Birthday 2</div></Typography>}
+/>
+
+
+</Stack>
+:
+
+<Stack spacing={2}>
+<FormControlLabel
+style={{display:"flex",gap:"2rem"}}
+value="article1"
+control={<Checkbox style={{display:"none"}}
+/>}
+label={<Typography fontSize="14px">
+  <div  style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/holidayone', '_blank')}}>Happy Holiday 1</div>
+  </Typography>}
+/>
+
+
+</Stack>
+
+
+}
+
+</FormControl>
+</>
   }
           </div>
           }
