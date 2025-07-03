@@ -327,7 +327,8 @@ function Newsletter(props) {
           <div style={{
             backgroundColor: '#ffffff',
             padding: '15px',
-            margin: '10px 20px',
+            margin: '2px 20px 10px 20px',
+            marginLeft: '7.5rem',
             borderRadius: '12px',
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
             maxWidth: '400px'
@@ -341,59 +342,21 @@ function Newsletter(props) {
               Select Newsletter
             </h3>
 
-            <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
-              <div 
-                onClick={() => setNewsletter1Active(!newsletter1Active)}
-                style={{
-                  padding: '10px 14px',
-                  backgroundColor: newsletter1Active ? '#2196F3' : '#fff',
-                  color: newsletter1Active ? '#fff' : '#333',
-                  border: '2px solid #e0e0e0',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  fontWeight: newsletter1Active ? '600' : '400'
-                }}
-                onMouseEnter={(e) => {
-                  if (!newsletter1Active) {
-                    e.target.style.backgroundColor = '#f0f0f0';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!newsletter1Active) {
-                    e.target.style.backgroundColor = '#fff';
-                  }
-                }}
-              >
-                Newsletter 1 (Birthday)
-              </div>
+            <Stack spacing={2}>
+              <FormControlLabel
+                style={{display:"flex",gap:"2rem"}}
+                value="newsletter1"
+                control={<div onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}} />}
+                label={<Typography fontSize="14px" onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}}>Newsletter 1 (Birthday)</Typography>}
+              />
               
-              <div 
-                onClick={() => setNewsletter2Active(!newsletter2Active)}
-                style={{
-                  padding: '10px 14px',
-                  backgroundColor: newsletter2Active ? '#2196F3' : '#fff',
-                  color: newsletter2Active ? '#fff' : '#333',
-                  border: '2px solid #e0e0e0',
-                  borderRadius: '8px',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                  fontWeight: newsletter2Active ? '600' : '400'
-                }}
-                onMouseEnter={(e) => {
-                  if (!newsletter2Active) {
-                    e.target.style.backgroundColor = '#f0f0f0';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  if (!newsletter2Active) {
-                    e.target.style.backgroundColor = '#fff';
-                  }
-                }}
-              >
-                Newsletter 2 (Holiday)
-              </div>
-            </div>
+              <FormControlLabel
+                style={{display:"flex",gap:"2rem"}}
+                value="newsletter2"
+                control={<div onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}} />}
+                label={<Typography fontSize="14px" onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}}>Newsletter 2 (Holiday)</Typography>}
+              />
+            </Stack>
           </div>
         </FuseScrollbars>
         {/* <button onClick={testMe()}>Click Me</button> */}
