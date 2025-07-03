@@ -99,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Inbox(props) {
+function Newsletter(props) {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const selectedContactId = useSelector(({ chatApp }) => chatApp.contacts.selectedContactId);
@@ -119,6 +119,8 @@ function Inbox(props) {
   const classes = useStyles(props);
   const chatRef = useRef(null);
   const [messageText, setMessageText] = useState('');
+  const [newsletter1Active, setNewsletter1Active] = useState(false); // Individual toggle for newsletter 1
+  const [newsletter2Active, setNewsletter2Active] = useState(false); // Individual toggle for newsletter 2
 
  //New Hooks
 
@@ -197,112 +199,216 @@ function Inbox(props) {
       }));
 
   return (
-    <div className={clsx('flex flex-col relative', props.className)}>
-      <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
-        {chatMessages.length || 0 && chatMessages.length > 0 ? (
-        <>
-          <div onClick={handleSave} className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40">
-            {chatMessagesOutput.map((item, i) => {
-              connectStatus = item.status;
-              const contact =
-                item.user1 === user.uid ? user : contacts.find((_contact) => _contact.user1 === item.user1);
-              return (
-                <div
-                  key={item.time}
-                  className={clsx(
-                    classes.messageRow,
-                    'flex flex-col flex-grow-0 flex-shrink-0 items-start justify-end relative px-16 pb-4',
-                    // { me: item.who === user.id },
-                    { me: item.user1 === user.uid },
-                    { contact: item.user1 !== user.uid },
-                    { 'first-of-group': isFirstMessageOfGroup(item, i) },
-                    { 'last-of-group': isLastMessageOfGroup(item, i) },
-                    i + 1 === chatMessages.length && 'pb-96'
-                  )}
-                >
-                  {shouldShowContactAvatar(item, i) && (
-                    <Avatar
-                      className="avatar absolute ltr:left-0 rtl:right-0 m-0 -mx-32"
-                      // src={contact.photoUrl}
-                      src={selectedChatUser.photoUrl}
-                    />
-                  )}
-                  <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">
-                    <div className="leading-tight whitespace-pre-wrap" style={{width:"50rem"}}>
-                      {/*item.messageText*/}
-                      
-                      <div
-        ref={editableRef}
-        contentEditable={true}
-        suppressContentEditableWarning={true}
-        
-      >
-        
-
-        <img 
-          src={ImageOne} 
-          alt="Newsletter Content" 
+    <>
+      <div className={clsx('flex flex-col relative', props.className)}>
+        <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
+          {chatMessages.length || 0 && chatMessages.length > 0 ? (
+          <>
+            <div onClick={handleSave} className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40">
+              {chatMessagesOutput.map((item, i) => {
+                connectStatus = item.status;
+                const contact =
+                  item.user1 === user.uid ? user : contacts.find((_contact) => _contact.user1 === item.user1);
+                return (
+                  <div
+                    key={item.time}
+                    className={clsx(
+                      classes.messageRow,
+                      'flex flex-col flex-grow-0 flex-shrink-0 items-start justify-end relative px-16 pb-4',
+                      // { me: item.who === user.id },
+                      { me: item.user1 === user.uid },
+                      { contact: item.user1 !== user.uid },
+                      { 'first-of-group': isFirstMessageOfGroup(item, i) },
+                      { 'last-of-group': isLastMessageOfGroup(item, i) },
+                      i + 1 === chatMessages.length && 'pb-96'
+                    )}
+                  >
+                    {shouldShowContactAvatar(item, i) && (
+                      <Avatar
+                        className="avatar absolute ltr:left-0 rtl:right-0 m-0 -mx-32"
+                        // src={contact.photoUrl}
+                        src={selectedChatUser.photoUrl}
+                      />
+                    )}
+                    <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">
+                      <div className="leading-tight whitespace-pre-wrap" style={{width:"50rem"}}>
+                        {/*item.messageText*/}
+                        
+                        <div
+          ref={editableRef}
+          contentEditable={true}
+          suppressContentEditableWarning={true}
           style={{ 
-            maxWidth: '100%', 
-            height: 'auto',
-            borderRadius: '8px'
-          }} 
-        />
-         
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center',
+            minHeight: '200px'
+          }}
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px', alignItems: 'center' }}>
+            {newsletter1Active && (
+              <img 
+                src={ImageOne} 
+                alt="Newsletter Content" 
+                style={{ 
+                  maxWidth: '100%', 
+                  height: 'auto',
+                  borderRadius: '8px'
+                }} 
+              />
+            )}
+            
+            {newsletter2Active && (
+              <img 
+                src={ImageTwo} 
+                alt="Newsletter Content" 
+                style={{ 
+                  maxWidth: '100%', 
+                  height: 'auto',
+                  borderRadius: '8px'
+                }} 
+              />
+            )}
+
+            {!newsletter1Active && !newsletter2Active && (
+              <div style={{ 
+                color: '#999', 
+                fontSize: '16px',
+                textAlign: 'center'
+              }}>
+                Select a newsletter to view content
+              </div>
+            )}
+          </div>
+        </div>
+                        </div>
+                    
+                      {/*<Typography
+                        className="time absolute hidden w-full text-11 mt-8 -mb-24 ltr:left-0 rtl:I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.
 
 
-      </div>
-                      </div>
-                   
-                    {/*<Typography
-                      className="time absolute hidden w-full text-11 mt-8 -mb-24 ltr:left-0 rtl:I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.
+
+  While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:
+
+  A breath of fresh air for the national aviation industry from PwC, published in March 2025. PwC Link
+
+  Deloitte Global's 2025 Airline CEO Survey from Deloitte, published on May 30, 2025. Deloitte Link
 
 
 
-While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:
-
-A breath of fresh air for the national aviation industry from PwC, published in March 2025. PwC Link
-
-Deloitte Global's 2025 Airline CEO Survey from Deloitte, published on May 30, 2025. Deloitte Link
-
-
-
-We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum..right-0 bottom-0 whitespace-nowrap"
-                      color="textSecondary"
-                    >
-                      {formatDistanceToNow(new Date(item.time), { addSuffix: true })}
-                </Typography>*/}
+  We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum..right-0 bottom-0 whitespace-nowrap"
+                        color="textSecondary"
+                      >
+                        {formatDistanceToNow(new Date(item.time), { addSuffix: true })}
+                  </Typography>*/}
+                    </div>
                   </div>
-                </div>
 
 
 
-              );
-            })}
-          </div>
-
-</>
-        ) : (
-          <div className="flex flex-col flex-1">
-            <div className="flex flex-col flex-1 items-center justify-center">
-              <Icon className="text-128" color="disabled">
-                chat
-              </Icon>
+                );
+              })}
             </div>
-            <Typography className="px-16 pb-24 text-center" color="textSecondary">
-              Start a conversation by typing your message below.
-            </Typography>
+
+  </>
+          ) : (
+            <div className="flex flex-col flex-1">
+              <div className="flex flex-col flex-1 items-center justify-center">
+                <Icon className="text-128" color="disabled">
+                  chat
+                </Icon>
+              </div>
+              <Typography className="px-16 pb-24 text-center" color="textSecondary">
+                Start a conversation by typing your message below.
+              </Typography>
+            </div>
+          )}
+
+          <div style={{
+            backgroundColor: '#ffffff',
+            padding: '15px',
+            margin: '10px 20px',
+            borderRadius: '12px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            maxWidth: '400px'
+          }}>
+            <h3 style={{
+              margin: '0 0 15px 0',
+              fontSize: '18px',
+              fontWeight: '600',
+              color: '#333'
+            }}>
+              Select Newsletter
+            </h3>
+
+            <div style={{ display: 'flex', gap: '10px', flexDirection: 'column' }}>
+              <div 
+                onClick={() => setNewsletter1Active(!newsletter1Active)}
+                style={{
+                  padding: '10px 14px',
+                  backgroundColor: newsletter1Active ? '#2196F3' : '#fff',
+                  color: newsletter1Active ? '#fff' : '#333',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  fontWeight: newsletter1Active ? '600' : '400'
+                }}
+                onMouseEnter={(e) => {
+                  if (!newsletter1Active) {
+                    e.target.style.backgroundColor = '#f0f0f0';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!newsletter1Active) {
+                    e.target.style.backgroundColor = '#fff';
+                  }
+                }}
+              >
+                Newsletter 1 (Birthday)
+              </div>
+              
+              <div 
+                onClick={() => setNewsletter2Active(!newsletter2Active)}
+                style={{
+                  padding: '10px 14px',
+                  backgroundColor: newsletter2Active ? '#2196F3' : '#fff',
+                  color: newsletter2Active ? '#fff' : '#333',
+                  border: '2px solid #e0e0e0',
+                  borderRadius: '8px',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s ease',
+                  fontWeight: newsletter2Active ? '600' : '400'
+                }}
+                onMouseEnter={(e) => {
+                  if (!newsletter2Active) {
+                    e.target.style.backgroundColor = '#f0f0f0';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!newsletter2Active) {
+                    e.target.style.backgroundColor = '#fff';
+                  }
+                }}
+              >
+                Newsletter 2 (Holiday)
+              </div>
+            </div>
           </div>
+        </FuseScrollbars>
+        {/* <button onClick={testMe()}>Click Me</button> */}
+        {chatMessages && (
+          <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
+            
+          </form>
         )}
-      </FuseScrollbars>
-       {/* <button onClick={testMe()}>Click Me</button> */}
-      {chatMessages && (
-        <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
-          
-        </form>
-      )}
-    </div>
+
+        
+      </div>
+
+      
+    </>
   );
 }
 
-export default Inbox;
+export default Newsletter;
