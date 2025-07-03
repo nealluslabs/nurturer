@@ -16,8 +16,12 @@ import { sendChat } from 'src/redux/actions/chat.action';
 import { Checkbox, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
 import { updateUserChat } from 'redux/actions/user.action';
 
-import holiday from 'src/app/main/urbanhive-assets/holiday.png'
+import { Modal, Box } from '@mui/material';
+
+
+import holiday1 from 'src/app/main/urbanhive-assets/holiday.png'
 import birthday1 from 'src/app/main/urbanhive-assets/birthday1.png'
+import birthday2 from 'src/images/Birthday_2.png'
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -120,6 +124,22 @@ function Inbox(props) {
   const chatRef = useRef(null);
   const [messageText, setMessageText] = useState('');
 
+  const [birthdayMessage1,setBirthdayMessage1] = useState(false)
+  const [birthdayMessage2,setBirthdayMessage2] = useState(false)
+  const [holidayMessage1,setHolidayMessage1] = useState(false)
+
+  const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleOpen2 = () => setOpen2(true);
+  const handleOpen3 = () => setOpen3(true);
+
+  const handleClose = () => setOpen(false);
+  const handleClose2 = () => setOpen2(false);
+  const handleClose3 = () => setOpen3(false);
+
  //New Hooks
 
 //  const [connectStatus, setconnectStatus] = useState('');
@@ -135,6 +155,19 @@ function Inbox(props) {
       scrollToBottom();
     }
   }, [chatMessages]);
+
+
+  useEffect(() => {
+    if (selectedChatUser && selectedChatUser.name === "Bob Johnson" ||selectedChatUser && selectedChatUser.name === "Emily White"  ) {
+      
+     setBirthdayMessage1(false)
+     setBirthdayMessage2(false)
+     setHolidayMessage1(false)
+
+    }
+  }, [selectedChatUser]);
+
+
 
   function scrollToBottom() {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
@@ -236,7 +269,127 @@ function Inbox(props) {
         contentEditable={true}
         suppressContentEditableWarning={true}
         
-      >
+      >     
+
+
+
+
+       {/* Modal */}
+       <Modal open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            outline: 'none',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={birthday1} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+          </div>
+        </Box>
+      </Modal>
+
+
+
+      {/* Modal 2*/}
+      <Modal open={open2} onClose={handleClose2}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            outline: 'none',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={birthday2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+          </div>
+        </Box>
+      </Modal>
+
+
+      {/* Modal 3*/}
+      <Modal open={open3} onClose={handleClose3}>
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            outline: 'none',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={holiday1} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+          </div>
+        </Box>
+      </Modal>
         
 
 
@@ -336,6 +489,25 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         <span>
         {"Hope you get a chance to unplug today and maybe spend some time behind the lens doing what you love. If you capture any incredible shots, I’d love to see one sometime."}
         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
+
+        {birthdayMessage1 && 
+         <>
+         <br/>
+         <br/>
+         <b> Happy Birthday 1 </b>
+         <br/>
+         </>
+        }
+
+
+        {birthdayMessage2 && 
+         <>
+          <br/>
+          <br/>
+         <b> Happy Birthday 2 </b>
+         
+         </>
+        }
        </span>
          :
          selectedChatUser && selectedChatUser.name  === "Carol Garcia"?
@@ -355,6 +527,13 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          <span>
          {"We’re grateful for all the work you do in healthcare—especially during times that remind us of the value of service, community, and care. Hope you're able to take a well-deserved break, maybe even spend some time with your four-legged friends at the shelter this weekend."}
          {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
+
+         {holidayMessage1 && 
+         <>
+         <br/>
+         <b> Happy Holidays 1 </b>
+         </>
+          }
          </span>
 
 
@@ -515,7 +694,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"The Future of Consumer Trust: Brand Strategy Trends in 2025",
@@ -866,17 +1045,18 @@ We had some great conversations previously, and I really valued the opportunity 
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Checkbox/> }
-/>}
+control={<Checkbox checked={birthdayMessage1} onClick={()=>{setBirthdayMessage1(!birthdayMessage1)}}   /> }
 label={<Typography fontSize="14px">
-  <div style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/birthdayone', '_blank')}}>Happy Birthday 1</div>
+  <div style={{cursor:"pointer"}}  onClick={handleOpen}>Happy Birthday 1</div>
   </Typography>}
 />
+
+
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article2"
-control={<Checkbox />}
-label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/birthdaytwo', '_blank')}}>Happy Birthday 2</div></Typography>}
+control={<Checkbox checked={birthdayMessage2} onClick={()=>{setBirthdayMessage2(!birthdayMessage2)}}/>}
+label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={handleOpen2}>Happy Birthday 2</div></Typography>}
 />
 
 
@@ -887,10 +1067,10 @@ label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={()=
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Checkbox style={{display:"none"}}
+control={<Checkbox checked={holidayMessage1} onClick={()=>{setHolidayMessage1(!holidayMessage1)}}
 />}
 label={<Typography fontSize="14px">
-  <div  style={{cursor:"pointer"}}  onClick={()=>{window.open('/apps/holidayone', '_blank')}}>Happy Holiday 1</div>
+  <div  style={{cursor:"pointer"}}  onClick={handleOpen3} >Happy Holiday 1</div>
   </Typography>}
 />
 

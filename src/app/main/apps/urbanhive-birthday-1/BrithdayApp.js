@@ -27,6 +27,8 @@ import SendIcon from '@mui/icons-material/Send';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { Mail } from '@mui/icons-material';
 
+import { Modal, Box } from '@mui/material';
+
 //images
 import birthdayOneCard from 'src/images/Birthday_1.png'
 
