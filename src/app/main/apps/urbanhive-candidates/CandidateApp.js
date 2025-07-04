@@ -22,6 +22,8 @@ import { saveFilteredUsers } from 'redux/reducers/user.slice';
 
 const useStyles = makeStyles((theme) => ({
   content: {
+    
+    width:"100%",
     '& canvas': {
       maxHeight: '100%',
     },
@@ -71,7 +73,7 @@ function CandidateApp(props) {
       }}
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
-        <div className="p-12 lg:ltr:pr-0 lg:rtl:pl-0">
+        <div className="p-12 lg:ltr:pr-0 lg:rtl:pl-0" >
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 
@@ -80,7 +82,7 @@ function CandidateApp(props) {
 
 
 
-<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"calc(64vw - 44%)"*/left:"43rem"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"calc(64vw - 44%)"*/left:"43.5rem"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
               
               {/*1*/}
                <Grid item>
@@ -135,7 +137,7 @@ function CandidateApp(props) {
                </Grid>
              </Grid>
 
-            <div style={{marginTop:"2rem"}}>
+            <div style={{marginTop:"2rem",width:"150%"}}>
             <CandidateCard /> 
             </div>
         </div>

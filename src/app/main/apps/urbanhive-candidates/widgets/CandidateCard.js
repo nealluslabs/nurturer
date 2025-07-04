@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      
       '& > *': {
         margin: theme.spacing(1),
       },
@@ -204,62 +205,6 @@ const userList =output && output.length ? (
         <Grid container sx={{marginTop:"2rem",position:"relative"}} >
 
 
-<Grid container spacing={0} style={{ display: "none", justifyContent: "space-between" ,position:"absolute",left:"43.5rem"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
-              
-              {/*1*/}
-               <Grid item>
-               <TextField
-             placeholder="Search..."
-             onChange={(e)=>{handleSearchResults(e.target.value)}}
-             sx={{ width: "28rem"}}
-             InputProps={{
-             
-             endAdornment: (
-             <InputAdornment position="end">
-             <SearchIcon  style={{cursor:"pointer"}} onClick={(e)=>{handleSearchResults(e.target.value)}} />
-             </InputAdornment>
-             ),
-             sx: {
-              height: "3rem", 
-              paddingLeft:"10px",             // sets the height of the root input wrapper
-              "& input": {
-                height: "3rem", 
-                paddingLeft:"10px",           // sets the height of the input field itself
-                padding: 0,                // remove default padding
-                fontSize: "1rem",       // optional: shrink font to fit small height
-              },
-            },
-             }}
-            />
-              
-               </Grid>
-
-               {/*2 */}
-               <Grid item>
-
-                 <Button
-                 onClick={()=>{history.push('/apps/profile')}}
-                   sx={{
-                     backgroundColor: "black",
-                     color: "white",
-                      height:"3rem",
-                     width:"11rem",
-                     fontSize:"1.45rem",
-                     fontWeight:"500",
-                     padding: "0.5rem 0.8rem",
-                     borderRadius: "0.3rem",
-                     textTransform: "none",
-                     "&:hover": {
-                       backgroundColor: "#333"
-                     }
-                   }}
-                 >
-                   Add Contact
-                 </Button>
-               </Grid>
-             </Grid>
-
-
           <ToastContainer
           position="top-right"
           autoClose={1000}
@@ -274,13 +219,13 @@ const userList =output && output.length ? (
 
    
 
-
-        <Grid item sx={{ mx: "0.3rem",marginTop:"1rem" }}>
+     <Grid container sx={{display:"flex",justifyContent:"flex-start",alignItems:"center"}}>
+        <Grid item  sx={{ mx: "0.3rem",marginTop:"1rem" }}>
           {/* <ButtonBase sx={{ width: 500, height: 500 }}> */}
           <Avatar alt="Remy Sharp" src={users.photoUrl} style={{ width: '180px', height: '180px'}} />
           {/* </ButtonBase> */}
         </Grid>
-        <Grid item xs={12} sm container sx={{marginTop:"1rem"}}>
+        <Grid item  md={7} container /*sx={{marginTop:"1rem", position:{md:"absolute",lg:"relative"},left:{md:"24rem",lg:"0rem"},top:{md:"-10rem",lg:"0rem"},display:"flex",justifyContent:{lg:"center",md:"center"},flexDirection:{lg:"row !important",md:"row-reverse !important"} }}*/ >
        
           <Grid item xs container direction="column" sx={{ mx: "2rem" }}>
             <Grid item xs>
@@ -299,7 +244,7 @@ const userList =output && output.length ? (
           </Grid>
        
        
-       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 400, height: 210, paddingTop: '100px', marginRight: '0px'}}>
+      <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 400, height: 210, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
@@ -324,6 +269,7 @@ const userList =output && output.length ? (
        </Box>
        
         </Grid>
+       </Grid>
        
         <Grid>
        

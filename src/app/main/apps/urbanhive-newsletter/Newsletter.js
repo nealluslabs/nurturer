@@ -326,7 +326,7 @@ function Newsletter(props) {
           )}  
 
 
-          <div style={{
+          {/*<div style={{
             backgroundColor: '#ffffff',
             padding: '15px',
             margin: '2px 20px 10px 20px',
@@ -350,18 +350,52 @@ function Newsletter(props) {
               <FormControlLabel
                 style={{display:"flex",gap:"2rem"}}
                 value="newsletter1"
-                control={<div onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}} />}
-                label={<Typography fontSize="14px" onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}}>Newsletter 1 </Typography>}
+                control={<div onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)}} style={{cursor: 'pointer'}} />}
+                label={<Typography fontSize="14px" onClick={() => {setNewsletter1Active(true);setNewsletter2Active(false)} } style={{cursor: 'pointer'}}>Newsletter 1 </Typography>}
               />
               
               <FormControlLabel
                 style={{display:"flex",gap:"2rem"}}
                 value="newsletter2"
-                control={<div onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}} />}
-                label={<Typography fontSize="14px" onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}}>Newsletter 2</Typography>}
+                control={<div onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)}} style={{cursor: 'pointer'}} />}
+                label={<Typography fontSize="14px" onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)} } style={{cursor: 'pointer'}}>Newsletter 2</Typography>}
               />
             </Stack>
-          </div>
+        </div>*/}
+
+
+
+          <>
+          <div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"53rem",maxWidth:"78.5%",padding:"1rem",paddingTop:"3rem"}}>
+
+                           <Typography
+                            style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                           >
+                             Newsletters
+                       </Typography>
+         
+         <FormControl component="fieldset">
+           
+               <Stack spacing={2}>
+                     <FormControlLabel
+                       style={{display:"flex",gap:"2rem"}}
+                       value="newsletter1"
+                       
+                       control={<Checkbox checked={newsletter1Active} onClick={() => {setNewsletter1Active(true);setNewsletter2Active(false)}} style={{cursor: 'pointer'}} />}
+                       label={<Typography fontSize="14px" onClick={() => {setNewsletter1Active(true);setNewsletter2Active(false)} } style={{cursor: 'pointer'}}>Newsletter 1 </Typography>}
+                     />
+                     
+                     <FormControlLabel
+                       style={{display:"flex",gap:"2rem"}}
+                       value="newsletter2"
+                       control={<Checkbox checked={newsletter2Active} onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)}} style={{cursor: 'pointer'}} />}
+                       label={<Typography fontSize="14px" onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)} } style={{cursor: 'pointer'}}>Newsletter 2</Typography>}
+                     />
+                   </Stack>
+          
+         </FormControl>
+         </div>
+ </>
         </FuseScrollbars>
         {/* <button onClick={testMe()}>Click Me</button> */}
         {chatMessages && (

@@ -205,7 +205,7 @@ function NewsletterSidebar(props) {
                 <Icon color="action">search</Icon>
 
                 <Input
-                  placeholder="Search or start new newsletter"
+                  placeholder="Search to remove newsletter recipients"
                   className="flex flex-1 px-8"
                   disableUnderline
                   fullWidth
