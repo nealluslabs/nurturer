@@ -201,7 +201,63 @@ const userList =output && output.length ? (
   // allUsers.map(users => {
     output.map(users => {
       return(
-        <Grid container sx={{marginTop:"2rem"}} >
+        <Grid container sx={{marginTop:"2rem",position:"relative"}} >
+
+
+<Grid container spacing={0} style={{ display: "none", justifyContent: "space-between" ,position:"absolute",left:"43.5rem"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+              
+              {/*1*/}
+               <Grid item>
+               <TextField
+             placeholder="Search..."
+             onChange={(e)=>{handleSearchResults(e.target.value)}}
+             sx={{ width: "28rem"}}
+             InputProps={{
+             
+             endAdornment: (
+             <InputAdornment position="end">
+             <SearchIcon  style={{cursor:"pointer"}} onClick={(e)=>{handleSearchResults(e.target.value)}} />
+             </InputAdornment>
+             ),
+             sx: {
+              height: "3rem", 
+              paddingLeft:"10px",             // sets the height of the root input wrapper
+              "& input": {
+                height: "3rem", 
+                paddingLeft:"10px",           // sets the height of the input field itself
+                padding: 0,                // remove default padding
+                fontSize: "1rem",       // optional: shrink font to fit small height
+              },
+            },
+             }}
+            />
+              
+               </Grid>
+
+               {/*2 */}
+               <Grid item>
+
+                 <Button
+                 onClick={()=>{history.push('/apps/profile')}}
+                   sx={{
+                     backgroundColor: "black",
+                     color: "white",
+                      height:"3rem",
+                     width:"11rem",
+                     fontSize:"1.45rem",
+                     fontWeight:"500",
+                     padding: "0.5rem 0.8rem",
+                     borderRadius: "0.3rem",
+                     textTransform: "none",
+                     "&:hover": {
+                       backgroundColor: "#333"
+                     }
+                   }}
+                 >
+                   Add Contact
+                 </Button>
+               </Grid>
+             </Grid>
 
 
           <ToastContainer

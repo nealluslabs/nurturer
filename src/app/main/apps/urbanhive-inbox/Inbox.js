@@ -675,7 +675,7 @@ We had some great conversations previously, and I really valued the opportunity 
 
 
            
-{<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"60rem",maxWidth:"78.5%",padding:"1rem",paddingTop:"3rem"}}>
+{<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"53rem",maxWidth:"78.5%",padding:"1rem",paddingTop:"3rem"}}>
   
  {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') ?
    

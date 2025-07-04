@@ -337,13 +337,13 @@ function Newsletter(props) {
             padding:"1rem",
             paddingTop:"3rem",
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            width:"60rem",
+            width:"53rem",
             maxWidth:"76.5%",
           }}>
                 <Typography
                         style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
                        >
-                         Articles
+                         Newsletters
                    </Typography>
 
             <Stack spacing={2}>

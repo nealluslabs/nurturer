@@ -80,7 +80,7 @@ function CandidateApp(props) {
 
 
 
-<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"calc(80vw - 44%)"*/left:"calc(64vw - 44%)"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
+<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"calc(64vw - 44%)"*/left:"43rem"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
               
               {/*1*/}
                <Grid item>
