@@ -119,7 +119,7 @@ function Newsletter(props) {
   const classes = useStyles(props);
   const chatRef = useRef(null);
   const [messageText, setMessageText] = useState('');
-  const [newsletter1Active, setNewsletter1Active] = useState(false); // Individual toggle for newsletter 1
+  const [newsletter1Active, setNewsletter1Active] = useState(true); // Individual toggle for newsletter 1
   const [newsletter2Active, setNewsletter2Active] = useState(false); // Individual toggle for newsletter 2
 
  //New Hooks
@@ -265,6 +265,7 @@ function Newsletter(props) {
                 style={{ 
                   maxWidth: '100%', 
                   height: 'auto',
+                  marginTop:'5rem',
                   borderRadius: '8px'
                 }} 
               />
@@ -322,7 +323,8 @@ function Newsletter(props) {
                 Start a conversation by typing your message below.
               </Typography>
             </div>
-          )}
+          )}  
+
 
           <div style={{
             backgroundColor: '#ffffff',
@@ -330,31 +332,33 @@ function Newsletter(props) {
             margin: '2px 20px 10px 20px',
             marginLeft: '7.5rem',
             borderRadius: '12px',
+            marginTop:"-10rem",
+            marginBottom:"10rem",
+            padding:"1rem",
+            paddingTop:"3rem",
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            maxWidth: '400px'
+            width:"60rem",
+            maxWidth:"76.5%",
           }}>
-            <h3 style={{
-              margin: '0 0 15px 0',
-              fontSize: '18px',
-              fontWeight: '600',
-              color: '#333'
-            }}>
-              Select Newsletter
-            </h3>
+                <Typography
+                        style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
+                       >
+                         Articles
+                   </Typography>
 
             <Stack spacing={2}>
               <FormControlLabel
                 style={{display:"flex",gap:"2rem"}}
                 value="newsletter1"
                 control={<div onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}} />}
-                label={<Typography fontSize="14px" onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}}>Newsletter 1 (Birthday)</Typography>}
+                label={<Typography fontSize="14px" onClick={() => setNewsletter1Active(!newsletter1Active)} style={{cursor: 'pointer'}}>Newsletter 1 </Typography>}
               />
               
               <FormControlLabel
                 style={{display:"flex",gap:"2rem"}}
                 value="newsletter2"
                 control={<div onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}} />}
-                label={<Typography fontSize="14px" onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}}>Newsletter 2 (Holiday)</Typography>}
+                label={<Typography fontSize="14px" onClick={() => setNewsletter2Active(!newsletter2Active)} style={{cursor: 'pointer'}}>Newsletter 2</Typography>}
               />
             </Stack>
           </div>
