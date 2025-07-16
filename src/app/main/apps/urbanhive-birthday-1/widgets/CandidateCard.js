@@ -151,7 +151,8 @@ useEffect(() => {
     ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
   }));
 
-  // console.log(output);
+  console.log("The output for the correct text --> ",output);
+  console.log("Users data is here -->", user.contacts);
 
 
 // const userList = allUsers.length ? (

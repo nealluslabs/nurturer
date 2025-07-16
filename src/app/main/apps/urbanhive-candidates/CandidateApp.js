@@ -37,7 +37,7 @@ function CandidateApp(props) {
  
   const history = useHistory();
   const { isAuth } = useSelector((state) => state.login);
-  const { allUsers,filteredUsers, isLoading } = useSelector((state) => state.user);
+  const { allUsers, allContacts, filteredUsers, filteredContacts, isLoading } = useSelector((state) => state.user);
   const classes = useStyles(props);
   const pageLayout = useRef(null);
   const [tabValue, setTabValue] = useState(0);
@@ -45,8 +45,8 @@ function CandidateApp(props) {
 
   const handleSearchResults = (searchTerm)=>{
 
-   dispatch(saveFilteredUsers(
-    allUsers.filter((item) => {
+   dispatch(saveFilteredContacts(
+    allContacts.filter((item) => {
     if (!searchTerm) return true; // Show all items if searchTerm is empty
     try {
     const regex = new RegExp(searchTerm, 'i'); // 'i' for case-insensitive matching

@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import format from 'date-fns/format';
 import StatusIcon from './StatusIcon';
 import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
-import { saveFilteredUsers } from 'redux/reducers/user.slice';
+import { saveFilteredContacts, saveFilteredUsers } from 'redux/reducers/user.slice';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {
@@ -52,7 +52,7 @@ function ContactListItem(props) {
   }
 
   
- dispatch(saveFilteredUsers(replica))
+ dispatch(saveFilteredContacts(replica))
 
 setTimeout(()=>{
   history.push('/candidates')

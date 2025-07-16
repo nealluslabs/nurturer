@@ -1,4 +1,4 @@
-import {fetchUsersPending, fetchUsersSuccess, fetchUsersFailed, fetchRealTimeUsersSuccess, fetchConnectedUserSuccess,
+import {fetchUsersPending, fetchUsersSuccess, fetchUsersFailed, fetchContactsSuccess, fetchContactsFailed, fetchRealTimeUsersSuccess, fetchConnectedUserSuccess,
     initiatePending, initiateSuccess, initiateSuccess2, initiateFailed, clearUser, resetConnects} from 'src/redux/reducers/user.slice';
  import { updateUsedConnection } from 'src/redux/reducers/auth.slice';
     import { db, fb, auth, storage } from '../../config/firebase';
@@ -26,6 +26,28 @@ export const fetchAllUsers = (uid) => async (dispatch) => {
         var errorMessage = error.message;
         console.log('Error fetching profile', errorMessage);
         dispatch(fetchUsersFailed({ errorMessage }));
+});
+
+};
+
+export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
+    dispatch(fetchUsersPending());
+    // db.collection('users').where("uid", "!=", fb.auth().currentUser.uid)
+    var fetchContacts = db.collection('contacts')
+    // fetchContacts = fetchContacts.where("uid", "!=", uid)
+    fetchContacts = fetchContacts.where("contacterId", "==", uid)
+    fetchContacts.get()
+    .then((snapshot) => {
+        const contacts = snapshot.docs.map((doc) => ({ ...doc.data() }));
+        // const filteredUser = contacts.filter(user => user.uid != uid);
+        console.log('Filtered User\'s', contacts );
+        // }
+        // dispatch(fetchContactsSuccess(contacts));
+        dispatch(fetchContactsSuccess(contacts));
+}).catch((error) => {
+        var errorMessage = error.message;
+        console.log('Error fetching profile', errorMessage);
+        dispatch(fetchContactsFailed({ errorMessage }));
 });
 
 };
