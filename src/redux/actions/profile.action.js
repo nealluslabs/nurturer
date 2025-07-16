@@ -191,7 +191,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
   console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
  
-  const userRef = db.collection("users");
+  const userRef = db.collection("contacts");
  
    userRef.add({
    name: profile.name,
@@ -209,7 +209,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     password:'12345678',
     usedConnection:0,
     lastActive:1663862737170,
-    
+    contacterId:user.id,
   
     skillset: '',
    
@@ -221,7 +221,13 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
   })
   .then((docRef) => {
     // Update the newly created document with its own ID
-    return userRef.doc(docRef.id).update({ uid: docRef.id });
+
+  
+    db.collection("users").doc(user.uid).update({
+      contacts: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+    });
+
+    return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
   .then(() => {
     const msg = 'Profile successfully created!';
