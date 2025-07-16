@@ -121,13 +121,16 @@ isFirstDayOfMonth
 
   
 useEffect(() => {
-  setOutput(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-    uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
-    ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-  }))
-)
- 
-}, [filteredUsers])
+  if (filteredUsers && user.contacts && connects) {
+    setOutput(filteredUsers
+      .filter(({ uid }) => user.contacts.includes(uid))
+      .map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+        uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+      }))
+    );
+  }
+}, [filteredUsers, user.contacts, connects])
 
 useEffect(() => {
 
@@ -165,35 +168,31 @@ useEffect(() => {
     connects.map(({ user2, type, status, invited_amt, skipped_amt }) => [user2, { type, status, invited_amt, skipped_amt }])
   );
 
-  const [output,setOutput] = useState(filteredUsers && filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro, industry,state,photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-    uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive, skillset,industry,state, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
-    ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-  }))
-
-
-)
+  const [output,setOutput] = useState([]);
 
  console.log("OUTPUT IS --->",output);
+ console.log("USER CONTACT FIELD IS --->", user.contacts);
+ console.log("FILTERED USERS THAT MATCH CONTACTS --->", filteredUsers?.filter(({ uid }) => user.contacts && user.contacts.includes(uid)));
 
    const handleSearchResults = (searchTerm)=>{
 
      setOutput(
-      filteredUsers.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-        uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive,industry,state, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
-        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-      })).filter((item) => {
-        if (!searchTerm) return true; // Show all items if searchTerm is empty
-      
-        try {
-          const regex = new RegExp(searchTerm, 'i'); // 'i' for case-insensitive matching
-          return item.name && regex.test(item.name);
-        } catch (e) {
-          return false; // If invalid regex, don't match anything
-        }
-      })
+      filteredUsers
+        .filter(({ uid }) => user.contacts && user.contacts.includes(uid))
+        .map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+          uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive,industry,state, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+          ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+        })).filter((item) => {
+          if (!searchTerm) return true; // Show all items if searchTerm is empty
+        
+          try {
+            const regex = new RegExp(searchTerm, 'i'); // 'i' for case-insensitive matching
+            return item.name && regex.test(item.name);
+          } catch (e) {
+            return false; // If invalid regex, don't match anything
+          }
+        })
      )
-
-
 
     }
 

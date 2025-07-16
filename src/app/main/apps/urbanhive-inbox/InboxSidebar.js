@@ -165,14 +165,16 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-      lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
-        uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,
-        message,
-        daysTo:(15*(index+1)).toString()+ " " + "Days" ,
-      ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-    }));
+    const connectedUsersOutput = connectedUsers && connectedUsers
+      .filter((item) => (item.uid !== user.uid) && user.contacts && user.contacts.includes(item.uid))
+      .map(({ uid, name, email, city, intro, skillset, skills_needed, 
+        lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
+          uid, name, email, city, intro, skillset, skills_needed, 
+          lookingFor, lastActive, isTechnical, photoUrl, password,
+          message,
+          daysTo:(15*(index+1)).toString()+ " " + "Days" ,
+        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+      }));
 
     console.log('Connected Users Mapped: ', connectedUsersOutput);
   }
@@ -185,13 +187,15 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-      lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
-        uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,message,
-        daysTo:(15*(index+1)).toString()+ " " + "Days" ,
-      ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-    }));
+    const connectedUsersOutput = connectedUsers && connectedUsers
+      .filter((item) => (item.uid !== user.uid) && user.contacts && user.contacts.includes(item.uid))
+      .map(({ uid, name, email, city, intro, skillset, skills_needed, 
+        lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
+          uid, name, email, city, intro, skillset, skills_needed, 
+          lookingFor, lastActive, isTechnical, photoUrl, password,message,
+          daysTo:(15*(index+1)).toString()+ " " + "Days" ,
+        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+      }));
 
 
   return (
