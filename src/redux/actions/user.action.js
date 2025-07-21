@@ -13,6 +13,7 @@ export const fetchAllUsers = (uid) => async (dispatch) => {
     // db.collection('users').where("uid", "!=", fb.auth().currentUser.uid)
     var fetchUsers = db.collection('users')
     // fetchUsers = fetchUsers.where("uid", "!=", uid)
+    console.log("This should show all the users", fetchUsers);
     fetchUsers = fetchUsers.where("intro", "!=", null)
     fetchUsers.get()
     .then((snapshot) => {
@@ -32,24 +33,38 @@ export const fetchAllUsers = (uid) => async (dispatch) => {
 
 export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
     dispatch(fetchUsersPending());
-    // db.collection('users').where("uid", "!=", fb.auth().currentUser.uid)
-    var fetchContacts = db.collection('contacts')
-    // fetchContacts = fetchContacts.where("uid", "!=", uid)
-    fetchContacts = fetchContacts.where("contacterId", "==", uid)
-    fetchContacts.get()
-    .then((snapshot) => {
-        const contacts = snapshot.docs.map((doc) => ({ ...doc.data() }));
-        // const filteredUser = contacts.filter(user => user.uid != uid);
-        console.log('Filtered User\'s', contacts );
-        // }
-        // dispatch(fetchContactsSuccess(contacts));
+    
+    try {
+        console.log("Fetching contacts for user:", uid);
+        
+        // Query contacts collection where contacterId matches the user's uid
+        const contactsSnapshot = await db.collection('contacts')
+            .where("contacterId", "==", uid)
+            .get();
+        
+        if (contactsSnapshot.empty) {
+            console.log("No contacts found for user:", uid);
+            dispatch(fetchContactsSuccess([]));
+            return;
+        }
+        
+        // Map the documents to extract data
+        const contacts = contactsSnapshot.docs.map((doc) => ({
+            id: doc.id,
+            ...doc.data()
+        }));
+        
+        console.log("Successfully fetched contacts:", contacts);
+        console.log("Total contacts found:", contacts.length);
+        
+        // Dispatch the contacts data to Redux store
         dispatch(fetchContactsSuccess(contacts));
-}).catch((error) => {
-        var errorMessage = error.message;
-        console.log('Error fetching profile', errorMessage);
+        
+    } catch (error) {
+        const errorMessage = error.message;
+        console.log('Error fetching contacts:', errorMessage);
         dispatch(fetchContactsFailed({ errorMessage }));
-});
-
+    }
 };
 
 export const updateUserChat = (selectedChatUser,newBulletPoint) => async (dispatch) => {

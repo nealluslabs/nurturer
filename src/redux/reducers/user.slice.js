@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   allUsers: [],
   filteredUsers:[],
+  allContacts: [],
   filteredContacts:[],
   liveUsers: [],
   connectedUsers: [],
@@ -34,7 +35,6 @@ const userSlice = createSlice({
     fetchContactsSuccess: (state, action) => {
         state.isLoading = false;
         state.allContacts = action.payload;
-        state.filteredUsers = action.payload;
         state.filteredContacts = action.payload;
         state.error = '';
         state.message = action.payload.msg;
@@ -105,7 +105,10 @@ const { actions, reducer } = userSlice;
 export const {
  fetchUsersPending,
  fetchUsersSuccess,
+ fetchContactsSuccess,
+ fetchContactsFailed,
  saveFilteredUsers,
+ saveFilteredContacts,
  saveCandidateInFocus,
  fetchRealTimeUsersSuccess,
  fetchConnectedUserSuccess,

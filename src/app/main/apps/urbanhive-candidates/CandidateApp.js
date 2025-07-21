@@ -15,7 +15,8 @@ import { fb, db, auth } from 'config/firebase';
 import { Button, Grid, InputAdornment, TextField } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { saveFilteredUsers } from 'redux/reducers/user.slice';
+import { saveFilteredUsers, saveFilteredContacts } from 'redux/reducers/user.slice';
+import { fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 
 
 
@@ -36,12 +37,18 @@ function CandidateApp(props) {
   const dispatch = useDispatch();
  
   const history = useHistory();
-  const { isAuth } = useSelector((state) => state.login);
+  const { isAuth, user } = useSelector((state) => state.login);
   const { allUsers, allContacts, filteredUsers, filteredContacts, isLoading } = useSelector((state) => state.user);
   const classes = useStyles(props);
   const pageLayout = useRef(null);
   const [tabValue, setTabValue] = useState(0);
 
+  // Fetch contacts when component mounts
+  useEffect(() => {
+    if (user && user.uid) {
+      dispatch(fetchAllContactForOneUser(user.uid));
+    }
+  }, [dispatch, user]);
 
   const handleSearchResults = (searchTerm)=>{
 

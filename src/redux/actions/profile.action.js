@@ -2,6 +2,7 @@ import {createProfilePending, createProfileSuccess,createProfileSuccessOnly, cre
   fetchProfilePending, fetchProfileSuccess, fetchProfileFailed} from 'src/redux/reducers/profile.slice';
 import { v4 as uuidv4 } from 'uuid';
 import { db, fb, auth, storage } from '../../config/firebase';
+import firebase from 'firebase/app';
 import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
 import { fetchAllUsers } from './user.action';
@@ -209,7 +210,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     password:'12345678',
     usedConnection:0,
     lastActive:1663862737170,
-    contacterId:user.id,
+    contacterId:user.uid,
   
     skillset: '',
    
