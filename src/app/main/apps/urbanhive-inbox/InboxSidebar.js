@@ -220,7 +220,7 @@ function InboxSidebar(props) {
                       })
                     ) : (
                       <div className="container">
-                          <center><p className="center">No available chat yet</p></center>
+                          <center><p className="center">No available emails yet</p></center>
                       </div>
                     )
                 }
