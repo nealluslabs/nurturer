@@ -19,7 +19,7 @@ import { motion } from 'framer-motion';
 import { useMemo, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChats } from 'src/redux/actions/chat.action';
-import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
+import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
 import ContactListItem2 from './ContactListItem2';
 import StatusIcon from './StatusIcon';
@@ -64,7 +64,7 @@ function InboxSidebar(props) {
   const [message, setMessage] = useState('');
   const [userUid, setUserUid] = useState(null);
   const { user } = useSelector((state) => state.login);
-  const { allUsers, connectedUsers, connects, connects2, isLoading } = useSelector((state) => state.user);
+  const { allUsers, connectedUsers, filteredContacts, connects, connects2, isLoading } = useSelector((state) => state.user);
   let unsubscribe;
 
 
@@ -82,21 +82,23 @@ function InboxSidebar(props) {
   };
   
   useEffect(() => {
-    console.log('All Users', allUsers);
-    console.log('user isso--->', user.uid);
-  }, [])
+    if (user && user.uid) {
+      // Fetch contacts from Firebase for inbox
+      dispatch(fetchAllContactForOneUser(user.uid));
+    }
+  }, [user, dispatch])
  
-  useEffect(() => {
-
-    unsubscribe = dispatch(fetchConnectedUsers(user.uid))
-    unsubscribe = dispatch(fetchConnectedUsers2(user.uid))
-    .then(unsubscribe => {
-      return unsubscribe;
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }, []);
+  // Remove old connected users fetching - now using filteredContacts from Firebase
+  // useEffect(() => {
+  //   unsubscribe = dispatch(fetchConnectedUsers(user.uid))
+  //   unsubscribe = dispatch(fetchConnectedUsers2(user.uid))
+  //   .then(unsubscribe => {
+  //     return unsubscribe;
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   })
+  // }, []);
   
     //componentWillUnmount
     useEffect(() => {
@@ -165,9 +167,7 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers
-      .filter((item) => (item.uid !== user.uid) && user.contacts && user.contacts.includes(item.uid))
-      .map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
           uid, name, email, city, intro, skillset, skills_needed, 
           lookingFor, lastActive, isTechnical, photoUrl, password,
@@ -187,12 +187,12 @@ function InboxSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers
-      .filter((item) => (item.uid !== user.uid) && user.contacts && user.contacts.includes(item.uid))
-      .map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
+    // Use filteredContacts from Firebase instead of connectedUsers
+    const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
+        lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency},index) => ({
           uid, name, email, city, intro, skillset, skills_needed, 
-          lookingFor, lastActive, isTechnical, photoUrl, password,message,
+          lookingFor, lastActive, isTechnical, photoUrl, password, message,
+          companyName, jobTitle, interests, frequency,
           daysTo:(15*(index+1)).toString()+ " " + "Days" ,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       }));
