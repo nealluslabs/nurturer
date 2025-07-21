@@ -37,7 +37,7 @@ const userSlice = createSlice({
         state.allContacts = action.payload;
         state.filteredContacts = action.payload;
         state.error = '';
-        state.message = action.payload.msg;
+        state.message = action.payload.msg; 
     },
     saveFilteredUsers: (state, action) => { 
       state.filteredUsers = action.payload;
