@@ -21,12 +21,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchChats } from 'src/redux/actions/chat.action';
 import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
-import ContactListItem2 from './ContactListItem2';
-import StatusIcon from './StatusIcon';
-import { getChat } from './store/chatSlice';
-import { selectContacts } from './store/contactsSlice';
-import { closeMobileChatsSidebar, openUserSidebar } from './store/sidebarsSlice';
-import { updateUserData } from './store/userSlice';
+import { closeMobileChatsSidebar } from './store/sidebarsSlice';
 
 const statusArr = [
   {
@@ -49,14 +44,10 @@ const statusArr = [
 
 function NewsletterSidebar(props) {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  // const user = useSelector(({ chatApp }) => chatApp.user);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [searchText, setSearchText] = useState('');
-  const [statusMenuEl, setStatusMenuEl] = useState(null);
-  const [moreMenuEl, setMoreMenuEl] = useState(null);
 
   //New Hooks
   const [chatStarted, setChatStarted] = useState(false);
@@ -65,7 +56,6 @@ function NewsletterSidebar(props) {
   const [userUid, setUserUid] = useState(null);
   const { user } = useSelector((state) => state.login);
   const { allUsers, connectedUsers, filteredContacts, connects, connects2, isLoading } = useSelector((state) => state.user);
-  let unsubscribe;
 
 
   const container = {
@@ -101,47 +91,13 @@ function NewsletterSidebar(props) {
   // }, []);
   
   
-    //componentWillUnmount
-    useEffect(() => {
-      return () => {
-        //cleanup
-        unsubscribe.then(f => f()).catch(error => console.log(error));
-      }
-    }, []);
-  
-
-
-  function handleMoreMenuClick(event) {
-    setMoreMenuEl(event.currentTarget);
-  }
-
-  function handleMoreMenuClose(event) {
-    setMoreMenuEl(null);
-  }
-
-  function handleStatusMenuClick(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    setStatusMenuEl(event.currentTarget);
-  }
-
-  function handleStatusSelect(event, status) {
-    event.preventDefault();
-    event.stopPropagation();
-    dispatch(
-      updateUserData({
-        ...user,
-        status,
-      })
-    );
-    setStatusMenuEl(null);
-  }
-
-  function handleStatusClose(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    setStatusMenuEl(null);
-  }
+  //componentWillUnmount - Remove cleanup since we're no longer using unsubscribe
+  // useEffect(() => {
+  //   return () => {
+  //     //cleanup
+  //     unsubscribe.then(f => f()).catch(error => console.log(error));
+  //   }
+  // }, []);
 
   function handleSearchText(event) {
     setSearchText(event.target.value);
@@ -263,7 +219,7 @@ function NewsletterSidebar(props) {
                       })
                     ) : (
                       <div className="container">
-                          <center><p className="center">No contacts available for newsletter</p></center>
+                          <center><p className="center">No contacts available for mails</p></center>
                       </div>
                     )
                 }
