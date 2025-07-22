@@ -2,6 +2,7 @@ import {createProfilePending, createProfileSuccess,createProfileSuccessOnly, cre
   fetchProfilePending, fetchProfileSuccess, fetchProfileFailed} from 'src/redux/reducers/profile.slice';
 import { v4 as uuidv4 } from 'uuid';
 import { db, fb, auth, storage } from '../../config/firebase';
+import firebase from 'firebase/app';
 import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
 import { fetchAllUsers } from './user.action';
@@ -209,7 +210,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     password:'12345678',
     usedConnection:0,
     lastActive:1663862737170,
-    contacterId:user.id,
+    contacterId:user.uid,
     message:user.message? user.message:{
       firstParagraph:"I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.",
       secondParagrpah:"While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:",
@@ -239,7 +240,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
 
 
     
-    }
+    },
 
   
     skillset: '',

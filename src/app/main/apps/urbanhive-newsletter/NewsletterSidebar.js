@@ -19,14 +19,9 @@ import { motion } from 'framer-motion';
 import { useMemo, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchChats } from 'src/redux/actions/chat.action';
-import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
+import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
-import ContactListItem2 from './ContactListItem2';
-import StatusIcon from './StatusIcon';
-import { getChat } from './store/chatSlice';
-import { selectContacts } from './store/contactsSlice';
-import { closeMobileChatsSidebar, openUserSidebar } from './store/sidebarsSlice';
-import { updateUserData } from './store/userSlice';
+import { closeMobileChatsSidebar } from './store/sidebarsSlice';
 
 const statusArr = [
   {
@@ -49,14 +44,10 @@ const statusArr = [
 
 function NewsletterSidebar(props) {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  // const user = useSelector(({ chatApp }) => chatApp.user);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const [searchText, setSearchText] = useState('');
-  const [statusMenuEl, setStatusMenuEl] = useState(null);
-  const [moreMenuEl, setMoreMenuEl] = useState(null);
 
   //New Hooks
   const [chatStarted, setChatStarted] = useState(false);
@@ -64,8 +55,7 @@ function NewsletterSidebar(props) {
   const [message, setMessage] = useState('');
   const [userUid, setUserUid] = useState(null);
   const { user } = useSelector((state) => state.login);
-  const { allUsers, connectedUsers, connects, connects2, isLoading } = useSelector((state) => state.user);
-  let unsubscribe;
+  const { allUsers, connectedUsers, filteredContacts, connects, connects2, isLoading } = useSelector((state) => state.user);
 
 
   const container = {
@@ -82,64 +72,32 @@ function NewsletterSidebar(props) {
   };
   
   useEffect(() => {
-    console.log('All Users', allUsers);
-    console.log('user isso--->', user.uid);
-  }, [])
+    if (user && user.uid) {
+      // Fetch contacts from Firebase for newsletter
+      dispatch(fetchAllContactForOneUser(user.uid));
+    }
+  }, [user, dispatch])
  
-  useEffect(() => {
-
-    unsubscribe = dispatch(fetchConnectedUsers(user.uid))
-    unsubscribe = dispatch(fetchConnectedUsers2(user.uid))
-    .then(unsubscribe => {
-      return unsubscribe;
-    })
-    .catch(error => {
-      console.log(error);
-    })
-  }, []);
+  // Remove old connected users fetching - now using filteredContacts from Firebase
+  // useEffect(() => {
+  //   unsubscribe = dispatch(fetchConnectedUsers(user.uid))
+  //   unsubscribe = dispatch(fetchConnectedUsers2(user.uid))
+  //   .then(unsubscribe => {
+  //     return unsubscribe;
+  //   })
+  //   .catch(error => {
+  //     console.log(error);
+  //   })
+  // }, []);
   
   
-    //componentWillUnmount
-    useEffect(() => {
-      return () => {
-        //cleanup
-        unsubscribe.then(f => f()).catch(error => console.log(error));
-      }
-    }, []);
-  
-
-
-  function handleMoreMenuClick(event) {
-    setMoreMenuEl(event.currentTarget);
-  }
-
-  function handleMoreMenuClose(event) {
-    setMoreMenuEl(null);
-  }
-
-  function handleStatusMenuClick(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    setStatusMenuEl(event.currentTarget);
-  }
-
-  function handleStatusSelect(event, status) {
-    event.preventDefault();
-    event.stopPropagation();
-    dispatch(
-      updateUserData({
-        ...user,
-        status,
-      })
-    );
-    setStatusMenuEl(null);
-  }
-
-  function handleStatusClose(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    setStatusMenuEl(null);
-  }
+  //componentWillUnmount - Remove cleanup since we're no longer using unsubscribe
+  // useEffect(() => {
+  //   return () => {
+  //     //cleanup
+  //     unsubscribe.then(f => f()).catch(error => console.log(error));
+  //   }
+  // }, []);
 
   function handleSearchText(event) {
     setSearchText(event.target.value);
@@ -166,7 +124,7 @@ function NewsletterSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    const connectedUsersOutput = filteredContacts && filteredContacts.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
       lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
@@ -186,10 +144,12 @@ function NewsletterSidebar(props) {
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    const connectedUsersOutput = connectedUsers && connectedUsers.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-      lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
+    // Use filteredContacts from Firebase instead of connectedUsers
+    const connectedUsersOutput = filteredContacts && filteredContacts.filter((item)=>(item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
+      lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,message,
+        lookingFor, lastActive, isTechnical, photoUrl, password, message,
+        companyName, jobTitle, interests, frequency,
         daysTo:(15*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
@@ -259,7 +219,7 @@ function NewsletterSidebar(props) {
                       })
                     ) : (
                       <div className="container">
-                          <center><p className="center">No contacts available for newsletter</p></center>
+                          <center><p className="center">No contacts available for emails</p></center>
                       </div>
                     )
                 }

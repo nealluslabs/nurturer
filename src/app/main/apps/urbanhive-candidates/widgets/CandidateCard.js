@@ -21,7 +21,7 @@ import '../style/swipe.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllUsers, fetchRealTimeConnections, fetchRealTimeConnections2, initiateConnection, rollOverConnections } from 'src/redux/actions/user.action';
+import { fetchAllUsers, fetchContactsSuccess, fetchRealTimeConnections, fetchRealTimeConnections2, initiateConnection, rollOverConnections } from 'src/redux/actions/user.action'; 
 import { fb } from 'config/firebase';
 import { timeSince } from 'config/getTimeStamp';
 import { updateLastActive } from 'src/redux/actions/auth.action';
@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      
       '& > *': {
         margin: theme.spacing(1),
       },
@@ -49,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
 function CandidateCard () {
   let reactSwipeEl;
   const dispatch = useDispatch();
-  const { allUsers,filteredUsers, connects, isLoading } = useSelector((state) => state.user);
+  const { allUsers, filteredUsers, allContacts, filteredContacts, connects, isLoading } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.login);
   const history = useHistory()
 
@@ -121,23 +120,16 @@ isFirstDayOfMonth
 
   
 useEffect(() => {
-  if (filteredUsers && user.contacts && connects) {
-    setOutput(filteredUsers
-      .filter(({ uid }) => user.contacts.includes(uid))
-      .map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+  if (filteredContacts && filteredContacts.length > 0) {
+    setOutput(filteredContacts.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
         uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       }))
     );
   }
-}, [filteredUsers, user.contacts, connects])
+}, [filteredContacts, connects])
 
 useEffect(() => {
-
-  if(!filteredUsers.length){
-   dispatch(fetchAllUsers(user.uid));
-  }
-
    dispatch(updateLastActive(user.uid));
 }, [])
 
@@ -170,19 +162,10 @@ useEffect(() => {
 
   const [output,setOutput] = useState([]);
 
- console.log("OUTPUT IS --->",output);
- console.log("USER CONTACT FIELD IS --->", user.contacts);
- console.log("FILTERED USERS THAT MATCH CONTACTS --->", filteredUsers?.filter(({ uid }) => user.contacts && user.contacts.includes(uid)));
-
    const handleSearchResults = (searchTerm)=>{
 
      setOutput(
-      filteredUsers
-        .filter(({ uid }) => user.contacts && user.contacts.includes(uid))
-        .map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-          uid, name, email, isTechnical, skills_needed, lookingFor, intro, photoUrl, lastActive,industry,state, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
-          ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-        })).filter((item) => {
+      filteredContacts.filter((item) => {
           if (!searchTerm) return true; // Show all items if searchTerm is empty
         
           try {
@@ -201,7 +184,7 @@ const userList =output && output.length ? (
   // allUsers.map(users => {
     output.map(users => {
       return(
-        <Grid container sx={{marginTop:"2rem",position:"relative"}} >
+        <Grid container sx={{marginTop:"2rem"}} >
 
 
           <ToastContainer
@@ -218,13 +201,13 @@ const userList =output && output.length ? (
 
    
 
-     <Grid container sx={{display:"flex",justifyContent:"flex-start",alignItems:"center"}}>
-        <Grid item  sx={{ mx: "0.3rem",marginTop:"1rem" }}>
+
+        <Grid item sx={{ mx: "0.3rem",marginTop:"1rem" }}>
           {/* <ButtonBase sx={{ width: 500, height: 500 }}> */}
           <Avatar alt="Remy Sharp" src={users.photoUrl} style={{ width: '180px', height: '180px'}} />
           {/* </ButtonBase> */}
         </Grid>
-        <Grid item  md={7} container /*sx={{marginTop:"1rem", position:{md:"absolute",lg:"relative"},left:{md:"24rem",lg:"0rem"},top:{md:"-10rem",lg:"0rem"},display:"flex",justifyContent:{lg:"center",md:"center"},flexDirection:{lg:"row !important",md:"row-reverse !important"} }}*/ >
+        <Grid item xs={12} sm container sx={{marginTop:"1rem"}}>
        
           <Grid item xs container direction="column" sx={{ mx: "2rem" }}>
             <Grid item xs>
@@ -243,7 +226,7 @@ const userList =output && output.length ? (
           </Grid>
        
        
-      <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 400, height: 210, paddingTop: '100px', marginRight: '0px'}}>
+       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 400, height: 210, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
@@ -268,7 +251,6 @@ const userList =output && output.length ? (
        </Box>
        
         </Grid>
-       </Grid>
        
         <Grid>
        
