@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      
       '& > *': {
         margin: theme.spacing(1),
       },
@@ -291,7 +292,7 @@ const userList =output && output.length ? (
   })
 ) : (
   <div className="container">
-      <center><p className="center">No available user yet</p></center>
+      <center><p className="center" sx={{position:"absolute", top:"10rem"}}>No available contacts yet</p></center>
   </div>
 )
 

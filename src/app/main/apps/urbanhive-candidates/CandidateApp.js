@@ -72,15 +72,15 @@ function CandidateApp(props) {
     <div style={{margin: "30px"}}>
     <FusePageSimple
       classes={{
-        header:
-          'min-h-160 h-160 lg:ltr:rounded-br-20 lg:rtl:rounded-bl-20 lg:ltr:mr-12 lg:rtl:ml-12',
+       // header:
+       //   'min-h-160 h-160 lg:ltr:rounded-br-20 lg:rtl:rounded-bl-20 lg:ltr:mr-12 lg:rtl:ml-12',
         toolbar: 'min-h-56 h-56 items-end',
-        rightSidebar: 'w-288 border-0 py-12',
+        //rightSidebar: 'w-288 border-0 py-12',
         content: classes.content,
       }}
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
-        <div className="p-12 lg:ltr:pr-0 lg:rtl:pl-0" >
+        <div className='p-56 lg:ltr:pr-0 lg:rtl:pl-0' >
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 

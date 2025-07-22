@@ -219,7 +219,7 @@ function NewsletterSidebar(props) {
                       })
                     ) : (
                       <div className="container">
-                          <center><p className="center">No contacts available for emails</p></center>
+                          <center><p className="center">No contacts for newsletter</p></center>
                       </div>
                     )
                 }
