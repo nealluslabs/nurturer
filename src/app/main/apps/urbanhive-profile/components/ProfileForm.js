@@ -14,7 +14,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/profile.action';
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
-import { createNewProfile, uploadNewImage } from 'redux/actions/profile.action';
+import { createNewProfile, duplicateToContacts, uploadNewImage } from 'redux/actions/profile.action';
 
 
 
@@ -243,7 +243,7 @@ export default function ProfileForm() {
 
             <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-8rem",right:"0.5rem",width:"23rem",flexDirection:"row",marginBottom:"1.5rem"}}>
                <Grid item>
-                 <Button
+                 <Button /*onClick={()=>{dispatch(duplicateToContacts())} }*/
                    sx={{
                      backgroundColor: "black",
                      color: "white",

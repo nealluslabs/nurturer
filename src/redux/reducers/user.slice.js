@@ -105,6 +105,9 @@ const { actions, reducer } = userSlice;
 export const {
  fetchUsersPending,
  fetchUsersSuccess,
+ fetchContactsSuccess,
+ fetchContactsFailed,
+ saveFilteredContacts,
  saveFilteredUsers,
  saveCandidateInFocus,
  fetchRealTimeUsersSuccess,
