@@ -155,11 +155,7 @@ function Inbox(props) {
  const { isAuth, user } = useSelector((state) => state.login);
  const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
  //const [paragraphs, setParagraphs] = useState([selectedChatUser.message.firstParagraph, selectedChatUser.message.secondParagraph, selectedChatUser.message.thirdParagraph]);
- const [paragraphs, setParagraphs] = useState({
-  firstParagraph: user.message?user.message.firstParagraph : selectedChatUser.message.firstParagraph,
-  secondParagraph:user.message? user.message.secondParagraph: selectedChatUser.message.secondParagraph,
-  thirdParagraph: user.message?user.message.thirdParagraph :selectedChatUser.message.thirdParagraph
-});
+
 
 const handleInput = () => {
   const paraData = {
@@ -170,6 +166,15 @@ const handleInput = () => {
   setParagraphs(paraData);
   dispatch(saveEditedParagraphs(paraData))
 };
+
+
+const [paragraphs, setParagraphs] = useState(user.message? user.message
+  :
+  {
+  firstParagraph: user.message?user.message.firstParagraph : selectedChatUser.message.firstParagraph,
+  secondParagraph:user.message? user.message.secondParagraph: selectedChatUser.message.secondParagraph,
+  thirdParagraph: user.message?user.message.thirdParagraph :selectedChatUser.message.thirdParagraph
+});
 
 
  const { connects,chatGptAnswer } = useSelector((state) => state.user);
@@ -184,6 +189,8 @@ const handleInput = () => {
     }
   }, [chatMessages]);
 
+ 
+
 
   useEffect(() => {
 
@@ -193,10 +200,14 @@ const handleInput = () => {
    // console.log("CHAT GPT ANSwER IS--->",chatGptAnswer)
 
    // console.log("CURRENT PARAGRAPHS IS--->",paragraphs)
+   if(editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
 
     setParagraphs(editedParagraphs);
     //dispatch(saveEditedParagraphs(paraData))
-
+   }
+   else{
+    setParagraphs(user.message && user.message);
+   }
     
    
   }, [chatGptAnswer,editedParagraphs]);
