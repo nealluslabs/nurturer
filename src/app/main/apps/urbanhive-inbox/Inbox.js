@@ -26,6 +26,7 @@ import holiday1 from 'src/app/main/urbanhive-assets/holiday.png'
 import birthday1 from 'src/app/main/urbanhive-assets/birthday1.png'
 import birthday2 from 'src/images/Birthday_2.png'
 import { saveEditedParagraphs } from 'redux/reducers/user.slice';
+import { ToastContainer, toast } from 'react-toastify';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -148,6 +149,17 @@ function Inbox(props) {
   const handleClose = () => setOpen(false);
   const handleClose2 = () => setOpen2(false);
   const handleClose3 = () => setOpen3(false);
+
+
+  const notifyInvite = () => toast.success('Message Updated!', {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
 
  //New Hooks
 
@@ -279,10 +291,10 @@ const [paragraphs, setParagraphs] = useState(user.message? user.message
   const sendUpdate = ()=>{
     console.log("Message has begun its progress--->",editedParagraphs.firstParagraph)
     dispatch( 
-      updateUserBroadcast(editedParagraphs,user)
-    )/*.then(() => {
-      setMessageText('');
-    });*/
+      updateUserBroadcast(editedParagraphs,user,notifyInvite)
+    ).then(() => {
+    // notifyInvite()
+    });
   }
 
  
@@ -301,6 +313,17 @@ const [paragraphs, setParagraphs] = useState(user.message? user.message
 
   return (
     <div className={clsx('flex flex-col relative', props.className)}>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
       <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
         {chatMessages.length || 0 && chatMessages.length > 0 ? (
         <>

@@ -138,7 +138,7 @@ export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,
 
 
 
-export const updateUserBroadcast = (updatedParagraphs,user) => async (dispatch) => {
+export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite) => async (dispatch) => {
   console.log("MESSAGE IS IN PHASE 2:", user.uid);
   
   try {
@@ -168,6 +168,7 @@ export const updateUserBroadcast = (updatedParagraphs,user) => async (dispatch) 
         })
         .then(() => {
           console.log("Message Updated Successfully in ut1@nurturer")
+          notifyInvite()
         })
 
 
