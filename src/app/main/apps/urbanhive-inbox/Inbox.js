@@ -152,7 +152,7 @@ function Inbox(props) {
 
 
   const notifyInvite = () => toast.success('Message Updated!', {
-    position: "top-right",
+    position: "bottom-right",
     autoClose: 1000,
     hideProgressBar: false,
     closeOnClick: true,
@@ -219,6 +219,7 @@ const [paragraphs, setParagraphs] = useState(user.message? user.message
    }
    else{
     setParagraphs(user.message && user.message);
+    dispatch(saveEditedParagraphs(user.message && user.message))
    }
     
    
