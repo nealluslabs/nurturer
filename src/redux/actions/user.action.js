@@ -8,6 +8,9 @@ import { clearChat } from 'src/redux/reducers/chat.slice';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
 import { saveChatGptAnswer, saveEditedParagraphs } from 'redux/reducers/user.slice';
 import axios from 'axios';
+
+import firebase from "firebase/app";
+import "firebase/firestore";
   
 
 export const fetchAllUsers = (uid) => async (dispatch) => {
@@ -69,11 +72,11 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
     }
 };
 
-export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,setLoading) => async (dispatch) => {
+export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,setLoading,previousMessage) => async (dispatch) => {
 
    setLoading(true)
 
-  const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
+  const apiEndpoint =`https://nurturer-helper-api.vercel.app/api/om/chatgpt`
 
 
 
@@ -115,7 +118,7 @@ export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,
 
      for each article, put in it's title into "bulletPointBold", it's source into "bulletPointRest" and a link to the article into "link"
 
-     make each paragraph relevant to the user's job: ${JobTitle},company:${Company},industry:${Industry}  and interests:${Interests}.Please make sure each article fetched is from this year`
+     make each paragraph relevant to the user's job: ${JobTitle},company:${Company},industry:${Industry}  and interests:${Interests}.Please make sure each article fetched is from this year. Please go through the javascript object ${JSON.stringify(previousMessage)}, and try to adapt to my writing style,so you can sound like me,when providing your answer`
 
 
   const jobResponse = await axios.post(apiEndpoint,{prompt:prompt})
@@ -138,7 +141,7 @@ export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,
 
 
 
-export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite) => async (dispatch) => {
+export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite,selectedChatUser) => async (dispatch) => {
   console.log("MESSAGE IS IN PHASE 2:", user.uid);
   
   try {
@@ -146,22 +149,31 @@ export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite) => asyn
       
       // Query contacts collection where contacterId matches the user's uid
       const contactsSnapshot = db.collection('users').doc(user && user.uid)
+
+      const contactDoc = db.collection('contacts').doc(selectedChatUser && selectedChatUser.uid)
          
       const  userToUpdate =   contactsSnapshot.get().then(async(doc)=>{ 
 
 
-   
+        
       
       if (doc.exists) {
 
         console.log("RAW MESSAGE IS -->", updatedParagraphs)
-        let updatedMessage =  doc.data().message
+        let updatedMessage =  {...doc.data().message}
+
+        
 
           updatedMessage.firstParagraph = updatedParagraphs && updatedParagraphs.firstParagraph
          updatedMessage.secondParagraph = updatedParagraphs &&  updatedParagraphs.secondParagraph
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
+          updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
 
          console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+         contactDoc.update({
+          messageQueue: firebase.firestore.FieldValue.arrayUnion(updatedMessage)
+        });
 
         contactsSnapshot.update({
           message:updatedMessage

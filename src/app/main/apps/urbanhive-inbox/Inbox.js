@@ -173,12 +173,33 @@ const handleInput = () => {
   const paraData = {
     firstParagraph: editableRef.current.querySelector(".firstParagraph")?.innerText || "",
     secondParagraph: editableRef.current.querySelector(".secondParagraph")?.innerText || "",
-    thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || ""
+    thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || "",
+
   };
-  setParagraphs(paraData);
-  dispatch(saveEditedParagraphs(paraData))
+  console.log("HANDLE INPUTS IS WORKING",paragraphs)
+  setParagraphs({...paragraphs,...paraData});
+  dispatch(saveEditedParagraphs({...paragraphs,...paraData}))
 };
 
+const updateArticle = (newBulletPoint) =>{ 
+let updatedBulletPoints = [...paragraphs.bulletPoints]
+
+
+if(updatedBulletPoints.filter((item)=>(item.id === newBulletPoint.id)).length ){
+  console.log("ITS THERE SO WE REMOVE IT---> ARTICLE IS UPDATING")
+  updatedBulletPoints = updatedBulletPoints.filter((item)=>(item.id !== newBulletPoint.id))
+}
+else{
+  console.log("ITS NOT THERE,SO WE ADD IT---> ARTICLE IS UPDATING")
+
+  updatedBulletPoints = [...updatedBulletPoints,newBulletPoint]
+}
+
+
+setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
+  dispatch(saveEditedParagraphs({...paragraphs,bulletPoints:updatedBulletPoints}))
+
+}
 
 const [paragraphs, setParagraphs] = useState(user.message? user.message
   :
@@ -187,6 +208,11 @@ const [paragraphs, setParagraphs] = useState(user.message? user.message
   secondParagraph:user.message? user.message.secondParagraph: selectedChatUser.message.secondParagraph,
   thirdParagraph: user.message?user.message.thirdParagraph :selectedChatUser.message.thirdParagraph
 });
+
+const [bulletPointChoice, setBulletPointChoice] = useState(user.message? user.message.bulletPoints
+  :
+ []
+);
 
 
  const { connects,chatGptAnswer } = useSelector((state) => state.user);
@@ -215,15 +241,17 @@ const [paragraphs, setParagraphs] = useState(user.message? user.message
    if(editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
 
     setParagraphs(editedParagraphs);
+    setBulletPointChoice(editedParagraphs.bulletPoints)
     //dispatch(saveEditedParagraphs(paraData))
    }
    else{
     setParagraphs(user.message && user.message);
+    setBulletPointChoice(user.message && user.message.bulletPoints)
     dispatch(saveEditedParagraphs(user.message && user.message))
    }
     
    
-  }, [chatGptAnswer,editedParagraphs]);
+  }, [chatGptAnswer]);
 
 
   useEffect(() => {
@@ -292,7 +320,7 @@ const [paragraphs, setParagraphs] = useState(user.message? user.message
   const sendUpdate = ()=>{
     console.log("Message has begun its progress--->",editedParagraphs.firstParagraph)
     dispatch( 
-      updateUserBroadcast(editedParagraphs,user,notifyInvite)
+      updateUserBroadcast(editedParagraphs,user,notifyInvite,selectedChatUser)
     ).then(() => {
     // notifyInvite()
     });
@@ -812,19 +840,19 @@ We had some great conversations previously, and I really valued the opportunity 
           label={<Typography fontSize="14px"><a href="https://martech.org/5-essential-priorities-for-marketers-in-2025/" target="_blank" rel="noopener noreferrer">Redefining Brand Value: Marketing Priorities for the 2025 Economy</a></Typography>}
         />*/}
 
- {paragraphs && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+ {paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
+          )}}/>}
           label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
@@ -877,19 +905,19 @@ We had some great conversations previously, and I really valued the opportunity 
         */}
         <>
          {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') &&<> <br /><br /> </>}
-         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') && paragraphs.bulletPoints && bulletPointChoice &&  bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
+          )}}/>}
           label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
@@ -944,19 +972,19 @@ We had some great conversations previously, and I really valued the opportunity 
           label={<Typography fontSize="14px"><a href="https://martech.org/5-essential-priorities-for-marketers-in-2025/" target="_blank" rel="noopener noreferrer">Redefining Brand Value: Marketing Priorities for the 2025 Economy</a></Typography>}
         />*/}
 
-{paragraphs && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints  && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
+          )}}/>}
           label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
@@ -1007,19 +1035,19 @@ We had some great conversations previously, and I really valued the opportunity 
           label={<Typography fontSize="14px"><a href="https://www.entrepreneur.com/en-in/news-and-trends/ai-agents-to-redefine-enterprise-strategy-in-2025-report/492416" target="_blank" rel="noopener noreferrer">AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025</a></Typography>}
         />*/}
 
-{paragraphs && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
+          )}}/>}
           label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
@@ -1087,19 +1115,19 @@ We had some great conversations previously, and I really valued the opportunity 
         />
         */}
 
-{paragraphs && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
+          )}}/>}
           label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
@@ -1167,20 +1195,20 @@ We had some great conversations previously, and I really valued the opportunity 
            />
             */}
 
-    {paragraphs && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+    {paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
-          label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
+          )}}/>}
+          label={<Typography fontSize="14px"><a href={point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
         </>
@@ -1244,20 +1272,20 @@ We had some great conversations previously, and I really valued the opportunity 
         />
         */}
 
-{paragraphs && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Checkbox onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
               bulletPointRest:point.bulletPointRest && point.bulletPointRest,
               link:point.link && point.link
             }
-          ))}}/>}
-          label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
+          )}}/>}
+          label={<Typography fontSize="14px"><a href={point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
         </>
@@ -1370,7 +1398,7 @@ label={<Typography fontSize="14px">
 
 
            { !loading && 
-            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.companyName,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading))}}
+            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.companyName,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,paragraphs))}}
             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
             }
 
