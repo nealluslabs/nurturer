@@ -291,6 +291,15 @@ function Chat(props) {
               onChange={onInputChange}
               value={messageText}
             />
+
+
+           <IconButton className="absolute ltr:right-0 rtl:left-0 top-0" type="submit">
+              <Icon className="text-24" color="action">
+                send
+              </Icon>
+            </IconButton>
+
+
             <IconButton className="absolute ltr:right-0 rtl:left-0 top-0" type="submit">
               <Icon className="text-24" color="action">
                 send

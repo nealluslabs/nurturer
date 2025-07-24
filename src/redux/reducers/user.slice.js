@@ -10,6 +10,8 @@ const initialState = {
   connects: [],
   connects2: [],
   isLoading: false,
+  editedParagraphs:{},
+  chatGptAnswer:{},
   candidateInFocus:{},
   info: '',
   error: '',
@@ -43,6 +45,14 @@ const userSlice = createSlice({
       state.filteredUsers = action.payload;
      
   },
+  saveEditedParagraphs: (state, action) => { 
+    state.editedParagraphs = action.payload;
+   
+},
+saveChatGptAnswer: (state, action) => { 
+  state.chatGptAnswer = action.payload;
+ 
+},
   saveFilteredContacts: (state, action) => { 
       state.filteredContacts = action.payload;
   },
@@ -108,6 +118,8 @@ export const {
  fetchContactsSuccess,
  fetchContactsFailed,
  saveFilteredUsers,
+ saveEditedParagraphs,
+ saveChatGptAnswer,
  saveFilteredContacts,
  saveCandidateInFocus,
  fetchRealTimeUsersSuccess,

@@ -6,6 +6,8 @@ import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from 'src/redux/reducers/chat.slice';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
+import { saveChatGptAnswer, saveEditedParagraphs } from 'redux/reducers/user.slice';
+import axios from 'axios';
   
 
 export const fetchAllUsers = (uid) => async (dispatch) => {
@@ -66,6 +68,122 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
         dispatch(fetchContactsFailed({ errorMessage }));
     }
 };
+
+export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,setLoading) => async (dispatch) => {
+
+   setLoading(true)
+
+  const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
+
+
+  const prompt = ` Generate 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):
+     {"firstParagraph":" ",
+      "secondParagraph":" ",
+      "thirdParagraph":" ",
+      "bulletPoints":[
+        {
+         "bulletPointBold":" ",
+         "bulletPointRest":" ",
+         "link":" ",
+         "id":1
+        },{
+          "bulletPointBold":" ",
+          "bulletPointRest":" ",
+          "link":" ",
+          "id":2
+        },{
+          "bulletPointBold":" ",
+          "bulletPointRest":" ",
+          "link":" ",
+          "id":3
+        },{
+          "bulletPointBold":" ",
+          "bulletPointRest":" ",
+          "link":" ",
+          "id":4
+        },{
+          "bulletPointBold":" ",
+          "bulletPointRest":" ",
+          "link":" ",
+          "id":5
+        },
+      ]
+     } .The first paragraph should be about how you haven't spoken in ${Frequency} days and hoe you've been thinking about their role.
+        second parargaph should be about how you have found some articles that relate to their industry ${Industry}.
+        The first paragraph should be about how you'd love to hear from them and you wish them luck in their future endeavors and hobbies: ${Interests}
+
+     for each article, put in it's title into "bulletPointBold", it's source into "bulletPointRest" and a link to the article into "link"
+
+     make each paragraph relevant to the user's job: ${JobTitle},company:${Company},industry:${Industry}  and interests:${Interests}.Please make sure each article fetched is from this year`
+
+
+  const jobResponse = await axios.post(apiEndpoint,{prompt:prompt})
+
+     console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT-->",JSON.parse(jobResponse.data.text))
+
+     const fullJobDetailsResponse = /*JSON.parse(*/jobResponse.data.text/*)*/
+
+ 
+
+     if(fullJobDetailsResponse){
+      dispatch(saveChatGptAnswer(fullJobDetailsResponse && fullJobDetailsResponse))
+
+      dispatch(saveEditedParagraphs(JSON.parse(fullJobDetailsResponse && fullJobDetailsResponse)))
+     }
+
+     setLoading(false)
+
+}
+
+
+
+export const updateUserBroadcast = (updatedParagraphs,user) => async (dispatch) => {
+  console.log("MESSAGE IS IN PHASE 2:", user.uid);
+  
+  try {
+      console.log("Fetching the user itself:", user.uid);
+      
+      // Query contacts collection where contacterId matches the user's uid
+      const contactsSnapshot = db.collection('users').doc(user && user.uid)
+         
+      const  userToUpdate =   contactsSnapshot.get().then(async(doc)=>{ 
+
+
+   
+      
+      if (doc.exists) {
+
+        console.log("RAW MESSAGE IS -->", updatedParagraphs)
+        let updatedMessage =  doc.data().message
+
+          updatedMessage.firstParagraph = updatedParagraphs && updatedParagraphs.firstParagraph
+         updatedMessage.secondParagraph = updatedParagraphs &&  updatedParagraphs.secondParagraph
+          updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
+
+         console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+        contactsSnapshot.update({
+          message:updatedMessage
+        })
+        .then(() => {
+          console.log("Message Updated Successfully in ut1@nurturer")
+        })
+
+
+         
+      }
+     
+    }) 
+    
+  } catch (error) {
+      const errorMessage = error.message;
+      console.log('Error updating user message:', errorMessage);
+      console.log("MESSAGE HAS FAILED IN CATCH:", user.uid);
+     
+  }
+};
+
+
 
 export const updateUserChat = (selectedChatUser,newBulletPoint) => async (dispatch) => {
 
