@@ -277,8 +277,8 @@ function InboxApp(props) {
                     </IconButton>
                     <div
                       className="flex items-center cursor-pointer"
-                      onClick={() => dispatch(openContactSidebar())}
-                      onKeyDown={() => dispatch(openContactSidebar())}
+                      /*onClick={() => dispatch(openContactSidebar())}
+                      onKeyDown={() => dispatch(openContactSidebar())}*/
                       role="button"
                       tabIndex={0}
                     >
@@ -286,11 +286,11 @@ function InboxApp(props) {
                         <div className="absolute right-0 bottom-0 -m-4 z-10">
                           <StatusIcon status={'online'} />
                         </div>
-                        <Avatar src={selectedChatUser.photoUrl} alt={selectedChatUser.name}>
+                        {<Avatar src={selectedChatUser.photoUrl} alt={selectedChatUser.name}>
                           {!selectedChatUser.photoUrl || selectedChatUser.photoUrl === ''
                             ? selectedChatUser.name[0]
                             : ''}
-                        </Avatar>
+                       </Avatar>}
                       </div>
                       <Typography color="inherit" className="text-18 font-semibold px-4">
                         {selectedChatUser.name}

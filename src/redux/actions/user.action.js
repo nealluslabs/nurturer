@@ -77,7 +77,7 @@ export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,
    setLoading(true)
 
   const apiEndpoint =`https://nurturer-helper-api.vercel.app/api/om/chatgpt`
-
+ //const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
 
 
   const prompt = ` Generate 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):

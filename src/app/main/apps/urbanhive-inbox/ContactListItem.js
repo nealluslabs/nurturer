@@ -87,7 +87,7 @@ setTimeout(()=>{
       // active: props.selectedContactId === props.contact.id,
       active: selectedContactId === props.user.uid,
     })}
-    onClick={() => props.onContactClick(props.user.uid)}
+    onClick={() => {props.onContactClick(props.user.uid); props.onClick(props.user.uid)}}
   >
     <div className="relative">
       <div className="absolute right-0 bottom-0 -m-4 z-10">

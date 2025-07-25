@@ -201,15 +201,15 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
 
 }
 
-const [paragraphs, setParagraphs] = useState(user.message? user.message
+const [paragraphs, setParagraphs] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]
   :
   {
-  firstParagraph: user.message?user.message.firstParagraph : selectedChatUser.message.firstParagraph,
-  secondParagraph:user.message? user.message.secondParagraph: selectedChatUser.message.secondParagraph,
-  thirdParagraph: user.message?user.message.thirdParagraph :selectedChatUser.message.thirdParagraph
+  firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
+  secondParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].secondParagraph: " ",
+  thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" "
 });
 
-const [bulletPointChoice, setBulletPointChoice] = useState(user.message? user.message.bulletPoints
+const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints
   :
  []
 );
@@ -238,16 +238,31 @@ const [bulletPointChoice, setBulletPointChoice] = useState(user.message? user.me
    // console.log("CHAT GPT ANSwER IS--->",chatGptAnswer)
 
    // console.log("CURRENT PARAGRAPHS IS--->",paragraphs)
-   if(editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
+   if(editedParagraphs && editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
 
     setParagraphs(editedParagraphs);
     setBulletPointChoice(editedParagraphs.bulletPoints)
     //dispatch(saveEditedParagraphs(paraData))
    }
    else{
-    setParagraphs(user.message && user.message);
+    //setParagraphs(user.message && user.message);
     setBulletPointChoice(user.message && user.message.bulletPoints)
     dispatch(saveEditedParagraphs(user.message && user.message))
+
+
+    setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]
+      :
+      {
+      firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
+      secondParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].secondParagraph: " ",
+      thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" "
+    });
+
+
+    setBulletPointChoice(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] &&  selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints)
+
+    dispatch(saveEditedParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]))
+
    }
     
    

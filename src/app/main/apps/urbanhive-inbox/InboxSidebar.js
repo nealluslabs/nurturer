@@ -126,10 +126,10 @@ function InboxSidebar(props) {
       );
       
     const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,message},index) => ({
+        lookingFor, lastActive, isTechnical, photoUrl, password,message,messageQueue},index) => ({
           uid, name, email, city, intro, skillset, skills_needed, 
           lookingFor, lastActive, isTechnical, photoUrl, password,
-          message,
+          message,messageQueue,
           daysTo:(15*(index+1)).toString()+ " " + "Days" ,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       }));
@@ -147,9 +147,9 @@ function InboxSidebar(props) {
       
     // Use filteredContacts from Firebase instead of connectedUsers
     const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency},index) => ({
+        lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue},index) => ({
           uid, name, email, city, intro, skillset, skills_needed, 
-          lookingFor, lastActive, isTechnical, photoUrl, password, message,
+          lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,
           companyName, jobTitle, interests, frequency,
           daysTo:(15*(index+1)).toString()+ " " + "Days" ,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
@@ -214,6 +214,7 @@ function InboxSidebar(props) {
                           user={user}
                         //   onContactClick={(contactId) => dispatch(getChat({ contactId, isMobile }))}
                           onContactClick={() => initChat(user, isMobile)}
+                          onClick={() => initChat(user, isMobile)}
                         />
                       </motion.div>
                       );
