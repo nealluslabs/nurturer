@@ -27,6 +27,7 @@ import { getChat } from './store/chatSlice';
 import { selectContacts } from './store/contactsSlice';
 import { closeMobileChatsSidebar, openUserSidebar } from './store/sidebarsSlice';
 import { updateUserData } from './store/userSlice';
+import { clearChats } from 'redux/actions/chat.action';
 
 const statusArr = [
   {
@@ -152,7 +153,7 @@ function NewsletterSidebar(props) {
     setChatUser(user2.name)
     setUserUid(user2.uid);
 
-     
+    dispatch(clearChats())
      dispatch(fetchChats(user1, user2))
      console.log('IsMobile: ', isMobile);
      if (isMobile) {

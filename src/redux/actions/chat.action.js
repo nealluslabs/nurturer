@@ -1,4 +1,4 @@
-import { fetchChatsPending, fetchChatsSuccess, setCurrentChat } from "src/redux/reducers/chat.slice";
+import { fetchChatsPending, fetchChatsSuccess, setCurrentChat ,clearCurrentChat} from "src/redux/reducers/chat.slice";
 import { db, fb, auth, storage } from '../../config/firebase';
 
 
@@ -9,8 +9,16 @@ export const fetchChats = (user1, user2_data) => async (dispatch) => {
     console.log('User 1: ', user1);
     console.log('User 2 chat data: ', user2);
 
+    dispatch(setCurrentChat({}));
      dispatch(setCurrentChat(user2_data));
      dispatch(getRealtimeChat(users))
+};
+
+export const clearChats = () => async (dispatch) => {
+   
+    dispatch(clearCurrentChat());
+    
+    
 };
 
 

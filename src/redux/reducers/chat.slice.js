@@ -44,12 +44,16 @@ const chatSlice = createSlice({
     },
     setCurrentChat: (state, action) => {
        state.chatStarted = true;
+       state.selectedChatUser = null;
        state.selectedChatUser = action.payload;
     },
     clearChat: (state) => {
       return {
         ...initialState,
       };
+    },
+    clearCurrentChat: (state) => {
+      state.selectedChatUser = {};
     },
   },
 });
@@ -61,6 +65,7 @@ export const {
  fetchChatsSuccess,
  fetchChatsFailed,
  setCurrentChat,
+ clearCurrentChat,
  clearChat,
 } = actions;
 

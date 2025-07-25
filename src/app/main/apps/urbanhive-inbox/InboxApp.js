@@ -286,14 +286,14 @@ function InboxApp(props) {
                         <div className="absolute right-0 bottom-0 -m-4 z-10">
                           <StatusIcon status={'online'} />
                         </div>
-                        {<Avatar src={selectedChatUser.photoUrl} alt={selectedChatUser.name}>
-                          {!selectedChatUser.photoUrl || selectedChatUser.photoUrl === ''
-                            ? selectedChatUser.name[0]
+                        {<Avatar src={selectedChatUser && selectedChatUser.photoUrl} alt={selectedChatUser && selectedChatUser.name}>
+                          {!selectedChatUser&&  !selectedChatUser.photoUrl || selectedChatUser && selectedChatUser.photoUrl === ''
+                            ? selectedChatUser && selectedChatUser.name[0]
                             : ''}
                        </Avatar>}
                       </div>
                       <Typography color="inherit" className="text-18 font-semibold px-4">
-                        {selectedChatUser.name}
+                        {selectedChatUser && selectedChatUser.name}
                       </Typography>
                     </div>
                   </Toolbar>

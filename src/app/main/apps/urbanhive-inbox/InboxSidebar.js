@@ -18,10 +18,11 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { motion } from 'framer-motion';
 import { useMemo, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchChats } from 'src/redux/actions/chat.action';
+import { fetchChats,clearChats } from 'src/redux/actions/chat.action';
 import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
 import { closeMobileChatsSidebar } from './store/sidebarsSlice';
+import { saveEditedParagraphs } from 'redux/reducers/user.slice';
 
 const statusArr = [
   {
@@ -111,7 +112,7 @@ function InboxSidebar(props) {
     setChatUser(user2.name)
     setUserUid(user2.uid);
 
-     
+    dispatch(clearChats(user1, user2))
      dispatch(fetchChats(user1, user2))
      console.log('IsMobile: ', isMobile);
      if (isMobile) {
@@ -213,8 +214,8 @@ function InboxSidebar(props) {
                         <ContactListItem
                           user={user}
                         //   onContactClick={(contactId) => dispatch(getChat({ contactId, isMobile }))}
-                          onContactClick={() => initChat(user, isMobile)}
-                          onClick={() => initChat(user, isMobile)}
+                          onContactClick={() => {initChat(user, isMobile)}}
+                          onClick={() => {dispatch(clearChats()) ; dispatch(saveEditedParagraphs({})) }}
                         />
                       </motion.div>
                       );

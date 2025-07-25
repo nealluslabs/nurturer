@@ -246,8 +246,10 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    }
    else{
     //setParagraphs(user.message && user.message);
+    //dispatch(saveEditedParagraphs(user.message && user.message))
+
     setBulletPointChoice(user.message && user.message.bulletPoints)
-    dispatch(saveEditedParagraphs(user.message && user.message))
+   
 
 
     setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]
@@ -261,12 +263,12 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
 
     setBulletPointChoice(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] &&  selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints)
 
-    dispatch(saveEditedParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]))
+    //dispatch(saveEditedParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]))
 
    }
     
    
-  }, [chatGptAnswer]);
+  }, [chatGptAnswer,selectedChatUser]);
 
 
   useEffect(() => {
