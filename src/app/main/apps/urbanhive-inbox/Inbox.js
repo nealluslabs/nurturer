@@ -165,9 +165,10 @@ function Inbox(props) {
 
 //  const [connectStatus, setconnectStatus] = useState('');
  const { isAuth, user } = useSelector((state) => state.login);
+ console.log("wWHAT IS USER IN STATE.LOGIN--->",user)
  const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
  //const [paragraphs, setParagraphs] = useState([selectedChatUser.message.firstParagraph, selectedChatUser.message.secondParagraph, selectedChatUser.message.thirdParagraph]);
-
+ const thisUser =user && user
 
 const handleInput = () => {
   const paraData = {
@@ -227,7 +228,12 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
     }
   }, [chatMessages]);
 
- 
+ // useEffect(() => {
+ //   if(chatGptAnswer && chatGptAnswer.bulletPoints && chatGptAnswer.bulletPoints.length){
+ //   dispatch(saveEditedParagraphs(chatGptAnswer))
+ //   }
+ // },
+ // [chatGptAnswer])
 
 
   useEffect(() => {
@@ -263,12 +269,12 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
 
     setBulletPointChoice(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] &&  selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints)
 
-    //dispatch(saveEditedParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]))
+   dispatch(saveEditedParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]))
 
    }
     
    
-  }, [chatGptAnswer,selectedChatUser]);
+  }, [chatGptAnswer,selectedChatUser/*,editedParagraphs*/]);
 
 
   useEffect(() => {
@@ -532,11 +538,18 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
         
 
 
-
+       {(selectedChatUser && (selectedChatUser.name !== "Emily White" ||selectedChatUser.name !== "Bob Johnson")) && (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
         <span>
           Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName  }
         </span>
-        
+        }
+
+
+    {(selectedChatUser && (selectedChatUser.name === "Emily White" ||selectedChatUser.name === "Bob Johnson")) && 
+        <span>
+          Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName  }
+        </span>
+        }
         <br /><br /><br /><br />
 
        {selectedChatUser && selectedChatUser.name  === "Alice Chen"?
@@ -769,8 +782,9 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
 
         <br /><br /><br /><br />
 
-
-
+      
+       {(selectedChatUser && (selectedChatUser.name !== "Emily White" ||selectedChatUser.name !== "Bob Johnson") )&& (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
+         <>
         <span>
           Regards,
         </span>
@@ -780,8 +794,25 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         <span>
           {user && user.firstName && user.lastName? user.firstName + " " + user.lastName:user && user.name && user.name !== "test user"?user.name :"Tim"}
         </span>
+        </>
+
+            }
 
 
+{(selectedChatUser && (selectedChatUser.name === "Emily White" ||selectedChatUser.name === "Bob Johnson") )&& 
+         <>
+        <span>
+          Regards,
+        </span>
+         
+        <br /><br />
+
+        <span>
+          {user && user.firstName && user.lastName? user.firstName + " " + user.lastName:user && user.name && user.name !== "test user"?user.name :"Tim"}
+        </span>
+        </>
+
+            }
       </div>
                       </div>
                    
@@ -1415,7 +1446,8 @@ label={<Typography fontSize="14px">
 
 
            { !loading && 
-            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.companyName,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,paragraphs))}}
+            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,paragraphs,thisUser,notifyInvite,selectedChatUser))}}
+            
             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
             }
 

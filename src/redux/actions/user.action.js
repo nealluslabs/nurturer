@@ -72,16 +72,17 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
     }
 };
 
-export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,setLoading,previousMessage) => async (dispatch) => {
+export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Interests,setLoading,previousMessage,user,notifyInvite,selectedChatUser) => async (dispatch) => {
+            
+   if(setLoading){setLoading(true)}
 
-   setLoading(true)
+  //const apiEndpoint =`https://nurturer-helper-api.vercel.app/api/om/chatgpt`
+ const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
 
-  const apiEndpoint =`https://nurturer-helper-api.vercel.app/api/om/chatgpt`
- //const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
-
-
-  const prompt = ` Generate 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):
-     {"firstParagraph":" ",
+console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
+  const prompt = ` Generate an email subject, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):
+     {"subject":" ",
+      "firstParagraph":" ",
       "secondParagraph":" ",
       "thirdParagraph":" ",
       "bulletPoints":[
@@ -112,9 +113,11 @@ export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,
           "id":5
         },
       ]
-     } .The first paragraph should be about how you haven't spoken in ${Frequency} days and hoe you've been thinking about their role.
+     } .The first paragraph should be about how you haven't spoken to ${Name} in ${Frequency} days and how you've been thinking about their role.
+         Don't start the paragraph with Dear ${Name}, just jump into the writing.
         second parargaph should be about how you have found some articles that relate to their industry ${Industry}.
-        The first paragraph should be about how you'd love to hear from them and you wish them luck in their future endeavors and hobbies: ${Interests}
+        The third paragraph should be about how you'd love to hear from them and you wish them luck in their future endeavors and hobbies: ${Interests}.
+        The Subject should be composed from the content of the paragraphs above and should have some sort of "catch up" phrase in it.
 
      for each article, put in it's title into "bulletPointBold", it's source into "bulletPointRest" and a link to the article into "link"
 
@@ -125,17 +128,19 @@ export const generateAiMessage = (Frequency,JobTitle,Company,Industry,Interests,
 
      console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT-->",JSON.parse(jobResponse.data.text))
 
-     const fullJobDetailsResponse = /*JSON.parse(*/jobResponse.data.text/*)*/
+     const fullJobDetailsResponse = JSON.parse(jobResponse.data.text)
 
  
 
      if(fullJobDetailsResponse){
-      dispatch(saveChatGptAnswer(fullJobDetailsResponse && fullJobDetailsResponse))
+      dispatch(saveChatGptAnswer(/*JSON.parse(*/fullJobDetailsResponse && fullJobDetailsResponse/*)*/))
 
-      dispatch(saveEditedParagraphs(JSON.parse(fullJobDetailsResponse && fullJobDetailsResponse)))
+      dispatch(saveEditedParagraphs(/*JSON.parse(*/fullJobDetailsResponse && fullJobDetailsResponse)/*)*/)
+
+      dispatch(updateUserBroadcast(fullJobDetailsResponse,user,notifyInvite,selectedChatUser))
      }
 
-     setLoading(false)
+     if(setLoading){setLoading(false)}
 
 }
 
@@ -168,12 +173,18 @@ export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite,selected
          updatedMessage.secondParagraph = updatedParagraphs &&  updatedParagraphs.secondParagraph
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
           updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
+          updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
 
          console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
 
          contactDoc.update({
           messageQueue: firebase.firestore.FieldValue.arrayUnion(updatedMessage)
-        });
+        }).then(() => contactDoc.get())
+        .then((doc) => {
+          if (doc.exists) {
+            dispatch(setCurrentChat(doc.data()));
+          }
+        })
 
         contactsSnapshot.update({
           message:updatedMessage
