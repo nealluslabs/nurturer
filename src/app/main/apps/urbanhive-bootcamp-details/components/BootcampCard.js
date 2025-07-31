@@ -23,13 +23,13 @@ import AVTR2 from "../../../urbanhive-assets/farouk-amoo.png" ;
 
 import TNAIL1 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
 import TNAIL2 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL3 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL4 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
-import TNAIL5 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
-import TNAIL6 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
-import TNAIL7 from  "../../../urbanhive-assets/urbanhive-thumbnails/CSS-position.png";
-import TNAIL8 from  "../../../urbanhive-assets/urbanhive-thumbnails/code-editor.png";
-import TNAIL9 from  "../../../urbanhive-assets/urbanhive-thumbnails/first-webpage.png";
+//import TNAIL3 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL4 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
+//import TNAIL5 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
+//import TNAIL6 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
+//import TNAIL7 from  "../../../urbanhive-assets/urbanhive-thumbnails/CSS-position.png";
+//import TNAIL8 from  "../../../urbanhive-assets/urbanhive-thumbnails/code-editor.png";
+//import TNAIL9 from  "../../../urbanhive-assets/urbanhive-thumbnails/first-webpage.png";
 
 
 /*import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';

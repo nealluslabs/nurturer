@@ -21,15 +21,15 @@ import IconButton from '@mui/material/IconButton';
 import AVTR1 from "../../../urbanhive-assets/brain.jpg" ;
 import AVTR2 from "../../../urbanhive-assets/brain.jpg" ;
 
-import TNAIL1 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL2 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL3 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL4 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL5 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
-import TNAIL6 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
-import TNAIL7 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL8 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
-import TNAIL9 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL1 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL2 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL3 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL4 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL5 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
+//import TNAIL6 from  "../../../urbanhive-assets/urbanhive-thumbnails/flutter-thumbnail.png";
+//import TNAIL7 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL8 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
+//import TNAIL9 from  "../../../urbanhive-assets/urbanhive-thumbnails/blank.png";
 
 
 /*import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -158,7 +158,7 @@ const theme = createTheme({
       <CardMedia
         component="img"
         height="170"
-        image={TNAIL1}
+        image={AVTR1}
         alt="Paella dish"
       />
       <CardContent >
@@ -255,7 +255,7 @@ const theme = createTheme({
         <CardMedia
           component="img"
           height="170"
-          image={TNAIL2}
+          image={AVTR1}
           alt="Paella dish"
         />
       <CardContent>
@@ -355,7 +355,7 @@ className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center ju
       <CardMedia
         component="img"
         height="170"
-        image={TNAIL3}
+        image={AVTR1}
         alt="Paella dish"
       />
       <CardContent>
@@ -456,7 +456,7 @@ className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center ju
         <CardMedia
           component="img"
           height="170"
-          image={TNAIL4}
+          image={AVTR1}
           alt="Paella dish"
         />
       <CardContent>
@@ -557,7 +557,7 @@ className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center ju
       <CardMedia
         component="img"
         height="170"
-        image={TNAIL7}
+        image={AVTR1}
         alt="Paella dish"
       />
       <CardContent>
@@ -653,7 +653,7 @@ className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center ju
         <CardMedia
           component="img"
           height="170"
-          image={TNAIL8}
+          image={AVTR1}
           alt="Paella dish"
         />
       <CardContent>
@@ -750,7 +750,7 @@ className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center ju
       <CardMedia
         component="img"
         height="170"
-        image={TNAIL9}
+        image={AVTR1}
         alt="Paella dish"
       />
       <CardContent>
@@ -840,7 +840,7 @@ className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 w-full items-center ju
       <CardMedia
         component="img"
         height="170"
-        image={TNAIL9}
+        image={AVTR1}
         alt="Paella dish"
       />
       <CardContent>
