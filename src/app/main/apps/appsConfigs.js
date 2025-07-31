@@ -1,3 +1,4 @@
+import SettingsAppConfig from './urbanhive-settings/SettingsAppConfig';
 // import AcademyAppConfig from './academy/AcademyAppConfig';
 // import CalendarAppConfig from './calendar/CalendarAppConfig';
 // import ChatAppConfig from './chat/ChatAppConfig';
@@ -62,6 +63,7 @@ const appsConfigs = [
   EditAppointmentConfig,
   BootCampConfig,
   BootCampDetailsConfig,
+  SettingsAppConfig,
   // AnalyticsDashboardAppConfig,
   // ProjectDashboardAppConfig,
   // MailAppConfig,

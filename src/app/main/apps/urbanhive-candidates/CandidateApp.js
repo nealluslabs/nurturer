@@ -68,6 +68,11 @@ function CandidateApp(props) {
 
 
   if (!isAuth) return <Redirect to={'/login'}/>
+  // If user has no contacts, redirect to profile page to add contacts
+  if (allContacts && Array.isArray(allContacts) && allContacts.length === 0) {
+    history.replace('/apps/profile');
+    return null;
+  }
   return (
     <div style={{margin: "30px"}}>
     <FusePageSimple

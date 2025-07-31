@@ -91,7 +91,7 @@ const navigationConfig = [
     title: 'Settings',
     type: 'item',
     icon: 'settings',
-    url: '#',
+    url: '/apps/settings',
   },
  /* {
     id: 'match',
