@@ -82,6 +82,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
   const prompt = ` Generate an email subject, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):
      {"subject":" ",
+     "messageStatus":"Pending"
       "firstParagraph":" ",
       "secondParagraph":" ",
       "thirdParagraph":" ",
@@ -133,11 +134,11 @@ console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
  
 
      if(fullJobDetailsResponse){
-      dispatch(saveChatGptAnswer(/*JSON.parse(*/fullJobDetailsResponse && fullJobDetailsResponse/*)*/))
+      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
 
-      dispatch(saveEditedParagraphs(/*JSON.parse(*/fullJobDetailsResponse && fullJobDetailsResponse)/*)*/)
+      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
 
-      dispatch(updateUserBroadcast(fullJobDetailsResponse,user,notifyInvite,selectedChatUser))
+      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date()},user,notifyInvite,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}

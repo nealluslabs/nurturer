@@ -10,6 +10,7 @@ import LogoutConfig from 'app/main/logout/LogoutConfig';
 // import UserInterfaceConfig from 'app/main/user-interface/UserInterfaceConfig';
 import { Redirect } from 'react-router-dom';
 import FuseLoading from '@fuse/core/FuseLoading';
+import LandingPageConfig from 'app/main/apps/urbanhive-landing-page/LandingPageConfig';
 
 const routeConfigs = [
   ...appsConfigs,
@@ -21,6 +22,7 @@ const routeConfigs = [
   // LoginConfig,
   // RegisterConfig,
   LogoutConfig,
+  LandingPageConfig,
   CallbackConfig,
 ];
 
@@ -32,7 +34,8 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: () => <Redirect to="/candidates" />,
+     component: () => <LandingPageConfig />,
+   // component: () => <Redirect to="/candidates" />,
     // component: () => <Redirect to="/apps/sessions" />,
   },
   {
