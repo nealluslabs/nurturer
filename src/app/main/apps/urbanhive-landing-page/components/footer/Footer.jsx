@@ -28,7 +28,7 @@ const Footer = () => {
 
       <div className='permalinks'>
       
-      <div className="footer-first">
+      <div className="footer-first" style={{position:"relative",top:"0.5rem"}}>
          
       <div /*onClick ={()=>{navigate('/home')}}*/ style={{fontSize:"1.6rem",color:"white",fontWeight:"900",/*color:"#E88B1E",*/cursor:"pointer"}}>
         {/*Snapplicant*/}
@@ -127,7 +127,7 @@ const Footer = () => {
 
       <div className="footer__copyright">
        <p>
-        &copy; 2024 All rights Reserved.
+        &copy; 2025 All rights Reserved.
        </p>
 
        <div style={{display:"flex",justifyContent:"center",gap:"2rem"}}>
