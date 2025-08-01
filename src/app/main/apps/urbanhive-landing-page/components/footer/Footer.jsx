@@ -94,9 +94,12 @@ const Footer = () => {
                       InputProps={{
                         
                         sx: { height: '2.5rem',
-                        '::placeholder': {
-                          color: 'gray',
-                          opacity: 1, // optional, ensures color is not faded
+                        input: {
+                          color: 'white', // actual input text
+                          '::placeholder': {
+                            color: 'white',
+                            opacity: 1,
+                          }
                         }
                         
                          },
