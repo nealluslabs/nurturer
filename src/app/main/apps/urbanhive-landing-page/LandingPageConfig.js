@@ -26,7 +26,7 @@ const LandingPageConfig = {
   auth: authRoles.onlyGuest,
   routes: [
     {
-      path: '/',
+      path: '/landing-page',
       component: LandingPage,
     },
   ],
