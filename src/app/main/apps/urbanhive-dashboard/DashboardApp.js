@@ -358,7 +358,7 @@ if (allContacts.length > 0) {
                         borderRadius: "4px"
                       }}
                     >
-                      {item.status}Pending
+                      {item.status}
                     </p>
                   </div>
                 );

@@ -24,7 +24,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Footer from './components/footer/Footer'
 
 
-import { Helmet } from 'react-helmet-async'
+// import { Helmet } from 'react-helmet-async'
 import DummyAbout from './components/about-copy/About'
 import DummyAbout2 from './components/about2-copy/About2'
 import DummyAbout3 from './components/about3-copy/About3'
