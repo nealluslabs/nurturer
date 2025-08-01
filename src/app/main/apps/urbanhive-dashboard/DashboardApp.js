@@ -149,88 +149,50 @@ function DashboardApp(props) {
   ];
 
 
-const touchpointData = [
-  {
-    id: 1,
-    title: "Special card for Kala",
-    subtitle: "Karla G - 06/02/2025",
-    status: "Pending",
-    statusColor: "grey",
-    statusBackground: "yellow",
-    icon: CardGiftcardIcon,
-    iconColor: "#26b502",
-  },
-  {
-    id: 2,
-    title: "Happy Birthday, Tyler!",
-    subtitle: "Tyler Walker - 06/01/2025",
-    status: "Failed",
-    statusColor: "white",
-    statusBackground: "grey",
+const { allContacts = [] } = useSelector((state) => state.user);
+let touchpointData = [];
+if (allContacts.length > 0) {
+  let allMessages = [];
+  allContacts.forEach(contact => {
+    if (Array.isArray(contact.messageQueue)) {
+      allMessages = allMessages.concat(
+        contact.messageQueue.map(msg => ({
+          ...msg,
+          contactName: contact.name,
+          contactId: contact.id,
+        }))
+      );
+    }
+  });
+  allMessages.sort((a, b) => {
+    if (a.createdAt && b.createdAt) {
+      return b.createdAt - a.createdAt;
+    }
+    return 0;
+  });
+  touchpointData = allMessages.slice(0, 5).map((msg, idx) => ({
+    id: msg.id || idx,
+    title: msg.title || msg.subject || 'No Title',
+    subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
+    status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
+    statusColor: 'grey',
+    statusBackground: 'yellow',
     icon: Mail,
-    iconColor: "blue",
-  },
-  {
-    id: 3,
-    title: "Special card for Kala",
-    subtitle: "Karla G - 06/02/2025",
-    status: "Sent",
-    statusColor: "white",
-    statusBackground: "green",
-    icon: CardGiftcardIcon,
-    iconColor: "#26b502",
-  },
-  {
-    id: 4,
-    title: "Happy Birthday, Tina!",
-    subtitle: "Tina S. - 06/01/2025",
-    status: "Failed",
-    statusColor: "white",
-    statusBackground: "grey",
-    icon: Mail,
-    iconColor: "blue",
-  },
-  {
-    id: 5,
-    title: "Sales is Making a Come Back",
-    subtitle: "Karla G - 06/02/2025",
-    status: "Pending",
-    statusColor: "grey",
-    statusBackground: "yellow",
-    icon: CardGiftcardIcon,
-    iconColor: "#26b502",
-  },
-];
+    iconColor: '#1976d2',
+  }));
+}
 
-const users = [
-  {
-    id: 1,
-    name: "Tyler Walker",
-    role: "Washup",
-    initials: "TW",
-    date: "06/01",
-    avatarBg: "#1e7a07",
-    textColor: "white"
-  },
-  {
-    id: 2,
-    name: "Tina S.",
-    role: "Svibes",
-    initials: "TS",
-    date: "06/01",
-    avatarBg: "#1e7a07",
-    textColor: "white"
-  },
-  {
-    id: 3,
-    name: "Karla G",
-    role: "EdZone, LLC",
-    initials: "KG",
-    date: "06/01",
-    avatarBg: "#1e7a07",
-    textColor: "white"
-  },
-];
+let recentContacts = [];
+if (allContacts.length > 0) {
+  recentContacts = [...allContacts]
+    .sort((a, b) => {
+      if (a.createdAt && b.createdAt) {
+        return b.createdAt - a.createdAt;
+      }
+      return 0;
+    })
+    .slice(0, 5);
+}
 
 
 
@@ -245,6 +207,18 @@ const users = [
       }}>
         {statsData.map((item, key) => {
           const IconComponent = item.icon;
+          // Make Total Contacts, Pending Touchpoints, and Upcoming Events clickable
+          const isTotalContacts = item.label === 'Total Contacts';
+          const isPendingTouchpoints = item.label === 'Pending Touchpoints';
+          const isUpcomingEvents = item.label === 'Upcoming Events';
+          const handleClick = () => {
+            if (isTotalContacts) {
+              history.push('/candidates');
+            } else if (isPendingTouchpoints || isUpcomingEvents) {
+              history.push('/apps/inbox');
+            }
+          };
+          const clickable = isTotalContacts || isPendingTouchpoints || isUpcomingEvents;
           return (
             <div 
               key={item.id} 
@@ -252,8 +226,17 @@ const users = [
                 background: "#ffffff", 
                 padding: "16px", 
                 textAlign: "center", 
-                borderRadius: "6px" 
+                borderRadius: "6px",
+                cursor: clickable ? "pointer" : "default",
+                boxShadow: isTotalContacts
+                  ? "0 0 0 2px #03befc33"
+                  : isPendingTouchpoints
+                  ? "0 0 0 2px #ca03fc33"
+                  : isUpcomingEvents
+                  ? "0 0 0 2px #03bafc33"
+                  : undefined
               }}
+              onClick={clickable ? handleClick : undefined}
             >
               <IconComponent sx={{ width: 45, height: 45, color: item.color }} />
               <p style={{ color: "#03befc", fontSize: "21px", fontWeight: "bold" }}>{item.count}</p>
@@ -283,6 +266,7 @@ const users = [
                   border: `2px solid ${ event.buttonColor ? event.buttonColor : "grey" }`, 
                   padding: "4px 7px", borderRadius: "6px", color: `${ event.buttonColor ? event.buttonColor : "grey" }`
                 }}
+                onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/apps/inbox') : undefined}
               >
                 {event.buttonText}
               </button>
@@ -329,6 +313,7 @@ const users = [
                   border: `2px solid grey`, 
                   padding: "4px 7px", borderRadius: "6px", color: "grey"
                 }}
+                onClick={() => history.push('/apps/inbox')}
               >
                 View All
               </button>
@@ -336,47 +321,49 @@ const users = [
 
             <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
               
-            {touchpointData.map((item) => {
-              const IconComponent = item.icon;
-
-              return (
-                <div 
-                  key={item.id} 
-                  style={{ 
-                    display: "flex", 
-                    alignItems: "center", 
-                    justifyContent: "space-between", 
-                    marginBottom: "16px" 
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <IconComponent 
-                      sx={{ 
-                        width: 16, 
-                        height: 16, 
-                        marginRight: "6px", 
-                        color: item.iconColor 
-                      }} 
-                    />
-                    <div>
-                      <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-                      <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
-                    </div>
-                  </div>
-
-                  <p 
-                    style={{ 
-                      padding: "4px 12px", 
-                      background: item.statusBackground, 
-                      color: item.statusColor, 
-                      borderRadius: "4px" 
+            {touchpointData.length === 0 ? (
+              <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending messages found.</div>
+            ) : (
+              touchpointData.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <div
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginBottom: "16px"
                     }}
                   >
-                    {item.status}
-                  </p>
-                </div>
-              );
-            })}
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <IconComponent
+                        sx={{
+                          width: 16,
+                          height: 16,
+                          marginRight: "6px",
+                          color: item.iconColor
+                        }}
+                      />
+                      <div>
+                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
+                        <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
+                      </div>
+                    </div>
+                    <p
+                      style={{
+                        padding: "4px 12px",
+                        background: item.statusBackground,
+                        color: item.statusColor,
+                        borderRadius: "4px"
+                      }}
+                    >
+                      {item.status}Pending
+                    </p>
+                  </div>
+                );
+              })
+            )}
 
 
             </div>
@@ -393,6 +380,7 @@ const users = [
                   border: `2px solid grey`, 
                   padding: "4px 7px", borderRadius: "6px", color: "grey"
                 }}
+                onClick={() => history.push('/candidates')}
               >
                 View All
               </button>
@@ -400,51 +388,75 @@ const users = [
 
             <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
               
-            {users.map((user) => (
-              <div 
-                key={user.id} 
-                style={{ 
-                  display: "flex", 
-                  alignItems: "center", 
-                  justifyContent: "space-between", 
-                  marginBottom: "16px" 
-                }}
-              >
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <div 
-                    style={{ 
-                      width: "32px", 
-                      height: "32px", 
-                      borderRadius: "50%", 
-                      marginRight: "12px", 
-                      //background: user.avatarBg, 
-                      background:"#01bcc0",
-                      color: user.textColor, 
-                      display: "flex", 
-                      alignItems: "center", 
-                      justifyContent: "center",
-                      fontWeight: "bold",
-                      fontSize: "12px"
+            {recentContacts.length === 0 ? (
+              <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No contacts found.</div>
+            ) : (
+              recentContacts.map((user, idx) => {
+                const initials = user.initials || (user.name ? user.name.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() : '?');
+                const name = user.name || 'Unknown';
+                const role = user.role || user.companyName || '';
+                const date = user.createdAt ? new Date(user.createdAt).toLocaleDateString() : '';
+                const photoUrl = user.photoUrl;
+                return (
+                  <div
+                    key={user.id || idx}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginBottom: "16px"
                     }}
                   >
-                    {user.initials}
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      {photoUrl ? (
+                        <img
+                          src={photoUrl}
+                          alt={name}
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "50%",
+                            marginRight: "12px",
+                            objectFit: "cover",
+                            border: "2px solid #01bcc0"
+                          }}
+                        />
+                      ) : (
+                        <div
+                          style={{
+                            width: "32px",
+                            height: "32px",
+                            borderRadius: "50%",
+                            marginRight: "12px",
+                            background: "#01bcc0",
+                            color: "white",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            fontWeight: "bold",
+                            fontSize: "12px"
+                          }}
+                        >
+                          {initials}
+                        </div>
+                      )}
+                      <div>
+                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>{name}</p>
+                        <p style={{ fontSize: "12px" }}>{role}</p>
+                      </div>
+                    </div>
+                    <p
+                      style={{
+                        padding: "4px 12px",
+                        borderRadius: "4px"
+                      }}
+                    >
+                      {date}
+                    </p>
                   </div>
-                  <div>
-                    <p style={{ fontSize: "14px", fontWeight: "bold" }}>{user.name}</p>
-                    <p style={{ fontSize: "12px" }}>{user.role}</p>
-                  </div>
-                </div>
-
-                <p 
-                  style={{ 
-                    padding: "4px 12px", 
-                    borderRadius: "4px" 
-                  }}
-                >
-                  {user.date}
-                </p>
-              </div>
-            ))}
+                );
+              })
+            )}
 
 
 
