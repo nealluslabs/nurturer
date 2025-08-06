@@ -175,7 +175,7 @@ const handleInput = () => {
     firstParagraph: editableRef.current.querySelector(".firstParagraph")?.innerText || "",
     secondParagraph: editableRef.current.querySelector(".secondParagraph")?.innerText || "",
     thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || "",
-
+    messageType:'Trigger'
   };
   console.log("HANDLE INPUTS IS WORKING",paragraphs)
   setParagraphs({...paragraphs,...paraData});
@@ -263,7 +263,8 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
       {
       firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
       secondParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].secondParagraph: " ",
-      thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" "
+      thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" ",
+      messageType:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].messageType :" "
     });
 
 

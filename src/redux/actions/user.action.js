@@ -176,6 +176,7 @@ export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite,selected
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
           updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
           updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
+          updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Trigger"
 
          console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
 
