@@ -82,6 +82,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
   const prompt = ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):
      {"subject":" ",
+     messageType:"Trigger"
      "messageStatus":"Pending"
       "firstParagraph":" ",
       "secondParagraph":" ",
