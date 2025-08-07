@@ -129,7 +129,7 @@ function NewsletterSidebar(props) {
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password,
         message,
-        daysTo:(15*(index+1)).toString()+ " " + "Days" ,
+        daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
@@ -150,7 +150,7 @@ function NewsletterSidebar(props) {
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password, message,
         companyName, jobTitle, interests, frequency,
-        daysTo:(15*(index+1)).toString()+ " " + "Days" ,
+        daysTo:(3+ 3*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 

@@ -299,7 +299,7 @@ const userList =output && output.length ? (
   return (
      <>
      {isLoading ? 
-      <center> <LinearProgress color="secondary" /></center>
+      <center> {/*<LinearProgress color="secondary" />*/}</center>
      : 
      userList.length >0 && 
      <div style={{height:"100vh",width:"70vw"}}>

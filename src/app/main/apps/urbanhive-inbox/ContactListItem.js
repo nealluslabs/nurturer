@@ -126,7 +126,7 @@ setTimeout(()=>{
         >
           {/* {format(new Date(props.contact.lastMessageTime), 'PP')} */}
           {/*format(new Date('2022-8-20'), 'PP')*/}
-          {props.user.daysTo?props.user.daysTo:"15 Days" }
+          {props.user.daysTo?props.user.daysTo:"7 Days" }
         </Typography>
       {/* )} */}
 
