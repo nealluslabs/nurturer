@@ -63,8 +63,7 @@ function CandidateApp(props) {
     }
     })
   ))
-    
-    }
+  }
 
 
   if (!isAuth) return <Redirect to={'/login'}/>
