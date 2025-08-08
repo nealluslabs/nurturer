@@ -47,6 +47,7 @@ function CandidateCard () {
   const { allUsers, connects, isLoading } = useSelector((state) => state.user);
   const { user } = useSelector((state) => state.login);
   let unsubscribe;
+  
   const notifyInvite = () => toast.success('🦄 Invited!', {
     position: "top-right",
     autoClose: 1000,

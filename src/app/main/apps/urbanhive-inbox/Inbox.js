@@ -253,8 +253,9 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    else{
     //setParagraphs(user.message && user.message);
     //dispatch(saveEditedParagraphs(user.message && user.message))
+    const bulletPointToBeSelected = user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Email')) && user.queryMsg.filter((item)=>(item.messageType ==='Email'))[0] && user.queryMsg.filter((item)=>(item.messageType ==='Email'))[0].bulletPoints && user.queryMsg.filter((item)=>(item.messageType ==='Email'))[0].bulletPoints
 
-    setBulletPointChoice(user.message && user.message.bulletPoints)
+    setBulletPointChoice(bulletPointToBeSelected && bulletPointToBeSelected)
    
 
 
@@ -546,11 +547,11 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
         }
 
 
-    {(selectedChatUser && (selectedChatUser.name === "Emily White" ||selectedChatUser.name === "Bob Johnson")) && 
+    {/*(selectedChatUser && (selectedChatUser.name === "Emily White" ||selectedChatUser.name === "Bob Johnson")) && 
         <span>
           Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName  }
         </span>
-        }
+      */}
         <br /><br /><br /><br />
 
        {selectedChatUser && selectedChatUser.name  === "Alice Chen"?
@@ -800,7 +801,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
             }
 
 
-{(selectedChatUser && (selectedChatUser.name === "Emily White" ||selectedChatUser.name === "Bob Johnson") )&& 
+{/*(selectedChatUser && (selectedChatUser.name === "Emily White" ||selectedChatUser.name === "Bob Johnson") )&& 
          <>
         <span>
           Regards,
@@ -813,7 +814,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         </span>
         </>
 
-            }
+          */}
       </div>
                       </div>
                    
