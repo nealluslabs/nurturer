@@ -26,6 +26,7 @@ import InventoryIcon from '@mui/icons-material/Inventory';
 import SendIcon from '@mui/icons-material/Send';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { Mail } from '@mui/icons-material';
+import { fetchAllContactForOneUser } from 'redux/actions/user.action';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -148,8 +149,17 @@ function DashboardApp(props) {
     },
   ];
 
+  const { user } = useSelector((state) => state.login);
+  
+  useEffect(() => {
+    if (user && user.uid) {
+      // Fetch contacts from Firebase for inbox
+      dispatch(fetchAllContactForOneUser(user.uid));
+    }
+  }, [user, dispatch])
 
-const { allContacts = [] } = useSelector((state) => state.user);
+
+  const { allContacts = [] } = useSelector((state) => state.user);
 let touchpointData = [];
 if (allContacts.length > 0) {
   let allMessages = [];

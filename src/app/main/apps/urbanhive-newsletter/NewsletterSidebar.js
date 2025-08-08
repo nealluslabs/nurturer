@@ -22,6 +22,7 @@ import { fetchChats } from 'src/redux/actions/chat.action';
 import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
 import { closeMobileChatsSidebar } from './store/sidebarsSlice';
+import { Box, TextField } from '@mui/material';
 
 const statusArr = [
   {
@@ -184,6 +185,151 @@ function NewsletterSidebar(props) {
 
       {/* Chats List */}
       <FuseScrollbars className="overflow-y-auto flex-1">
+
+            <List className="w-[100%] mx-auto">
+              
+               <motion.div
+                 className="flex flex-col flex-shrink-0"
+                 variants={container}
+                 initial="hidden"
+                 animate="show"
+               >
+              {/* <button onClick={() => testConnections()}>Please Click Me😌</button> */}
+              {
+                   <motion.div variants={item}>
+                     <Typography className="font-medium text-20 px-16 py-24" color="secondary">
+                       Newsletter Settings
+                     </Typography>
+                   </motion.div>
+                 }       
+
+
+
+                              <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" sx={{marginBottom:"1.5rem"}}>
+                                <Box
+                                  sx={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'red',
+                                  }}
+                                />
+                                <Box
+                                  sx={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'green',
+                                  }}
+                                />
+                                <Box
+                                  sx={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'yellow',
+                                  }}
+                                />
+                                <Box
+                                  sx={{
+                                    width: '3rem',
+                                    height: '3rem',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'blue',
+                                  }}
+                                />
+                              </Box>
+
+      
+               
+                         <Box display="flex" flexDirection="column" gap={2}>
+                     <motion.div variants={item}>
+                       <Box display="flex" alignItems="center" gap={2}>
+                         <Typography sx={{ width: '10%' }}>{/*Paragraph 1*/}</Typography>
+                         <TextField
+                           variant="outlined"
+                           sx={{
+                             width: '90%',
+                             '& .MuiOutlinedInput-root': {
+                               height: '2.5rem',
+                               borderRadius: '0.5rem',
+                             },
+                             '& .MuiOutlinedInput-input': {
+                               height: '2.5rem',
+                               padding: '0 8px',
+                             },
+                           }}
+                         />
+                       </Box>
+                     </motion.div>
+                   
+                     <motion.div variants={item}>
+                       <Box display="flex" alignItems="center" gap={2}>
+                         <Typography sx={{ width: '10%' }}>{/*Paragraph 2*/}</Typography>
+                         <TextField
+                           variant="outlined"
+                           sx={{
+                             width: '90%',
+                             '& .MuiOutlinedInput-root': {
+                               height: '2.5rem',
+                               borderRadius: '0.5rem',
+                             },
+                             '& .MuiOutlinedInput-input': {
+                               height: '2.5rem',
+                               padding: '0 8px',
+                             },
+                           }}
+                         />
+                       </Box>
+                     </motion.div>
+                   
+                     <motion.div variants={item}>
+                       <Box display="flex" alignItems="center" gap={2}>
+                         <Typography sx={{ width: '10%' }}>{/*Paragraph 3*/}</Typography>
+                         <TextField
+                           variant="outlined"
+                           sx={{
+                             width: '90%',
+                             '& .MuiOutlinedInput-root': {
+                               height: '2.5rem',
+                               borderRadius: '0.5rem',
+                             },
+                             '& .MuiOutlinedInput-input': {
+                               height: '2.5rem',
+                               padding: '0 8px',
+                             },
+                           }}
+                         />
+                       </Box>
+                     </motion.div>
+                   
+                     <motion.div variants={item}>
+                       <Box display="flex" alignItems="center" gap={2}>
+                         <Typography sx={{ width: '10%' }}>{/*Paragraph 4*/}</Typography>
+                         <TextField
+                           variant="outlined"
+                           sx={{
+                             width: '90%',
+                             '& .MuiOutlinedInput-root': {
+                               height: '2.5rem',
+                               borderRadius: '0.5rem',
+                             },
+                             '& .MuiOutlinedInput-input': {
+                               height: '2.5rem',
+                               padding: '0 8px',
+                             },
+                           }}
+                         />
+                       </Box>
+                     </motion.div>
+                   </Box>
+
+                 
+               </motion.div>
+          
+         </List>
+
+
         <List className="w-full">
          
         

@@ -277,6 +277,11 @@ const userList =output && output.length ? (
         {/* <Divider classes={{root: classes.divider}} /> */}
         {users.frequency ? users.frequency : 'Monthly'}
         <br/><br/>
+
+        <h4><b>Triggers</b></h4>
+        {/* <Divider classes={{root: classes.divider}} /> */}
+        {'Leadership Changes, New Acquisitions'}
+        <br/><br/>
         
         <h4><b>Interests</b></h4>
         {/* <Divider classes={{root: classes.divider}} /> */}

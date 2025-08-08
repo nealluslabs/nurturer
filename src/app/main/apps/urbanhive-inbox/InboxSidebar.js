@@ -200,7 +200,7 @@ function InboxSidebar(props) {
              {connectedUsersOutput.length > 0 && (
                   <motion.div variants={item}>
                     <Typography className="font-medium text-20 px-16 py-24" color="secondary">
-                      Emails
+                      Touches
                     </Typography>
                   </motion.div>
                 )}
@@ -222,7 +222,7 @@ function InboxSidebar(props) {
                       })
                     ) : (
                       <div className="container">
-                          <center><p className="center">No Emails available yet</p></center>
+                          <center><p className="center">No Touches available yet</p></center>
                       </div>
                     )
                 }
