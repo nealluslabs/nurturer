@@ -113,7 +113,7 @@ setTimeout(()=>{
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={props.user.name === "Emily White"? "Happy Fourth of July!🎉":`${props.user.name==="Bob Johnson"?"Happy Birthday Bob!🎂":props.user.messageQueue && props.user.messageQueue[props.user.messageQueue.length-1 && props.user.messageQueue.length-1] && props.user.messageQueue[props.user.messageQueue.length-1].subject ? props.user.messageQueue[props.user.messageQueue.length-1].subject:""}${props.user.name==="Alice Chen"? " 🙌":""}`  }
+      secondary={props.user.name === "Emily White"? "Happy Fourth of July!🎉":`${props.user.name==="Bob Johnson"?"Happy Birthday Bob!🎂":props.user.messageQueue && props.user.messageQueue[props.user.messageQueue.length-1 && props.user.messageQueue.length-1] && props.user.messageQueue[props.user.messageQueue.length-1].subject ? props.user.messageQueue[props.user.messageQueue.length-1].subject:""}${props.user.name==="Alice Chen"? " 📅":"📧"}`  }
       // secondary={props.contact.mood}
     />
 
