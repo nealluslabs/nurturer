@@ -12,6 +12,7 @@ import format from 'date-fns/format';
 import StatusIcon from './StatusIcon';
 import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
 import { saveFilteredContacts, saveFilteredUsers } from 'redux/reducers/user.slice';
+import { FaEnvelope } from 'react-icons/fa';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {
@@ -113,7 +114,7 @@ setTimeout(()=>{
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={props.user.name === "Emily White"? "Happy Fourth of July!🎉":`${props.user.name==="Bob Johnson"?"Happy Birthday Bob!🎂":props.user.messageQueue && props.user.messageQueue[props.user.messageQueue.length-1 && props.user.messageQueue.length-1] && props.user.messageQueue[props.user.messageQueue.length-1].subject ? props.user.messageQueue[props.user.messageQueue.length-1].subject:""}${props.user.name==="Alice Chen"? " 📅": (props.user.name==="John Smith"||props.user.name==="Carol Garcia")  ?" 🖂":" "}`  }
+      secondary={props.user.name === "Emily White"? "Happy Fourth of July!🎉":`${props.user.name==="Bob Johnson"?"Happy Birthday Bob!🎂":props.user.messageQueue && props.user.messageQueue[props.user.messageQueue.length-1 && props.user.messageQueue.length-1] && props.user.messageQueue[props.user.messageQueue.length-1].subject ? props.user.messageQueue[props.user.messageQueue.length-1].subject:""}${props.user.name==="Alice Chen"? " 📅": (props.user.name==="John Smith"||props.user.name==="Carol Garcia")  ?"✉️":" "}`  }
       // secondary={props.contact.mood}
     />
 

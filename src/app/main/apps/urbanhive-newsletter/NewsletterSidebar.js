@@ -193,7 +193,7 @@ function NewsletterSidebar(props) {
             <List className="w-[100%] mx-auto" >
               
                <motion.div
-               style={{backgroundColor:"#FAF9F6",paddingTop:"1rem",paddingBottom:"2rem",position:"relative",top:"-0.5rem"}}
+               style={{paddingTop:"1rem",paddingBottom:"0rem",position:"relative",top:"-0.5rem"}}
                  className="flex flex-col flex-shrink-0"
                  variants={container}
                  initial="hidden"
@@ -202,13 +202,13 @@ function NewsletterSidebar(props) {
               {/* <button onClick={() => testConnections()}>Please Click Me😌</button> */}
               {
                    <motion.div variants={item}>
-                     <Typography className="font-medium text-20 px-16 py-24" color="secondary">
+                     <Typography className="font-medium text-20 px-16 py-16" color="secondary">
                        Settings
                      </Typography>
                    </motion.div>
                  }       
 
-
+               
 
                               <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" sx={{marginBottom:"1.5rem"}}>
                                 <Box
@@ -384,6 +384,10 @@ function NewsletterSidebar(props) {
                </motion.div>
           
          </List>
+
+         <div style={{backgroundColor:"#FAF9F6",width:"100%",height:"3rem"}}>
+          {/**THIS DIV IS FOR BACKGROUND COLOR, OF OFF WHITE DONT UNCOMMENT IT OUT */}
+         </div>
 
 
         <List className="w-full overflow-y-auto">

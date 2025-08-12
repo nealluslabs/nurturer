@@ -232,14 +232,14 @@ export default function SettingsForm() {
       >
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
       </Alert><br/></div>}
-            <p>Update Settings details.</p><br/>
+            <h2>Reset Password</h2><br/>
 
            
 
             <Grid container spacing={4} style={{position:"relative",marginTop:"2rem"}}>
 
             
-            <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
+           {/* <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
                         label="Name"
                         name="name"
@@ -248,7 +248,7 @@ export default function SettingsForm() {
                         error={errors.name}
                     />
                 </Grid>
-
+              */}
                
 
                 <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
@@ -383,7 +383,7 @@ export default function SettingsForm() {
 
 
 
-
+      {/*
         <Grid item xs={12} sm={6}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <label htmlFor="profilePhoto">
@@ -420,6 +420,7 @@ export default function SettingsForm() {
           )}
         </Box>
          </Grid>
+        */}
 
 
                 </Grid>
@@ -437,10 +438,11 @@ export default function SettingsForm() {
                     type="submit"
                     disabled={isLoading}
                     text={isLoading ? 'Loading...' : 'Submit'} />
-                <Controls.Button
+               {/* <Controls.Button
                     text="Reset"
                     color="default"
                     onClick={resetForm} />
+            */}
                 </div>
                 </Box>
         </Form>
