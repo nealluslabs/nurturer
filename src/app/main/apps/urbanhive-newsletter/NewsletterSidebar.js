@@ -22,7 +22,7 @@ import { fetchChats } from 'src/redux/actions/chat.action';
 import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
 import { closeMobileChatsSidebar } from './store/sidebarsSlice';
-import { Box, TextField } from '@mui/material';
+import { Box, TextField,Select } from '@mui/material';
 
 const statusArr = [
   {
@@ -58,6 +58,10 @@ function NewsletterSidebar(props) {
   const { user } = useSelector((state) => state.login);
   const { allUsers, connectedUsers, filteredContacts, connects, connects2, isLoading } = useSelector((state) => state.user);
 
+
+  const [font, setFont] = useState("Arial");
+  const [image, setImage] = useState("First Image");
+  const [section, setSection] = useState("First Section");
 
   const container = {
     show: {
@@ -184,11 +188,12 @@ function NewsletterSidebar(props) {
       </AppBar>
 
       {/* Chats List */}
-      <FuseScrollbars className="overflow-y-auto flex-1">
+      {/*<FuseScrollbars className="overflow-y-auto flex-1">*/}
 
-            <List className="w-[100%] mx-auto">
+            <List className="w-[100%] mx-auto" >
               
                <motion.div
+               style={{backgroundColor:"#FAF9F6",paddingTop:"1rem",paddingBottom:"2rem",position:"relative",top:"-0.5rem"}}
                  className="flex flex-col flex-shrink-0"
                  variants={container}
                  initial="hidden"
@@ -198,7 +203,7 @@ function NewsletterSidebar(props) {
               {
                    <motion.div variants={item}>
                      <Typography className="font-medium text-20 px-16 py-24" color="secondary">
-                       Newsletter Settings
+                       Settings
                      </Typography>
                    </motion.div>
                  }       
@@ -208,54 +213,111 @@ function NewsletterSidebar(props) {
                               <Box display="flex" flexDirection="row" justifyContent="space-around" alignItems="center" sx={{marginBottom:"1.5rem"}}>
                                 <Box
                                   sx={{
-                                    width: '3rem',
-                                    height: '3rem',
+                                    width: '4rem',
+                                    height: '4rem',
                                     borderRadius: '50%',
                                     backgroundColor: 'red',
                                   }}
                                 />
                                 <Box
                                   sx={{
-                                    width: '3rem',
-                                    height: '3rem',
+                                    width: '4rem',
+                                    height: '4rem',
                                     borderRadius: '50%',
                                     backgroundColor: 'green',
                                   }}
                                 />
                                 <Box
                                   sx={{
-                                    width: '3rem',
-                                    height: '3rem',
+                                    width: '4rem',
+                                    height: '4rem',
                                     borderRadius: '50%',
                                     backgroundColor: 'yellow',
                                   }}
                                 />
                                 <Box
                                   sx={{
-                                    width: '3rem',
-                                    height: '3rem',
+                                    width: '4rem',
+                                    height: '4rem',
                                     borderRadius: '50%',
                                     backgroundColor: 'blue',
                                   }}
                                 />
+
+                                 <Box
+                                  sx={{
+                                    width: '4rem',
+                                    height: '4rem',
+                                    borderRadius: '50%',
+                                    backgroundColor: 'black',
+                                  }}
+                                />
+
+                                
                               </Box>
 
       
                
-                         <Box display="flex" flexDirection="column" gap={2}>
+                         <Box display="flex" flexDirection="column" sx={{margin:"0 auto",paddingLeft:"1.5rem",width:"100%"}} gap={2}>
                      <motion.div variants={item}>
-                       <Box display="flex" alignItems="center" gap={2}>
-                         <Typography sx={{ width: '10%' }}>{/*Paragraph 1*/}</Typography>
+                     <Box display="flex" alignItems="center" gap={2}>
+                          <Select
+                           value={section}
+                           onChange={(e) => setSection(e.target.value)}
+                           sx={{
+                             width: "20%",
+                             height: "3.5rem",
+                             borderRadius: "0.5rem",
+                           }}
+                         >
+                           <MenuItem value="First Section">First Section</MenuItem>
+                           <MenuItem value="Second Section">Second Section</MenuItem>
+                           <MenuItem value="Third Section">Third Section</MenuItem>
+                           <MenuItem value="Fourth Section">Fourth Section</MenuItem>
+                         </Select>
                          <TextField
                            variant="outlined"
                            sx={{
-                             width: '90%',
+                             width: '69%',
                              '& .MuiOutlinedInput-root': {
-                               height: '2.5rem',
+                               height: '3.5rem',
                                borderRadius: '0.5rem',
                              },
                              '& .MuiOutlinedInput-input': {
-                               height: '2.5rem',
+                               height: '3.5rem',
+                               padding: '0 8px',
+                             },
+                           }}
+                         />
+                       </Box>
+                     </motion.div>
+                   
+                     <motion.div variants={item}>
+                     <Box display="flex" alignItems="center" gap={2}>
+                          <Select
+                           value={image}
+                           onChange={(e) => setImage(e.target.value)}
+                           sx={{
+                             width: "20%",
+                             height: "3.5rem",
+                             borderRadius: "0.5rem",
+                           }}
+                         >
+                           <MenuItem value="First Image">First Image</MenuItem>
+                           <MenuItem value="Second Image">Second Image</MenuItem>
+                           <MenuItem value="Third Image">Third Image</MenuItem>
+                           <MenuItem value="Fourth Image">Fourth Image</MenuItem>
+                         </Select>
+                         <TextField
+                           variant="outlined"
+                           sx={{
+                             width: '69%',
+                             '& .MuiOutlinedInput-root': {
+                               height: '3.5rem',
+                               borderRadius: '0.5rem',
+                             },
+                             '& .MuiOutlinedInput-input': {
+                               height: '3.5rem',
                                padding: '0 8px',
                              },
                            }}
@@ -265,17 +327,30 @@ function NewsletterSidebar(props) {
                    
                      <motion.div variants={item}>
                        <Box display="flex" alignItems="center" gap={2}>
-                         <Typography sx={{ width: '10%' }}>{/*Paragraph 2*/}</Typography>
+                          <Select
+                           value={font}
+                           onChange={(e) => setFont(e.target.value)}
+                           sx={{
+                             width: "20%",
+                             height: "3.5rem",
+                             borderRadius: "0.5rem",
+                           }}
+                         >
+                           <MenuItem value="Arial">Arial</MenuItem>
+                           <MenuItem value="Serif">Serif</MenuItem>
+                           <MenuItem value="Calibri">Calibri</MenuItem>
+                           <MenuItem value="Lato">Lato</MenuItem>
+                         </Select>
                          <TextField
                            variant="outlined"
                            sx={{
-                             width: '90%',
+                             width: '69%',
                              '& .MuiOutlinedInput-root': {
-                               height: '2.5rem',
+                               height: '3.5rem',
                                borderRadius: '0.5rem',
                              },
                              '& .MuiOutlinedInput-input': {
-                               height: '2.5rem',
+                               height: '3.5rem',
                                padding: '0 8px',
                              },
                            }}
@@ -283,45 +358,26 @@ function NewsletterSidebar(props) {
                        </Box>
                      </motion.div>
                    
-                     <motion.div variants={item}>
+                    {/* <motion.div variants={item}>
                        <Box display="flex" alignItems="center" gap={2}>
-                         <Typography sx={{ width: '10%' }}>{/*Paragraph 3*/}</Typography>
+                         <Typography sx={{ width: '10%' }}></Typography>
                          <TextField
                            variant="outlined"
                            sx={{
                              width: '90%',
                              '& .MuiOutlinedInput-root': {
-                               height: '2.5rem',
+                               height: '3rem',
                                borderRadius: '0.5rem',
                              },
                              '& .MuiOutlinedInput-input': {
-                               height: '2.5rem',
+                               height: '3rem',
                                padding: '0 8px',
                              },
                            }}
                          />
                        </Box>
                      </motion.div>
-                   
-                     <motion.div variants={item}>
-                       <Box display="flex" alignItems="center" gap={2}>
-                         <Typography sx={{ width: '10%' }}>{/*Paragraph 4*/}</Typography>
-                         <TextField
-                           variant="outlined"
-                           sx={{
-                             width: '90%',
-                             '& .MuiOutlinedInput-root': {
-                               height: '2.5rem',
-                               borderRadius: '0.5rem',
-                             },
-                             '& .MuiOutlinedInput-input': {
-                               height: '2.5rem',
-                               padding: '0 8px',
-                             },
-                           }}
-                         />
-                       </Box>
-                     </motion.div>
+                     */}
                    </Box>
 
                  
@@ -330,7 +386,7 @@ function NewsletterSidebar(props) {
          </List>
 
 
-        <List className="w-full">
+        <List className="w-full overflow-y-auto">
          
         
             
@@ -344,7 +400,7 @@ function NewsletterSidebar(props) {
              {connectedUsersOutput.length > 0 && (
                   <motion.div variants={item}>
                     <Typography className="font-medium text-20 px-16 py-24" color="secondary">
-                      Newsletter Recipients
+                       Recipients
                     </Typography>
                   </motion.div>
                 )}
@@ -373,7 +429,7 @@ function NewsletterSidebar(props) {
               </motion.div>
          
         </List>
-      </FuseScrollbars>
+      {/*</FuseScrollbars>*/}
     </div>
   );
 }
