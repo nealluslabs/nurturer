@@ -1,7 +1,12 @@
 {
     "$schema": "https://openapi.vercel.sh/vercel.json",
+    "functions": {
+        "api/cron/route.js": {
+          "runtime": "nodejs20.x"
+        },
     "crons": [
-      { "path": "/api/cron", "schedule": "0 15 * * *" }
+      { "path": "/api/cron/route.js", "schedule": "0 15 * * *" }
     ]
   }
+}
   
