@@ -5,5 +5,5 @@
       { "path": "/api/cron/route.js", "schedule": "0 15 * * *" }
     ]
   }
-}
+
   
