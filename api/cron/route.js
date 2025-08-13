@@ -1,9 +1,22 @@
-import axios from 'axios';
-
-import firebase from "firebase/app";
+i
 import "firebase/firestore";
+import admin from 'firebase-admin';
+
+if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert({
+        projectId: process.env.PROJECT_ID,
+        clientEmail: process.env.CLIENT_EMAIL,
+        privateKey: process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
+      }),
+    });
+  }
   
-import { db, fb, auth, storage } from 'src/config/firebase';
+  const db = admin.firestore();
+
+
+  
+//import { db, fb, auth, storage } from 'src/config/firebase';
 
 
 export default async function handler(req, res) {
