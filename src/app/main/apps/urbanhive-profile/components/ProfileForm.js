@@ -77,9 +77,26 @@ export default function ProfileForm() {
     const [showError2, setshowError2] = useState(false);
     const [file, setFile] = useState(null);
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
+    const [triggers, setTriggers] = useState(profileData.triggers||[]);
     const [photoURL, setPhotoURL] = useState(profileData.photoUrl != '' ? profileData.photoUrl : user.photoUrl);
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
+
+    const [inputValue, setInputValue] = useState("");
+
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" && inputValue.trim() !== "") {
+        e.preventDefault(); // prevent form submission
+        if (triggers && !triggers.includes(inputValue.trim())) {
+          setTriggers([...triggers, inputValue.trim()]);
+        }
+        setInputValue(""); // clear field
+      }
+    };
+  
+    const handleDelete = (triggerToDelete) => {
+      setTriggers((prev) => prev.filter((t) => t !== triggerToDelete));
+    };
   
 
     const initialFValues = {
@@ -90,6 +107,7 @@ export default function ProfileForm() {
      // lookingFor: profileData.lookingFor == '' ? 'nil' : profileData.lookingFor,
       city: profileData.city == '' ? '' : profileData.city,
       state: profileData.state == '' ? '' : profileData.state,
+      //triggers: profileData.triggers && profileData.triggers.length ===0   ? [] : profileData.triggers,
       frequency: profileData.frequency == '' ? '' : profileData.frequency,
       jobTitle:profileData && profileData.jobTitle && profileData.jobTitle == '' ? '' : profileData.jobTitle,
       interests: profileData.interests == '' ? '' : profileData.interests,
@@ -138,6 +156,7 @@ export default function ProfileForm() {
         temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
        if ('state' in fieldValues)
         temp.state = fieldValues.state.length != 0 ? "" : "This field is required."
+      
        if ('frequency' in fieldValues)
         temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
        if ('birthday' in fieldValues)
@@ -194,19 +213,20 @@ export default function ProfileForm() {
            const companyName = values.companyName;
            const jobTitle = values.jobTitle;
            const state = values.state;
+           //const triggers = values.triggers;
            const interests = values.interests;
            const industry = values.industry;
            const frequency = values.frequency;
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { intro, frequency, city, jobTitle,state, interests, companyName,industry,name,email,birthday,workAnniversary};
+          const profile = { intro, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
-          dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
+          dispatch(createNewProfile({...profile,triggers}, user, file, resetForm, photoURL));
           }else{
-            dispatch(uploadNewImage(profile, user, file, resetForm));
+            dispatch(uploadNewImage({...profile,triggers}, user, file, resetForm));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }
@@ -306,6 +326,7 @@ export default function ProfileForm() {
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
+                sx={{width:"53%"}}
                         name="intro"
                         label="Notes"
                         value={values.intro/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
@@ -344,6 +365,36 @@ export default function ProfileForm() {
                         options={skillSetService.getStates()}
                         error={errors.state}
                     />
+                </Grid>
+
+
+                <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
+                     {/* Text input */}
+                   <TextField
+                     label="Add Trigger"
+                     variant="outlined"
+                    style={{width:"53%"}}
+                     value={inputValue}
+                     onChange={(e) => setInputValue(e.target.value)}
+                     onKeyDown={handleKeyDown}
+                   />
+             
+                   {/* Chips for triggers */}
+                   <Box sx={{ mt: 1, display:triggers &&triggers.length?"flex": "none", gap: 1, flexWrap: "wrap",border:triggers &&!triggers.length?"0px":"0.5px solid gray",width:"55%",height:"max-content" }}>
+                     {triggers && triggers.map((trigger, index) => (
+                      
+                       <Chip
+                         style={{width:"max-content",zIndex:"1000",color:"black"}}
+                         key={index}
+                         label={trigger}
+                         onDelete={() => handleDelete(trigger)}
+                        
+                         variant="outlined"
+                         
+                       />
+                     
+                     ))}
+                   </Box>
                 </Grid>
 
 

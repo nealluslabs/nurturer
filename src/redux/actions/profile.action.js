@@ -204,6 +204,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     birthday:profile.birthday,
     workAnniversary:profile.workAnniversary,
     city: profile.city,
+    triggers:profile.triggers,
     state: profile.state,
     frequency: profile.frequency,
     interests: profile.interests,
