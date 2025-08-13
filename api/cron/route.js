@@ -27,10 +27,19 @@ export const UpdateAllContacts = (uid) => async (dispatch) => {
           const currentSendDateNum = Number(data.sendDate);
   
           if (!isNaN(currentSendDateNum)) {
-            const updatedSendDate = String(currentSendDateNum - 1);
-            console.log(`Updating doc ${doc.id}: ${data.sendDate} -> ${updatedSendDate}`);
+            let updatedSendDate;
   
+            if (currentSendDateNum === 0) {
+              // If sendDate is 0, set to frequency
+              updatedSendDate = String(data.frequency ?? 0);
+            } else {
+              // Otherwise subtract 1
+              updatedSendDate = String(currentSendDateNum - 1);
+            }
+  
+            console.log(`Updating doc ${doc.id}: ${data.sendDate} -> ${updatedSendDate}`);
             batch.update(doc.ref, { sendDate: updatedSendDate });
+  
           } else {
             console.warn(`sendDate is not a number for doc ${doc.id}:`, data.sendDate);
           }
@@ -46,4 +55,5 @@ export const UpdateAllContacts = (uid) => async (dispatch) => {
       dispatch(fetchUsersFailed({ errorMessage: error.message }));
     }
   };
+  
   
