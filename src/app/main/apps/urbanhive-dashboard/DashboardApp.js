@@ -194,6 +194,7 @@ if (allContacts.length > 0) {
           ...msg,
           contactName: contact.name,
           contactId: contact.id||contact.uid,
+          uid:contact.uid
         }))
       );
     }
@@ -213,6 +214,7 @@ if (allContacts.length > 0) {
     statusBackground: 'yellow',
     icon: Mail,
     iconColor: '#1976d2',
+    uid:msg.uid
   }));
 }
 
@@ -363,10 +365,10 @@ if (allContacts.length > 0) {
                 return (
                   <div 
                   onClick={()=>{
-                    console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.id === item.contactId))[0])
+                    console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.uid === item.uid))[0])
                     dispatch(setCurrentChat(
                       //we are assuming we will always get something..risky dagogo- aug -14 2025
-                      allContacts.filter((contact)=>(contact.id === item.id))[0]
+                      allContacts.filter((contact)=>(contact.uid === item.uid))[0]
                     ))
 
                     setTimeout(()=>{history.push('/apps/inbox')},300)
