@@ -27,6 +27,8 @@ import SendIcon from '@mui/icons-material/Send';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { Mail } from '@mui/icons-material';
 import { fetchAllContactForOneUser } from 'redux/actions/user.action';
+import { saveFilteredContacts } from 'redux/reducers/user.slice';
+import { setCurrentChat } from 'redux/reducers/chat.slice';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -159,7 +161,29 @@ function DashboardApp(props) {
   }, [user, dispatch])
 
 
-  const { allContacts = [] } = useSelector((state) => state.user);
+  const { allContacts = [],filteredContacts } = useSelector((state) => state.user);
+
+  const resortFilteredUsersAndPush = (userId)=>{
+    
+    const replica = [...filteredContacts]
+   
+     const index = replica.findIndex(user => user.uid === userId);
+   
+     if (index > -1) {
+       const [matchedUser] = replica.splice(index, 1);
+       replica.unshift(matchedUser);
+     }
+   
+     
+    dispatch(saveFilteredContacts(replica))
+   
+   setTimeout(()=>{
+     history.push('/candidates')
+      },300)
+   
+    }
+
+
 let touchpointData = [];
 if (allContacts.length > 0) {
   let allMessages = [];
@@ -169,7 +193,7 @@ if (allContacts.length > 0) {
         contact.messageQueue.map(msg => ({
           ...msg,
           contactName: contact.name,
-          contactId: contact.id,
+          contactId: contact.id||contact.uid,
         }))
       );
     }
@@ -337,13 +361,23 @@ if (allContacts.length > 0) {
               touchpointData.map((item) => {
                 const IconComponent = item.icon;
                 return (
-                  <div
+                  <div 
+                  onClick={()=>{
+                    console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.id === item.contactId))[0])
+                    dispatch(setCurrentChat(
+                      //we are assuming we will always get something..risky dagogo- aug -14 2025
+                      allContacts.filter((contact)=>(contact.id === item.id))[0]
+                    ))
+
+                    setTimeout(()=>{history.push('/apps/inbox')},300)
+                  }}
                     key={item.id}
                     style={{
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      marginBottom: "16px"
+                      marginBottom: "16px",
+                      cursor:"pointer"
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
@@ -396,7 +430,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",cursor:"pointer" }}>
               
             {recentContacts.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No contacts found.</div>
@@ -417,7 +451,13 @@ if (allContacts.length > 0) {
                       marginBottom: "16px"
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center"}}
+                     onClick={()=>{
+                     console.log("FILTERED USERS FROM DASHBOARD-->",user)
+                      resortFilteredUsersAndPush(user.uid)
+
+                     }}
+                    >
                       {photoUrl ? (
                         <img
                           src={photoUrl}

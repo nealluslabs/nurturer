@@ -57,7 +57,7 @@ const navigationConfig = [
  
   {
     id: 'inbox',
-    title: 'Nurture',
+    title: 'Touches',
     type: 'item',
     icon: 'chat',
     url: '/apps/inbox',

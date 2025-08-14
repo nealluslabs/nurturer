@@ -45,7 +45,7 @@ function CandidateApp(props) {
 
   // Fetch contacts when component mounts
   useEffect(() => {
-    if (user && user.uid) {
+    if (user && user.uid && !filteredUsers) {
       dispatch(fetchAllContactForOneUser(user.uid));
     }
   }, [dispatch, user]);
