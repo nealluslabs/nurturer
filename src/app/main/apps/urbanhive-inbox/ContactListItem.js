@@ -130,7 +130,7 @@ setTimeout(()=>{
           {props.user.sendDate?props.user.sendDate + " Days":"7 Days" /*props.user.daysTo?props.user.daysTo:"7 Days"*/ }
         </Typography>
       {/* )} */}
-
+ 
       {/* Show Badge if message is unread */}
       {/* {props.contact.unread && (
         <div
