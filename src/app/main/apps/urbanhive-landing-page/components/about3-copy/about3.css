@@ -50,6 +50,7 @@
  .CTAboximg1{
  border-radius: 5%;
  width:450px;
+ height:250px;
  /*height:400px;*/
  aspect-ratio: 1 /(4/3);
  }

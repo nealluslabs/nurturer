@@ -1,6 +1,6 @@
 import React from 'react'
 import './about2.css'
-import about2graphic from 'src/images/about2graphic.png'
+import about2graphic from 'src/images/AI-agent-2.jpg'
 import about2decor from 'src/images/about2decor.png'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 //import { useNavigate } from 'react-router-dom'
@@ -25,7 +25,7 @@ const DummyAbout2 = () => {
        
 
       <div className="about2Explainer">
-      <h1 style={{fontWeight:"700",color:"#40255F",fontSize:"2.8rem"}}> Set It and Stay Top of Mind{/*<span className="text-accent">  get the Job! </span>*/}</h1>
+      <h1 style={{fontWeight:"700",color:"#000",fontSize:"2.8rem"}}> Set It and Stay Top of Mind{/*<span className="text-accent">  get the Job! </span>*/}</h1>
 
          <p style={{fontSize:"1.8rem"}}>
          Once set up, the system works for you—sending on your behalf with your sign-off. No writing, automatic scheduling, just nurturing made easy.
