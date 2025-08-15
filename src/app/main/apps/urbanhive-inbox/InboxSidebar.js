@@ -127,10 +127,10 @@ function InboxSidebar(props) {
       );
       
     const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,message,messageQueue},index) => ({
+        lookingFor, lastActive, isTechnical, photoUrl, password,message,messageQueue,sendDate},index) => ({
           uid, name, email, city, intro, skillset, skills_needed, 
           lookingFor, lastActive, isTechnical, photoUrl, password,
-          message,messageQueue,
+          message,messageQueue,sendDate,
           daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       }));
@@ -148,9 +148,9 @@ function InboxSidebar(props) {
       
     // Use filteredContacts from Firebase instead of connectedUsers
     const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue},index) => ({
+        lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue,sendDate},index) => ({
           uid, name, email, city, intro, skillset, skills_needed, 
-          lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,
+          lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
           companyName, jobTitle, interests, frequency,
           daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
