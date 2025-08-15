@@ -56,7 +56,7 @@ const Footer = () => {
 
 
 
-      <div className="footer-second">
+      {/* <div className="footer-second">
      
       <ul >
       <li><a href="#">Products</a></li>
@@ -64,8 +64,8 @@ const Footer = () => {
         <li><a href="#">Recruiter</a></li>
         {/*<li><a href="#">AI interview Prep</a></li>*/}
        
-      </ul>
-      </div>
+      {/* </ul> */}
+      {/* </div> */} 
 
       <div className="footer-third">
      
