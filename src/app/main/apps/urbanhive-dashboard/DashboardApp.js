@@ -48,18 +48,84 @@ function DashboardApp(props) {
   const [tabValue, setTabValue] = useState(0);
 
 
+  
+
+  const { user } = useSelector((state) => state.login);
+  
+  useEffect(() => {
+    if (user && user.uid) {
+      // Fetch contacts from Firebase for inbox
+      dispatch(fetchAllContactForOneUser(user.uid));
+    }
+  }, [user, dispatch])
+
+
+
+
+
+  const { allContacts = [],filteredContacts } = useSelector((state) => state.user);
+
+
+let touchpointData = [];
+if (allContacts.length > 0) {
+  let allMessages = [];
+  allContacts.forEach(contact => {
+    if (Array.isArray(contact.messageQueue)) {
+      allMessages = allMessages.concat(
+        contact.messageQueue.map(msg => ({
+          ...msg,
+          contactName: contact.name,
+          contactId: contact.id||contact.uid,
+          uid:contact.uid
+        }))
+      );
+    }
+  });
+  allMessages.sort((a, b) => {
+    if (a.createdAt && b.createdAt) {
+      return b.createdAt - a.createdAt;
+    }
+    return 0;
+  });
+  touchpointData = allMessages.slice(0, 5).map((msg, idx) => ({
+    id: msg.id || idx,
+    title: msg.title || msg.subject || 'No Title',
+    subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
+    status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
+    statusColor: 'grey',
+    statusBackground: 'yellow',
+    icon: Mail,
+    iconColor: '#1976d2',
+    uid:msg.uid
+  }));
+}
+
+let recentContacts = [];
+if (allContacts.length > 0) {
+  recentContacts = [...allContacts]
+    .sort((a, b) => {
+      if (a.createdAt && b.createdAt) {
+        return b.createdAt - a.createdAt;
+      }
+      return 0;
+    })
+    .slice(0, 5);
+}
+
+
+
   const statsData = [
     {
       id: 1,
       icon: GroupsIcon,
-      count: 3,
+      count: allContacts?allContacts.length:0,
       label: 'Total Contacts',
       color: '#03befc',
     },
     {
       id: 2,
       icon: WatchLaterIcon,
-      count: 10,
+      count: touchpointData?touchpointData.length:0,
       label: 'Pending Touchpoints',
       color: '#ca03fc',
     },
@@ -151,18 +217,6 @@ function DashboardApp(props) {
     },
   ];
 
-  const { user } = useSelector((state) => state.login);
-  
-  useEffect(() => {
-    if (user && user.uid) {
-      // Fetch contacts from Firebase for inbox
-      dispatch(fetchAllContactForOneUser(user.uid));
-    }
-  }, [user, dispatch])
-
-
-  const { allContacts = [],filteredContacts } = useSelector((state) => state.user);
-
   const resortFilteredUsersAndPush = (userId)=>{
     
     const replica = [...filteredContacts]
@@ -183,52 +237,6 @@ function DashboardApp(props) {
    
     }
 
-
-let touchpointData = [];
-if (allContacts.length > 0) {
-  let allMessages = [];
-  allContacts.forEach(contact => {
-    if (Array.isArray(contact.messageQueue)) {
-      allMessages = allMessages.concat(
-        contact.messageQueue.map(msg => ({
-          ...msg,
-          contactName: contact.name,
-          contactId: contact.id||contact.uid,
-          uid:contact.uid
-        }))
-      );
-    }
-  });
-  allMessages.sort((a, b) => {
-    if (a.createdAt && b.createdAt) {
-      return b.createdAt - a.createdAt;
-    }
-    return 0;
-  });
-  touchpointData = allMessages.slice(0, 5).map((msg, idx) => ({
-    id: msg.id || idx,
-    title: msg.title || msg.subject || 'No Title',
-    subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
-    status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
-    statusColor: 'grey',
-    statusBackground: 'yellow',
-    icon: Mail,
-    iconColor: '#1976d2',
-    uid:msg.uid
-  }));
-}
-
-let recentContacts = [];
-if (allContacts.length > 0) {
-  recentContacts = [...allContacts]
-    .sort((a, b) => {
-      if (a.createdAt && b.createdAt) {
-        return b.createdAt - a.createdAt;
-      }
-      return 0;
-    })
-    .slice(0, 5);
-}
 
 
 
