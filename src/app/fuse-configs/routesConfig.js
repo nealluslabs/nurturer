@@ -34,8 +34,8 @@ const routes = [
   {
     path: '/',
     exact: true,
-    component: () => <LandingPageConfig />,
-    //component: () => <Redirect to="/candidates" />,
+    //component: () => <LandingPageConfig />,
+    component: () => <Redirect to="/candidates" />,
    //  component: () => <Redirect to="/apps/sessions" />,
   },
   {
