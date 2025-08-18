@@ -5,7 +5,7 @@ function FuseSplashScreen() {
     <div id="fuse-splash-screen">
       <div className="center">
         <div className="logo">
-          <img width="128" src="assets/images/logos/bridgetech_s.png" alt="logo" />
+          <img width="128" src="assets/images/logos/nurturer-logo.png" alt="logo" />
         </div>
         <div className="spinner-wrapper">
           <div className="spinner">

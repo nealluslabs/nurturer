@@ -54,7 +54,7 @@ function ComingSoonPage() {
         <motion.div initial={{ opacity: 0, scale: 0.6 }} animate={{ opacity: 1, scale: 1 }}>
           <Card className="w-full max-w-384">
             <CardContent className="flex flex-col items-center justify-center p-16 sm:p-32 text-center">
-              <img className="w-128 m-32" src="assets/images/logos/bridgetech_s.png" alt="logo" />
+              <img className="w-128 m-32" src="assets/images/logos/nurturer-logo.png" alt="logo" />
 
               <Typography variant="subtitle1" className="mb-16 font-semibold">
                 Hey! Thank you for visiting Bridge Lang.

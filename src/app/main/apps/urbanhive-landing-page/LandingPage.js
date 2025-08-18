@@ -64,7 +64,7 @@ function LandingPage() {
    
 
 
-      <div className="welcomePage baskerville">
+      <div className="welcomePage baskerville" style={{backgroundColor:"white"}}>
      
       {<DummyHeader />}
       <DummyAbout/>
