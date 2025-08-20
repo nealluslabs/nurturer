@@ -122,8 +122,8 @@ isFirstDayOfMonth
   
 useEffect(() => {
   if (filteredContacts && filteredContacts.length > 0) {
-    setOutput(filteredContacts.map(({ uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
-        uid, name, email, isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
+    setOutput(filteredContacts.map(({ uid, name, email,triggers ,isTechnical, skills_needed, lookingFor, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency }) => ({
+        uid, name, email, isTechnical, skills_needed, lookingFor,triggers, intro,industry,state, photoUrl, lastActive, skillset, city,companyName,jobTitle,birthday,workAnniversary,interests,frequency,
         ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       }))
     );

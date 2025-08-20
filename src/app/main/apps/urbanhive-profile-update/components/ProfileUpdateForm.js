@@ -14,7 +14,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createProfile, fetchProfile, uploadImage,updateProfile,updateProfileWithImage } from 'src/redux/actions/profile.action';
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
-import { createNewProfile, uploadNewImage } from 'redux/actions/profile.action';
+import { createNewProfile, uploadNewImage, uploadNewImageforUpdate } from 'redux/actions/profile.action';
 
 
 
@@ -77,12 +77,29 @@ export default function ProfileUpdateForm() {
     const [showError, setshowError] = useState(false);
     const [showError2, setshowError2] = useState(false);
     const [file, setFile] = useState(null);
+    const [triggers, setTriggers] = useState(candidateInFocus.triggers||[]);
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
     const [photoURL, setPhotoURL] = useState(candidateInFocus.photoUrl != '' ? candidateInFocus.photoUrl : candidateInFocus.image);
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
+    const [inputValue, setInputValue] = useState("");
+
+    console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",triggers)
   
 
+    const handleKeyDown = (e) => {
+      if (e.key === "Enter" && inputValue.trim() !== "") {
+        e.preventDefault(); // prevent form submission
+        if (triggers && !triggers.includes(inputValue.trim())) {
+          setTriggers([...triggers, inputValue.trim()]);
+        }
+        setInputValue(""); // clear field
+      }
+    };
+  
+    const handleDelete = (triggerToDelete) => {
+      setTriggers((prev) => prev.filter((t) => t !== triggerToDelete));
+    };
 
     console.log("candidate in focus is--->",candidateInFocus)
     const initialFValues = {
@@ -207,15 +224,15 @@ export default function ProfileUpdateForm() {
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { intro, frequency, city, jobTitle,state, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
+          const profile = { intro, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
-          if(!photoURL.selectedFile){
-          dispatch(updateProfile(profile, user, file, resetForm, photoURL));
-          }else{
-            dispatch(updateProfileWithImage(profile, user, file, resetForm));
-            //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
-          } 
+          if(photoURL == static_img){
+            dispatch(createNewProfile({...profile,triggers}, user, file, resetForm, photoURL));
+            }else{
+              dispatch(uploadNewImageforUpdate({...profile,triggers}, user, file, resetForm));
+              //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
+            } 
         }
     }
 
@@ -352,6 +369,40 @@ export default function ProfileUpdateForm() {
                         error={errors.state}
                     />
                 </Grid>
+
+
+                <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
+                     {/* Text input */}
+                   <TextField
+                     label="Add Trigger"
+                     variant="outlined"
+                    style={{width:"53%"}}
+                     value={inputValue}
+                     onChange={(e) => setInputValue(e.target.value)}
+                     onKeyDown={handleKeyDown}
+                   />
+             
+                   {/* Chips for triggers */}
+                   <Box sx={{ mt: 1, display:triggers &&triggers.length?"flex": "none", gap: 1, flexWrap: "wrap",border:triggers &&!triggers.length?"0px":"0.5px solid gray",width:"55%",height:"max-content" }}>
+                     {triggers && triggers.map((trigger, index) => (
+                      
+                       <Chip
+                         style={{width:"max-content",zIndex:"1000",color:"black"}}
+                         key={index}
+                         label={trigger}
+                         onDelete={() => handleDelete(trigger)}
+                        
+                         variant="outlined"
+                         
+                       />
+                     
+                     ))}
+                   </Box>
+                </Grid>
+
+
+
+
 
 
                 <Grid item xs={12} sm={6}>

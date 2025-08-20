@@ -76,6 +76,46 @@ export const uploadNewImageOld = (profile, user, file, resetForm) => async (disp
 
 
 
+export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async (dispatch) => {
+  const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
+  const uploadToS3 = async (file) => {
+
+    console.log("PABOUT TO SEND TO S3--->",file)
+  
+  
+    const params = {
+      Body: file, // Blob
+      Bucket:process.env.REACT_APP_S3_BUCKET,
+      Key: file.name, // Unique filename
+      ContentType: 'image/png', // Ensure correct MIME type
+    };
+  
+  
+  
+     
+    
+    const data = await s3.upload({
+      Body: file, // Blob
+      Bucket:process.env.REACT_APP_S3_BUCKET,
+      Key: file.name, // Unique filename
+      ContentType: 'image/png', // Ensure correct MIME type
+    }).promise();
+    return data.Location; // S3 file URL 
+  };
+  
+  
+  
+  uploadToS3(file)
+  .then( async(url) => {
+          console.log('Image URL: ', url);
+          dispatch(updateNewProfile(profile, user, file, resetForm, url));
+        });
+    
+ 
+}
+
+
+
 
   export const uploadNewImage = (profile, user, file, resetForm) => async (dispatch) => {
     const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
@@ -297,6 +337,97 @@ async function duplicateCollection(sourceCollection, targetCollection) {
 
 
 duplicateCollection("users","contacts")
+
+}
+
+export const updateNewProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
+  console.log('All data: ',{profile, user, url});
+  dispatch(createProfilePending());
+ 
+  const userRef = db.collection("contacts");
+ 
+   userRef.add({
+   name: profile.name,
+   email: profile.email,
+    intro: profile.intro,
+   companyName: profile.companyName,
+   industry: profile.industry,
+    jobTitle: profile.jobTitle,
+    birthday:profile.birthday,
+    workAnniversary:profile.workAnniversary,
+    city: profile.city,
+    triggers:profile.triggers,
+    state: profile.state,
+    frequency: profile.frequency,
+    interests: profile.interests,
+    password:'12345678',
+    usedConnection:0,
+    lastActive:1663862737170,
+    contacterId:user.uid,
+    message:user.message? user.message:{
+      firstParagraph:"I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.",
+      secondParagrpah:"While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:",
+      thirdParagraph:"We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum.",
+      bulletPoints:[
+        {bulletPointBold:"Deloitte Global's 2025 Airline CEO Survey",
+        bulletPointRest:"Deloitte, May 30, 2025 Deloitte Link",
+        id:"7",
+        link:""
+
+      },
+      {bulletPointBold:"A breath of fresh air for the national aviation industry"
+      ,
+      bulletPointRest: "PwC, June 3, 2025 PwC Link",
+      id:"8",
+      link:""
+
+    },
+    {bulletPointBold:"Navigating Headwinds: KPMG’s 2025 Global Aviation Outlook"
+    ,
+    bulletPointRest:"– KPMG, June 10, 2025",
+    id:"9",
+    link:"https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings"
+
+  },
+      ]
+
+
+    
+    },
+
+  
+    skillset: '',
+   
+    skills_needed: '',
+    isTechnical: 'no',
+    lookingFor:'',
+    githubUrl: '',
+    photoUrl: url,
+  })
+  .then((docRef) => {
+    // Update the newly created document with its own ID
+
+  
+    db.collection("users").doc(user.uid).update({
+      contacts: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+    });
+
+    return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
+  })
+  .then(() => {
+    const msg = 'Profile successfully created!';
+    console.log(msg);
+     dispatch(createProfileSuccessOnly({ msg }));
+     dispatch(fetchAllUsers(user.uid));
+    // dispatch(fetchProfile());
+    // dispatch(fetchUserData(fb.auth().currentUser.uid));
+    // resetForm();
+  })
+  .catch((error) => {
+    var errorMessage = error.message;
+    console.log('Error creating profile', errorMessage);
+    dispatch(createProfileFailed({ errorMessage }));
+  });
 
 }
 
