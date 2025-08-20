@@ -648,7 +648,23 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          <>
          <br/>
          <br/>
-         <b> Happy Birthday 1 </b>
+         {/*<b> Happy Birthday 1 </b>*/}
+
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={birthday1} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
          <br/>
          </>
         }
@@ -658,7 +674,23 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          <>
           <br/>
           <br/>
-         <b> Happy Birthday 2 </b>
+         {/*<b> Happy Birthday 2 </b>*/}
+
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={birthday2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
          
          </>
         }
@@ -685,7 +717,25 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          {holidayMessage1 && 
          <>
          <br/>
-         <b> Happy Holidays 1 </b>
+         {/*<b> Happy Holidays 1 </b>*/}
+
+
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={holiday1} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+
          </>
           }
          </span>
