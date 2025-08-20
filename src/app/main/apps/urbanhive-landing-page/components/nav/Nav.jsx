@@ -27,7 +27,7 @@ const Nav = () => {
      <div className='navContainer' >
       <div style={{ display:"flex",width:"100%",justifyContent:"flex-start",alignItems:"center",paddingRight:"2rem",fontSize:"2rem",color:"white",fontWeight:"900"/*color:"#E88B1E"*/,marginLeft:"0rem"}}>
      
-        <img src={navIcon} style={{width:"160px"}} alt="nurturer  logo"/>
+        <img src={navIcon} style={{width:"80px"}} alt="nurturer  logo"/>
         {/*<div style={{position:"relative",top:"2rem",left:"2rem"}}>
         Nurturer
         </div>*/}

@@ -54,10 +54,10 @@ function UserNavbarHeader(props) {
         <br/><br/>
         <Avatar
           // style={{: '2em'}}
-          style={{ width: '120px', height: '120px', backgroundColor: "#000000"}}
+          style={{ width: '100px', height: '120px', backgroundColor: "#000000"}}
           className={clsx(classes.avatar, 'avatar w-72 h-72 p-8 box-content')}
           alt="user photo"
-          src={'assets/images/logos/bridgetechlogo.png'}
+          src={'assets/images/logos/nurturer-logo.png'}
           // src={
           //   user.data.photoURL && user.data.photoURL !== ''
           //     ? user.data.photoURL
