@@ -53,17 +53,17 @@ const DummyAbout2 = () => {
 </div>*/}  
 
 
-{<div className='about2CTA'>
+   {<div className='about2CTA'>
     
  
     <img  className='CTAboximg2' src={about2graphic} alt="search image"/>
     
        
         
-        </div>}
+  </div>}
       
 
-        <img style={{position:"absolute",bottom:"-3rem",left:"5rem",height:"300px"}}  className='about2__decor'  src={about2decor} />
+        {/*<img style={{position:"absolute",bottom:"-3rem",left:"5rem",height:"300px"}}  className='about2__decor'  src={about2decor} />*/}
    
    
 </div>
