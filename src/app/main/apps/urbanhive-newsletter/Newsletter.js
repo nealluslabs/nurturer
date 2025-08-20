@@ -381,15 +381,15 @@ function Newsletter(props) {
                        style={{display:"flex",gap:"2rem"}}
                        value="newsletter1"
                        
-                       control={<Checkbox checked={newsletter1Active} onClick={() => {setNewsletter1Active(true);setNewsletter2Active(false)}} style={{cursor: 'pointer'}} />}
-                       label={<Typography fontSize="14px" onClick={() => {setNewsletter1Active(true);setNewsletter2Active(false)} } style={{cursor: 'pointer'}}>Newsletter 1 </Typography>}
+                       control={<Checkbox checked={newsletter1Active} onClick={() => {setNewsletter1Active(!newsletter1Active)/*;setNewsletter2Active(false)*/}} style={{cursor: 'pointer'}} />}
+                       label={<Typography fontSize="14px" onClick={() => {setNewsletter1Active(!newsletter1Active)/*;setNewsletter2Active(false)*/} } style={{cursor: 'pointer'}}>Newsletter 1 </Typography>}
                      />
                      
                      <FormControlLabel
                        style={{display:"flex",gap:"2rem"}}
                        value="newsletter2"
-                       control={<Checkbox checked={newsletter2Active} onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)}} style={{cursor: 'pointer'}} />}
-                       label={<Typography fontSize="14px" onClick={() => {setNewsletter2Active(true);setNewsletter1Active(false)} } style={{cursor: 'pointer'}}>Newsletter 2</Typography>}
+                       control={<Checkbox checked={newsletter2Active} onClick={() => {setNewsletter2Active(!newsletter2Active)/*;setNewsletter1Active(false)*/ }} style={{cursor: 'pointer'}} />}
+                       label={<Typography fontSize="14px" onClick={() => {setNewsletter2Active(!newsletter2Active)/*;setNewsletter1Active(false)*/  } } style={{cursor: 'pointer'}}>Newsletter 2</Typography>}
                      />
                    </Stack>
           
