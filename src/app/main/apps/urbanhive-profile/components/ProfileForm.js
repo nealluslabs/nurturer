@@ -255,7 +255,7 @@ export default function ProfileForm() {
       >
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
       </Alert><br/></div>}
-            <p>Fill out profile details.</p><br/>
+            <p>Fill out contact details.</p><br/>
 
            
 
