@@ -4,12 +4,21 @@ import { Button as MuiButton, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     root: {
-        margin: theme.spacing(0.5)
+            margin: theme.spacing(0.5),
+            marginTop:"1rem",
+            background: 'black',
+            color: 'white',
+            padding: '10px 20px',
+            borderRadius: '8px',
+      
     },
     label: {
         textTransform: 'none'
     }
 }))
+
+
+
 
 export default function Button(props) {
 

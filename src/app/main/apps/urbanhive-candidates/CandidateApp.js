@@ -17,7 +17,7 @@ import { Button, Grid, InputAdornment, TextField } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts } from 'redux/reducers/user.slice';
 import { fetchAllContactForOneUser } from 'src/redux/actions/user.action';
-
+import AddIcon from '@mui/icons-material/Add';
 
 
 
@@ -93,60 +93,72 @@ function CandidateApp(props) {
 
 
 
-<Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"relative",/*left:"calc(64vw - 44%)"*/left:"43.5rem"/*,transform: "translateX(-55%)"*/,top:"3rem",width:"40rem",flexDirection:"row",marginBottom:"1.5rem",zIndex:"1000"}}>
-              
-              {/*1*/}
-               <Grid item>
-               <TextField
-             placeholder="Search..."
-             onChange={(e)=>{handleSearchResults(e.target.value)}}
-             sx={{ width: "28rem"}}
-             InputProps={{
-             
-             endAdornment: (
-             <InputAdornment position="end">
-             <SearchIcon  style={{cursor:"pointer"}} onClick={(e)=>{handleSearchResults(e.target.value)}} />
-             </InputAdornment>
-             ),
-             sx: {
-              height: "3rem", 
-              paddingLeft:"10px",             // sets the height of the root input wrapper
-              "& input": {
-                height: "3rem", 
-                paddingLeft:"10px",           // sets the height of the input field itself
-                padding: 0,                // remove default padding
-                fontSize: "1rem",       // optional: shrink font to fit small height
-              },
-            },
-             }}
+            <Grid 
+  container 
+  spacing={0}
+  sx={{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative",
+    top: "3rem",
+    left: "2.5rem",
+    width: "80%",
+    maxWidth:"80%",
+    marginBottom: "1.5rem",
+    zIndex: 1000,
+    flexWrap: "nowrap",   // 🚀 ensures both items stay on same line
+    columnGap: "1rem"     // 🚀 sets fixed 1rem gap between items
+  }}
+>
+  {/* 1 */}
+  <Grid item sx={{ flex: "0 0 85%" }}>
+    <TextField
+      placeholder="Search..."
+      onChange={(e) => { handleSearchResults(e.target.value) }}
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <SearchIcon 
+              style={{ cursor:"pointer" }} 
+              onClick={(e)=>{handleSearchResults(e.target.value)}} 
             />
-              
-               </Grid>
+          </InputAdornment>
+        ),
+        sx: {
+          height: "3.8rem",
+          paddingLeft:"10px",
+          "& input": {
+            height: "3rem",
+            paddingLeft:"10px",
+            padding: 0,
+            fontSize: "1rem",
+          },
+        },
+      }}
+    />
+  </Grid>
 
-               {/*2 */}
-               <Grid item>
+  {/* 2 */}
+  <Grid item sx={{ flex: "0 0 20%" }}>
+    <button 
+      onClick={() => { history.push('/apps/profile') }}
+      style={{ 
+        backgroundColor: "black",
+        color: 'white',
+        padding: '10px 20px',
+        borderRadius: '8px',
+        textTransform: 'none',
+        
+      }}
+    >
+      <AddIcon sx={{ marginRight: '4px' }} />
+      Add Contact
+    </button>
+  </Grid>
+</Grid>
 
-                 <Button
-                 onClick={()=>{history.push('/apps/profile')}}
-                   sx={{
-                     backgroundColor: "black",
-                     color: "white",
-                      height:"3rem",
-                     width:"11rem",
-                     fontSize:"1.45rem",
-                     fontWeight:"500",
-                     padding: "0.5rem 0.8rem",
-                     borderRadius: "0.3rem",
-                     textTransform: "none",
-                     "&:hover": {
-                       backgroundColor: "#333"
-                     }
-                   }}
-                 >
-                   Add Contact
-                 </Button>
-               </Grid>
-             </Grid>
 
             <div style={{marginTop:"2rem",width:"150%"}}>
             <CandidateCard /> 

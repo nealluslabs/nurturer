@@ -385,7 +385,25 @@ function NewsletterSidebar(props) {
           
          </List>
 
-         <div style={{backgroundColor:"#FAF9F6",width:"100%",height:"3rem"}}>
+
+         <button 
+          style={{ 
+            //background: 'linear-gradient(to right, #6a11cb, #b13cff)',
+            backgroundColor:"black",
+            color: 'white',
+            padding: '10px 60px',
+            borderRadius: '8px',
+             
+            textAlign:"center",
+             width:"max-content",
+             margin:"0 auto"
+          }}
+        >
+           
+            Submit
+        </button>
+
+         <div style={{backgroundColor:"#FAF9F6",width:"100%",height:"3rem",marginTop:"1rem"}}>
           {/**THIS DIV IS FOR BACKGROUND COLOR, OF OFF WHITE DONT UNCOMMENT IT OUT */}
          </div>
 
