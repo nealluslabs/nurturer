@@ -3,6 +3,11 @@ import {createProfilePending, createProfileSuccess,createProfileSuccessOnly, cre
 import { v4 as uuidv4 } from 'uuid';
 import { db, fb, auth, storage } from '../../config/firebase';
 import firebase from 'firebase/app';
+import "firebase/auth";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
 import { fetchAllUsers } from './user.action';
@@ -316,6 +321,71 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     console.log('Error creating profile', errorMessage);
     dispatch(createProfileFailed({ errorMessage }));
   });
+
+}
+
+
+export const updateUserPassword = (profileData,userID) => async (dispatch) => {
+  console.log("UPDATE USER PASSWORD HAS STARTED--->",profileData)
+
+  const notifySuccessFxn = (successMessage) => toast.success(successMessage, {
+position: "bottom-right",
+autoClose: 1000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+
+const notifyErrorFxn = (errorMessage) => toast.error(errorMessage, {
+position: "bottom-right",
+autoClose: 1000,
+hideProgressBar: false,
+closeOnClick: true,
+pauseOnHover: true,
+draggable: true,
+progress: undefined,
+});
+ 
+      //update password start
+      const user = fb.auth().currentUser;
+      console.log('FB CURRENT USER IS --->',user)
+      user.updatePassword(profileData.password && profileData.password)
+        .then(() => {
+         
+         console.log('USER PASSWORD HAS BEEN UPDATED I THINK!')
+         dispatch(fetchProfile())
+        }).then(()=>{
+
+          var user = db.collection("users").doc(userID);
+          user.get(
+            
+          ).then((doc) => {
+          if (doc.exists) {
+           
+            //dispatch(storeUserData(doc.data() ));
+            user.update({
+              password:profileData.password
+            })
+           
+            notifySuccessFxn("Password updated successfully!");
+            
+          } else {
+             
+              notifyErrorFxn("Error updating password, please try again!")
+              //console.log("No such document!");
+          }
+        })
+
+        })
+        .catch((error) => {
+          
+          console.error("Error updating password: ", error);
+          notifyErrorFxn(error.message);
+        });
+     //update password end
+     
 
 }
 

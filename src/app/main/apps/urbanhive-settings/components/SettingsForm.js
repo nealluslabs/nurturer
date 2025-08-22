@@ -14,7 +14,8 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/profile.action';
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
-import { createNewProfile, duplicateToContacts, uploadNewImage } from 'redux/actions/profile.action';
+import { createNewProfile, duplicateToContacts, uploadNewImage,updateUserPassword } from 'redux/actions/profile.action';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -74,6 +75,11 @@ export default function SettingsForm() {
     const { user } = useSelector((state) => state.login);
     const { profileData, isLoading, error, message } = useSelector((state) => state.profile);
     const [showError, setshowError] = useState(false);
+
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+
+
     const [showError2, setshowError2] = useState(false);
     const [file, setFile] = useState(null);
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
@@ -97,7 +103,7 @@ export default function SettingsForm() {
       email: profileData.email == '' ? '' : profileData.email,
       birthday: profileData.birthday == '' ? '' : profileData.birthday,
       workAnniversary: profileData.workAnniversary == '' ? '' : profileData.workAnniversary,
-      password: profileData.password == '' ? '' : profileData.name,
+      password: profileData.password == '' ? '' : profileData.password,
 
 
       
@@ -168,6 +174,7 @@ export default function SettingsForm() {
     const handleSubmit = e => {
         e.preventDefault();
         console.log("UPDATE SETINGS HAS BEEN TRIGGERED BUT NOTHING IS HAPPENING JUST YET")
+        dispatch(updateUserPassword({password,confirmPassword},user.uid))
        //console.log('Photo URL: ', photoURL);
        //console.log('File URL: ', file);
        // e.preventDefault()
@@ -210,6 +217,18 @@ export default function SettingsForm() {
     }
 
     return !openCrop ? (
+      <>
+      <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
         <Form onSubmit={handleSubmit}>
       {error && <div><Alert
         severity="error" color="error"
@@ -255,9 +274,9 @@ export default function SettingsForm() {
                 <Controls.Input
                         label="Password"
                         name="password"
-                        value={values.password}
-                        onChange={handleInputChange}
-                        error={errors.email}
+                        value={password}
+                        onChange={(e)=>{setPassword(e.target.value)}}
+                        //error={errors.email}
                     />
                 </Grid>
 
@@ -265,11 +284,11 @@ export default function SettingsForm() {
                 <Controls.Input
                         name="resetPassword"
                         label="Reset Password"
-                        value={values.resetPassword}
-                        onChange={handleInputChange}
-                        error={errors.intro}
-                        rows={2}
-                        maxRows={4}
+                        value={confirmPassword}
+                        onChange={(e)=>{setConfirmPassword(e.target.value)}}
+                        //error={errors.intro}
+                        rows={1}
+                        //maxRows={4}
                     />
                 </Grid>
                {/* <Grid item xs={12} sm={6}>
@@ -446,6 +465,7 @@ export default function SettingsForm() {
                 </div>
                 </Box>
         </Form>
+        </>
      ) : (
         <CropEasy {...{ photoURL, setOpenCrop, setPhotoURL, setFile }} />
       );
