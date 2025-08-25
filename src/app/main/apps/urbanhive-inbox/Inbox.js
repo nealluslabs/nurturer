@@ -1481,7 +1481,7 @@ label={<Typography fontSize="14px">
                   root: 'flex flex-grow flex-shrink-0 mx-16 ltr:mr-48 rtl:ml-48 my-8',
                   input: '',
                 },
-                placeholder: 'Type your messages',
+                placeholder: '',
               }}
               InputLabelProps={{
                 shrink: false,

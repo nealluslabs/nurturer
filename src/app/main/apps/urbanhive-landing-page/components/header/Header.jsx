@@ -47,25 +47,42 @@ const DummyHeader = () => {
            
            
    
-              <button className="welcome-btn"
+             {/* <button className="welcome-btn"
               
               style={{width:"180px",
               height:"50px",
               display:"inline-block",
-              //backgroundColor: "#000000",
+             
               backgroundColor: "#FCB004",
               color:"white",
               padding:"0.75rem 1.2rem", 
               cursor:"pointer",
               borderRadius: "5px",
-              // border:"1px solid #7152CA",
+             
               textAlign: "center",
               marginTop: "3rem",
               fontSize: "1.4rem"}}
               
-              onClick ={()=>{/*dispatch(setRecruiter(false));dispatch(setDemo(true));*/history.push('/login')}} >
+              onClick ={()=>{history.push('/login')}} >
                 Login
-              </button>
+              </button>*/}
+
+              <button 
+              onClick ={()=>{/*dispatch(setRecruiter(false));dispatch(setDemo(true));*/history.push('/login')}}
+          style={{ 
+            backgroundColor: "#FCB004",
+            color: 'white',
+            padding: '10px 20px',
+            borderRadius: '8px',
+            textTransform: 'none', 
+            '&:hover': {
+              background: 'linear-gradient(to right, #5c0fb8, #a734ff)',
+            },
+          }}
+        >
+            
+            Login
+           </button>
      
               {/*<a href={'https://onerecruiter-recruiter.netlify.app/login'}>
               <button onClick ={()=>{/navigate('/login')}} className="btn">

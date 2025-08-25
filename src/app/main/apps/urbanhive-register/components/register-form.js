@@ -7,7 +7,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory,useParams,useLocation } from 'react-router-dom';
 import { submitRegister } from 'app/auth/store/registerSlice';
 import * as yup from 'yup';
 import _ from '@lodash';
@@ -29,6 +29,16 @@ const schema = yup.object().shape({
   passwordConfirm: yup.string().oneOf([yup.ref('password'), null], 'Passwords must match'),
 });
 
+//THIS WILL BE THE COMPANY'S ID FROM THEIR UNIQUE LINK I.E https://nurturer.vercel.app/register/100001
+//
+//const routeParams = useParams();
+
+//console.log("ROUTE PARAMS--->",routeParams)
+const id = /*routeParams && routeParams.id?routeParams.id:*/"100001"
+
+
+
+
 const defaultValues = {
   // displayName: '',
   fName: '',
@@ -36,12 +46,14 @@ const defaultValues = {
   phone: '',
   email: '',
   password: '',
+  companyID:'',
   passwordConfirm: '',
 };
 
 function RegisterForm(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [companyID, setCompanyID] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
   const dispatch = useDispatch();
@@ -216,6 +228,36 @@ function RegisterForm(props) {
                   <InputAdornment position="end">
                     <Icon className="text-20" color="action">
                       email
+                    </Icon>
+                  </InputAdornment>
+                ),
+              }}
+              variant="outlined"
+              required
+            />
+          )}
+        />
+
+
+        <Controller
+          name="companyID"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              value={id?id:'100001'}
+              // onChange={(e) => setEmail(e.target.value)}
+              className="mb-16"
+              type="text"
+              disabled={true}
+              error={!!errors.companyID}
+              helperText={errors?.companyID?.message}
+              label="Company ID"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">
+                    <Icon className="text-20" color="action">
+                      home
                     </Icon>
                   </InputAdornment>
                 ),

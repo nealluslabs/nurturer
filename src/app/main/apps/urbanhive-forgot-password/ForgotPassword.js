@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import LoginForm from './components/login-form';
+import ForgotPasswordForm from './components/forgot-password-form';
 import Auth0LoginTab from './tabs/Auth0LoginTab';
 import FirebaseLoginTab from './tabs/FirebaseLoginTab';
 import JWTLoginTab from './tabs/JWTLoginTab';
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Login() {
+function ForgotPassword() {
   const classes = useStyles();
   const [selectedTab, setSelectedTab] = useState(0);
   const { isAuth } = useSelector((state) => state.login);
@@ -123,7 +123,7 @@ function Login() {
             {selectedTab === 1 && <FirebaseLoginTab />}
             {selectedTab === 2 && <Auth0LoginTab />} */}
 
-            <LoginForm />
+            <ForgotPasswordForm />
           </CardContent>
 
           <div className="flex flex-row space-between items-center justify-around pb-32" style={{width:"90%"}}>
@@ -133,8 +133,8 @@ function Login() {
                 Register
               </Link>
             </div>
-            { <Link className="font-normal mt-8" to="/forgot-password" style={{position:"relative",top:"-0.5rem"}}>
-              Forgot Password?
+            { <Link className="font-normal mt-8" to="/login" style={{position:"relative",top:"-0.5rem"}}>
+              Login
             </Link> }
           </div>
         </Card>
@@ -160,15 +160,19 @@ function Login() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1, transition: { delay: 0.3 } }}
             >
+              
               <Typography variant="subtitle1" color="inherit" className="mt-32">
-              The AI powered assistant that keeps you in the conversation.
+              Reset Your Password Here.
                
-                <ul style={{listStyle: "square", color:"#FFFFF", marginLeft:"40px"}}>
-                <li style={{marginTop:"5px"}}>Stay Top-Of-Mind</li>
-                <li style={{marginTop:"5px"}}>Save Time, Close More</li>
-                <li style={{marginTop:"5px"}}>Never Miss a Lead</li>
+                
+                  <ul style={{listStyle: "square", color:"#FFFFF", marginLeft:"40px"}}>
+                <li style={{marginTop:"5px"}}>Click "Send Reset Email" to get a password Reset Email</li>
+                {/*<li style={{marginTop:"5px"}}>Save Time, Close More</li>
+                <li style={{marginTop:"5px"}}>Never Miss a Lead</li>*/}
                </ul>
+             
               </Typography>
+        
             </motion.div>
           </div> 
         </div>
@@ -177,4 +181,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default ForgotPassword;

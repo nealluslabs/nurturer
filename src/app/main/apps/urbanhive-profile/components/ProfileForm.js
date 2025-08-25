@@ -272,6 +272,12 @@ export default function ProfileForm() {
                      fontSize:"1.6rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
+
+                     
+                     padding: '10px 20px',
+                     borderRadius: '8px',
+      
+                     
                      textTransform: "none", // Optional: keeps text as "CSV" without uppercase
                      "&:hover": {
                        backgroundColor: "#333"
@@ -291,6 +297,10 @@ export default function ProfileForm() {
                      fontSize:"1.8rem",
                      padding: "0.5rem 0.8rem",
                      borderRadius: "0.3rem",
+
+                     padding: '10px 20px',
+                     borderRadius: '8px',
+                     
                      textTransform: "none",
                      "&:hover": {
                        backgroundColor: "#333"
