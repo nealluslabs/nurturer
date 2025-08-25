@@ -707,6 +707,7 @@ function Newsletter(props) {
                                         fontSize: "1.25rem",
                                         textAlign: "center",
                                         marginBottom: "1rem",
+                                        marginLeft: "1rem",
                                         fontFamily: selectedFont || "Poppins",
                                       }}
                                     >
