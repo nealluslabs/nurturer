@@ -16,6 +16,8 @@ import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
 import { createNewProfile, uploadNewImage, uploadNewImageforUpdate } from 'redux/actions/profile.action';
 
+import Papa from "papaparse";
+
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -85,6 +87,67 @@ export default function ProfileUpdateForm() {
     const [inputValue, setInputValue] = useState("");
 
     console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",triggers)
+
+    /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
+
+ 
+
+    const isValidOption = (options, value) =>
+      options.some((opt) => opt.title.toLowerCase() === value.toLowerCase());
+
+
+    const handleCSVUpload = (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+    
+      Papa.parse(file, {
+        header: true, // assumes first row is header (name,email,etc)
+        skipEmptyLines: true,
+        complete: (results) => {
+          const row = results.data[0]; // take first row for simplicity, or loop over multiple
+    
+          // list of simple text fields
+          const textFields = [
+            "name",
+            "email",
+            "notes",
+            "jobTitle",
+            "industry",
+            "companyName",
+            "workAnniversary",
+            "birthday",
+          ];
+    
+          // update simple text fields
+          textFields.forEach((field) => {
+            if (row[field]) {
+              handleInputChange({
+                target: { name: field, value: row[field] },
+              });
+            }
+          });
+    
+          // check select fields (frequency, city, state)
+          const selectMappings = {
+            frequency:skillSetService.getCities ? skillSetService.getCities() : [],
+            city: skillSetService.getCities ? skillSetService.getCities() : [],
+            state: skillSetService.getStates ? skillSetService.getStates() : [],
+          };
+    
+          Object.keys(selectMappings).forEach((field) => {
+            if (row[field] && isValidOption(selectMappings[field], row[field])) {
+              handleInputChange({
+                target: { name: field, value: row[field] },
+              });
+            }
+          });
+        },
+      });
+    };
+    
+
+
+    /**CSV FUNCTIONALITY END AND ITS HELPERS END */
   
 
     const handleKeyDown = (e) => {
@@ -104,7 +167,7 @@ export default function ProfileUpdateForm() {
     console.log("candidate in focus is--->",candidateInFocus)
     const initialFValues = {
       //id: user.uid,
-      intro: candidateInFocus.intro == '' ? '' : candidateInFocus.intro,
+      notes: candidateInFocus.notes == '' ? '' : candidateInFocus.notes,
      // skills_needed: candidateInFocus.skills_needed == '' ? '' : candidateInFocus.skills_needed,
      // isTechnical: candidateInFocus.isTechnical == '' ? 'nil' : candidateInFocus.isTechnical,
      // lookingFor: candidateInFocus.lookingFor == '' ? 'nil' : candidateInFocus.lookingFor,
@@ -150,8 +213,8 @@ export default function ProfileUpdateForm() {
         if ('companyName' in fieldValues)
           temp.companyName = fieldValues.companyName ? "" : "This field is required."
       
-        if ('intro' in fieldValues)
-            temp.intro = fieldValues.intro ? "" : "This field is required."
+        if ('notes' in fieldValues)
+            temp.notes = fieldValues.notes ? "" : "This field is required."
       // if ('skillset' in fieldValues)
       //      temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
        if ('city' in fieldValues)
@@ -213,7 +276,7 @@ export default function ProfileUpdateForm() {
         if (validate()){
           const name = values.name;
           const email = values.email;
-           const intro = values.intro;
+           const notes = values.notes;
            const city = values.city;
            const companyName = values.companyName;
            const jobTitle = values.jobTitle;
@@ -224,7 +287,7 @@ export default function ProfileUpdateForm() {
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { intro, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
+          const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
@@ -268,6 +331,7 @@ export default function ProfileUpdateForm() {
             <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-8rem",right:"0.5rem",width:"23rem",flexDirection:"row",marginBottom:"1.5rem"}}>
                <Grid item>
                  <Button
+                  onClick={() => document.getElementById("csvInput").click()}
                    sx={{
                      backgroundColor: "black",
                      color: "white",
@@ -279,7 +343,7 @@ export default function ProfileUpdateForm() {
 
                      padding: '10px 20px',
                      borderRadius: '8px',
-
+                    
                      textTransform: "none", // Optional: keeps text as "CSV" without uppercase
                      "&:hover": {
                        backgroundColor: "#333"
@@ -288,6 +352,17 @@ export default function ProfileUpdateForm() {
                  >
                    CSV
                  </Button>
+
+                      <input
+                     type="file"
+                     id="csvInput"
+                     accept=".csv"
+                     
+                     style={{ opacity:"0",position:"absolute",height:"4.6rem",width:"11rem",backgroundColor:"pink" }}
+                     onChange={handleCSVUpload}
+                      />
+
+
                </Grid>
                <Grid item>
                  <Button
@@ -340,11 +415,11 @@ export default function ProfileUpdateForm() {
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
-                        name="intro"
+                        name="notes"
                         label="Notes"
-                        value={values.intro/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
+                        value={values.notes/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
                         onChange={handleInputChange}
-                        error={errors.intro}
+                        error={errors.notes}
                         rows={2}
                         maxRows={4}
                     />

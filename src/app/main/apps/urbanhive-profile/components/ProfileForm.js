@@ -15,7 +15,7 @@ import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/prof
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
 import { createNewProfile, duplicateToContacts, uploadNewImage } from 'redux/actions/profile.action';
-
+import Papa from "papaparse";
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -84,6 +84,83 @@ export default function ProfileForm() {
 
     const [inputValue, setInputValue] = useState("");
 
+
+      /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
+
+      const isValidOption = (options, value) =>{
+        console.log("INSIDE VALID OPTIONS NOW, WHAT IS THE CSV FILE SAYING?-->",value)
+        options.some((opt) => opt.title.toLowerCase() === value.toLowerCase());
+      }
+  
+      const handleCSVUpload = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+      
+        Papa.parse(file, {
+          header: true, // assumes first row is header (name,email,etc)
+          skipEmptyLines: true,
+          complete: (results) => {
+            const row = results.data[0]; // take first row for simplicity, or loop over multiple
+      
+            // list of simple text fields
+            const textFields = [
+              "name",
+              "email",
+              "notes",
+              "jobTitle",
+              "industry",
+              "interests",
+               "triggers",
+              "companyName",
+              "workAnniversary",
+              "birthday",
+            ];
+      
+            // update simple text fields
+            textFields.forEach((field) => {
+              if (row[field]) {
+                if (field === "triggers") {
+                  // split by commas, trim each trigger
+                  const triggerArray = row[field]
+                    .split(",")
+                    .map((t) => t.trim())
+                    .filter((t) => t.length > 0);
+      
+                  setTriggers(triggerArray);
+                } else {
+                handleInputChange({
+                  target: { name: field, value: row[field] },
+                });
+              }
+               }
+            });
+      
+            // check select fields (frequency, city, state)
+            const selectMappings = {
+              frequency:skillSetService.getCities ? skillSetService.getFrequency() : [],
+              city: skillSetService.getCities ? skillSetService.getCities() : [],
+              state: skillSetService.getStates ? skillSetService.getStates() : [],
+            };
+
+            console.log('WHAT IS OBJECT FIELDS SELECT MAPPINGS SEF--->',Object.keys(selectMappings))
+      
+            Object.keys(selectMappings).forEach((field) => {
+              
+              if (row[field] && isValidOption(selectMappings[field], row[field])) {
+                
+                handleInputChange({
+                  target: { name: field, value:row[field] },
+                });
+              }
+            });
+          },
+        });
+      };
+      
+  
+  
+      /**CSV FUNCTIONALITY END AND ITS HELPERS END */
+
     const handleKeyDown = (e) => {
       if (e.key === "Enter" && inputValue.trim() !== "") {
         e.preventDefault(); // prevent form submission
@@ -101,7 +178,7 @@ export default function ProfileForm() {
 
     const initialFValues = {
       //id: user.uid,
-      intro: profileData.intro == '' ? '' : profileData.intro,
+      notes: profileData.notes == '' ? '' : profileData.notes,
      // skills_needed: profileData.skills_needed == '' ? '' : profileData.skills_needed,
      // isTechnical: profileData.isTechnical == '' ? 'nil' : profileData.isTechnical,
      // lookingFor: profileData.lookingFor == '' ? 'nil' : profileData.lookingFor,
@@ -146,8 +223,8 @@ export default function ProfileForm() {
         if ('companyName' in fieldValues)
           temp.companyName = fieldValues.companyName ? "" : "This field is required."
       
-        if ('intro' in fieldValues)
-            temp.intro = fieldValues.intro ? "" : "This field is required."
+        if ('notes' in fieldValues)
+            temp.notes = fieldValues.notes ? "" : "This field is required."
       // if ('skillset' in fieldValues)
       //      temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
        if ('city' in fieldValues)
@@ -208,7 +285,7 @@ export default function ProfileForm() {
         if (validate()){
           const name = values.name;
           const email = values.email;
-           const intro = values.intro;
+           const notes = values.notes;
            const city = values.city;
            const companyName = values.companyName;
            const jobTitle = values.jobTitle;
@@ -220,7 +297,7 @@ export default function ProfileForm() {
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { intro, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary};
+          const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
@@ -263,7 +340,7 @@ export default function ProfileForm() {
 
             <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-8rem",right:"0.5rem",width:"23rem",flexDirection:"row",marginBottom:"1.5rem"}}>
                <Grid item>
-                 <Button /*onClick={()=>{dispatch(duplicateToContacts())} }*/
+                 <Button  onClick={() => document.getElementById("csvInput").click()}
                    sx={{
                      backgroundColor: "black",
                      color: "white",
@@ -287,6 +364,20 @@ export default function ProfileForm() {
                    CSV
                  </Button>
                </Grid>
+
+
+                      <input
+                     type="file"
+                     id="csvInput"
+                     accept=".csv"
+                     style={{ opacity:"0",position:"absolute",height:"4.6rem",width:"11rem",backgroundColor:"pink" }}
+                     onChange={handleCSVUpload}
+                      />
+
+
+
+
+
                <Grid item>
                  <Button
                    sx={{
@@ -337,11 +428,11 @@ export default function ProfileForm() {
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
                 sx={{width:"53%"}}
-                        name="intro"
+                        name="notes"
                         label="Notes"
-                        value={values.intro/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
+                        value={values.notes/*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/}
                         onChange={handleInputChange}
-                        error={errors.intro}
+                        error={errors.notes}
                         rows={2}
                         maxRows={4}
                     />

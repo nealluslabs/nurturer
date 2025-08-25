@@ -61,6 +61,7 @@
         "moment": "2.30.1",
         "notistack": "3.0.2",
         "os-browserify": "^0.3.0",
+        "papaparse": "^5.5.3",
         "path-browserify": "^1.0.1",
         "path-to-regexp": "8.2.0",
         "perfect-scrollbar": "1.5.6",

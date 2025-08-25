@@ -207,7 +207,7 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
   var userRef = db.collection("users").doc(fb.auth().currentUser.uid);
   const profileData = userRef.update({
       uid: fb.auth().currentUser.uid,
-      intro: profile.intro,
+      notes: profile.notes,
       skillset: profile.skillset,
       city: profile.city,
       skills_needed: profile.skills_needed,
@@ -242,7 +242,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
    userRef.add({
    name: profile.name,
    email: profile.email,
-    intro: profile.intro,
+    notes: profile.notes,
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,
