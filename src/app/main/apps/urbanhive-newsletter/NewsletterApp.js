@@ -197,7 +197,7 @@ function NewsletterApp(props) {
                 },
               }}
             >
-              <ChatsSidebar />
+              {/* <ChatsSidebar /> */}
             </SwipeableDrawer>
           </Hidden>
           <Hidden smDown>

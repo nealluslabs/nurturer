@@ -8,6 +8,7 @@ import developerReducer from 'src/redux/reducers/developer.slice';
 import appointmentsReducer from 'src/redux/reducers/appointments.slice';
 import bootcampReducer from 'src/redux/reducers/bootcamp.slice';
 import chatReducer from 'src/redux/reducers/chat.slice';
+import newsletterReducer from 'src/redux/reducers/newsLetter.slice';
 import fuse from '../app/store/fuse';
 import i18n from '../app/store/i18nSlice';
 import chatApp from 'app/main/apps/urbanhive-inbox/store';
@@ -23,8 +24,9 @@ const reducers = combineReducers({
   adminUser: adminUserReducer,
   developer:developerReducer,
   appointments:appointmentsReducer,
-  bootcamp: bootcampReducer,
+  bootcamp: bootcampReducer, 
   chat: chatReducer,
+  newsletter: newsletterReducer,
   fuse,
   i18n,
   chatApp,
