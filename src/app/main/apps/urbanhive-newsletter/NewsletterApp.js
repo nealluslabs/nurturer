@@ -238,7 +238,7 @@ function NewsletterApp(props) {
           </SwipeableDrawer>
 
           <main className={clsx(classes.contentWrapper, 'z-10')}>
-            {!selectedChatUser ? (
+            {true == false ? ( //CONSIDER USING A LESS TEMPORARY CONDITION - daGOGO - AUG -26 2025
               <div className="flex flex-col flex-1 items-center justify-center p-24">
                 <Paper className="rounded-full p-48 md:p-64 shadow-xl">
                   <Icon className="block text-48 md:text-64" color="secondary">
@@ -246,7 +246,7 @@ function NewsletterApp(props) {
                   </Icon>
                 </Paper>
                 <Typography variant="h6" className="mt-24 mb-12 text-32 font-700">
-                  Send Newsletter To Contacts
+                  Send Newsletter To Contacts 
                 </Typography>
                 <Typography
                   className="hidden md:flex px-16 pb-24 text-16 text-center"

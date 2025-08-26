@@ -281,7 +281,7 @@ function NewsletterSidebar(props) {
       {/* Chats List */}
       {/*<FuseScrollbars className="overflow-y-auto flex-1">*/}
 
-      <List className="w-[100%] mx-auto">
+      <List className="w-[100%]  overflow-y-auto mx-auto" style={{height:"50%"}}>
         <motion.div
           style={{
             paddingTop: "1rem",
@@ -599,7 +599,7 @@ function NewsletterSidebar(props) {
         {/**THIS DIV IS FOR BACKGROUND COLOR, OF OFF WHITE DONT UNCOMMENT IT OUT */}
       </div>
 
-      <List className="w-full overflow-y-auto">
+      <List className="w-full overflow-y-auto" style={{height:"50%"}}>
         <motion.div
           className="flex flex-col flex-shrink-0"
           variants={container}
