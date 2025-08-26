@@ -156,15 +156,15 @@ function Newsletter(props) {
   }
 
   function shouldShowContactAvatar(item, i) {
-    return (
-      item.user1 === selectedChatUser.uid &&
+   if(selectedChatUser){ return (
+      item.user1 ===(selectedChatUser && selectedChatUser.uid) &&
       ((chatMessages[i + 1] &&
-        chatMessages[i + 1].user1 !== selectedChatUser.uid) ||
+        chatMessages[i + 1].user1 !== (selectedChatUser && selectedChatUser.uid)) ||
         !chatMessages[i + 1])
 
       // item.who === selectedContactId &&
       // ((chat.dialog[i + 1] && chat.dialog[i + 1].who !== selectedContactId) || !chat.dialog[i + 1])
-    );
+    );}
   }
 
   function isFirstMessageOfGroup(item, i) {
@@ -293,11 +293,11 @@ function Newsletter(props) {
                         i + 1 === chatMessages.length && "pb-96"
                       )}
                     >
-                      {shouldShowContactAvatar(item, i) && (
+                      {selectedChatUser && shouldShowContactAvatar(item, i) && (
                         <Avatar
                           className="avatar absolute ltr:left-0 rtl:right-0 m-0 -mx-32"
                           // src={contact.photoUrl}
-                          src={selectedChatUser.photoUrl}
+                          src={selectedChatUser && selectedChatUser.photoUrl}
                         />
                       )}
                       <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">

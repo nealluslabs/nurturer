@@ -28,6 +28,7 @@ import { selectContacts } from './store/contactsSlice';
 import { closeMobileChatsSidebar, openUserSidebar } from './store/sidebarsSlice';
 import { updateUserData } from './store/userSlice';
 import { clearChats } from 'redux/actions/chat.action';
+import { setCurrentChat } from 'redux/reducers/chat.slice';
 
 const statusArr = [
   {
@@ -194,7 +195,11 @@ function NewsletterSidebar(props) {
         daysTo:(3+ 3*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
+    
+    useEffect(()=>{
 
+     dispatch(setCurrentChat(connectedUsers && connectedUsers[0]))
+    },[])
 
   return (
     <div className="flex flex-col flex-auto h-full">
