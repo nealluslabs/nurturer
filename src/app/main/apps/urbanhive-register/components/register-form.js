@@ -31,10 +31,16 @@ const schema = yup.object().shape({
 
 //THIS WILL BE THE COMPANY'S ID FROM THEIR UNIQUE LINK I.E https://nurturer.vercel.app/register/100001
 //
-//const routeParams = useParams();
 
-//console.log("ROUTE PARAMS--->",routeParams)
-const id = /*routeParams && routeParams.id?routeParams.id:*/"100001"
+//const { id } = props.match.params; // <-- get param here
+//
+//useEffect(() => {
+//  if (id) {
+//    console.log("Route param id:", id);
+//    // do something with id...
+//  }
+//}, [id]);
+
 
 
 
@@ -53,7 +59,7 @@ const defaultValues = {
 function RegisterForm(props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [companyID, setCompanyID] = useState('');
+  
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
   const dispatch = useDispatch();
@@ -64,6 +70,23 @@ function RegisterForm(props) {
    // the alert is displayed by default
    const [alert, setAlert] = useState(true);
 
+
+  // fetching id from params -START
+ 
+
+  const {id}= useParams();
+  let companyId =id && id;
+  const [companyID, setCompanyID] = useState(id);
+
+useEffect(()=>{
+  companyId  = id?id:null
+
+  console.log("OUR ROUTE PARAMS ID IS---->",id)
+}
+,[id])
+
+
+// fetching id from params - END
 
   const { control, formState, handleSubmit, reset, setError } = useForm({
     mode: 'onChange',
@@ -245,11 +268,11 @@ function RegisterForm(props) {
           render={({ field }) => (
             <TextField
               {...field}
-              value={id?id:'100001'}
+              value={companyId && companyId}
               // onChange={(e) => setEmail(e.target.value)}
               className="mb-16"
               type="text"
-              disabled={true}
+              disabled={companyId?true:false}
               error={!!errors.companyID}
               helperText={errors?.companyID?.message}
               label="Company ID"

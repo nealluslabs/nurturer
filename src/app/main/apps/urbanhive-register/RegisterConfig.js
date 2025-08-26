@@ -26,6 +26,8 @@ const RegisterConfig = {
   auth: authRoles.onlyGuest,
   routes: [
     {
+     
+      path: '/register/:id',
       path: '/register',
       component: Register,
     },
