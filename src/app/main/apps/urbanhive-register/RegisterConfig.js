@@ -28,7 +28,13 @@ const RegisterConfig = {
     {
      
       path: '/register/:id',
+      exact: true,
+      //path: '/register',
+      component: Register,
+    },
+    {
       path: '/register',
+      exact: true,
       component: Register,
     },
   ],
