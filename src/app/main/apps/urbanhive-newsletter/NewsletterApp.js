@@ -310,7 +310,7 @@ function NewsletterApp(props) {
             className="h-full absolute z-30"
             variant="temporary"
             anchor="right"
-            open={contactSidebarOpen}
+            open={contactSidebarOpen} 
             onOpen={(ev) => {}}
             onClose={() => dispatch(closeContactSidebar())}
             classes={{
