@@ -153,7 +153,7 @@ function Newsletter(props) {
 
   function scrollToBottom() {
     chatRef.current.scrollTop = chatRef.current.scrollHeight;
-  }
+  } 
 
   function shouldShowContactAvatar(item, i) {
    if(selectedChatUser){ return (
