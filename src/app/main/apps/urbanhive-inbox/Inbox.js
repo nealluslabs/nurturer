@@ -279,7 +279,25 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    }
     
    
-  }, [chatGptAnswer,selectedChatUser/*,editedParagraphs*/]);
+  }, [selectedChatUser/*,editedParagraphs*/]);
+
+
+
+
+  useEffect(() => {
+
+   //THIS USE EFFECT IS FOR WHEN CHAT GPT DELIVERS A NEW MESSAGE ONLY
+  
+    if(editedParagraphs && editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
+ 
+     setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
+     setBulletPointChoice(editedParagraphs.bulletPoints)
+    
+    }
+  
+      //THIS USE EFFECT IS FOR WHEN CHAT GPT DELIVERS A NEW MESSAGE ONLY --END
+    
+   }, [chatGptAnswer]);
 
 
   useEffect(() => {
