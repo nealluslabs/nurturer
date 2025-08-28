@@ -67,6 +67,11 @@ function DashboardApp(props) {
 
 
 let touchpointData = [];
+
+let onlyTouchpointMessagesData = [];
+let onlyEventsMessagesData = [];
+
+console.log("WHAT IS ALL CONTACTS DATA,ON DASHBOARD THAT IS-->",allContacts)
 if (allContacts.length > 0) {
   let allMessages = [];
   allContacts.forEach(contact => {
@@ -87,6 +92,40 @@ if (allContacts.length > 0) {
     }
     return 0;
   });
+
+onlyTouchpointMessagesData = allMessages.filter((item)=>(item.messageType === 'Email')).map((msg, idx) => ({
+  id: msg.id || idx,
+  title: msg.title || msg.subject || 'No Title',
+  subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
+  status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
+  messageType:msg.messageType,
+  statusColor: 'grey',
+  statusBackground: 'yellow',
+  icon: Mail,
+  iconColor: '#1976d2',
+  uid:msg.uid
+}));
+
+
+
+
+onlyEventsMessagesData = allMessages.filter((item)=>(item.messageType === 'Event')).map((msg, idx) => ({
+  id: msg.id || idx,
+  title: msg.title || msg.subject || 'No Title',
+  subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
+  status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
+  messageType:msg.messageType,
+  statusColor: 'grey',
+  statusBackground: 'yellow',
+  icon: Mail,
+  iconColor: '#1976d2',
+  uid:msg.uid
+}));
+
+
+
+
+
   touchpointData = allMessages.slice(0, 5).map((msg, idx) => ({
     id: msg.id || idx,
     title: msg.title || msg.subject || 'No Title',
@@ -99,6 +138,8 @@ if (allContacts.length > 0) {
     uid:msg.uid
   }));
 }
+
+
 
 let recentContacts = [];
 if (allContacts.length > 0) {
@@ -125,14 +166,14 @@ if (allContacts.length > 0) {
     {
       id: 2,
       icon: WatchLaterIcon,
-      count: touchpointData?touchpointData.length:0,
+      count: onlyTouchpointMessagesData?onlyTouchpointMessagesData.length:0,
       label: 'Pending Touchpoints',
       color: '#ca03fc',
     },
     {
       id: 3,
       icon: CalendarMonthIcon,
-      count: 5,
+      count: onlyEventsMessagesData?onlyEventsMessagesData.length:0,
       label: 'Upcoming Events',
       color: '#03bafc',
     },

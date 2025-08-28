@@ -82,7 +82,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
   const prompt = ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON).For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
      {"subject":" ",
-     messageType:"Event"
+     messageType:"Email",
      "messageStatus":"Pending"
       "firstParagraph":" ",
       "secondParagraph":" ",
