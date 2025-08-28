@@ -6,7 +6,7 @@ import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from 'src/redux/reducers/chat.slice';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
-import { saveChatGptAnswer, saveEditedParagraphs } from 'redux/reducers/user.slice';
+import { saveChatGptAnswer, saveEditedParagraphs,saveAiTrigger } from 'redux/reducers/user.slice';
 import axios from 'axios';
 
 import firebase from "firebase/app";
@@ -80,7 +80,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
  const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
 
 console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
-  const prompt = ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON):
+  const prompt = ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON).For the id in each object of the bulletPoints array, please generate a unique id.Finally for the subject, make sure to put an emoji at the end of the generated subject:
      {"subject":" ",
      messageType:"Event"
      "messageStatus":"Pending"
@@ -92,27 +92,27 @@ console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
          "bulletPointBold":" ",
          "bulletPointRest":" ",
          "link":" ",
-         "id":1
+         "id":" ",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":2
+          "id":" ",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":3
+          "id":" ",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":4
+          "id":" ",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":5
+          "id":" ",
         },
       ]
      } .The first paragraph should be about how you haven't spoken to ${Name} in ${Frequency} days and how you've been thinking about their role.
@@ -143,6 +143,12 @@ console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
      }
 
      if(setLoading){setLoading(false)}
+
+   //ai trigger is to fetch contacts afresh after ai has generated, just so that 
+   //subjects are up to date in the touches sidebar (formerly contacts sidebar
+    //you can put anything into ai trigger
+   
+     dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
 
 }
 

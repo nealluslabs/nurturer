@@ -188,6 +188,9 @@ let updatedBulletPoints = [...paragraphs.bulletPoints]
 
 if(updatedBulletPoints.filter((item)=>(item.id === newBulletPoint.id)).length ){
   console.log("ITS THERE SO WE REMOVE IT---> ARTICLE IS UPDATING")
+  console.log("WHAT IS NEW BULLET POINT ID--->",newBulletPoint.id)
+  console.log("WHAT IS UPDATED BULLET POINTS--->",updatedBulletPoints)
+
   updatedBulletPoints = updatedBulletPoints.filter((item)=>(item.id !== newBulletPoint.id))
 }
 else{
@@ -246,7 +249,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    // console.log("CURRENT PARAGRAPHS IS--->",paragraphs)
    if(editedParagraphs && editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
 
-    setParagraphs(editedParagraphs);
+    setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
     setBulletPointChoice(editedParagraphs.bulletPoints)
     //dispatch(saveEditedParagraphs(paraData))
    }
@@ -652,8 +655,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
 
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -678,8 +681,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
 
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -689,7 +692,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
                 alignItems: 'center',
               }}
             >
-              <img src={birthday2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={birthday2} alt="Birthday Card" style={{ width: '100%', weight: '100%' }} />
             </div>
          
          </>
@@ -916,7 +919,7 @@ We had some great conversations previously, and I really valued the opportunity 
        {/* <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"The Future of Consumer Trust: Brand Strategy Trends in 2025",
@@ -929,7 +932,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"Redefining Brand Value: Marketing Priorities for the 2025 Economy",
@@ -945,7 +948,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -979,7 +982,7 @@ We had some great conversations previously, and I really valued the opportunity 
        {/* <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"From Insight to Action: The Evolving Role of Data Scientists in 2025",
@@ -992,7 +995,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025",
@@ -1010,7 +1013,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1048,7 +1051,7 @@ We had some great conversations previously, and I really valued the opportunity 
       {/*  <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"The Future of Consumer Trust: Brand Strategy Trends in 2025",
@@ -1061,7 +1064,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"Redefining Brand Value: Marketing Priorities for the 2025 Economy",
@@ -1077,7 +1080,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1111,7 +1114,7 @@ We had some great conversations previously, and I really valued the opportunity 
         {/*<FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"From Insight to Action: The Evolving Role of Data Scientists in 2025",
@@ -1124,7 +1127,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025",
@@ -1140,7 +1143,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1176,7 +1179,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"Serverless Architectures and the Next Evolution of Cloud Backends",
@@ -1189,7 +1192,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"Intelligent Load Balancing: AI Meets Infrastructure Automation",
@@ -1203,7 +1206,7 @@ We had some great conversations previously, and I really valued the opportunity 
       <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"The Rise of Event-Driven APIs: Real-Time Systems in 2025",
@@ -1220,7 +1223,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1256,7 +1259,7 @@ We had some great conversations previously, and I really valued the opportunity 
            <FormControlLabel
            style={{display:"flex",gap:"2rem"}}
              value="article1"
-             control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+             control={<Radio onClick={()=>{dispatch(updateUserChat(selectedChatUser,
                {
                  id:"1",
                  bulletPointBold:"Navigating Headwinds: KPMG’s 2025 Global Aviation Outlook",
@@ -1269,7 +1272,7 @@ We had some great conversations previously, and I really valued the opportunity 
            <FormControlLabel
            style={{display:"flex",gap:"2rem"}}
              value="article2"
-             control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+             control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
                {
                  id:"2",
                  bulletPointBold:"Reaching New Altitudes: Strategic Shifts in Air Travel Recovery",
@@ -1283,7 +1286,7 @@ We had some great conversations previously, and I really valued the opportunity 
          <FormControlLabel
            style={{display:"flex",gap:"2rem"}}
              value="article2"
-             control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+             control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
                {
                  id:"2",
                  bulletPointBold:"Flight Path 2025: The CEO Agenda for a Resilient Aviation Future",
@@ -1300,7 +1303,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1334,7 +1337,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"1",
               bulletPointBold:"The Evolution of Electric Supercars",
@@ -1347,7 +1350,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article2"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"2",
               bulletPointBold:"How Aerodynamics Shapes Modern Vehicles",
@@ -1360,7 +1363,7 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article3"
-          control={<Checkbox  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
+          control={<Radio  onClick={()=>{dispatch(updateUserChat(selectedChatUser,
             {
               id:"3",
               bulletPointBold:"Inside Ferrari's Hybrid Powertrain",
@@ -1377,7 +1380,9 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Checkbox onClick={()=>{updateArticle(
+          control={<Radio
+            
+            onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1410,7 +1415,12 @@ We had some great conversations previously, and I really valued the opportunity 
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Checkbox checked={birthdayMessage1} onClick={()=>{setBirthdayMessage1(!birthdayMessage1)}}   /> }
+control={<Radio checked={birthdayMessage1} onClick={()=>{ 
+                                                  
+                                              
+                                                    setBirthdayMessage1(true);setBirthdayMessage2(false)
+                                                 
+                                                  }}   /> }
 label={<Typography fontSize="14px">
   <div style={{cursor:"pointer"}}  onClick={handleOpen}>Happy Birthday 1</div>
   </Typography>}
@@ -1420,7 +1430,12 @@ label={<Typography fontSize="14px">
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article2"
-control={<Checkbox checked={birthdayMessage2} onClick={()=>{setBirthdayMessage2(!birthdayMessage2)}}/>}
+control={<Radio checked={birthdayMessage2} onClick={()=>{
+
+  setBirthdayMessage2(true);setBirthdayMessage1(false)  
+
+}}
+/>}
 label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={handleOpen2}>Happy Birthday 2</div></Typography>}
 />
 
@@ -1432,7 +1447,7 @@ label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={han
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Checkbox checked={holidayMessage1} onClick={()=>{setHolidayMessage1(!holidayMessage1)}}
+control={<Radio checked={holidayMessage1} onClick={()=>{setHolidayMessage1(!holidayMessage1)}}
 />}
 label={<Typography fontSize="14px">
   <div  style={{cursor:"pointer"}}  onClick={handleOpen3} >Happy Holiday 1</div>

@@ -12,6 +12,7 @@ const initialState = {
   isLoading: false,
   editedParagraphs:{},
   chatGptAnswer:{},
+  aiTrigger:'',
   candidateInFocus:{},
   info: '',
   error: '',
@@ -51,6 +52,10 @@ const userSlice = createSlice({
 },
 saveChatGptAnswer: (state, action) => { 
   state.chatGptAnswer = action.payload;
+ 
+},
+saveAiTrigger: (state, action) => { 
+  state.aiTrigger = action.payload;
  
 },
   saveFilteredContacts: (state, action) => { 
@@ -120,6 +125,7 @@ export const {
  saveFilteredUsers,
  saveEditedParagraphs,
  saveChatGptAnswer,
+ saveAiTrigger,
  saveFilteredContacts,
  saveCandidateInFocus,
  fetchRealTimeUsersSuccess,

@@ -56,7 +56,7 @@ function InboxSidebar(props) {
   const [message, setMessage] = useState('');
   const [userUid, setUserUid] = useState(null);
   const { user } = useSelector((state) => state.login);
-  const { allUsers, connectedUsers, filteredContacts, connects, connects2, isLoading } = useSelector((state) => state.user);
+  const { allUsers, connectedUsers, filteredContacts,aiTrigger, connects, connects2, isLoading } = useSelector((state) => state.user);
 
 
   const container = {
@@ -77,7 +77,7 @@ function InboxSidebar(props) {
       // Fetch contacts from Firebase for inbox
       dispatch(fetchAllContactForOneUser(user.uid));
     }
-  }, [user, dispatch])
+  }, [user,aiTrigger, dispatch])
  
   // Remove old connected users fetching - now using filteredContacts from Firebase
   // useEffect(() => {

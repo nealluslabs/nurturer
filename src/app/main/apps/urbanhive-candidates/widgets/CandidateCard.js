@@ -227,7 +227,7 @@ const userList =output && output.length ? (
           </Grid>
        
        
-       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: 400, height: 210, paddingTop: '100px', marginRight: '0px'}}>
+       <Box component="span" sx={{ p: 10, mx: "1rem", border: '1px solid black', width: {xs:300,sm:400}, height: 210, paddingTop: '100px', marginRight: '0px'}}>
        {/* <div style={{ paddingRight: '60px', border: '1px solid black' }}>
        
        </div> */}
