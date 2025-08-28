@@ -80,7 +80,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
  const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
 
 console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
-  const prompt = ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON).For the id in each object of the bulletPoints array, please generate a unique id.Finally for the subject, make sure to put an emoji at the end of the generated subject:
+  const prompt = ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON).For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
      {"subject":" ",
      messageType:"Event"
      "messageStatus":"Pending"
@@ -92,27 +92,27 @@ console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
          "bulletPointBold":" ",
          "bulletPointRest":" ",
          "link":" ",
-         "id":" ",
+         "id":"0",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":" ",
+          "id":"1",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":" ",
+          "id":"2",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":" ",
+          "id":"3",
         },{
           "bulletPointBold":" ",
           "bulletPointRest":" ",
           "link":" ",
-          "id":" ",
+          "id":"4",
         },
       ]
      } .The first paragraph should be about how you haven't spoken to ${Name} in ${Frequency} days and how you've been thinking about their role.

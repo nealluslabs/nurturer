@@ -948,7 +948,9 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio onClick={()=>{updateArticle(
+          control={<Radio 
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1013,7 +1015,9 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio onClick={()=>{updateArticle(
+          control={<Radio 
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1080,7 +1084,10 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio onClick={()=>{updateArticle(
+          control={<Radio 
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            
+            onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1143,7 +1150,9 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio onClick={()=>{updateArticle(
+          control={<Radio 
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1223,7 +1232,9 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio onClick={()=>{updateArticle(
+          control={<Radio 
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1303,7 +1314,9 @@ We had some great conversations previously, and I really valued the opportunity 
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio onClick={()=>{updateArticle(
+          control={<Radio
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+             onClick={()=>{updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1381,7 +1394,7 @@ We had some great conversations previously, and I really valued the opportunity 
         style={{display:"flex",gap:"2rem"}}
           value="article1"
           control={<Radio
-            
+            checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
             onClick={()=>{updateArticle(
             {
               id:point.id,
