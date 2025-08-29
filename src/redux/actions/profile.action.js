@@ -257,40 +257,9 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     usedConnection:0,
     lastActive:1663862737170,
     contacterId:user.uid,
-    message:user.message? user.message:{
-      firstParagraph:"I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.",
-      secondParagrpah:"While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:",
-      thirdParagraph:"We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum.",
-      bulletPoints:[
-        {bulletPointBold:"Deloitte Global's 2025 Airline CEO Survey",
-        bulletPointRest:"Deloitte, May 30, 2025 Deloitte Link",
-        id:"7",
-        link:""
-
-      },
-      {bulletPointBold:"A breath of fresh air for the national aviation industry"
-      ,
-      bulletPointRest: "PwC, June 3, 2025 PwC Link",
-      id:"8",
-      link:""
-
-    },
-    {bulletPointBold:"Navigating Headwinds: KPMG’s 2025 Global Aviation Outlook"
-    ,
-    bulletPointRest:"– KPMG, June 10, 2025",
-    id:"9",
-    link:"https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings"
-
-  },
-      ]
-
-
-    
-    },
-
-  
+    message:user.message?user.message:'',
     skillset: '',
-   
+  
     skills_needed: '',
     isTechnical: 'no',
     lookingFor:'',
@@ -323,6 +292,76 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
   });
 
 }
+
+
+
+export const batchUploadContacts = async (contactsArray, user, url) => {
+  const db = firebase.firestore();
+  const userRef = db.collection("users").doc(user.uid);
+  const contactsRef = db.collection("contacts");
+
+  const batch = db.batch();
+  const newContactIds = [];
+
+  contactsArray.forEach((profile) => {
+    // Generate a new doc ref with an ID
+    const newDocRef = contactsRef.doc();
+    const newId = newDocRef.id;
+    newContactIds.push(newId);
+
+    const contactData = {
+      name: profile.name || "",
+      email: profile.email || "",
+      notes: profile.notes || "",
+      companyName: profile.companyName || "",
+      industry: profile.industry || "",
+      jobTitle: profile.jobTitle || "",
+      birthday: profile.birthday || "",
+      workAnniversary: profile.workAnniversary || "",
+      city: profile.city || "",
+      triggers: profile.triggers || [],
+      state: profile.state || "",
+      frequency: profile.frequency || "1 month",
+      interests: profile.interests || "",
+
+      // extra fields
+      password: "12345678",
+      usedConnection: 0,
+      lastActive: Date.now(),
+      contacterId: user.uid,
+      message: user.message ? user.message : "",
+      skillset: "",
+      skills_needed: "",
+      isTechnical: "no",
+      lookingFor: "",
+      githubUrl: "",
+      photoUrl: url || "",
+
+      // Add IDs
+      uid: newId,
+      id: newId,
+      contacteeId: newId,
+      contacterId: user.uid,
+    };
+
+    batch.set(newDocRef, contactData);
+  });
+
+  try {
+    // Commit all writes at once
+    await batch.commit();
+
+    // ✅ After batch, update user's contacts array
+    await userRef.update({
+      contacts: firebase.firestore.FieldValue.arrayUnion(...newContactIds),
+    });
+
+    console.log("Batch upload successful!");
+  } catch (error) {
+    console.error("Error batch uploading contacts:", error);
+  }
+};
+
 
 
 export const updateUserPassword = (profileData,userID) => async (dispatch) => {
