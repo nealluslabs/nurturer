@@ -165,10 +165,36 @@ function Inbox(props) {
 
 //  const [connectStatus, setconnectStatus] = useState('');
  const { isAuth, user } = useSelector((state) => state.login);
- console.log("wWHAT IS USER IN STATE.LOGIN--->",user)
+
  const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
  //const [paragraphs, setParagraphs] = useState([selectedChatUser.message.firstParagraph, selectedChatUser.message.secondParagraph, selectedChatUser.message.thirdParagraph]);
  const thisUser =user && user
+ console.log("IN INBOX DAGOGO, WHO IS SELECTED CHAT USER--->",selectedChatUser)
+//HOW WE DECIDE WHICH MESSAGE THE AI WILL MODEL - START 
+
+const [aiMessageToModel,setAiMessageToModel] = useState({});
+
+useEffect(()=>{
+
+
+
+
+if(user && selectedChatUser && selectedChatUser.name == "Emily White"){
+
+
+  setAiMessageToModel(user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Holiday')) && user.queryMsg.filter((item)=>(item.messageType ==='Holiday'))[0])
+}else if(user && selectedChatUser && selectedChatUser.name == "Bob Johnson"){
+
+  setAiMessageToModel(user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Birthday')) && user.queryMsg.filter((item)=>(item.messageType ==='Birthday'))[0])
+}else{
+  setAiMessageToModel(user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Email')) && user.queryMsg.filter((item)=>(item.messageType ==='Email'))[0])
+}
+
+
+},[selectedChatUser])
+
+
+//HOW WE DECIDE WHICH MESSAGE THE AI WILL MODEL  --END
 
 const handleInput = () => {
   const paraData = {
@@ -1544,7 +1570,8 @@ label={<Typography fontSize="14px">
 
 
            { !loading && 
-            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,paragraphs,thisUser,notifyInvite,selectedChatUser))}}
+           //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
+            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))}}
             
             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
             }
