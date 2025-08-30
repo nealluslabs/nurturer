@@ -379,6 +379,7 @@ if (allContacts.length > 0) {
                   border: "2px solid #0367fc", padding: "4px 7px", marginTop: "24px", borderRadius: "6px",
                   display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc"
                 }}
+                onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/events') : undefined}
               >
                 {event.actionKey}
               </button>

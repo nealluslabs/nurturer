@@ -37,7 +37,7 @@ import BirthdayOneAppConfig from './urbanhive-birthday-1/BirthdayAppConfig';
 import BirthdayTwoAppConfig from './urbanhive-birthday-two/BirthdayAppConfig';
 import HolidayOneAppConfig from './urbanhive-holiday-one/HolidayAppConfig';
 import ForgotPasswordConfig from './urbanhive-forgot-password/ForgotPasswordConfig';
-
+import EventsAppConfig from './urbanhive-events/EventsAppConfig';
 
 const appsConfigs = [
   LoginConfig,
@@ -66,6 +66,7 @@ const appsConfigs = [
   BootCampConfig,
   BootCampDetailsConfig,
   SettingsAppConfig,
+  EventsAppConfig,
   // AnalyticsDashboardAppConfig,
   // ProjectDashboardAppConfig,
   // MailAppConfig,
