@@ -187,41 +187,9 @@ if (allContacts.length > 0) {
   ];
   
   // The whole card (so you can scale if you want to have multiple cards)
-  const eventsData = [
-    {
-      id: 1,
-      headerIcon: CalendarMonthIcon,
-      headerTitle: "Upcoming Events (Next 7 Days)",
-      buttonText: "View All",
-      buttonColor: "#0367fc",
-      mainIcon: EventAvailableIcon,
-      mainText: "No upcoming events in the next 7 days",
-      subText: "Events help you stay connected with meaningful touchpoints",
-      actionKey: "Add Event to Contacts",
-      details: [
-        {
-          id: 1,
-          icon: CakeIcon,
-          iconColor: "#fce703",
-          title: "Birthdays",
-          description: "Personal connection opportunities",
-        },
-        {
-          id: 2,
-          icon: FavoriteIcon,
-          iconColor: "#fc0b03",
-          title: "Anniversaries",
-          description: "Celebrate meaningful milestones",
-        },
-        {
-          id: 3,
-          icon: CardGiftcardIcon,
-          iconColor: "#03c6fc",
-          title: "Custom Event",
-          description: "Company launches, conferences, or special dates",
-        },
-      ], 
-    },
+  //current events data was mapped left to right and i want the card on the left to show when there are no events
+  const eventsData = onlyEventsMessagesData && onlyEventsMessagesData.length? [
+ 
     {
       id: 2,
       headerIcon: LightbulbIcon,
@@ -256,7 +224,83 @@ if (allContacts.length > 0) {
         },
       ], 
     },
-  ];
+  ]
+  
+  :
+
+ [
+     {
+       id: 1,
+       headerIcon: CalendarMonthIcon,
+       headerTitle: "Upcoming Events (Next 7 Days)",
+       buttonText: "View All",
+       buttonColor: "#0367fc",
+       mainIcon: EventAvailableIcon,
+       mainText: "No upcoming events in the next 7 days",
+       subText: "Events help you stay connected with meaningful touchpoints",
+       actionKey: "Add Event to Contacts",
+       details: [
+         {
+           id: 1,
+           icon: CakeIcon,
+           iconColor: "#fce703",
+           title: "Birthdays",
+           description: "Personal connection opportunities",
+         },
+         {
+           id: 2,
+           icon: FavoriteIcon,
+           iconColor: "#fc0b03",
+           title: "Anniversaries",
+           description: "Celebrate meaningful milestones",
+         },
+         {
+           id: 3,
+           icon: CardGiftcardIcon,
+           iconColor: "#03c6fc",
+           title: "Custom Event",
+           description: "Company launches, conferences, or special dates",
+         },
+       ], 
+     },
+     {
+       id: 2,
+       headerIcon: LightbulbIcon,
+       headerTitle: "Smart Suggestion",
+       buttonText: "View All",
+       buttonColor: "#26b502",
+       mainIcon: LightbulbIcon,
+       mainText: "No suggestion at the moment",
+       subText: "Smart suggestion help you stay proactive with client relationships",
+       actionKey: "View Automation Settings",
+       details: [
+         {
+           id: 1,
+           icon: EmailIcon,
+           iconColor: "#0335fc",
+           title: "Email Suggestions",
+           description: "Based on contact history and timing",
+         },
+         {
+           id: 2,
+           icon: CardGiftcardIcon,
+           iconColor: "#03fc5e",
+           title: "Card Suggestions",
+           description: "For birthday, holidays, and special occassions",
+         },
+         {
+           id: 3,
+           icon: InventoryIcon,
+           iconColor: "#03c6fc",
+           title: "Follow-up Reminders",
+           description: "Automated timing based on your settings",
+         },
+       ], 
+     },
+   ]
+  
+  
+  ;
 
   const resortFilteredUsersAndPush = (userId)=>{
     
@@ -338,8 +382,93 @@ if (allContacts.length > 0) {
         margin: "26px 2px"
       }}>
 
+
+
+   <div >
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: "center" }}>
+                <CalendarMonthIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
+                <h3>Upcoming Events (Next 7 Days)</h3>
+              </div>
+              <button 
+                style={{ 
+                  border: `2px solid grey`, 
+                  padding: "4px 7px", borderRadius: "6px", color: "grey"
+                }}
+                onClick={() => history.push('/apps/inbox')}
+              >
+                View All
+              </button>
+            </div>
+
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"87.5%",maxHeight:"87.5%"}}>
+              
+            {onlyEventsMessagesData.length === 0 ? (
+              <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending events found.</div>
+            ) : (
+              onlyEventsMessagesData.map((item) => {
+                const IconComponent = item.icon;
+                return (
+                  <div 
+                  
+                  onClick={()=>{
+                    console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.uid === item.uid))[0])
+                    
+                    dispatch(setCurrentChat(
+                      //we are assuming we will always get something..risky dagogo- aug -14 2025
+                      allContacts.filter((contact)=>(contact.uid === item.uid))[0]
+                    ))
+
+                    setTimeout(()=>{history.push('/apps/inbox')},300)
+                  }}
+                    key={item.id}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      marginBottom: "16px",
+                      cursor:"pointer",
+                     
+                    }}
+                  >
+                    <div style={{ display: "flex", alignItems: "center" }}>
+                      <IconComponent
+                        sx={{
+                          width: 16,
+                          height: 16,
+                          marginRight: "6px",
+                          color: item.iconColor
+                        }}
+                      />
+                      <div>
+                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
+                        <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
+                      </div>
+                    </div>
+                    <p
+                      style={{
+                        padding: "4px 12px",
+                        background: item.statusBackground,
+                        color: item.statusColor,
+                        borderRadius: "4px"
+                      }}
+                    >
+                      {item.status?item.status:"Pending"}
+                    </p>
+                  </div>
+                );
+              })
+            )}
+
+
+            </div>
+          </div>
+
         
-        {eventsData.map((event) => (
+     
+              
+{
+        eventsData.map((event) => (
           <div key={event.id}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
@@ -388,6 +517,8 @@ if (allContacts.length > 0) {
           </div>
         ))}
 
+
+
         <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
@@ -408,7 +539,7 @@ if (allContacts.length > 0) {
             <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
               
             {touchpointData.length === 0 ? (
-              <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending messages found.</div>
+              <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending touchpoints found.</div>
             ) : (
               touchpointData.map((item) => {
                 const IconComponent = item.icon;

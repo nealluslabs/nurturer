@@ -14,8 +14,23 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/profile.action';
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
-import { createNewProfile, duplicateToContacts, uploadNewImage } from 'redux/actions/profile.action';
+import { createNewProfile, duplicateToContacts, uploadNewImage,batchUploadContacts } from 'redux/actions/profile.action';
 import Papa from "papaparse";
+
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  
+  Table,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Typography,
+ 
+} from "@mui/material";
 
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
@@ -85,14 +100,26 @@ export default function ProfileForm() {
     const [inputValue, setInputValue] = useState("");
 
 
+
+
       /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
+
+
+      const [parsedData, setParsedData] = useState([]); // store rows from CSV
+      const [open, setOpen] = useState(false); // dialog open state
 
       const isValidOption = (options, value) =>{
         console.log("INSIDE VALID OPTIONS NOW, WHAT IS THE CSV FILE SAYING?-->",value)
         options.some((opt) => opt.title.toLowerCase() === value.toLowerCase());
       }
+
+      const handleClose = () => setOpen(false);
   
-      const handleCSVUpload = (event) => {
+
+   
+    
+      
+      const handleCSVUploadOld = (event) => {
         const file = event.target.files[0];
         if (!file) return;
       
@@ -156,6 +183,100 @@ export default function ProfileForm() {
           },
         });
       };
+
+
+
+      const handleCSVUpload = (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+      
+        Papa.parse(file, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            if (!results || !results.data || results.data.length === 0) {
+              alert("CSV file is empty or invalid");
+              return;
+            }
+      
+            // list of required text fields
+            const textFields = [
+              "name",
+              "email",
+              "notes",
+              "jobTitle",
+              "industry",
+             // "frequency",
+             // "city",
+              //"state",
+              //"interests", // uncomment later
+              "triggers",
+              "companyName",
+              "workAnniversary",
+              "birthday",
+            ];
+      
+            // ✅ validate headers
+            const csvHeaders = results.meta.fields || [];
+            const missingHeaders = textFields.filter(
+              (field) => !csvHeaders.includes(field)
+            );
+      
+            if (missingHeaders.length > 0) {
+              alert(`Missing required headers in CSV: ${missingHeaders.join(", ")}`);
+              return;
+            }
+      
+            // helper function to validate frequency
+            const validateFrequency = (value) => {
+              if (!value) return "1 month"; // default if missing
+              const regex = /^(\d{1,2})\s*months?$/i; // e.g. "3 month" or "3 months"
+              const match = value.match(regex);
+      
+              if (match) {
+                const num = parseInt(match[1], 10);
+                if (num >= 1 && num <= 12) {
+                  // normalize to singular/plural properly
+                  return num === 1 ? "1 month" : `${num} months`;
+                }
+              }
+              // fallback
+              return "1 month";
+            };
+      
+            // ✅ process all rows
+            const processedData = results.data.map((row) => {
+              const cleanedRow = {};
+              textFields.forEach((field) => {
+                if (row[field]) {
+                  if (field === "triggers") {
+                    cleanedRow[field] = row[field]
+                      .split(",")
+                      .map((t) => t.trim())
+                      .filter((t) => t.length > 0);
+                  } else if (field === "frequency") {
+                    cleanedRow[field] = validateFrequency(row[field].trim());
+                  } else {
+                    cleanedRow[field] = row[field];
+                  }
+                } else {
+                  // default values
+                  cleanedRow[field] = field === "frequency" ? "1 month" : "";
+                }
+              });
+              return cleanedRow;
+            });
+      
+            console.log("Processed CSV rows:", processedData);
+            setParsedData(processedData); // store all rows in state
+      
+            // ✅ open dialog after parsing
+            setOpen(true);
+          },
+        });
+      };
+      ;
+      
       
   
   
@@ -333,6 +454,97 @@ export default function ProfileForm() {
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
       </Alert><br/></div>}
             <p>Fill out contact details.</p><br/>
+
+
+             {/* Material UI Dialog */}
+      <Dialog open={open} onClose={handleClose}  maxWidth="md" fullWidth>
+        <DialogTitle  style={{fontSize:"1.6rem"}}>CSV Data Preview</DialogTitle>
+        <DialogContent>
+          <Typography  style={{fontSize:"1.4rem"}} variant="subtitle1" gutterBottom>
+            Are you satisfied with these values?
+          </Typography>
+
+          {parsedData.length > 0 ? (
+            <Table>
+              <TableHead>
+                <TableRow>
+                  {/* Render headers dynamically */}
+                  {Object.keys(parsedData[0]).map((header) => (
+                    <TableCell key={header}>{header}</TableCell>
+                  ))}
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {parsedData.map((row, rowIndex) => (
+                  <TableRow key={rowIndex}>
+                    {Object.values(row).map((value, i) => (
+                      <TableCell style={{fontSize:"1.1rem"}} key={i}>{value}</TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          ) : (
+            <Typography>No data found</Typography>
+          )}
+        </DialogContent>
+
+        <DialogActions>
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Button variant="outlined" onClick={handleClose}
+            
+
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              height:"4.5rem",
+              width:"11rem",
+              fontSize:"1.6rem",
+              padding: "0.5rem 0.8rem",
+              borderRadius: "0.3rem",
+
+              
+              padding: '10px 20px',
+              borderRadius: '8px',
+
+              
+              textTransform: "none", // Optional: keeps text as "CSV" without uppercase
+              "&:hover": {
+                backgroundColor: "#333"
+              }
+            }}
+            
+            >
+              CANCEL
+            </Button>
+            <Button variant="contained"
+            
+            sx={{
+              backgroundColor: "black",
+              color: "white",
+              height:"4.5rem",
+              width:"11rem",
+              fontSize:"1.6rem",
+              padding: "0.5rem 0.8rem",
+              borderRadius: "0.3rem",
+
+              
+              padding: '10px 20px',
+              borderRadius: '8px',
+
+              
+              textTransform: "none", // Optional: keeps text as "CSV" without uppercase
+              "&:hover": {
+                backgroundColor: "#333"
+              }
+            }}
+            onClick={()=>{dispatch(batchUploadContacts(parsedData && parsedData,user,"https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png"))  }}
+            >
+              UPLOAD
+            </Button>
+          </Box>
+        </DialogActions>
+      </Dialog>
 
            
 
