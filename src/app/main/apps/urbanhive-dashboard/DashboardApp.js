@@ -395,7 +395,7 @@ if (allContacts.length > 0) {
                   border: `2px solid grey`, 
                   padding: "4px 7px", borderRadius: "6px", color: "grey"
                 }}
-                onClick={() => history.push('/apps/inbox')}
+                onClick={() => history.push('/events')}
               >
                 View All
               </button>
@@ -480,7 +480,7 @@ if (allContacts.length > 0) {
                   border: `2px solid ${ event.buttonColor ? event.buttonColor : "grey" }`, 
                   padding: "4px 7px", borderRadius: "6px", color: `${ event.buttonColor ? event.buttonColor : "grey" }`
                 }}
-                onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/apps/inbox') : undefined}
+                onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/events') : undefined}
               >
                 {event.buttonText}
               </button>

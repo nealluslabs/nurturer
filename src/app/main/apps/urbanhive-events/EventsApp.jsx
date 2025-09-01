@@ -3,18 +3,20 @@ import {
   TextField,
   MenuItem,
   Button,
-  // Typography,
+  Divider,
   Select,
   FormControl,
   FormHelperText,
+  Chip,
 } from "@mui/material";
 import { useForm, Form } from "./components/useForms";
 import FusePageSimple from "@fuse/core/FusePageSimple";
 import { useDispatch, useSelector } from "react-redux";
 import Icon from "@material-ui/core/Icon";
-import { Paper } from '@mui/material';
-import { Redirect } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
+import { Paper } from "@mui/material";
+import { Redirect } from "react-router-dom";
+import Typography from "@material-ui/core/Typography";
+import { Grid } from '@material-ui/core';
 
 const initialFValues = {
   name: "",
@@ -80,98 +82,102 @@ function EventsScreen() {
             flexDirection="column"
             sx={{ padding: 5 }}
           >
-              <Form
-                onSubmit={handleSubmit}
-                sx={{
-                  maxWidth: 600,
+            <Form
+              onSubmit={handleSubmit}
+              sx={{
+                maxWidth: 600,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                fontSize: "2rem",
+              }}
+            >
+              <div className="flex justify-between">
+                <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
+                  <TextField
+                    label="Name"
+                    name="name"
+                    value={values.name}
+                    onChange={handleInputChange}
+                    error={!!errors.name}
+                    helperText={errors.name}
+                    variant="outlined"
+                    InputProps={{
+                      sx: { fontSize: "1.3rem", width: '80%',   },
+                    }}
+                    InputLabelProps={{
+                      sx: { fontSize: "1.3rem" },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
+                  <TextField
+                    label="Date"
+                    name="date"
+                    type="date"
+                    value={values.date}
+                    onChange={handleInputChange}
+                    InputLabelProps={{ shrink: true }}
+                    error={!!errors.date}
+                    helperText={errors.date}
+                    variant="outlined"
+                    InputProps={{
+                      sx: { fontSize: "1.3rem", width: '80%',  },
+                    }}
+                  />
+                </Grid>
+              </div>
+
+              <FormControl fullWidth error={!!errors.eventType}>
+                <Select
+                  labelId="event-type-label"
+                  id="event-type"
+                  name="eventType"
+                  value={values.eventType}
+                  onChange={handleInputChange}
+                  displayEmpty
+                  sx={{ fontSize: "1.3rem", width: '40%', marginTop: 2 }}
+                >
+                  <MenuItem value="">
+                    <em>Choose an event</em>
+                  </MenuItem>
+                  <MenuItem value="Birthday">Birthday</MenuItem>
+                  <MenuItem value="Anniversary">Anniversary</MenuItem>
+                </Select>
+                <FormHelperText>{errors.eventType}</FormHelperText>
+              </FormControl>
+              {/* </div> */}
+              <Divider>
+                <Chip label="😉 | 🔃" />
+              </Divider>
+
+              <div
+                style={{
+                  marginTop: 16,
+                  fontSize: "1.3rem",
+                  marginLeft: "1rem",
                   display: "flex",
-                  flexDirection: "column",
+                  justifyContent: "center",
                   alignItems: "center",
-                  fontSize: "2rem",
+                  gap: "2rem",
                 }}
               >
-                <TextField
-                  label="Name"
-                  name="name"
-                  value={values.name}
-                  onChange={handleInputChange}
-                  error={!!errors.name}
-                  helperText={errors.name}
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    sx: { fontSize: "1.3rem" },
-                  }}
-                  InputLabelProps={{
-                    sx: { fontSize: "1.3rem" },
-                  }}
-                />
-
-                {/* Date */}
-                <TextField
-                  label="Date"
-                  name="date"
-                  type="date"
-                  value={values.date}
-                  onChange={handleInputChange}
-                  InputLabelProps={{ shrink: true }}
-                  error={!!errors.date}
-                  helperText={errors.date}
-                  variant="outlined"
-                  fullWidth
-                  InputProps={{
-                    sx: { fontSize: "1.3rem" },
-                  }}
-                />
-
-                <FormControl fullWidth error={!!errors.eventType}>
-                  <Select
-                    labelId="event-type-label"
-                    id="event-type"
-                    name="eventType"
-                    value={values.eventType}
-                    onChange={handleInputChange}
-                    displayEmpty
-                    sx={{ fontSize: "1.3rem" }}
-                  >
-                    <MenuItem value="">
-                      <em>Choose an event</em>
-                    </MenuItem>
-                    <MenuItem value="Birthday">Birthday</MenuItem>
-                    <MenuItem value="Anniversary">Anniversary</MenuItem>
-                  </Select>
-                  <FormHelperText>{errors.eventType}</FormHelperText>
-                </FormControl>
-                {/* </div> */}
-
-                <div
-                  style={{
-                    marginTop: 16,
+                <Button
+                  type="submit"
+                  variant="contained"
+                  sx={{
                     fontSize: "1.3rem",
-                    marginLeft: "1rem",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    gap: "2rem",
+                    borderRadius: "0.7rem",
+                    color: "white",
+                    backgroundColor: "black",
+                    width: "100px",
+                    height: "40px",
                   }}
                 >
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    sx={{ fontSize: "1.3rem", borderRadius: '0.7rem',  color:"white", backgroundColor:"black", width: "100px", height: "40px" }}
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    style={{ marginLeft: 8 }}
-                    variant="outlined"
-                    onClick={resetForm}
-                    sx={{ fontSize: "1.3rem", borderRadius: '0.7rem', width: "100px", height: "40px" }}
-                  >
-                    Reset
-                  </Button>
-                </div>
-              </Form>
+                  Submit
+                </Button>
+              </div>
+            </Form>
           </Paper>
         </div>
       }
