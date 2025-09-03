@@ -401,7 +401,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"87.5%",maxHeight:"87.5%"}}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"87.5%",maxHeight:"87.5%",position:"relative"}}>
               
             {onlyEventsMessagesData.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending events found.</div>
@@ -459,6 +459,18 @@ if (allContacts.length > 0) {
                 );
               })
             )}
+
+
+                   
+              <button 
+                style={{ 
+                  border: "2px solid #0367fc", padding: "4px 7px", marginTop: "24px", borderRadius: "6px",
+                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:"13%",left:"35%",
+                }}
+                onClick={() => history.push('/events')}
+              >
+                {"Add Event To Contact"}
+              </button>
 
 
             </div>
@@ -538,10 +550,10 @@ if (allContacts.length > 0) {
 
             <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
               
-            {touchpointData.length === 0 ? (
+            {onlyTouchpointMessagesData.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending touchpoints found.</div>
             ) : (
-              touchpointData.map((item) => {
+              onlyTouchpointMessagesData.map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div 
