@@ -318,14 +318,14 @@ function NewsletterSidebar(props) {
                 width: "4rem",
                 height: "4rem",
                 borderRadius: "50%",
-                backgroundColor: "#FF0000",
+                backgroundColor: "#D62222",
                 cursor: "pointer",
                 border:
-                  selectedBackgroundColor === "#FF0000"
+                  selectedBackgroundColor === "#D62222"
                     ? "3px solid #333"
                     : "none",
               }}
-              onClick={() => dispatch(setBackgroundColor("#FF0000"))}
+              onClick={() => dispatch(setBackgroundColor("#D62222"))}
             />
 
             <Box
@@ -333,29 +333,29 @@ function NewsletterSidebar(props) {
                 width: "4rem",
                 height: "4rem",
                 borderRadius: "50%",
-                backgroundColor: "#00FF00",
+                backgroundColor: "#128C1D",
                 cursor: "pointer",
                 border:
-                  selectedBackgroundColor === "#00FF00"
+                  selectedBackgroundColor === "#128C1D"
                     ? "3px solid #333"
                     : "none",
               }}
-              onClick={() => dispatch(setBackgroundColor("#00FF00"))}
+              onClick={() => dispatch(setBackgroundColor("#128C1D"))}
             />
             <Box
               sx={{
                 width: "4rem",
                 height: "4rem",
                 borderRadius: "50%",
-                backgroundColor: "#FEC600",
+                backgroundColor: "#DBCB21",
                 cursor: "pointer",
                 border:
-                  selectedBackgroundColor === "#FEC600"
+                  selectedBackgroundColor === "#DBCB21"
                     ? "3px solid #333"
                     : "none",
               }}
               onClick={() => {
-                dispatch(setBackgroundColor("#FEC600"));
+                dispatch(setBackgroundColor("#DBCB21"));
               }}
             />
             <Box
@@ -363,15 +363,15 @@ function NewsletterSidebar(props) {
                 width: "4rem",
                 height: "4rem",
                 borderRadius: "50%",
-                backgroundColor: "#0000FF",
+                backgroundColor: "#1E229C",
                 cursor: "pointer",
                 border:
-                  selectedBackgroundColor === "#0000FF"
+                  selectedBackgroundColor === "#1E229C"
                     ? "3px solid #333"
                     : "none",
               }}
               onClick={() => {
-                dispatch(setBackgroundColor("#0000FF"));
+                dispatch(setBackgroundColor("#1E229C"));
               }}
             />
 
