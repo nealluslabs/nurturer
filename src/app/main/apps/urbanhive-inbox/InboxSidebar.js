@@ -103,6 +103,15 @@ function InboxSidebar(props) {
 
   function handleSearchText(event) {
     setSearchText(event.target.value);
+    if(event.target.value=== ""||event.target.value=== null ){
+      setConnUsers(connectedUsersOutput)
+    }
+    else{
+
+    setConnUsers(connUsers.filter((item)=>(item.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+
+    console.log("WHO ARE THESE USERS, WHY IS THE SEARCH FAILING--->",connUsers.filter((item)=>(item.name.toLowerCase().includes(event.target.value.toLowerCase()))))
+    }
   }
 
 
@@ -120,48 +129,40 @@ function InboxSidebar(props) {
       }
   }
 
-  const testConnections = () => {
-    
-  const connectsById = Object.fromEntries(
-    connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
-      );
-      
-    const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password,message,messageQueue,sendDate},index) => ({
-          uid, name, email, city, intro, skillset, skills_needed, 
-          lookingFor, lastActive, isTechnical, photoUrl, password,
-          message,messageQueue,sendDate,
-          daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
-        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-      }));
-
-    console.log('Connected Users Mapped: ', connectedUsersOutput);
-  }
-
-
-
 
 
   const connectsById = Object.fromEntries(
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
       );
       
-    // Use filteredContacts from Firebase instead of connectedUsers
-    const connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-        lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue,sendDate},index) => ({
-          uid, name, email, city, intro, skillset, skills_needed, 
-          lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
-          companyName, jobTitle, interests, frequency,
-          daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
-        ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-      }));
+
+
+        // Use filteredContacts from Firebase instead of connectedUsers
+    let connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
+      lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue,sendDate},index) => ({
+        uid, name, email, city, intro, skillset, skills_needed, 
+        lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
+        companyName, jobTitle, interests, frequency,
+        daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
+      ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+    }));
+
+  const [connUsers,setConnUsers] = useState(connectedUsersOutput)
+  console.log("CONN USERS-->",connUsers)
+
+      useEffect(()=>{
+
+        setConnUsers(connectedUsersOutput)
+
+      },[])
+
+  
 
 
   return (
     <div className="flex flex-col flex-auto h-full">
       <AppBar position="static" color="default" elevation={0}>
-        {useMemo(
-          () => (
+        
             <Toolbar className="px-16">
               <Paper className="flex p-4 items-center w-full px-8 py-4 shadow">
                 <Icon color="action">search</Icon>
@@ -179,9 +180,7 @@ function InboxSidebar(props) {
                 />
               </Paper>
             </Toolbar>
-          ),
-          [searchText]
-        )}
+        
       </AppBar>
 
       {/* Chats List */}
@@ -200,15 +199,15 @@ function InboxSidebar(props) {
              {connectedUsersOutput.length > 0 && (
                   <motion.div variants={item}>
                     <Typography className="font-medium text-20 px-16 py-24" color="secondary">
-                      Touches
+                      Touches / Events
                     </Typography>
                   </motion.div>
                 )}
 
               
                 {
-                  connectedUsersOutput.length ? (
-                    connectedUsersOutput.map((user) => {
+                  connUsers && connUsers.length ? (
+                    connUsers.map((user) => {
                       return(
                         <motion.div variants={item} key={user.uid}>
                         <ContactListItem
@@ -218,11 +217,11 @@ function InboxSidebar(props) {
                           onClick={() => {dispatch(clearChats()) ; dispatch(saveEditedParagraphs({})) }}
                         />
                       </motion.div>
-                      );
+                      ); 
                       })
                     ) : (
                       <div className="container">
-                          <center><p className="center">No Touches available yet</p></center>
+                          <center><p className="center">No Touches/Events available yet</p></center>
                       </div>
                     )
                 }
