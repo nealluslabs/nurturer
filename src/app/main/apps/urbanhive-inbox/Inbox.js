@@ -1569,12 +1569,12 @@ label={<Typography fontSize="14px">
             </IconButton>
 
 
-           { !loading && 
+           {/* !loading && 
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
-            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))}}
+           <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))}} 
             
             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
-            }
+            */}
 
           { loading && 
             <CircularProgress size={20} style={{position:"absolute",top:"1.9rem",right:"8rem",color:"grey"}} />
