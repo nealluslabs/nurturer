@@ -28,7 +28,7 @@ const DummyAbout2 = () => {
       <h1 style={{fontWeight:"700",color:"#000",fontSize:"2.8rem"}}> Set It and Stay Top of Mind{/*<span className="text-accent">  get the Job! </span>*/}</h1>
 
          <p style={{fontSize:"1.8rem"}}>
-         Once set up, the system works for you—sending on your behalf with your sign-off. No writing, automatic scheduling, just nurturing made easy.
+         Effortless nurturing. Once set up, the system works for you—sending on your behalf with your sign-off. No writing, automatic scheduling, just nurturing made easy.
         </p>
 
        {/*<div className = "about-btn-placement" >

@@ -1,6 +1,6 @@
 import React from 'react'
 import './about.css'
-import mobileAndWeb from 'src/images/AI-agent-1.jpeg'
+import mobileAndWeb from 'src/images/3(1).png'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 //import { useNavigate } from 'react-router-dom'
 
@@ -36,7 +36,7 @@ const DummyAbout = () => {
       <h1 style={{fontWeight:"700",color:"#000",fontSize:"2.8rem"}}> Every Touchpoint is Personal{/*<span className="text-accent">  get the Job! </span>*/}</h1>
 
          <p style={{fontSize:"1.8rem"}}>
-         Every touchpoint is about the prospect—not your product. Share helpful and AI-powered relevant articles, 
+         Be different by showing you care. Every touchpoint is about the prospect—not your product. Share helpful and AI-powered relevant articles, 
          timely insights, holiday cards, and meaningful notes that build trust.
         </p>
 
