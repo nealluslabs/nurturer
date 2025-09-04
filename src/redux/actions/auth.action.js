@@ -32,9 +32,24 @@ import { clearChat } from 'src/redux/reducers/chat.slice';
 
 
 
-export const signup = (user, history) => async (dispatch) => {
+export const signup = (user, history,notifySkip) => async (dispatch) => {
       console.log(user);
        dispatch(signupPending());
+
+   
+
+       db.collection('companies')
+            .get()
+            .then((snapshot) => {
+              
+          
+              const  validCompanyIds = snapshot.docs.map((doc) => (doc.data().companyID));
+
+    
+              console.log("WHAT IS VALID COMPANY IDS--->",validCompanyIds)
+              console.log("WHAT IS COMPANY ID SUBMITTED FOR USER--->",user.companyID)
+              
+       if(validCompanyIds.includes(user.companyID)){  
         fb.auth().createUserWithEmailAndPassword(
           user.email,
           user.password
@@ -43,6 +58,7 @@ export const signup = (user, history) => async (dispatch) => {
           uid: res.user.uid,
           name: user.name,
           email: user.email,
+          companyID:user.companyID,
           phone: user.phone,
           password: user.password,
           photoUrl: static_img,
@@ -59,6 +75,18 @@ export const signup = (user, history) => async (dispatch) => {
         var errorMessage = err.message;
         dispatch(signupFailed({ errorMessage }));
       })
+
+      }else{
+        notifySkip("The company ID you entered is invalid, please verify your company ID and try again!")
+      }
+
+
+
+
+      })    
+
+
+
   }
 
   export const signin = (user,history) => async (dispatch) => {

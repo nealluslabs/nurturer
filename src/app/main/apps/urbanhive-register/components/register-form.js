@@ -14,6 +14,8 @@ import _ from '@lodash';
 import { signup } from 'src/redux/actions/auth.action';
 import { db, fb } from '../../../../../config/firebase';
 import { logoutSuccess } from 'src/redux/reducers/auth.slice';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 
 const schema = yup.object().shape({
@@ -42,7 +44,15 @@ const schema = yup.object().shape({
 //}, [id]);
 
 
-
+const notifySkip = (message) => toast.error(message, {
+  position: "top-right",
+  autoClose: 1000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  });
 
 
 const defaultValues = {
@@ -125,13 +135,24 @@ useEffect(()=>{
     const email = model.email;
     const phone = model.phone;
     const password = model.password;
-    const user = { name, email, phone, password };
-    dispatch(signup(user, history));
+    const user = { name, email, phone, password,companyID:companyID };
+    dispatch(signup(user, history,notifySkip));
   }
 
 
   return (
     <div className="w-full">
+      <ToastContainer
+          position="top-right"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
       {/* Close after 3 sec */}
       {/* {alert && <Alert  severity="error" color="error">
            Error Dey o
@@ -268,10 +289,10 @@ useEffect(()=>{
           render={({ field }) => (
             <TextField
               {...field}
-              value={companyId && companyId}
-              // onChange={(e) => setEmail(e.target.value)}
+              value={companyID && companyID}
+               onChange={(e) => setCompanyID(e.target.value)}
               className="mb-16"
-              type="text"
+              type="number"
               disabled={companyId?true:false}
               error={!!errors.companyID}
               helperText={errors?.companyID?.message}
