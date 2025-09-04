@@ -52,15 +52,9 @@ const DummyHeader = () => {
               style={{width:"180px",
               height:"50px",
               display:"inline-block",
-<<<<<<< HEAD
-             
-              backgroundColor: "#FCB004",
-              color:"white",
-=======
               //backgroundColor: "#000000",
               backgroundColor: "#fff6bd",
               color:"black",
->>>>>>> 19a00c3 (Made image changes to the and content change to the landing page)
               padding:"0.75rem 1.2rem", 
               cursor:"pointer",
               borderRadius: "5px",
@@ -76,8 +70,8 @@ const DummyHeader = () => {
               <button 
               onClick ={()=>{/*dispatch(setRecruiter(false));dispatch(setDemo(true));*/history.push('/login')}}
           style={{ 
-            backgroundColor: "#FCB004",
-            color: 'white',
+            backgroundColor: "#fff6bd",
+            color: 'black',
             padding: '10px 20px',
             borderRadius: '8px',
             textTransform: 'none', 
