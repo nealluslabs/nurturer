@@ -52,6 +52,7 @@
  width:500px;
  height:650px;
 
+
  object-fit: cover;     /* Ensures the image covers the container */
  object-position: 0 0;   /* Position the image starting from the top */
  clip-path: inset(10% 0 20% 0);

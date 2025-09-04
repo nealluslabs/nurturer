@@ -17,7 +17,7 @@ const DummyAbout2 = () => {
 
 
     <section id='about2'>
-    <div className="container-hp about2__container" style ={{marginTop:"10rem"}}>
+    <div className="container-hp about2__container" style ={{marginTop:"-5rem"}}>
        
 
 
