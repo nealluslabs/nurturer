@@ -18,7 +18,7 @@ const DummyAbout = () => {
     <section id='about' >
 
     <p style={{fontWeight:"700",fontSize:"3.5rem",color:"#000",paddingBottom:"1rem",paddingLeft:"0.8rem",paddingRight:"0.8rem",borderBottom:"1px solid #40255F",width:"max-content",margin:"0 auto",marginBottom:"2rem",marginTop:"3rem"}}> The Solution{/*<span className="text-accent">  get the Job! </span>*/}</p>
-    <div className="container-hp about__container" style ={{marginTop:"10rem"}}>
+    <div className="container-hp about__container" style ={{/*marginTop:"10rem",*/}}>
        
 
 

@@ -49,10 +49,14 @@
 
  .CTAboximg1{
  border-radius: 5%;
- width:450px;
- height:250px;
+ width:500px;
+ height:650px;
+
+ object-fit: cover;     /* Ensures the image covers the container */
+ object-position: 0 0;   /* Position the image starting from the top */
+ clip-path: inset(10% 0 20% 0);
  /*height:400px;*/
- aspect-ratio: 1 /(4/3);
+ /*aspect-ratio: 1 /(4/3);*/
  }
  
  .btn-place{
