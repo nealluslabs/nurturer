@@ -93,12 +93,13 @@ export default function ProfileForm() {
     const [file, setFile] = useState(null);
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
     const [triggers, setTriggers] = useState(profileData.triggers||[]);
+    const [interests, setInterests] = useState(profileData.interests||[]);
     const [photoURL, setPhotoURL] = useState(profileData.photoUrl != '' ? profileData.photoUrl : user.photoUrl);
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
 
     const [inputValue, setInputValue] = useState("");
-
+    const [inputValue2, setInputValue2] = useState("");
 
 
 
@@ -154,7 +155,19 @@ export default function ProfileForm() {
                     .filter((t) => t.length > 0);
       
                   setTriggers(triggerArray);
-                } else {
+                }
+                if (field === "interests") {
+                  // split by commas, trim each trigger
+                  const interestArray = row[field]
+                    .split(",")
+                    .map((t) => t.trim())
+                    .filter((t) => t.length > 0);
+      
+                  setInterests(interestArray);
+                }
+                
+                
+                else {
                 handleInputChange({
                   target: { name: field, value: row[field] },
                 });
@@ -209,7 +222,7 @@ export default function ProfileForm() {
              // "frequency",
              // "city",
               //"state",
-              //"interests", // uncomment later
+              "interests", // uncomment later
               "triggers",
               "companyName",
               "workAnniversary",
@@ -291,10 +304,25 @@ export default function ProfileForm() {
         setInputValue(""); // clear field
       }
     };
+
+    const handleKeyDown2 = (e) => {
+      if (e.key === "Enter" && inputValue.trim() !== "") {
+        e.preventDefault(); // prevent form submission
+        if (interests && !interests.includes(inputValue.trim())) {
+          setInterests([...interests, inputValue.trim()]);
+        }
+        setInputValue(""); // clear field
+      }
+    };
   
     const handleDelete = (triggerToDelete) => {
       setTriggers((prev) => prev.filter((t) => t !== triggerToDelete));
     };
+
+    const handleDelete2 = (interestToDelete) => {
+      setInterests((prev) => prev.filter((t) => t !== interestToDelete));
+    };
+  
   
 
     const initialFValues = {
@@ -308,7 +336,7 @@ export default function ProfileForm() {
       //triggers: profileData.triggers && profileData.triggers.length ===0   ? [] : profileData.triggers,
       frequency: profileData.frequency == '' ? '' : profileData.frequency,
       jobTitle:profileData && profileData.jobTitle && profileData.jobTitle == '' ? '' : profileData.jobTitle,
-      interests: profileData.interests == '' ? '' : profileData.interests,
+      //interests: profileData.interests == '' ? '' : profileData.interests,
       industry: profileData.industry == '' ? '' : profileData.industry,
       companyName: profileData.companyName == '' ? '' : profileData.companyName,
       name: profileData.name == '' ? '' : profileData.name,
@@ -353,7 +381,7 @@ export default function ProfileForm() {
        if ('jobTitle' in fieldValues)
         temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
        if ('state' in fieldValues)
-        temp.state = fieldValues.state.length != 0 ? "" : "This field is required."
+        temp.state = fieldValues.state && fieldValues.state.length != 0 ? "" : "This field is required."
       
        if ('frequency' in fieldValues)
         temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
@@ -412,19 +440,19 @@ export default function ProfileForm() {
            const jobTitle = values.jobTitle;
            const state = values.state;
            //const triggers = values.triggers;
-           const interests = values.interests;
+           //const interests = values.interests;
            const industry = values.industry;
            const frequency = values.frequency;
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary};
+          const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,birthday,workAnniversary};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
-          dispatch(createNewProfile({...profile,triggers}, user, file, resetForm, photoURL));
+          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL));
           }else{
-            dispatch(uploadNewImage({...profile,triggers}, user, file, resetForm));
+            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }
@@ -747,14 +775,45 @@ export default function ProfileForm() {
               
 
 
-                <Grid item xs={12} sm={6}>
+                {/*<Grid item xs={12} sm={6}>
                 <Controls.Input
                         label="Interests"
                         name="interests"
                         value={values.interests}
                         onChange={handleInputChange}
-                        //error={errors.city}
+                       
                     />
+                    </Grid>*/}
+
+
+
+                <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
+                     {/* Text input */}
+                   <TextField
+                     label="Add Interest"
+                     variant="outlined"
+                    style={{width:"53%"}}
+                     value={inputValue2}
+                     onChange={(e) => setInputValue2(e.target.value)}
+                     onKeyDown={handleKeyDown2}
+                   />
+             
+                   {/* Chips for interests */}
+                   <Box sx={{ mt: 1, display:interests &&interests.length?"flex": "none", gap: 1, flexWrap: "wrap",border:interests &&!interests.length?"0px":"0.5px solid gray",width:"55%",height:"max-content" }}>
+                     {interests && interests.map((interest, index) => (
+                      
+                       <Chip
+                         style={{width:"max-content",zIndex:"1000",color:"black"}}
+                         key={index}
+                         label={interest}
+                         onDelete={() => handleDelete2(interest)}
+                        
+                         variant="outlined"
+                         
+                       />
+                     
+                     ))}
+                   </Box>
                 </Grid>
 
 

@@ -8,6 +8,7 @@ import {
   FormControl,
   FormHelperText,
   Chip,
+  Autocomplete,
 } from "@mui/material";
 import { useForm, Form } from "./components/useForms";
 import FusePageSimple from "@fuse/core/FusePageSimple";
@@ -21,14 +22,19 @@ import { Grid } from '@material-ui/core';
 const initialFValues = {
   name: "",
   date: "",
+  email:"",
   eventType: "",
 };
+
+
 
 function EventsScreen() {
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("name" in fieldValues)
       temp.name = fieldValues.name ? "" : "This field is required.";
+    if ("email" in fieldValues)
+      temp.email = fieldValues.email ? "" : "This field is required.";
     if ("date" in fieldValues)
       temp.date = fieldValues.date ? "" : "This field is required.";
     if ("eventType" in fieldValues)
@@ -47,6 +53,35 @@ function EventsScreen() {
     }
   };
   const { isAuth } = useSelector((state) => state.login);
+  const { allUsers,allContacts, connectedUsers, filteredContacts,aiTrigger, connects, connects2, isLoading } = useSelector((state) => state.user);
+
+  console.log("ALL CONTACTS ON EVENTS PAGE--->",allContacts)
+
+  const handleSelectByName = (selectedName) => {
+    const contact = allContacts.find((c) => c.name === selectedName);
+
+    //console.log("WHAT IS CONTACT WHILE SELECTING NAME--->",contact && contact.email)
+    if (contact && contact.email) {
+      setValues((prev)=>({ ...prev,name: contact.name,email:contact.email && contact.email }));
+      handleSelectByEmail(contact && contact.email)
+       
+    } else {
+      setValues((prev) => ({ ...prev, name: selectedName }));
+    }
+
+   
+  };
+  
+  const handleSelectByEmail = (selectedEmail) => {
+    const contact = allContacts.find((c) => c.email === selectedEmail);
+    if (contact) {
+      setValues((prev)=>({ ...prev, name: contact.name, email: contact.email }));
+    } else {
+      setValues((prev) => ({ ...prev, email: selectedEmail }));
+    }
+  };
+  
+
 
   if (!isAuth) return <Redirect to={"/login"} />;
   return (
@@ -94,23 +129,82 @@ function EventsScreen() {
             >
               <div className="flex justify-between">
                 <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
-                  <TextField
-                    label="Name"
-                    name="name"
-                    value={values.name}
-                    onChange={handleInputChange}
-                    error={!!errors.name}
-                    helperText={errors.name}
-                    variant="outlined"
-                    InputProps={{
-                      sx: { fontSize: "1.3rem", width: '80%',   },
-                    }}
-                    InputLabelProps={{
-                      sx: { fontSize: "1.3rem" },
-                    }}
-                  />
+                    {/* Name Autocomplete */}
+                      <Autocomplete
+                        freeSolo
+                        options={allContacts && allContacts.map((c) => c.name)}
+                        inputValue={values.name}
+                       // onChange={(event, newInputValue) => {
+                       //   handleSelectByName(newInputValue);
+                       //   
+                       // }}
+                        onInputChange={(event, newInputValue) => {
+                          handleSelectByName(newInputValue);
+                          
+                        }}
+                        
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Name"
+                            name="name"
+                           //value={values.name}
+                            error={!!errors.name}
+                            helperText={errors.name}
+                            //onChange={handleInputChange}
+                            variant="outlined"
+                            InputProps={{
+                              ...params.InputProps,
+                              sx: { fontSize: '1.3rem', width: '100%' },
+                            }}
+                            InputLabelProps={{
+                              sx: { fontSize: '1.3rem' },
+                            }}
+                          />
+                        )}
+                      />
                 </Grid>
+
                 <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
+                   {/* Email Autocomplete */}
+                   <Autocomplete
+                     freeSolo
+                     options={allContacts && allContacts.map((c) => c.email)}
+                     inputValue={values.email}
+                     onInputChange={(event, newInputValue) => {
+                       handleSelectByEmail(newInputValue);
+                     }}
+                     
+                    // onChange={(event, newInputValue) => {
+                    //  handleSelectByEmail(newInputValue);
+                    //  
+                    //}}
+                     renderInput={(params) => (
+                       <TextField
+                         {...params}
+                         label="Email"
+                         name="email"
+                         //value={values.email}
+                         //onChange={handleInputChange}
+                         error={!!errors.email}
+                         helperText={errors.email}
+                         variant="outlined"
+                         InputProps={{
+                           ...params.InputProps,
+                           sx: { fontSize: '1.3rem', width: '100%' },
+                         }}
+                         InputLabelProps={{
+                           sx: { fontSize: '1.3rem' },
+                         }}
+                       />
+                     )}
+                   />
+                </Grid>
+
+                
+              </div>
+              <div className="flex justify-between">
+              <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
                   <TextField
                     label="Date"
                     name="date"
@@ -126,8 +220,8 @@ function EventsScreen() {
                     }}
                   />
                 </Grid>
-              </div>
-
+             
+            <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
               <FormControl fullWidth error={!!errors.eventType}>
                 <Select
                   labelId="event-type-label"
@@ -136,7 +230,7 @@ function EventsScreen() {
                   value={values.eventType}
                   onChange={handleInputChange}
                   displayEmpty
-                  sx={{ fontSize: "1.3rem", width: '40%', marginTop: 2 }}
+                  sx={{ fontSize: "1.3rem", width: '80%'}}
                 >
                   <MenuItem value="">
                     <em>Choose an event</em>
@@ -146,7 +240,11 @@ function EventsScreen() {
                 </Select>
                 <FormHelperText>{errors.eventType}</FormHelperText>
               </FormControl>
-              {/* </div> */}
+
+            </Grid>
+
+
+               </div> 
               <Divider>
                 <Chip label="😉 | 🔃" />
               </Divider>
