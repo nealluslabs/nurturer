@@ -216,7 +216,7 @@ function EventsScreen() {
                     helperText={errors.date}
                     variant="outlined"
                     InputProps={{
-                      sx: { fontSize: "1.3rem", width: '80%',  },
+                      sx: { fontSize: "1.3rem",  },
                     }}
                   />
                 </Grid>
@@ -230,7 +230,7 @@ function EventsScreen() {
                   value={values.eventType}
                   onChange={handleInputChange}
                   displayEmpty
-                  sx={{ fontSize: "1.3rem", width: '80%'}}
+                  sx={{ fontSize: "1.3rem",}}
                 >
                   <MenuItem value="">
                     <em>Choose an event</em>
