@@ -456,6 +456,7 @@ export default function SettingsForm() {
                 <Controls.Button
                     type="submit"
                     disabled={isLoading}
+                    style={{ backgroundColor: "#20dbe4" }}
                     text={isLoading ? 'Loading...' : 'Submit'} />
                {/* <Controls.Button
                     text="Reset"

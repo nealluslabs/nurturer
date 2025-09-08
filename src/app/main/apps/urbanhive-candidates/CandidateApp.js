@@ -145,7 +145,7 @@ function CandidateApp(props) {
     <button 
       onClick={() => { history.push('/apps/profile') }}
       style={{ 
-        backgroundColor: "black",
+        backgroundColor: "#20dbe4",
         color: 'white',
         padding: '10px 20px',
         borderRadius: '8px',
@@ -154,7 +154,7 @@ function CandidateApp(props) {
       }}
     >
       <AddIcon sx={{ marginRight: '4px' }} />
-      Add Contact
+      New Contact
     </button>
   </Grid>
 </Grid>

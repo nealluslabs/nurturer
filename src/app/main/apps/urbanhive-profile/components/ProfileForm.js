@@ -495,7 +495,7 @@ export default function ProfileForm() {
             
 
             sx={{
-              backgroundColor: "black",
+              backgroundColor: "#20dbe4",
               color: "white",
               height:"4.5rem",
               width:"11rem",
@@ -520,7 +520,7 @@ export default function ProfileForm() {
             <Button variant="contained"
             
             sx={{
-              backgroundColor: "black",
+              backgroundColor: "#20dbe4",
               color: "white",
               height:"4.5rem",
               width:"11rem",
@@ -554,7 +554,7 @@ export default function ProfileForm() {
                <Grid item>
                  <Button  onClick={() => document.getElementById("csvInput").click()}
                    sx={{
-                     backgroundColor: "black",
+                     backgroundColor: "#20dbe4",
                      color: "white",
                      height:"4.5rem",
                      width:"11rem",
@@ -593,7 +593,7 @@ export default function ProfileForm() {
                <Grid item>
                  <Button
                    sx={{
-                     backgroundColor: "black",
+                     backgroundColor: "#20dbe4",
                      color: "white",
                       height:"4.5rem",
                      width:"11rem",
@@ -697,7 +697,7 @@ export default function ProfileForm() {
                      {triggers && triggers.map((trigger, index) => (
                       
                        <Chip
-                         style={{width:"max-content",zIndex:"1000",color:"black"}}
+                         style={{width:"max-content",zIndex:"1000",color:"#20dbe4"}}
                          key={index}
                          label={trigger}
                          onDelete={() => handleDelete(trigger)}

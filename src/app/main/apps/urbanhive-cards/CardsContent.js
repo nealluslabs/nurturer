@@ -22,7 +22,7 @@ function CardsContent() {
 
         <button 
           style={{ 
-            background: 'linear-gradient(to right, #6a11cb, #b13cff)',
+            background: '#20dbe4',
             color: 'white',
             padding: '10px 20px',
             borderRadius: '8px',
@@ -167,7 +167,7 @@ function CardsContent() {
 
             <button
               style={{ 
-                background: 'linear-gradient(to right, #6a11cb, #b13cff)',
+                background: '#20dbe4',
                 color: 'white',
                 padding: '10px 20px',
                 borderRadius: '8px',
@@ -286,7 +286,7 @@ function CardsContent() {
 
             <button
               style={{ 
-                background: 'linear-gradient(to right, #6a11cb, #b13cff)',
+                background: '#20dbe4',
                 color: 'white',
                 padding: '10px 20px',
                 borderRadius: '8px',

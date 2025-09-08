@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {
   TextField,
   MenuItem,
@@ -16,19 +16,24 @@ import Icon from "@material-ui/core/Icon";
 import { Paper } from "@mui/material";
 import { Redirect } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
-import { Grid } from '@material-ui/core';
+import { Grid } from "@material-ui/core";
+import { useLocation } from "react-router-dom";
 
 const initialFValues = {
   name: "",
+  email: "",
   date: "",
   eventType: "",
 };
 
 function EventsScreen() {
+  
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     if ("name" in fieldValues)
       temp.name = fieldValues.name ? "" : "This field is required.";
+    if ("email" in fieldValues)
+      temp.email = fieldValues.email ? "" : "This field is required.";
     if ("date" in fieldValues)
       temp.date = fieldValues.date ? "" : "This field is required.";
     if ("eventType" in fieldValues)
@@ -47,8 +52,20 @@ function EventsScreen() {
     }
   };
   const { isAuth } = useSelector((state) => state.login);
+  const location = useLocation();
+  const { name, email } = location.state || {}; 
+  useEffect(() => {
+  if (name || email) {
+    setValues((prev) => ({
+      ...prev,
+      name: name || prev.name,
+      email: email || prev.email,
+    }));
+  }
+}, [name, email, setValues]);
 
   if (!isAuth) return <Redirect to={"/login"} />;
+
   return (
     <FusePageSimple
       header={
@@ -103,13 +120,33 @@ function EventsScreen() {
                     helperText={errors.name}
                     variant="outlined"
                     InputProps={{
-                      sx: { fontSize: "1.3rem", width: '80%',   },
+                      sx: { fontSize: "1.3rem", width: "80%" },
                     }}
                     InputLabelProps={{
                       sx: { fontSize: "1.3rem" },
                     }}
                   />
                 </Grid>
+                <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={values.email}
+                    onChange={handleInputChange}
+                    error={!!errors.email}
+                    helperText={errors.email}
+                    variant="outlined"
+                    InputProps={{
+                      sx: { fontSize: "1.3rem", width: "80%" },
+                    }}
+                     InputLabelProps={{
+                      sx: { fontSize: "1.3rem" },
+                    }}
+                  />
+                </Grid>
+              </div>
+              <div className="flex justify-between">
                 <Grid item xs={12} sm={6} style={{ marginTop: "1rem" }}>
                   <TextField
                     label="Date"
@@ -122,30 +159,37 @@ function EventsScreen() {
                     helperText={errors.date}
                     variant="outlined"
                     InputProps={{
-                      sx: { fontSize: "1.3rem", width: '80%',  },
+                      sx: { fontSize: "1.3rem", width: "80%" },
                     }}
                   />
                 </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  sm={6}
+                  style={{  marginTop: "1rem" }}  >
+
+                <FormControl fullWidth error={!!errors.eventType}>
+                  <Select
+                    labelId="event-type-label"
+                    id="event-type"
+                    name="eventType"
+                    value={values.eventType}
+                    onChange={handleInputChange}
+                    displayEmpty
+                    sx={{ fontSize: "1.3rem", width: "80%" }}
+                  >
+                    <MenuItem value="">
+                      <em>Choose an event</em>
+                    </MenuItem>
+                    <MenuItem value="Birthday">Birthday</MenuItem>
+                    <MenuItem value="Anniversary">Anniversary</MenuItem>
+                  </Select>
+                  <FormHelperText>{errors.eventType}</FormHelperText>
+                </FormControl>
+                  </Grid>
               </div>
 
-              <FormControl fullWidth error={!!errors.eventType}>
-                <Select
-                  labelId="event-type-label"
-                  id="event-type"
-                  name="eventType"
-                  value={values.eventType}
-                  onChange={handleInputChange}
-                  displayEmpty
-                  sx={{ fontSize: "1.3rem", width: '40%', marginTop: 2 }}
-                >
-                  <MenuItem value="">
-                    <em>Choose an event</em>
-                  </MenuItem>
-                  <MenuItem value="Birthday">Birthday</MenuItem>
-                  <MenuItem value="Anniversary">Anniversary</MenuItem>
-                </Select>
-                <FormHelperText>{errors.eventType}</FormHelperText>
-              </FormControl>
               {/* </div> */}
               <Divider>
                 <Chip label="😉 | 🔃" />
@@ -169,7 +213,7 @@ function EventsScreen() {
                     fontSize: "1.3rem",
                     borderRadius: "0.7rem",
                     color: "white",
-                    backgroundColor: "black",
+                    backgroundColor: "#20dbe4",
                     width: "100px",
                     height: "40px",
                   }}
