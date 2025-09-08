@@ -49,8 +49,8 @@
 
  .CTAboximg1{
  border-radius: 5%;
- width:500px;
-height:650px;
+ width:450px;
+height:600px;
 
 object-fit: cover;     /* Ensures the image covers the container */
 object-position: 0 0;   /* Position the image starting from the top */
