@@ -38,13 +38,7 @@ const Footer = () => {
        <ul>
         <li>
           <div style={{display:"flex",flexDirection:"row",justifyContent:"center",alignItems:"center",gap:"0.6rem",fontSize:"1.4rem"}}>
-           <FaSquareFacebook/>
-           <FaInstagram/>
-           
-           
-           <BsLinkedin/>
-           <FaYoutube/>
-
+           hello@nurturer.ai
 
           </div>
           

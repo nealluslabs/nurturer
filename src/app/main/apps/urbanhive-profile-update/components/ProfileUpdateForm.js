@@ -80,13 +80,35 @@ export default function ProfileUpdateForm() {
     const [showError2, setshowError2] = useState(false);
     const [file, setFile] = useState(null);
     const [triggers, setTriggers] = useState(candidateInFocus.triggers||[]);
+    const [interests2, setInterests2] = useState(candidateInFocus.interests||[]);
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
     const [photoURL, setPhotoURL] = useState(candidateInFocus.photoUrl != '' ? candidateInFocus.photoUrl : candidateInFocus.image);
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
     const [inputValue, setInputValue] = useState("");
 
-    console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",triggers)
+    console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",candidateInFocus.interests)
+
+    
+
+const [inputValue2, setInputValue2] = useState("");
+
+
+const handleKeyDown2 = (e) => {
+if (e.key === "Enter" && inputValue2.trim() !== "") {
+e.preventDefault(); // prevent form submission
+if (interests2 && !interests2.includes(inputValue2.trim())) {
+setInterests2([...interests2, inputValue2.trim()]);
+}
+setInputValue2(""); // clear field
+}
+};
+
+
+const handleDelete2 = (interestToDelete) => {
+setInterests2((prev) => prev.filter((t) => t !== interestToDelete));
+};
+
 
     /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
 
@@ -175,7 +197,7 @@ export default function ProfileUpdateForm() {
       state: candidateInFocus.state == '' ? '' : candidateInFocus.state,
       frequency: candidateInFocus.frequency == '' ? '' : candidateInFocus.frequency,
       jobTitle:candidateInFocus && candidateInFocus.jobTitle && candidateInFocus.jobTitle == '' ? '' : candidateInFocus.jobTitle,
-      interests: candidateInFocus.interests == '' ? '' : candidateInFocus.interests,
+      //interests: candidateInFocus.interests == '' ? '' : candidateInFocus.interests,
       industry: candidateInFocus.industry == '' ? '' : candidateInFocus.industry,
       companyName: candidateInFocus.companyName == '' ? '' : candidateInFocus.companyName,
       name: candidateInFocus.name == '' ? '' : candidateInFocus.name,
@@ -281,7 +303,7 @@ export default function ProfileUpdateForm() {
            const companyName = values.companyName;
            const jobTitle = values.jobTitle;
            const state = values.state;
-           const interests = values.interests;
+           //const interests = values.interests;
            const industry = values.industry;
            const frequency = values.frequency;
            const birthday = values.birthday;
@@ -291,9 +313,9 @@ export default function ProfileUpdateForm() {
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL == static_img){
-            dispatch(createNewProfile({...profile,triggers}, user, file, resetForm, photoURL));
+            dispatch(createNewProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
             }else{
-              dispatch(uploadNewImageforUpdate({...profile,triggers}, user, file, resetForm));
+              dispatch(uploadNewImageforUpdate({...profile,triggers,interests:interests2}, user, file, resetForm));
               //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
             } 
         }
@@ -527,13 +549,35 @@ export default function ProfileUpdateForm() {
 
 
                 <Grid item xs={12} sm={6}>
-                <Controls.Input
+                {/*<Controls.Input
                         label="Interests"
                         name="interests"
                         value={values.interests}
                         onChange={handleInputChange}
                         //error={errors.city}
-                    />
+                    />*/}
+
+                    {/* Text input */}
+               <TextField
+               label="Add Interest"
+               variant="outlined"
+               style={{width:"53%"}}
+               value={inputValue2}
+               onChange={(e) => setInputValue2(e.target.value)}
+               onKeyDown={handleKeyDown2}
+               />
+               {/* Chips for interests */}
+               <Box sx={{ mt: 1, display:interests2 &&interests2.length?"flex": "none", gap: 1, flexWrap: "wrap",border:interests2 &&!interests2.length?"0px":"0.5px solid gray",width:"55%",height:"max-content" }}>
+               {interests2 && interests2.map((interest, index) => (
+               <Chip
+               style={{width:"max-content",zIndex:"1000",color:"black"}}
+               key={index}
+               label={interest}
+               onDelete={() => handleDelete2(interest)}
+               variant="outlined"
+               />
+               ))}
+               </Box>
                 </Grid>
 
 
@@ -553,13 +597,36 @@ export default function ProfileUpdateForm() {
 
 
                 <Grid item xs={12} sm={6}>
-                <Controls.Input
+                {/*<Controls.Input
                         label="Work Anniversary"
                         name="workAnniversary"
                         value={values.workAnniversary}
                         onChange={handleInputChange}
-                        //error={errors.city}
-                    />
+                        
+                    />*/}
+
+                  <TextField
+                        label="Work Anniversary"
+                        name="workAnniversary"
+                        type="date"
+                        value={values.workAnniversary}
+                        onChange={handleInputChange}
+                        style={{
+                          width: '53%',
+                         // border:"1px solid #F5F5F5",
+                          //borderRadius:"5px",
+                          padding:"10px",
+
+                        }}
+                       
+                        InputProps={{
+                          sx: { fontSize: '1.3rem' },
+                        }}
+                        InputLabelProps={{
+                          sx: { fontSize: '1.3rem' },
+                          shrink: true,
+                        }}
+                      />
                 </Grid>
 
                {/* <Grid item xs={12} sm={6}>

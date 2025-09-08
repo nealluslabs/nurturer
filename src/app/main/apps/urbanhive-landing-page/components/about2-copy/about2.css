@@ -16,12 +16,14 @@
      align-items: center;
      gap:3rem; 
      padding-bottom: 4rem;
+    
  }
  
  .about2Explainer{
      flex:1;
      padding:5%;
      padding-top: 0.5%;
+     margin-top: auto;
  }
  
  .about2CTA{

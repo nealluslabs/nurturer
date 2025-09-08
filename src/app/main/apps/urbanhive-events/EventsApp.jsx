@@ -8,6 +8,7 @@ import {
   FormControl,
   FormHelperText,
   Chip,
+  Autocomplete,
 } from "@mui/material";
 import { useForm, Form } from "./components/useForms";
 import FusePageSimple from "@fuse/core/FusePageSimple";
@@ -23,8 +24,11 @@ const initialFValues = {
   name: "",
   email: "",
   date: "",
+  email:"",
   eventType: "",
 };
+
+
 
 function EventsScreen() {
   
@@ -32,6 +36,8 @@ function EventsScreen() {
     let temp = { ...errors };
     if ("name" in fieldValues)
       temp.name = fieldValues.name ? "" : "This field is required.";
+    if ("email" in fieldValues)
+      temp.email = fieldValues.email ? "" : "This field is required.";
     if ("email" in fieldValues)
       temp.email = fieldValues.email ? "" : "This field is required.";
     if ("date" in fieldValues)

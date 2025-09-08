@@ -32,7 +32,7 @@ const DummyHeader = () => {
       
 
       <div className="headerExplainer">
-         <h1 className="text-light" style={{marginBottom:"0rem",color:"white",fontWeight:"700",fontSize:"2.8rem"}}> Thoughtful Touches Without Thinking</h1>
+         <h1 className="text-light" style={{marginBottom:"0rem",color:"white",fontWeight:"700",fontSize:"2.8rem"}}> Thoughtful Touches Without The Thinking</h1>
    
          
             <p className="text-light" style={{maxWidth:"50%",margin:"0 auto",marginBottom:"2rem",marginTop:"2rem",fontSize:"1.5rem",color:"white"}}>
@@ -52,9 +52,9 @@ const DummyHeader = () => {
               style={{width:"180px",
               height:"50px",
               display:"inline-block",
-             
-              backgroundColor: "#FCB004",
-              color:"white",
+              //backgroundColor: "#000000",
+              backgroundColor: "#fff6bd",
+              color:"black",
               padding:"0.75rem 1.2rem", 
               cursor:"pointer",
               borderRadius: "5px",
