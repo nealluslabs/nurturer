@@ -553,13 +553,36 @@ export default function ProfileUpdateForm() {
 
 
                 <Grid item xs={12} sm={6}>
-                <Controls.Input
+                {/*<Controls.Input
                         label="Work Anniversary"
                         name="workAnniversary"
                         value={values.workAnniversary}
                         onChange={handleInputChange}
-                        //error={errors.city}
-                    />
+                        
+                    />*/}
+
+                  <TextField
+                        label="Work Anniversary"
+                        name="workAnniversary"
+                        type="date"
+                        value={values.workAnniversary}
+                        onChange={handleInputChange}
+                        style={{
+                          width: '53%',
+                         // border:"1px solid #F5F5F5",
+                          //borderRadius:"5px",
+                          padding:"10px",
+
+                        }}
+                       
+                        InputProps={{
+                          sx: { fontSize: '1.3rem' },
+                        }}
+                        InputLabelProps={{
+                          sx: { fontSize: '1.3rem' },
+                          shrink: true,
+                        }}
+                      />
                 </Grid>
 
                {/* <Grid item xs={12} sm={6}>

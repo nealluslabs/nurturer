@@ -306,12 +306,12 @@ export default function ProfileForm() {
     };
 
     const handleKeyDown2 = (e) => {
-      if (e.key === "Enter" && inputValue.trim() !== "") {
+      if (e.key === "Enter" && inputValue2.trim() !== "") {
         e.preventDefault(); // prevent form submission
-        if (interests && !interests.includes(inputValue.trim())) {
-          setInterests([...interests, inputValue.trim()]);
+        if (interests && !interests.includes(inputValue2.trim())) {
+          setInterests([...interests, inputValue2.trim()]);
         }
-        setInputValue(""); // clear field
+        setInputValue2(""); // clear field
       }
     };
   
@@ -833,13 +833,35 @@ export default function ProfileForm() {
 
 
                 <Grid item xs={12} sm={6}>
-                <Controls.Input
+                {/*<Controls.Input
                         label="Work Anniversary"
                         name="workAnniversary"
                         value={values.workAnniversary}
                         onChange={handleInputChange}
-                        //error={errors.city}
-                    />
+                        
+                    />*/}
+
+                    <TextField
+                        label="Work Anniversary"
+                        name="workAnniversary"
+                        type="date"
+                        value={values.workAnniversary}
+                        onChange={handleInputChange}
+                         style={{
+                          width: '53%',
+                          //border:"1px solid #F5F5F5",
+                          //padding:"10px",
+                          borderRadius:"5px"
+                        }}
+                       
+                        InputProps={{
+                          sx: { fontSize: '1.3rem' },
+                        }}
+                        InputLabelProps={{
+                          sx: { fontSize: '1.3rem' },
+                          shrink: true,
+                        }}
+                      />
                 </Grid>
 
                {/* <Grid item xs={12} sm={6}>
