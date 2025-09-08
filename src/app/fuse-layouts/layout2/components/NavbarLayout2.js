@@ -7,7 +7,9 @@ import { memo } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.default,
+    /*backgroundColor: theme.palette.background.default,*/
+    background:
+    ' linear-gradient(rgba(32, 219, 228, 0) 30%, rgba(32, 219, 228, 0) 30%), linear-gradient(rgba(32, 219, 228, 0.25) 0, rgba(32, 219, 228, 0) 40%);',
     color: theme.palette.text.primary,
   },
 }));

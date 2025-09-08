@@ -46,7 +46,7 @@ function FusePageSimpleSidebar(props, ref) {
           }}
           style={{ position: 'absolute' }}
         >
-          <FusePageSimpleSidebarContent {...props} />
+        <FusePageSimpleSidebarContent {...props} />
         </SwipeableDrawer>
       </Hidden>
       {props.variant === 'permanent' && (
