@@ -108,13 +108,13 @@ function NavbarStyle3Content(props) {
 
   return (
     <ClickAwayListener onClickAway={() => setPanelOpen(false)}>
-      <div className={clsx('flex flex-auto flex h-full', classes.root, props.className)}>
+      <div className={clsx('flex-auto flex h-full', classes.root, props.className)}>
         <ThemeProvider theme={contrastTheme}>
           <div
             id="fuse-navbar-side-panel"
             className={clsx(classes.sidePanel, 'flex flex-shrink-0 flex-col items-center')}
           >
-            <img className="w-44 my-32" src="assets/images/logos/nurturer-logo.png" alt="logo" />
+            <img className="w-44 my-32" src="assets/images/logos/Group-2.png" alt="logo" />
 
             <FuseScrollbars
               className="flex flex-1 min-h-0 justify-center w-full overflow-y-auto overflow-x-hidden"

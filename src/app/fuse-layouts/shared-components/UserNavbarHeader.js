@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import { useSelector } from 'react-redux';
-
+// import logo from '/images/Group-2.png'
 const useStyles = makeStyles((theme) => ({
   root: {
     '&.user': {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   avatar: {
-    background: theme.palette.background.default,
+    // background: theme.palette.background.default,
     transition: theme.transitions.create('all', {
       duration: theme.transitions.duration.shortest,
       easing: theme.transitions.easing.easeInOut,
@@ -35,7 +35,7 @@ function UserNavbarHeader(props) {
 
   return (
     <AppBar
-      style={{backgroundColor: "#000000"}}
+      style={{backgroundColor: "#20dbe4"}}
       position="static"
       color="primary"
       classes={{ root: classes.root }}
@@ -54,10 +54,10 @@ function UserNavbarHeader(props) {
         <br/><br/>
         <Avatar
           // style={{: '2em'}}
-          style={{ width: '100px', height: '120px', backgroundColor: "#000000"}}
+          style={{ width: '100px', height: '120px'}}
           className={clsx(classes.avatar, 'avatar w-72 h-72 p-8 box-content')}
           alt="user photo"
-          src={'assets/images/logos/nurturer-logo.png'}
+          src={'assets/images/logos/Group-2.png'}
           // src={
           //   user.data.photoURL && user.data.photoURL !== ''
           //     ? user.data.photoURL
