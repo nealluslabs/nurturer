@@ -52,8 +52,13 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     flex: '1 1 auto',
     height: 'auto',
+<<<<<<< HEAD
    // backgroundColor: ' #20dbe4',
      backgroundColor: theme.palette.background.default,
+=======
+    // backgroundColor: ' #20dbe4',
+    backgroundColor: '#fff',
+>>>>>>> 2fa7065dbe1fd6ae494cb7b2a6476830b09cdf56
   },
   topBg: {
     position: 'absolute',
@@ -110,6 +115,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     flex: '1 1 100%',
     zIndex: 10,
+<<<<<<< HEAD
     //background: ' #20dbe4'
   },
      background: `linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0.8)} 0,${alpha(
@@ -117,6 +123,15 @@ const useStyles = makeStyles((theme) => ({
        0.6
      )} 20%,${alpha(theme.palette.background.paper, 0.8)})`,
    //},
+=======
+    // background: ' #20dbe4'
+  },
+    background: `linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0.8)} 0,${alpha(
+      theme.palette.background.paper,
+      0.6
+    )} 20%,${alpha(theme.palette.background.paper, 0.8)})`,
+  // },
+>>>>>>> 2fa7065dbe1fd6ae494cb7b2a6476830b09cdf56
   content: {
     display: 'flex',
     flex: '1 1 100%',
