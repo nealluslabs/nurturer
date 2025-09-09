@@ -57,7 +57,9 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     height: headerHeight,
     backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
-    backgroundColor: theme.palette.primary.dark,
+    
+    //backgroundColor: theme.palette.primary.dark,
+    backgroundColor:'#20dbe4',
     backgroundSize: 'cover',
     pointerEvents: 'none',
   },

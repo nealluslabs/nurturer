@@ -35,7 +35,7 @@ function UserNavbarHeader(props) {
 
   return (
     <AppBar
-      style={{backgroundColor: "#000000"}}
+      style={{backgroundColor: "#20dbe4"}}
       position="static"
       color="primary"
       classes={{ root: classes.root }}
@@ -54,7 +54,7 @@ function UserNavbarHeader(props) {
         <br/><br/>
         <Avatar
           // style={{: '2em'}}
-          style={{ width: '100px', height: '120px', backgroundColor: "#000000"}}
+          style={{ width: '100px', height: '120px', backgroundColor: "#20dbe4"}}
           className={clsx(classes.avatar, 'avatar w-72 h-72 p-8 box-content')}
           alt="user photo"
           src={'assets/images/logos/nurturer-logo.png'}

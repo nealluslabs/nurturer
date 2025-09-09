@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     backgroundImage: 'url("/assets/images/patterns/rain-grey.png")',
     backgroundColor: theme.palette.background.paper,
-    // backgroundColor: '#20dbe4',
+   
     minHeight: 0,
     overflow: 'hidden',
   },

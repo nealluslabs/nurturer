@@ -52,8 +52,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     flex: '1 1 auto',
     height: 'auto',
-    backgroundColor: ' #20dbe4',
-    // backgroundColor: theme.palette.background.default,
+   // backgroundColor: ' #20dbe4',
+     backgroundColor: theme.palette.background.default,
   },
   topBg: {
     position: 'absolute',
@@ -91,8 +91,8 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 1 100%',
     flexDirection: 'row',
     backgroundImage: 'url("/assets/images/patterns/rain-grey.png")',
-    backgroundColor:' #20dbe4',
-    // backgroundColor: theme.palette.background.paper,
+   // backgroundColor:' #20dbe4',
+    backgroundColor: theme.palette.background.paper,
     minHeight: 0,
     overflow: 'hidden',
   },
@@ -110,13 +110,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     flex: '1 1 100%',
     zIndex: 10,
-    background: ' #20dbe4'
+    //background: ' #20dbe4'
   },
-  //   background: `linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0.8)} 0,${alpha(
-  //     theme.palette.background.paper,
-  //     0.6
-  //   )} 20%,${alpha(theme.palette.background.paper, 0.8)})`,
-  // },
+     background: `linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0.8)} 0,${alpha(
+       theme.palette.background.paper,
+       0.6
+     )} 20%,${alpha(theme.palette.background.paper, 0.8)})`,
+   //},
   content: {
     display: 'flex',
     flex: '1 1 100%',

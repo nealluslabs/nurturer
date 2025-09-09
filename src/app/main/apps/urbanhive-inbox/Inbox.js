@@ -239,6 +239,8 @@ const [paragraphs, setParagraphs] = useState(selectedChatUser.messageQueue  && s
   thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" "
 });
 
+console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", selectedChatUser.messageQueue )
+
 const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints
   :
  []
@@ -1189,13 +1191,14 @@ We had some great conversations previously, and I really valued the opportunity 
           label={<Typography fontSize="14px"><a href="https://www.entrepreneur.com/en-in/news-and-trends/ai-agents-to-redefine-enterprise-strategy-in-2025-report/492416" target="_blank" rel="noopener noreferrer">AI-Augmented Intelligence: Redefining Enterprise Decision-Making in 2025</a></Typography>}
         />*/}
 
-{paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints  && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
           control={<Radio 
             checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            
             onClick={()=>{updateArticle(
             {
               id:point.id,
@@ -1209,6 +1212,8 @@ We had some great conversations previously, and I really valued the opportunity 
        
         </>
       ))}
+
+      
       
          
       </Stack>
@@ -1353,14 +1358,17 @@ We had some great conversations previously, and I really valued the opportunity 
            />
             */}
 
-    {paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints  && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio
+          control={<Radio 
             checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
-             onClick={()=>{updateArticle(
+            
+            onClick={()=>{
+              console.log("WHAT IS POINT FROM JOHN SMITH -->",point)
+              updateArticle(
             {
               id:point.id,
               bulletPointBold:point.bulletPointRest && point.bulletPointBold,
@@ -1368,7 +1376,7 @@ We had some great conversations previously, and I really valued the opportunity 
               link:point.link && point.link
             }
           )}}/>}
-          label={<Typography fontSize="14px"><a href={point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
+          label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
         </>
@@ -1432,13 +1440,14 @@ We had some great conversations previously, and I really valued the opportunity 
         />
         */}
 
-{paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
+{paragraphs && paragraphs.bulletPoints  && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
           value="article1"
-          control={<Radio
+          control={<Radio 
             checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
+            
             onClick={()=>{updateArticle(
             {
               id:point.id,
@@ -1447,11 +1456,13 @@ We had some great conversations previously, and I really valued the opportunity 
               link:point.link && point.link
             }
           )}}/>}
-          label={<Typography fontSize="14px"><a href={point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
+          label={<Typography fontSize="14px"><a href={point.link && point.link} target="_blank" rel="noopener noreferrer">{point.bulletPointBold}</a></Typography>}
         />
        
         </>
       ))}
+
+      
       </Stack>
    
   </FormControl>

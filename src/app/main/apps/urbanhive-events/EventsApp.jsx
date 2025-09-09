@@ -77,7 +77,7 @@ function EventsScreen() {
       header={
         <div
           className="flex flex-1 items-center justify-between p-12 md:p-24"
-          style={{ backgroundColor: "#000000" }}
+          style={{backgroundColor: "#20dbe4"}}
         >
           <div className="flex flex-col">
             <div className="flex items-center mb-16">

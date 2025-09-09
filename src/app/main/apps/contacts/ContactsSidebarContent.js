@@ -64,7 +64,7 @@ function ContactsSidebarContent(props) {
 
         <Divider />
 
-        <div className="p-24">
+        <div className="p-24" style={{backgroundColor: "#20dbe4"}}>
           <Button
             variant="contained"
             color="secondary"
