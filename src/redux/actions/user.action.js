@@ -310,7 +310,7 @@ export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite,selected
         })
         .then(() => {
           console.log("Message Updated Successfully in ut1@nurturer")
-          notifyInvite()
+         // notifyInvite()
         })
 
 

@@ -138,7 +138,7 @@ function InboxSidebar(props) {
 
 
         // Use filteredContacts from Firebase instead of connectedUsers
-    let connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    let connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).sort((a, b) => (a.frequencyInDays || 0) - (b.frequencyInDays || 0)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
       lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue,sendDate},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
@@ -147,7 +147,7 @@ function InboxSidebar(props) {
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
-  const [connUsers,setConnUsers] = useState(connectedUsersOutput)
+  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].sort((a, b) => (a.frequencyInDays || 0) - (b.frequencyInDays || 0)) )
   console.log("CONN USERS-->",connUsers)
 
       useEffect(()=>{
