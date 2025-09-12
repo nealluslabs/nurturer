@@ -11,7 +11,7 @@ import { memo } from 'react';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
+    color: /*theme.palette.text.primary,*/'#FFF',
     '& ::-webkit-scrollbar-thumb': {
       boxShadow: `inset 0 0 0 20px ${
         theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.24)' : 'rgba(255, 255, 255, 0.24)'
@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     overflowY: 'auto',
     '-webkit-overflow-scrolling': 'touch',
+    color: /*theme.palette.text.primary,*/'#FFF',
     background:
       'linear-gradient(rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 30%), linear-gradient(rgba(0, 0, 0, 0.25) 0, rgba(0, 0, 0, 0) 40%)',
     backgroundRepeat: 'no-repeat',
@@ -42,7 +43,7 @@ function NavbarStyle1Content(props) {
 
   return (
     <div
-    style={{backgroundColor:' #20dbe4'}}
+    style={{backgroundColor:' #20dbe4',color:"#FFF"}}
       className={clsx(
         'flex flex-auto flex-col overflow-hidden h-full',
         classes.root,
@@ -51,11 +52,12 @@ function NavbarStyle1Content(props) {
     >
       <FuseScrollbars
         className={clsx(classes.content)}
+        style={{backgroundColor:' #20dbe4',color:"#FFF"}}
         option={{ suppressScrollX: true, wheelPropagation: false }}
       >
         <UserNavbarHeader />
 
-        <Navigation layout="vertical" />
+        <Navigation layout="vertical"  style={{backgroundColor:' #20dbe4',color:"#FFF"}}  />
       </FuseScrollbars>
     </div>
   );

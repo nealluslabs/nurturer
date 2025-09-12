@@ -17,6 +17,7 @@ import { selectWidgets } from './store/widgetsSlice';
 const useStyles = makeStyles((theme) => ({
   selectedProject: {
     background: lighten(theme.palette.primary.dark, 0.1),
+    background:"white",
     color: theme.palette.primary.contrastText,
     borderRadius: '16px 0 0 0',
   },

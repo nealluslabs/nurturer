@@ -23,7 +23,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    
+    backgroundColor:"white",
     width:"100%",
     '& canvas': {
       maxHeight: '100%',

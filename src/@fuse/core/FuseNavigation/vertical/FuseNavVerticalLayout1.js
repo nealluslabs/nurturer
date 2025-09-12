@@ -8,16 +8,19 @@ const useStyles = makeStyles((theme) => ({
   navigation: {
     '& .fuse-list-item': {
       '&:hover': {
+        color:"white",
         backgroundColor:
           theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0,0,0,.04)',
       },
       '&:focus:not(.active)': {
+        color:"white",
         backgroundColor:
          theme.palette.type === 'dark' ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0,0,0,.05)',
       },
     },
     '&.active-square-list': {
       '& .fuse-list-item, & .active.fuse-list-item': {
+        color:"white",
         width: '100%',
         borderRadius: '0',
        
@@ -25,6 +28,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '&.dense': {
       '& .fuse-list-item': {
+        color:"white",
         paddingTop: 0,
         paddingBottom: 0,
         height: 32,

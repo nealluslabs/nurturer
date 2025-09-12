@@ -14,12 +14,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   selectedProject: {
-    background: theme.palette.primary.main,
+     //background: theme.palette.primary.main,
+    backgroundColor:'#FFF', /*theme.palette.primary.main*/
     color: theme.palette.primary.contrastText,
     borderRadius: '8px 0 0 0',
   },
   projectMenuButton: {
-    background: theme.palette.primary.main,
+    //background: theme.palette.primary.main,
+    backgroundColor:'#FFF', /*theme.palette.primary.main*/
     color: theme.palette.primary.contrastText,
     borderRadius: '0 8px 0 0',
     marginLeft: 1,
@@ -42,6 +44,7 @@ function CardsApp(props) {
         content: classes.content,
         leftSidebar: 'w-256 border-0',
         header: 'min-h-auto',
+         backgroundColor: '#FFF',
       }}
     //   header={<CardsHeader />}
       content={<CardsContent />}

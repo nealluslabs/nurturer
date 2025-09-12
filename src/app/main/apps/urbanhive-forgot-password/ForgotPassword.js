@@ -45,7 +45,7 @@ function ForgotPassword() {
   }
 
   
-  if (isAuth) return <Redirect to={'/candidates'}/>
+  if (isAuth) return <Redirect to={'/apps/dashboard'}/>
   return (
     <div
       className={clsx(

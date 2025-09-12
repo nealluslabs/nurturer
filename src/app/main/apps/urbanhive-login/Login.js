@@ -19,18 +19,22 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
-      theme.palette.primary.dark,
-      0.5
-    )} 100%)`,
+    //yellow -dagogo
+    background:"#fff6bd",
+//background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
+//  theme.palette.primary.dark,
+//  0.5
+//)} 100%)`,
     color: theme.palette.primary.contrastText,
   },
   leftSection: {},
   rightSection: {
-    background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
-      theme.palette.primary.dark,
-      0.5
-    )} 100%)`,
+    //blue - dagogo
+    background:"#20dbe4",
+   // background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
+   //   theme.palette.primary.dark,
+   //   0.5
+   // )} 100%)`,
     color: theme.palette.primary.contrastText,
   },
 }));
@@ -45,7 +49,7 @@ function Login() {
   }
 
   
-  if (isAuth) return <Redirect to={'/candidates'}/>
+  if (isAuth) return <Redirect to={'/apps/dashboard'}/>
   return (
     <div
       className={clsx(

@@ -32,6 +32,7 @@ import { setCurrentChat } from 'redux/reducers/chat.slice';
 
 const useStyles = makeStyles((theme) => ({
   content: {
+    backgroundColor:"white",
     '& canvas': {
       maxHeight: '100%',
     },
@@ -327,7 +328,7 @@ if (allContacts.length > 0) {
 
   if (!isAuth) return <Redirect to={'/login'}/>
   return (
-    <div style={{margin: "30px"}}>
+    <div style={{margin: "30px",backgroundColor:"white"}}>
 
       <div style={{
         display: "grid",

@@ -14,12 +14,14 @@ import { useLocation } from 'react-router-dom';
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
+    //color: theme.palette.primary.contrastText,
+    color: /*theme.palette.text.primary,*/'#FFF',
   },
   sidePanel: {},
   panel: {
     backgroundColor: theme.palette.background.default,
-    color: theme.palette.text.primary,
+    //color: theme.palette.text.primary,
+    color: /*theme.palette.text.primary,*/'#FFF',
     transition: theme.transitions.create(['opacity'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.shortest,

@@ -12,7 +12,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
    // backgroundColor: theme.palette.background.default,
    backgroundColor:'#20dbe4',
-    color: theme.palette.text.primary,
+    //color: theme.palette.text.primary,
+    color: /*theme.palette.text.primary,*/'#FFF',
     '& ::-webkit-scrollbar-thumb': {
       boxShadow: `inset 0 0 0 20px ${
         theme.palette.type === 'light' ? 'rgba(0, 0, 0, 0.24)' : 'rgba(255, 255, 255, 0.24)'
@@ -31,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
     '-webkit-overflow-scrolling': 'touch',
     backgroundColor:
       '#20dbe4',
+      color: /*theme.palette.text.primary,*/'#FFF',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 40px, 100% 10px',
     backgroundAttachment: 'local, scroll',

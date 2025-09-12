@@ -249,7 +249,7 @@ console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
 
       dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date()},user,notifyInvite,selectedChatUser))
+      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date()},user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}
@@ -264,7 +264,7 @@ console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
 
 
 
-export const updateUserBroadcast = (updatedParagraphs,user,notifyInvite,selectedChatUser) => async (dispatch) => {
+export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => async (dispatch) => {
   console.log("MESSAGE IS IN PHASE 2:", user.uid);
   
   try {

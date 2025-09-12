@@ -11,7 +11,7 @@ import Holiday from "../../../../images/Holiday_1.png";
 
 function CardsContent() {
   return (
-    <div style={{ padding: '24px' }}>
+    <div style={{ padding: '24px',backgroundColor:"white"}}>
       <Box
         sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}
       >

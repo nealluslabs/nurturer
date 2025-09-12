@@ -21,14 +21,17 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 12,
     paddingLeft: props.itemPadding > 80 ? 80 : props.itemPadding,
     color: alpha(theme.palette.text.primary, 0.7),
+    color:"white",
     cursor: 'pointer',
     
     textDecoration: 'none!important',
     '&:hover': {
       color: theme.palette.text.primary,
+      color:"white",
     },
     '&.active': {
       color: theme.palette.text.primary,
+      color:"white",
       backgroundColor:
         /*theme.palette.type === 'light'
           ? ((props.item && props.item.title ==='Settings' )||(props.item && props.item.title ==='Newsletter' )||(props.item )) ? "transparent":'rgba(0, 0, 0, .05)' 
@@ -37,14 +40,17 @@ const useStyles = makeStyles((theme) => ({
       transition: 'border-radius .15s cubic-bezier(0.4,0.0,0.2,1)',
       '& .fuse-list-item-text-primary': {
         color: 'inherit',
+        color:"white",
       },
       '& .fuse-list-item-icon': {
         color: 'inherit',
+        color:"white",
       },
     },
     '& .fuse-list-item-icon': {
       marginRight: 12,
       color: 'inherit',
+      color:"white",
     },
     '& .fuse-list-item-text': {},
   }
