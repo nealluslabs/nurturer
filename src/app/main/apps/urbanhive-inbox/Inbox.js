@@ -201,6 +201,7 @@ const handleInput = () => {
     firstParagraph: editableRef.current.querySelector(".firstParagraph")?.innerText || "",
     secondParagraph: editableRef.current.querySelector(".secondParagraph")?.innerText || "",
     thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || "",
+    //PERHAPS CONSIDER SETTING BULLET POINTS --AS THEY MAY DISAPPEAR WHEN YOU START TYPING.. OR NOT, WE MAY NOT NEED TO TYPE  DAGOGO -SEP 12 2025
     messageType:'Trigger'
   };
   console.log("HANDLE INPUTS IS WORKING",paragraphs)
@@ -290,7 +291,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    
 
 
-    setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]
+    setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? {...selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1],bulletPoints:selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1].bulletPoints.slice(0,2) }
       :
       {
       firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
