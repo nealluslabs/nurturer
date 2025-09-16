@@ -21,7 +21,7 @@ function CardsContent() {
         </Typography>
 
         <button 
-          style={{ 
+          sx={{ 
             background: '#20dbe4',
             color: 'white',
             padding: '10px 20px',
@@ -37,9 +37,27 @@ function CardsContent() {
         </button>
       </Box>
 
-      <div style={{ marginTop: "42px", display: "flex", justifyContent: "space-between", flexWrap: "wrap" }}>
+      <Box sx={{ marginTop: "42px", display: "flex", justifyContent: "space-between",
+      flexWrap:{
+        sm: "wrap",
+      xs:"nowrap"},
+      flexDirection:{
+        xs: "column",        // mobile (extra-small)
+          sm: "row", // small screens
+          md: "row"  // medium+
+      }
+      /*display: "grid",
+        gridTemplateColumns: {
+          xs: "1fr",        // mobile (extra-small)
+          sm: "repeat(2, 1fr)", // small screens
+          md: "repeat(2, 1fr)"  // medium+
+        },
+        gap: {sm:"16px",xs:"24px"},*/
+        }}>
+
+
         
-        <div style={{ width: "50%", backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
+        <Box sx={{ width: {xs:"100%",sm:"50%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
 
           <div 
             style={{ 
@@ -77,7 +95,7 @@ function CardsContent() {
                 <div
                   style={{ 
                     display: "flex", alignItems: "center", cursor: "pointer", 
-                    border: "1px solid blue", padding: "8px", borderRadius: "4px",
+                    border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
@@ -87,7 +105,7 @@ function CardsContent() {
                 <div
                   style={{ 
                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
-                    border: "1px solid red", padding: "8px", borderRadius: "4px", 
+                    border: "1px solid red", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
                 >
                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
@@ -109,7 +127,7 @@ function CardsContent() {
                 <div
                   style={{ 
                     display: "flex", alignItems: "center", cursor: "pointer", 
-                    border: "1px solid blue", padding: "8px", borderRadius: "4px",
+                    border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
@@ -119,7 +137,7 @@ function CardsContent() {
                 <div
                   style={{ 
                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
-                    border: "1px solid red", padding: "8px", borderRadius: "4px", 
+                    border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem"
                   }}
                 >
                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
@@ -129,9 +147,9 @@ function CardsContent() {
 
           </div>
 
-        </div>
+        </Box>
 
-        <div style={{ width: "45%", backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
+        <Box sx={{width: {xs:"100%",sm:"45%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
 
           <div 
             style={{ 
@@ -183,14 +201,16 @@ function CardsContent() {
 
           </div>
 
-        </div>
+        </Box>
 
-        <div 
-          style={{ 
-            width: "50%", backgroundColor: "white", padding: "6px", borderRadius: "8px",  
-            marginTop: "24px" 
+        <Box
+          sx={{ 
+            width: {xs:"100%",sm:"45%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px",  
+            marginTop: "24px"
           }}
         >
+
+          
 
           <div 
             style={{ 
@@ -228,7 +248,7 @@ function CardsContent() {
                 <div
                   style={{ 
                     display: "flex", alignItems: "center", cursor: "pointer", 
-                    border: "1px solid blue", padding: "8px", borderRadius: "4px",
+                    border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
@@ -238,7 +258,7 @@ function CardsContent() {
                 <div
                   style={{ 
                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
-                    border: "1px solid red", padding: "8px", borderRadius: "4px", 
+                    border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem",
                   }}
                 >
                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
@@ -248,9 +268,9 @@ function CardsContent() {
 
           </div>
 
-        </div>
+        </Box>
 
-        <div style={{ width: "45%", backgroundColor: "white", padding: "6px", borderRadius: "8px", marginTop: "24px" }}>
+        <Box sx={{ width: {xs:"100%",sm:"45%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px", marginTop: "24px" }}>
 
           <div 
             style={{ 
@@ -302,9 +322,9 @@ function CardsContent() {
 
           </div>
 
-        </div>
+        </Box>
 
-      </div>
+      </Box>
     </div>
   );
 }

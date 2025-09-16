@@ -29,6 +29,7 @@ import { Mail } from '@mui/icons-material';
 import { fetchAllContactForOneUser } from 'redux/actions/user.action';
 import { saveFilteredContacts } from 'redux/reducers/user.slice';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
+import { Box,Button } from '@mui/material';
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -330,9 +331,13 @@ if (allContacts.length > 0) {
   return (
     <div style={{margin: "30px",backgroundColor:"white"}}>
 
-      <div style={{
+      <Box sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
+        gridTemplateColumns: {
+          xs: "repeat(2, 1fr)",        // mobile (extra-small)
+          sm: "repeat(4, 1fr)", // small screens
+          md: "repeat(4, 1fr)"  // medium+
+        },
         gap: "16px"
       }}>
         {statsData.map((item, key) => {
@@ -374,13 +379,17 @@ if (allContacts.length > 0) {
             </div>
           );
         })}
-      </div>
+      </Box>
 
-      <div style={{
+      <Box sx={{
         display: "grid",
-        gridTemplateColumns: "repeat(2, 1fr)",
-        gap: "16px",
-        margin: "26px 2px"
+        gridTemplateColumns: {
+          xs: "1fr",        // mobile (extra-small)
+          sm: "repeat(2, 1fr)", // small screens
+          md: "repeat(2, 1fr)"  // medium+
+        },
+        gap: {sm:"16px",xs:"24px"},
+        margin:"26px 2px"
       }}>
 
 
@@ -463,15 +472,15 @@ if (allContacts.length > 0) {
 
 
                    
-              <button 
-                style={{ 
-                  border: "2px solid #0367fc", padding: "4px 7px", marginTop: "24px", borderRadius: "6px",
-                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:"13%",left:"35%",
+              <Button
+                sx={{ 
+                  border: "2px solid #0367fc", padding: "4px 7px", marginTop:"24px", borderRadius: "6px",fontFamily:"Poppins",fontSize:"1.2rem",
+                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"13%",xs:"3%"},left:{xs:"25%",sm:"35%"}
                 }}
                 onClick={() => history.push('/events')}
               >
                 {"Add Event To Contact"}
-              </button>
+              </Button>
 
 
             </div>
@@ -709,7 +718,7 @@ if (allContacts.length > 0) {
             </div>
           </div>
 
-      </div>
+      </Box>
       
 
     </div>

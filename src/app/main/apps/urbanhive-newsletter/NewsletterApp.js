@@ -35,6 +35,7 @@ import {
 
 import UserSidebar from './UserSidebar';
 import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
+import NewsletterSidebar from './NewsletterSidebar';
 
 const drawerWidth = 400;
 const headerHeight = 200;
@@ -97,7 +98,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
   },
   drawerPaper: {
-    width: drawerWidth,
+    width: '100%'/*drawerWidth*/,
     maxWidth: '100%',
     overflow: 'hidden',
     height: '100%',
@@ -183,9 +184,9 @@ function NewsletterApp(props) {
               className="h-full absolute z-20"
               variant="temporary"
               anchor="left"
-              open={mobileChatsSidebarOpen}
+              open={contactSidebarOpen}
               onOpen={(ev) => {}}
-              onClose={() => dispatch(closeMobileChatsSidebar())}
+              onClose={() => dispatch(closeContactSidebar())}
               disableSwipeToOpen
               classes={{
                 paper: clsx(classes.drawerPaper, 'absolute ltr:left-0 rtl:right-0'),
@@ -262,7 +263,7 @@ function NewsletterApp(props) {
                   variant="outlined"
                   color="primary"
                   className="flex md:hidden"
-                  onClick={() => dispatch(openMobileChatsSidebar())}
+                  onClick={() => dispatch(openContactSidebar())}
                 >
                  Select contacts to send newsletter..
                 </Button>
@@ -274,7 +275,7 @@ function NewsletterApp(props) {
                     <IconButton
                       color="inherit"
                       aria-label="Open drawer"
-                      onClick={() => dispatch(openMobileChatsSidebar())}
+                      onClick={() => dispatch(openContactSidebar())}
                       className="flex md:hidden"
                     >
                       <Icon>email</Icon>
@@ -311,18 +312,18 @@ function NewsletterApp(props) {
           </main>
 
           <SwipeableDrawer
-            className="h-full absolute z-30"
+            className=" h-full absolute z-30"
             variant="temporary"
             anchor="right"
             open={contactSidebarOpen} 
             onOpen={(ev) => {}}
-            onClose={() => dispatch(closeContactSidebar())}
+            onClick={() => dispatch(closeContactSidebar())}
             classes={{
               paper: clsx(classes.drawerPaper, 'absolute ltr:right-0 rtl:left-0'),
             }}
             style={{ position: 'absolute' }}
             ModalProps={{
-              keepMounted: true,
+              keepMounted: false,
               disablePortal: true,
               BackdropProps: {
                 classes: {
@@ -331,7 +332,7 @@ function NewsletterApp(props) {
               },
             }}
           >
-            <ContactSidebar />
+            <NewsletterSidebar />
           </SwipeableDrawer>
         </div>
       </div>

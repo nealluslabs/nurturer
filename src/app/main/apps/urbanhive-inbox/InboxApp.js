@@ -121,6 +121,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: '1 1 100%',
     minHeight: 0,
+  
   },
 }));
 
@@ -307,6 +308,8 @@ function InboxApp(props) {
                 <div className={classes.content}>
                   <Chat className="flex flex-1 z-10" />
                 </div>
+
+      
               </>
             )}
           </main>
