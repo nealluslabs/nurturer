@@ -30,7 +30,7 @@ const Footer = () => {
       
       <div className="footer-first" style={{position:"relative",top:"0.5rem"}}>
          
-      <div /*onClick ={()=>{navigate('/home')}}*/ style={{fontSize:"1.6rem",color:"white",fontWeight:"900",/*color:"#E88B1E",*/cursor:"pointer"}}>
+      <div className="footer-first-title" /*onClick ={()=>{navigate('/home')}}*/ style={{fontSize:"1.6rem",color:"white",fontWeight:"900",/*color:"#E88B1E",*/cursor:"pointer"}}>
         {/*Snapplicant*/}
         {/* < img src={oneRecruiter}  style={{marginBottom:"0rem", height:"7rem",width:"10rem"}}  href="#" className='footer__logo'/>*/}
      Nurturer

@@ -190,12 +190,22 @@ footer li {
     .footer-first {
         position: relative;
         left:0%;
-        padding-left:35%;
+        padding-left:42%;
+         display: flex;
+      justify-content: center;
+      position: relative;
+        
         
       }
+
+      .footer-first-title {
+        position: relative;
+        left:1.5rem;
+      }
+
       
       .footer-last {
-          position: relative;
+          position: right;
           right:0%
       }
     
@@ -213,7 +223,19 @@ footer li {
 
     .footer-first {
         padding-left: 30%;
-        
+      display: flex;
+      justify-content: center;
+      position: relative;
       }
+      
+      .footer-first-title {
+        position: relative;
+        left:1.5rem;
+      }
+
+
+     
+
+
       
  }

@@ -79,6 +79,9 @@ export default function ProfileUpdateForm() {
     const [showError, setshowError] = useState(false);
     const [showError2, setshowError2] = useState(false);
     const [file, setFile] = useState(null);
+    const [newState,setNewState]=useState(null)
+    const [newCities,setNewCities]=useState([])
+
     const [triggers, setTriggers] = useState(candidateInFocus.triggers||[]);
     const [interests2, setInterests2] = useState(candidateInFocus.interests||[]);
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
@@ -109,6 +112,16 @@ const handleDelete2 = (interestToDelete) => {
 setInterests2((prev) => prev.filter((t) => t !== interestToDelete));
 };
 
+
+useEffect(()=>{
+
+  skillSetService.getCities(newState)
+
+  setNewCities(skillSetService.getCities(newState))
+
+  console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
+
+},[newState])
 
     /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
 
@@ -452,7 +465,7 @@ setInterests2((prev) => prev.filter((t) => t !== interestToDelete));
                         label="City"
                         value={values.city}
                         onChange={handleInputChange}
-                        options={skillSetService.getCities()}
+                        options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
                         error={errors.city}
                     />
                 </Grid>
@@ -471,7 +484,7 @@ setInterests2((prev) => prev.filter((t) => t !== interestToDelete));
                         name="state"
                         label="State"
                         value={values.state}
-                        onChange={handleInputChange}
+                        onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);console.log("JUST SELECTED A STATE --->",e.target.value) }}
                         options={skillSetService.getStates()}
                         error={errors.state}
                     />

@@ -101,6 +101,19 @@ export default function ProfileForm() {
     const [inputValue, setInputValue] = useState("");
     const [inputValue2, setInputValue2] = useState("");
 
+    const [newState,setNewState]=useState(null)
+const [newCities,setNewCities]=useState([])
+
+useEffect(()=>{
+
+skillSetService.getCities(newState)
+
+setNewCities(skillSetService.getCities(newState))
+
+console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
+
+},[newState])
+
 
 
       /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
@@ -679,13 +692,13 @@ export default function ProfileForm() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
-                        name="city"
-                        label="City"
-                        value={values.city}
-                        onChange={handleInputChange}
-                        options={skillSetService.getCities()}
-                        error={errors.city}
-                    />
+                 name="city"
+                 label="City"
+                 value={values.city}
+                 onChange={handleInputChange}
+                 options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
+                 error={errors.city}
+                 />
                 </Grid>
               
                 <Grid item xs={12} sm={6}>
@@ -698,14 +711,15 @@ export default function ProfileForm() {
                     />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                      <Controls.Select
-                        name="state"
-                        label="State"
-                        value={values.state}
-                        onChange={handleInputChange}
-                        options={skillSetService.getStates()}
-                        error={errors.state}
-                    />
+                <Controls.Select
+                name="state"
+                label="State"
+                value={values.state}
+                onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);console.log("JUST SELECTED A STATE --->",e.target.value) }}
+                options={skillSetService.getStates()}
+                error={errors.state}
+                />
+
                 </Grid>
 
 
