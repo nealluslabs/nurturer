@@ -369,7 +369,7 @@ if (allContacts.length > 0) {
                   ? "0 0 0 2px #ca03fc33"
                   : isUpcomingEvents
                   ? "0 0 0 2px #03bafc33"
-                  : undefined
+                  : '0 2px 8px rgba(0,0,0,0.1)'
               }}
               onClick={clickable ? handleClick : undefined}
             >
@@ -411,12 +411,12 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"87.5%",maxHeight:"87.5%",position:"relative"}}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"87.5%",maxHeight:"87.5%",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)'}}>
               
             {onlyEventsMessagesData.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending events found.</div>
             ) : (
-              onlyEventsMessagesData.map((item) => {
+              onlyEventsMessagesData.slice(0,5).map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div 
@@ -475,7 +475,7 @@ if (allContacts.length > 0) {
               <Button
                 sx={{ 
                   border: "2px solid #0367fc", padding: "4px 7px", marginTop:"24px", borderRadius: "6px",fontFamily:"Poppins",fontSize:"1.2rem",
-                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"13%",xs:"3%"},left:{xs:"25%",sm:"35%"}
+                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"5%",xs:"3%"},left:{xs:"25%",sm:"35%"}
                 }}
                 onClick={() => history.push('/events')}
               >
@@ -488,10 +488,10 @@ if (allContacts.length > 0) {
 
         
      
-              
-{
+          <div>   
+{   
         eventsData.map((event) => (
-          <div key={event.id}>
+          <div key={event.id} style={{}}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <event.headerIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
@@ -499,6 +499,7 @@ if (allContacts.length > 0) {
               </div>
               <button 
                 style={{ 
+                 
                   border: `2px solid ${ event.buttonColor ? event.buttonColor : "grey" }`, 
                   padding: "4px 7px", borderRadius: "6px", color: `${ event.buttonColor ? event.buttonColor : "grey" }`
                 }}
@@ -508,7 +509,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <event.mainIcon sx={{ width: 65, height: 65 }} />
               </div>
@@ -525,20 +526,38 @@ if (allContacts.length > 0) {
                 ))}
               </div>
 
-              <button 
-                style={{ 
-                  border: "2px solid #0367fc", padding: "4px 7px", marginTop: "24px", borderRadius: "6px",
-                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc"
+            <div style={{position:"relative", marginTop: "24px", borderRadius: "6px",
+                  display: "block", color: "#0367fc",height:"5.5rem",width:"100%"}}>
+
+                    
+              <Button 
+                //style={{ 
+                //  position:"absolute",
+                //  bottom:"-3rem",
+                //  left:"30%",
+                //  padding: "4px 7px", marginTop: "24px", borderRadius: "6px",
+                //  border: "2px solid #0367fc", padding: "4px 7px",
+                //  marginLeft: "auto", marginRight: "auto"
+                //  
+                //}}
+
+                sx={{ 
+                  border: "2px solid #0367fc", padding: "4px 7px", marginTop:"24px", borderRadius: "6px",fontFamily:"Poppins",fontSize:"1.2rem",
+                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"-30%",xs:"-13%"},left:{xs:"18%",sm:"35%"}
                 }}
                 onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/events') : undefined}
               >
                 {event.actionKey}
-              </button>
+              </Button>
+            </div>
 
             </div>
           </div>
-        ))}
-
+        ))
+       
+        }
+         </div>
+  
 
 
         <div>
@@ -558,12 +577,12 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" }}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               
             {onlyTouchpointMessagesData.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending touchpoints found.</div>
             ) : (
-              onlyTouchpointMessagesData.map((item) => {
+              onlyTouchpointMessagesData.slice(0,5).map((item) => {
                 const IconComponent = item.icon;
                 return (
                   <div 
@@ -635,7 +654,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",cursor:"pointer" }}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",cursor:"pointer",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               
             {recentContacts.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No contacts found.</div>

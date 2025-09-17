@@ -269,7 +269,17 @@ function Newsletter(props) {
             <>
               <div
                 onClick={handleSave}
-                className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40"
+                className="
+                flex flex-col 
+                pt-16 px-16 
+                pb-40 
+                pl-0 -ml-10         
+                pr-0   
+                w-3/5 mx-auto
+                sm:w-full            
+                sm:pl-56 sm:ml-0    
+                sm:pr-56            
+                "
               >
                 {chatMessagesOutput.map((item, i) => {
                   connectStatus = item.status;

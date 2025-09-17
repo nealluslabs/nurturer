@@ -31,6 +31,8 @@ const themesConfig = {
       background: {
         paper: '#FFFFFF',
         default: '#f6f7f9',
+        themeYellow:"#FFF6BD",
+        themeBlue:"#20DBE4",
       },
       error: red,
     },

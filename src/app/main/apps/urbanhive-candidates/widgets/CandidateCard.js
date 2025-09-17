@@ -296,7 +296,7 @@ function CandidateCard() {
                   p: 10,
                   mx: "1rem",
                   border: "1px solid black",
-                  width: { xs: 300, sm: 400 },
+                  width: { xs: 270, sm: 300 ,md:400},
                   height: 210,
                   paddingTop: "30px",
                   marginRight: "0px",

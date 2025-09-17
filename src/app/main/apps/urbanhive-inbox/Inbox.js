@@ -431,7 +431,17 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
       <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
         {chatMessages.length || 0 && chatMessages.length > 0 ? (
         <>
-          <div onClick={handleSave} className="flex flex-col pt-16 px-16 ltr:pl-56 rtl:pr-56 pb-40" >
+          <div onClick={handleSave} className="
+  flex flex-col 
+  pt-16 px-16 
+  pb-40 
+  pl-0 -ml-10         
+  pr-0   
+  w-3/5 mx-auto
+  sm:w-full            
+  sm:pl-56 sm:ml-0    
+  sm:pr-56            
+" >
             {chatMessagesOutput.map((item, i) => {
               connectStatus = item.status;
               const contact =
@@ -947,7 +957,7 @@ We had some great conversations previously, and I really valued the opportunity 
 
 
            
-{<div style={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:"7.5rem",marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:"53rem",maxWidth:"78.5%",padding:"1rem",paddingTop:"3rem"}}>
+{<Box sx={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
  {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') ?
    
@@ -1532,7 +1542,7 @@ label={<Typography fontSize="14px">
 </FormControl>
 </>
   }
-          </div>
+          </Box>
           }
 
 </>

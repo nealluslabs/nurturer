@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 const useStyles = makeStyles((theme) => ({
   root: {
     //yellow -dagogo
-    background:"#fff6bd",
+    background:theme.palette.background.themeYellow,/*"#fff6bd"*/
 //background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
 //  theme.palette.primary.dark,
 //  0.5
@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   leftSection: {},
   rightSection: {
     //blue - dagogo
-    background:"#20dbe4",
+    background:/*"#20dbe4"*/theme.palette.background.themeBlue,
    // background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
    //   theme.palette.primary.dark,
    //   0.5
@@ -40,8 +40,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Login() {
-  const classes = useStyles();
+  const theme = useSelector(({ fuse }) => fuse.settings.themes);
+  console.log("OYA WHAT IS THEME-->",theme)
+  const classes =theme && useStyles(theme);
   const [selectedTab, setSelectedTab] = useState(0);
+  
   const { isAuth } = useSelector((state) => state.login);
 
   function handleTabChange(event, value) {
