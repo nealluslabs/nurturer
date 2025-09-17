@@ -3,9 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const sidebarsSlice = createSlice({
   name: 'chatApp/sidebars',
   initialState: {
-    mobileChatsSidebarOpen: false,
+    mobileChatsSidebarOpen: true,
     userSidebarOpen: false,
-    contactSidebarOpen: false,
+    contactSidebarOpen: true,
   },
   reducers: {
     openMobileChatsSidebar: (state, action) => {

@@ -35,6 +35,7 @@ import {
 
 import UserSidebar from './UserSidebar';
 import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
+import { setCurrentChat } from 'redux/reducers/chat.slice';
 
 const drawerWidth = 400;
 const headerHeight = 200;
@@ -140,14 +141,34 @@ function InboxApp(props) {
 
   const { isAuth, user } = useSelector((state) => state.login);
   const { selectedChatUser } = useSelector((state) => state.chat);
-  const { allUsers, isLoading } = useSelector((state) => state.user);
+  const { allUsers,allContacts, isLoading } = useSelector((state) => state.user);
   let unsubscribe;
   const classes = useStyles(props);
 
+  //useEffect(() => {
+  //  
+  //if(allContacts && allContacts,length){
+  //   dispatch(setCurrentChat(
+  //    //we are assuming we will always get something..risky dagogo- aug -14 2025
+  //    allContacts[0]
+  //
+  //  ))
+  //}
+//
+  //  console.log("WHAT IS , ALL CONTACTS ??--->",allContacts)
+//
+//
+  //}, []);
+//
 
   useEffect(() => {
     dispatch(getUserData());
     dispatch(getContacts());
+
+   
+
+
+
   }, [dispatch]);
 
 
@@ -314,29 +335,7 @@ function InboxApp(props) {
             )}
           </main>
 
-          <SwipeableDrawer
-            className="h-full absolute z-30"
-            variant="temporary"
-            anchor="right"
-            open={contactSidebarOpen}
-            onOpen={(ev) => {}}
-            onClose={() => dispatch(closeContactSidebar())}
-            classes={{
-              paper: clsx(classes.drawerPaper, 'absolute ltr:right-0 rtl:left-0'),
-            }}
-            style={{ position: 'absolute' }}
-            ModalProps={{
-              keepMounted: true,
-              disablePortal: true,
-              BackdropProps: {
-                classes: {
-                  root: 'absolute',
-                },
-              },
-            }}
-          >
-            <ContactSidebar />
-          </SwipeableDrawer>
+         
         </div>
       </div>
     </div>

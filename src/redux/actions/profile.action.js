@@ -50,34 +50,34 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
   );
 }
 
-export const uploadNewImageOld = (profile, user, file, resetForm) => async (dispatch) => {
-  const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
-  console.log('File Name: ', imageName);
-  dispatch(createProfilePending());
-  const uploadTask = storage.ref(`profile_images/${imageName}`).put(file);
-  uploadTask.on(
-    "state_changed",
-    snapshot => {
-      const progress = Math.round(
-        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-      );
-      // setProgress(progress);
-    },
-    error => {
-      console.log(error);
-    },
-    () => {
-      storage
-        .ref("profile_images")
-        .child(imageName)
-        .getDownloadURL()
-        .then(url => {
-          console.log('Image URL: ', url);
-          dispatch(createNewProfile(profile, user, file, resetForm, url));
-        });
-    }
-  );
-}
+// /export const uploadNewImageOld = (profile, user, file, resetForm) => async (dispatch) => {
+// /  const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
+// /  console.log('File Name: ', imageName);
+// /  dispatch(createProfilePending());
+// /  const uploadTask = storage.ref(`profile_images/${imageName}`).put(file);
+// /  uploadTask.on(
+// /    "state_changed",
+// /    snapshot => {
+// /      const progress = Math.round(
+// /        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+// /      );
+// /      // setProgress(progress);
+// /    },
+// /    error => {
+// /      console.log(error);
+// /    },
+// /    () => {
+// /      storage
+// /        .ref("profile_images")
+// /        .child(imageName)
+// /        .getDownloadURL()
+// /        .then(url => {
+// /          console.log('Image URL: ', url);
+// /          dispatch(createNewProfile(profile, user, file, resetForm, url));
+// /        });
+// /    }
+// /  );
+// /}
 
 
 
@@ -113,7 +113,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
   uploadToS3(file)
   .then( async(url) => {
           console.log('Image URL: ', url);
-          dispatch(updateNewProfile(profile, user, file, resetForm, url));
+          dispatch(updateProfile(profile, user, file, resetForm, url));
         });
     
  
@@ -200,7 +200,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
    
   }
   
-
+//DONT USE THIS FOR NURTURER!
 export const createProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
   console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
@@ -458,7 +458,8 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
    userRef.add({
    name: profile.name,
    email: profile.email,
-    intro: profile.intro,
+    intro: profile.notes,
+    notes: profile.notes,
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,
@@ -524,7 +525,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
     return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
   .then(() => {
-    const msg = 'Profile successfully created!';
+    const msg = 'Profile successfully updated!';
     console.log(msg);
      dispatch(createProfileSuccessOnly({ msg }));
      dispatch(fetchAllUsers(user.uid));
@@ -545,12 +546,13 @@ export const updateProfile = (profile, user, file, resetForm, url) => async (dis
   console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
  
-  const userRef = db.collection("users").doc(profile.uid)
+  const userRef = db.collection("contacts").doc(profile.uid)
  
    userRef.update({
    name: profile.name,
    email: profile.email,
-    intro: profile.intro,
+    notes: profile.notes,
+    intro: profile.notes,
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,

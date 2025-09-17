@@ -433,6 +433,8 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
         e.preventDefault();
        console.log('Photo URL: ', photoURL);
        console.log('File URL: ', file);
+      
+
         e.preventDefault()
         if(values.isTechnical == 'nil'){
           setshowError(true);
@@ -444,7 +446,11 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
         }else{
           setshowError2(false);
         }
-        if (validate()){
+
+        
+
+
+        /*if (validate()){*/
           const name = values.name;
           const email = values.email;
            const notes = values.notes;
@@ -462,13 +468,14 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
           const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,birthday,workAnniversary};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
+
           if(photoURL == static_img){
           dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL));
           }else{
             dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
-        }
+       /*  }*/
     }
 
     return !openCrop ? (

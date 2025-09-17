@@ -14,7 +14,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { createProfile, fetchProfile, uploadImage,updateProfile,updateProfileWithImage } from 'src/redux/actions/profile.action';
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
-import { createNewProfile, uploadNewImage, uploadNewImageforUpdate } from 'redux/actions/profile.action';
+import { createNewProfile, updateNewProfile, uploadNewImage, uploadNewImageforUpdate } from 'redux/actions/profile.action';
 
 import Papa from "papaparse";
 
@@ -316,7 +316,7 @@ useEffect(()=>{
            const companyName = values.companyName;
            const jobTitle = values.jobTitle;
            const state = values.state;
-           //const interests = values.interests;
+           const interests = values.interests;
            const industry = values.industry;
            const frequency = values.frequency;
            const birthday = values.birthday;
@@ -325,13 +325,13 @@ useEffect(()=>{
           const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
-          if(photoURL == static_img){
-            dispatch(createNewProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
+          if(photoURL){
+            dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
             }else{
               dispatch(uploadNewImageforUpdate({...profile,triggers,interests:interests2}, user, file, resetForm));
               //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
             } 
-        }
+       }
     }
 
     return !openCrop ? (
@@ -709,7 +709,7 @@ useEffect(()=>{
                 <div>
                 <Controls.Button
                     type="submit"
-                    disabled={isLoading}
+                    disabled={false}
                     text={isLoading ? 'Loading...' : 'Submit'} />
                 <Controls.Button
                     text="Reset"
