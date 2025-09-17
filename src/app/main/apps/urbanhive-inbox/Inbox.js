@@ -600,7 +600,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
         
 
 
-       {(selectedChatUser && (selectedChatUser.name !== "Emily White" ||selectedChatUser.name !== "Bob Johnson")) && (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
+       {(selectedChatUser && (selectedChatUser.name !== "Emily Whiter" ||selectedChatUser.name !== "Bob Johnsons")) && (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
         <span>
           Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName  }
         </span>
@@ -630,10 +630,9 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
         
-       {"Wishing you a fantastic birthday and a year ahead filled with great moments—both on and off the construction site!"}
-
-
+       {/*"Wishing you a fantastic birthday and a year ahead filled with great moments—both on and off the construction site!"*/}
         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph*/}
+        {paragraphs && paragraphs.firstParagraph}
         </span>
 
          :
@@ -668,10 +667,9 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
          
-       { "Wishing you and everyone at Harmony Medical Center a safe and uplifting Fourth of July!"}
-
-
+       {/*"Wishing you and everyone at Harmony Medical Center a safe and uplifting Fourth of July!"*/}
         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.firstParagraph*/}
+        {paragraphs && paragraphs.firstParagraph}
          </span>
          
 
@@ -701,8 +699,9 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         :
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span>
-        {"Hope you get a chance to unplug today and maybe spend some time behind the lens doing what you love. If you capture any incredible shots, I’d love to see one sometime."}
+        {/*"Hope you get a chance to unplug today and maybe spend some time behind the lens doing what you love. If you capture any incredible shots, I’d love to see one sometime."*/}
         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
+        {paragraphs && paragraphs.secondParagraph}
 
         {birthdayMessage1 && 
          <>
@@ -771,8 +770,9 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          :
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span >
-         {"We’re grateful for all the work you do in healthcare—especially during times that remind us of the value of service, community, and care. Hope you're able to take a well-deserved break, maybe even spend some time with your four-legged friends at the shelter this weekend."}
+         {/*"We’re grateful for all the work you do in healthcare—especially during times that remind us of the value of service, community, and care. Hope you're able to take a well-deserved break, maybe even spend some time with your four-legged friends at the shelter this weekend."*/}
          {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
+         {paragraphs && paragraphs.secondParagraph}
 
          {holidayMessage1 && 
          <>
@@ -823,7 +823,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
           – {point.bulletPointRest}{" "}
           
         </span>
-       {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') &&<> <br /><br /> </>}
+       {!(selectedChatUser.name === 'Emily Whiter' || selectedChatUser.name === 'Bob Johnsons') &&<> <br /><br /> </>}
         </>
       ))
          }
@@ -856,8 +856,9 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         selectedChatUser && selectedChatUser.name  === "Bob Johnson"?
         <span >
         
-        {"Here’s to continued success at Urban Developers and to finding the perfect light—on the job and in your photos."}
+        {/*"Here’s to continued success at Urban Developers and to finding the perfect light—on the job and in your photos."*/}
         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph*/}
+        {paragraphs && paragraphs.thirdParagraph}
         </span>
 
          :
@@ -878,8 +879,9 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span>
          
-        {"Thank you again for the difference you make. Happy Independence Day!"}
+        {/*"Thank you again for the difference you make. Happy Independence Day!"*/}
         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.thirdParagraph*/}
+        {paragraphs && paragraphs.thirdParagraph}
          </span>
          
 
