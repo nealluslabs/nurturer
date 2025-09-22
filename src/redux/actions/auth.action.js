@@ -9,6 +9,11 @@ import { clearChat } from 'src/redux/reducers/chat.slice';
 // import { clearBank } from '../reducers/bank.slice';
 // import { createBankAcc } from './bank.action';
 
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+
+
+
+
 
 // export const signup = (user, history) => async (dispatch) => {
 //   console.log(user);
@@ -36,6 +41,15 @@ export const signup = (user, history,notifySkip) => async (dispatch) => {
       console.log(user);
        dispatch(signupPending());
 
+
+const sesClient = new SESClient({
+  region: "eu-west-2", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
+  credentials: {
+    accessKeyId:process.env.REACT_APP_ACCESS_KEY_ID,
+    secretAccessKey:process.env.REACT_APP_SECRET_ACCESS_KEY,
+  },
+});
+
    
 
        db.collection('companies')
@@ -53,22 +67,83 @@ export const signup = (user, history,notifySkip) => async (dispatch) => {
         fb.auth().createUserWithEmailAndPassword(
           user.email,
           user.password
-      ).then((res)=>{
-        return db.collection('users').doc(res.user.uid).set({
-          uid: res.user.uid,
-          name: user.name,
-          email: user.email,
-          companyID:user.companyID,
-          phone: user.phone,
-          password: user.password,
-          photoUrl: static_img,
-          lastActive: new Date().getTime(),
-          monthlyConnection: 5,
-          usedConnection: 0,
-          registeredOn:new Date()
-        })
+      ).then(async(res)=>{
+
+      /**TRY TO SEND THE EMAIL HERE - START */
+
+       db.collection('users').doc(res.user.uid).set({
+        uid: res.user.uid,
+        name: user.name,
+        email: user.email,
+        companyID:user.companyID,
+        phone: user.phone,
+        password: user.password,
+        photoUrl: static_img,
+        lastActive: new Date().getTime(),
+        monthlyConnection: 5,
+        usedConnection: 0,
+        registeredOn:new Date()
+      })
+      
+      try {
+        const params = {
+          Destination: {
+            ToAddresses: [user.email], // recipient email
+          },
+          Message: {
+            Body: {
+              Text: {
+                Data: "Welcome to Nurturer – Your Account is Ready.",
+              },
+              Html: {
+                Data: ` <h2>Welcome to uFarmX!</h2>
+                       <p>Dear <strong>${user.name &&user.name||user.name &&user.name}</strong>,</p>
+                       <br/>
+                       <br/>
+
+                       
+                       <p>Welcome aboard! Your registration on Nurturer is now complete, and you’re all set to begin using the platform.</p>
+                       <br/>
+
+
+                        <p>With Nurturer, you’ll have the tools to stay connected with your leads, nurture stronger relationships, and remain top of mind in a simple, effective way. Your access has already been set up, so you can dive right in and start making the most of the platform.</p>
+                        <br/>
+                        <p>We’re excited to have you join the Nurturer community and look forward to supporting your success.</p>
+                        <br/>
+    
+                       
+    
+                        <p>Warm Regards</p>,
+                        <p>– The Nurturer Team</p>`
+              },
+            },
+            Subject: {
+              Data: "Welcome to Nurturer – Your Account is Ready",
+            },
+          },
+          Source: 'info@nurturer.com'//process.env.SES_FROM_EMAIL, // must be a verified SES sender
+        };
+    
+        const command = new SendEmailCommand(params);
+        const response = await sesClient.send(command);
+    
+        console.log("✅ Email sent successfully:", response.MessageId);
+        return response;
+      } catch (error) {
+        console.error("❌ Error sending email:", error);
+        throw error;
+      }
+
+
+
+     /**TRY TO SEND THE EMAIL HERE - END */
+
       }).then(() => {
         dispatch(signupSuccess());
+
+
+
+
         history.push("/login");
       }).catch((err) => {
         console.error("Error signiing up: ", err);
