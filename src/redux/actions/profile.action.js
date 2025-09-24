@@ -264,7 +264,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     isTechnical: 'no',
     lookingFor:'',
     githubUrl: '',
-    photoUrl: url,
+    photoUrl: url?url:'https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png',
   })
   .then((docRef) => {
     // Update the newly created document with its own ID
@@ -335,7 +335,7 @@ export const batchUploadContacts = async (contactsArray, user, url) => {
       isTechnical: "no",
       lookingFor: "",
       githubUrl: "",
-      photoUrl: url || "",
+      photoUrl: url || "https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png",
 
       // Add IDs
       uid: newId,
