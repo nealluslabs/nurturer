@@ -23,6 +23,7 @@ import { updateLastActive } from "src/redux/actions/auth.action";
 import { useHistory } from "react-router";
 import { saveCandidateInFocus } from "redux/reducers/user.slice";
 import AddIcon from "@mui/icons-material/Add";
+import { FaPencilAlt } from "react-icons/fa";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -432,7 +433,11 @@ function CandidateCard() {
                       <b>Frequency</b>
                     </h4>
                     {/* <Divider classes={{root: classes.divider}} /> */}
-                    {users.frequency ? users.frequency : "Monthly"}
+                    {users.frequency ? 
+                    <p style={{display:"flex",justifyContent:"flex-start",gap:"1rem",marginTop:"0.5rem"}}>
+                    <p>{users.frequency}</p>   <FaPencilAlt/>
+                    </p>
+                    : "Monthly"}
                     <br />
                     <br />
 
@@ -450,7 +455,13 @@ function CandidateCard() {
                     {/* <Divider classes={{root: classes.divider}} /> */}
                     {/*users.skillset */}
                     {/*Hausa, Igbo  */}
-                    {users.interests ? users.interests : "Cars"}
+                    {users.interests ?
+
+                     users.interests.map((item,index)=>(
+                 `${item}${index !== users.interests.length-1?',':''} `))
+
+
+                      : "Cars"}
                   </Box>
                 </Grid>
               </Grid>
