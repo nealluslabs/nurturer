@@ -379,7 +379,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"87.5%",maxHeight:"87.5%",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)'}}>
+            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px" ,height:"34.6rem",maxHeight:"87.5%",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)'}}>
               
             {onlyEventsMessagesData.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No pending events found.</div>
@@ -478,7 +478,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+            <div style={{ background: "white",  height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <event.mainIcon sx={{ width: 65, height: 65 }} />
               </div>
@@ -512,7 +512,7 @@ if (allContacts.length > 0) {
 
                 sx={{ 
                   border: "2px solid #0367fc", padding: "4px 7px", marginTop:"24px", borderRadius: "6px",fontFamily:"Poppins",fontSize:"1.2rem",
-                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"-30%",xs:"-13%"},left:{xs:"18%",sm:"35%"}
+                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"-5%",xs:"-13%"},left:{xs:"18%",sm:"35%"}
                 }}
                 onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/events') : undefined}
               >
@@ -623,7 +623,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",cursor:"pointer",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+            <div style={{ background: "white", height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",cursor:"pointer",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               
             {recentContacts.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>No contacts found.</div>
