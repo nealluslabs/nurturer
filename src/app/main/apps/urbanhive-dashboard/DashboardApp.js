@@ -190,7 +190,7 @@ if (allContacts.length > 0) {
   
   // The whole card (so you can scale if you want to have multiple cards)
   //current events data was mapped left to right and i want the card on the left to show when there are no events
-  const eventsData = onlyEventsMessagesData && onlyEventsMessagesData.length? [
+  const smartSuggestions = onlyEventsMessagesData && onlyEventsMessagesData.length? [
  
     {
       id: 2,
@@ -230,76 +230,44 @@ if (allContacts.length > 0) {
   
   :
 
- [
-     {
-       id: 1,
-       headerIcon: CalendarMonthIcon,
-       headerTitle: "Upcoming Events (Next 7 Days)",
-       buttonText: "View All",
-       buttonColor: "#0367fc",
-       mainIcon: EventAvailableIcon,
-       mainText: "No upcoming events in the next 7 days",
-       subText: "Events help you stay connected with meaningful touchpoints",
-       actionKey: "Add Event to Contacts",
-       details: [
-         {
-           id: 1,
-           icon: CakeIcon,
-           iconColor: "#fce703",
-           title: "Birthdays",
-           description: "Personal connection opportunities",
-         },
-         {
-           id: 2,
-           icon: FavoriteIcon,
-           iconColor: "#fc0b03",
-           title: "Anniversaries",
-           description: "Celebrate meaningful milestones",
-         },
-         {
-           id: 3,
-           icon: CardGiftcardIcon,
-           iconColor: "#03c6fc",
-           title: "Custom Event",
-           description: "Company launches, conferences, or special dates",
-         },
-       ], 
-     },
-     {
-       id: 2,
-       headerIcon: LightbulbIcon,
-       headerTitle: "Smart Suggestion",
-       buttonText: "View All",
-       buttonColor: "#26b502",
-       mainIcon: LightbulbIcon,
-       mainText: "No suggestion at the moment",
-       subText: "Smart suggestion help you stay proactive with client relationships",
-       actionKey: "View Automation Settings",
-       details: [
-         {
-           id: 1,
-           icon: EmailIcon,
-           iconColor: "#0335fc",
-           title: "Email Suggestions",
-           description: "Based on contact history and timing",
-         },
-         {
-           id: 2,
-           icon: CardGiftcardIcon,
-           iconColor: "#03fc5e",
-           title: "Card Suggestions",
-           description: "For birthday, holidays, and special occassions",
-         },
-         {
-           id: 3,
-           icon: InventoryIcon,
-           iconColor: "#03c6fc",
-           title: "Follow-up Reminders",
-           description: "Automated timing based on your settings",
-         },
-       ], 
-     },
-   ]
+  [
+ 
+    {
+      id: 2,
+      headerIcon: LightbulbIcon,
+      headerTitle: "Smart Suggestion",
+      buttonText: "View All",
+      buttonColor: "#26b502",
+      mainIcon: LightbulbIcon,
+      mainText: "No suggestion at the moment",
+      subText: "Smart suggestion help you stay proactive with client relationships",
+      actionKey: "View Automation Settings",
+      details: [
+        {
+          id: 1,
+          icon: EmailIcon,
+          iconColor: "#0335fc",
+          title: "Email Suggestions",
+          description: "Based on contact history and timing",
+        },
+        {
+          id: 2,
+          icon: CardGiftcardIcon,
+          iconColor: "#03fc5e",
+          title: "Card Suggestions",
+          description: "For birthday, holidays, and special occassions",
+        },
+        {
+          id: 3,
+          icon: InventoryIcon,
+          iconColor: "#03c6fc",
+          title: "Follow-up Reminders",
+          description: "Automated timing based on your settings",
+        },
+      ], 
+    },
+  ]
+  
   
   
   ;
@@ -488,10 +456,11 @@ if (allContacts.length > 0) {
 
         
      
-          <div>   
+          <div >   
 {   
-        eventsData.map((event) => (
+        smartSuggestions.map((event) => (
           <div key={event.id} style={{}}>
+          
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <event.headerIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
@@ -555,7 +524,7 @@ if (allContacts.length > 0) {
           </div>
         ))
        
-        }
+      }
          </div>
   
 

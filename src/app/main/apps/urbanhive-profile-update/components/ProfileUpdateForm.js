@@ -459,26 +459,7 @@ useEffect(()=>{
                         maxRows={4}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                <Controls.Select
-                        name="city"
-                        label="City"
-                        value={values.city}
-                        onChange={handleInputChange}
-                        options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
-                        error={errors.city}
-                    />
-                </Grid>
-              
-                <Grid item xs={12} sm={6}>
-                <Controls.Input
-                        label="Job Title"
-                        name="jobTitle"
-                        value={values.jobTitle}
-                        onChange={handleInputChange}
-                        error={errors.jobTitle}
-                    />
-                </Grid>
+
                 <Grid item xs={12} sm={6}>
                       <Controls.Select
                         name="state"
@@ -490,6 +471,31 @@ useEffect(()=>{
                     />
                 </Grid>
 
+
+               
+              
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Job Title"
+                        name="jobTitle"
+                        value={values.jobTitle}
+                        onChange={handleInputChange}
+                        error={errors.jobTitle}
+                    />
+                </Grid>
+
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Select
+                        name="city"
+                        label="City"
+                        value={values.city}
+                        onChange={handleInputChange}
+                        options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
+                        error={errors.city}
+                    />
+                </Grid>
+               
 
                 <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
