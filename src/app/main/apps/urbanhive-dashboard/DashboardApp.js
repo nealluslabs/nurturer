@@ -230,7 +230,120 @@ if (allContacts.length > 0) {
   
   :
 
+  /*[
+ 
+    {
+      id: 2,
+      headerIcon: LightbulbIcon,
+      headerTitle: "Smart Suggestion",
+      buttonText: "View All",
+      buttonColor: "#26b502",
+      mainIcon: LightbulbIcon,
+      mainText: "No suggestion at the moment",
+      subText: "Smart suggestion help you stay proactive with client relationships",
+      actionKey: "View Automation Settings",
+      details: [
+        {
+          id: 1,
+          icon: EmailIcon,
+          iconColor: "#0335fc",
+          title: "Email Suggestions",
+          description: "Based on contact history and timing",
+        },
+        {
+          id: 2,
+          icon: CardGiftcardIcon,
+          iconColor: "#03fc5e",
+          title: "Card Suggestions",
+          description: "For birthday, holidays, and special occassions",
+        },
+        {
+          id: 3,
+          icon: InventoryIcon,
+          iconColor: "#03c6fc",
+          title: "Follow-up Reminders",
+          description: "Automated timing based on your settings",
+        },
+      ], 
+    },
+  ]*/
+
   [
+    /*{
+      id: 1,
+      headerIcon: CalendarMonthIcon,
+      headerTitle: "Upcoming Events (Next 7 Days)",
+      buttonText: "View All",
+      buttonColor: "#0367fc",
+      mainIcon: EventAvailableIcon,
+      mainText: "No upcoming events in the next 7 days",
+      subText: "Events help you stay connected with meaningful touchpoints",
+      actionKey: "Add Event to Contacts",
+      details: [
+        {
+          id: 1,
+          icon: CakeIcon,
+          iconColor: "#fce703",
+          title: "Birthdays",
+          description: "Personal connection opportunities",
+        },
+        {
+          id: 2,
+          icon: FavoriteIcon,
+          iconColor: "#fc0b03",
+          title: "Anniversaries",
+          description: "Celebrate meaningful milestones",
+        },
+        {
+          id: 3,
+          icon: CardGiftcardIcon,
+          iconColor: "#03c6fc",
+          title: "Custom Event",
+          description: "Company launches, conferences, or special dates",
+        },
+      ], 
+    },*/
+    {
+      id: 2,
+      headerIcon: LightbulbIcon,
+      headerTitle: "Smart Suggestion",
+      buttonText: "View All",
+      buttonColor: "#26b502",
+      mainIcon: LightbulbIcon,
+      mainText: "No suggestion at the moment",
+      subText: "Smart suggestion help you stay proactive with client relationships",
+      actionKey: "View Automation Settings",
+      details: [
+        {
+          id: 1,
+          icon: EmailIcon,
+          iconColor: "#0335fc",
+          title: "Email Suggestions",
+          description: "Based on contact history and timing",
+        },
+        {
+          id: 2,
+          icon: CardGiftcardIcon,
+          iconColor: "#03fc5e",
+          title: "Card Suggestions",
+          description: "For birthday, holidays, and special occassions",
+        },
+        {
+          id: 3,
+          icon: InventoryIcon,
+          iconColor: "#03c6fc",
+          title: "Follow-up Reminders",
+          description: "Automated timing based on your settings",
+        },
+      ], 
+    },
+  ]
+  
+
+
+    // The whole card (so you can scale if you want to have multiple cards)
+  //current events data was mapped left to right and i want the card on the left to show when there are no events
+  const eventsData = onlyEventsMessagesData && onlyEventsMessagesData.length? [
  
     {
       id: 2,
@@ -268,6 +381,116 @@ if (allContacts.length > 0) {
     },
   ]
   
+  :
+
+  /*[
+ 
+    {
+      id: 2,
+      headerIcon: LightbulbIcon,
+      headerTitle: "Smart Suggestion",
+      buttonText: "View All",
+      buttonColor: "#26b502",
+      mainIcon: LightbulbIcon,
+      mainText: "No suggestion at the moment",
+      subText: "Smart suggestion help you stay proactive with client relationships",
+      actionKey: "View Automation Settings",
+      details: [
+        {
+          id: 1,
+          icon: EmailIcon,
+          iconColor: "#0335fc",
+          title: "Email Suggestions",
+          description: "Based on contact history and timing",
+        },
+        {
+          id: 2,
+          icon: CardGiftcardIcon,
+          iconColor: "#03fc5e",
+          title: "Card Suggestions",
+          description: "For birthday, holidays, and special occassions",
+        },
+        {
+          id: 3,
+          icon: InventoryIcon,
+          iconColor: "#03c6fc",
+          title: "Follow-up Reminders",
+          description: "Automated timing based on your settings",
+        },
+      ], 
+    },
+  ]*/
+
+  [
+    {
+      id: 1,
+      headerIcon: CalendarMonthIcon,
+      headerTitle: "Upcoming Events (Next 7 Days)",
+      buttonText: "View All",
+      buttonColor: "#0367fc",
+      mainIcon: EventAvailableIcon,
+      mainText: "No upcoming events in the next 7 days",
+      subText: "Events help you stay connected with meaningful touchpoints",
+      actionKey: "Add Event to Contacts",
+      details: [
+        {
+          id: 1,
+          icon: CakeIcon,
+          iconColor: "#fce703",
+          title: "Birthdays",
+          description: "Personal connection opportunities",
+        },
+        {
+          id: 2,
+          icon: FavoriteIcon,
+          iconColor: "#fc0b03",
+          title: "Anniversaries",
+          description: "Celebrate meaningful milestones",
+        },
+        {
+          id: 3,
+          icon: CardGiftcardIcon,
+          iconColor: "#03c6fc",
+          title: "Custom Event",
+          description: "Company launches, conferences, or special dates",
+        },
+      ], 
+    },
+   /* {
+      id: 2,
+      headerIcon: LightbulbIcon,
+      headerTitle: "Smart Suggestion",
+      buttonText: "View All",
+      buttonColor: "#26b502",
+      mainIcon: LightbulbIcon,
+      mainText: "No suggestion at the moment",
+      subText: "Smart suggestion help you stay proactive with client relationships",
+      actionKey: "View Automation Settings",
+      details: [
+        {
+          id: 1,
+          icon: EmailIcon,
+          iconColor: "#0335fc",
+          title: "Email Suggestions",
+          description: "Based on contact history and timing",
+        },
+        {
+          id: 2,
+          icon: CardGiftcardIcon,
+          iconColor: "#03fc5e",
+          title: "Card Suggestions",
+          description: "For birthday, holidays, and special occassions",
+        },
+        {
+          id: 3,
+          icon: InventoryIcon,
+          iconColor: "#03c6fc",
+          title: "Follow-up Reminders",
+          description: "Automated timing based on your settings",
+        },
+      ], 
+    },*/
+  ]
   
   
   ;
@@ -362,6 +585,7 @@ if (allContacts.length > 0) {
 
 
 
+{onlyEventsMessagesData.length > 0  &&
    <div >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
@@ -453,11 +677,85 @@ if (allContacts.length > 0) {
 
             </div>
           </div>
+          }
 
         
      
-          <div >   
-{   
+          <div style={{}}>   
+{ 
+        eventsData.map((event) => (
+          <div key={event.id} style={{}}>
+          
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div style={{ display: 'flex', alignItems: "center" }}>
+                <event.headerIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
+                <h3>{event.headerTitle}</h3>
+              </div>
+              <button 
+                style={{ 
+                 
+                  border: `2px solid ${ event.buttonColor ? event.buttonColor : "grey" }`, 
+                  padding: "4px 7px", borderRadius: "6px", color: `${ event.buttonColor ? event.buttonColor : "grey" }`
+                }}
+                onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/events') : undefined}
+              >
+                {event.buttonText}
+              </button>
+            </div>
+
+            <div style={{ background: "white",  height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <event.mainIcon sx={{ width: 65, height: 65 }} />
+              </div>
+              <h3 style={{ textAlign: "center", marginTop: "2px", fontWeight: "semibold" }}>{event.mainText}</h3>
+              <p style={{ textAlign: "center", marginTop: "4px" }}>{event.subText}</p>
+
+              <div style={{ marginTop: "21px" }}>
+                {event.details.map((detail) => (
+                  <div key={detail.id} style={{ display: 'flex', marginBottom: '8px' }}>
+                    <detail.icon sx={{ width: 18, height: 18, marginRight: "10px", color: detail.iconColor }} />
+                    <p style={{ marginRight: "7px", fontWeight: "bold" }}>{detail.title}: </p>
+                    <p>{detail.description}</p>
+                  </div>
+                ))}
+              </div>
+
+            <div style={{position:"relative", marginTop: "24px", borderRadius: "6px",
+                  display: "block", color: "#0367fc",height:"5.5rem",width:"100%"}}>
+
+                    
+              <Button 
+                //style={{ 
+                //  position:"absolute",
+                //  bottom:"-3rem",
+                //  left:"30%",
+                //  padding: "4px 7px", marginTop: "24px", borderRadius: "6px",
+                //  border: "2px solid #0367fc", padding: "4px 7px",
+                //  marginLeft: "auto", marginRight: "auto"
+                //  
+                //}}
+
+                sx={{ 
+                  border: "2px solid #0367fc", padding: "4px 7px", marginTop:"24px", borderRadius: "6px",fontFamily:"Poppins",fontSize:"1.2rem",
+                  display: "block", marginLeft: "auto", marginRight: "auto", color: "#0367fc",position:"absolute",bottom:{sm:"-5%",xs:"-13%"},left:{xs:"18%",sm:"35%"}
+                }}
+                onClick={event.headerTitle === "Upcoming Events (Next 7 Days)" ? () => history.push('/events') : undefined}
+              >
+                {event.actionKey}
+              </Button>
+            </div>
+
+            </div>
+          </div>
+        ))
+       
+      }
+         </div>
+
+
+
+         <div style={{}}>   
+{ 
         smartSuggestions.map((event) => (
           <div key={event.id} style={{}}>
           
