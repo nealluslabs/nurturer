@@ -315,7 +315,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
 
 
 
-export const batchUploadContacts = async (contactsArray, user, url) => {
+export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvite) => async(dispatch)=> {
   const db = firebase.firestore();
   const userRef = db.collection("users").doc(user.uid);
   const contactsRef = db.collection("contacts");
@@ -353,13 +353,13 @@ export const batchUploadContacts = async (contactsArray, user, url) => {
       birthday: profile.birthday || "",
       workAnniversary: profile.workAnniversary || "",
       city: profile.city || "",
-      triggers: profile.triggers || [],
+      triggers: profile.triggers? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
       sendDate:changeFrequencyToDays(profile.frequency|| "1 month"),
       frequencyInDays:changeFrequencyToDays(profile.frequency || "1 month"),
       queryMsg:[],
       state: profile.state || "",
       frequency: profile.frequency || "1 month",
-      interests: profile.interests || [],
+      interests: profile.interests?profile.interests.split(',').map(interest => interest.trim()) : [],
 
       // extra fields
       password: "12345678",
@@ -394,6 +394,9 @@ export const batchUploadContacts = async (contactsArray, user, url) => {
     });
 
     console.log("Batch upload successful!");
+    setOpen(false)
+    //alert("All contacts uploaded Successfully!")
+    notifyInvite("All contacts uploaded successfully!")
   } catch (error) {
     console.error("Error batch uploading contacts:", error);
   }

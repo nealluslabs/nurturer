@@ -17,6 +17,7 @@ import { fb, static_img } from 'config/firebase';
 import { createNewProfile, updateNewProfile, uploadNewImage, uploadNewImageforUpdate } from 'redux/actions/profile.action';
 
 import Papa from "papaparse";
+import { ToastContainer, toast } from 'react-toastify';
 
 
 
@@ -112,6 +113,16 @@ const handleDelete2 = (interestToDelete) => {
 setInterests2((prev) => prev.filter((t) => t !== interestToDelete));
 };
 
+
+const notifySkip = (message) => toast.error(message, {
+  position: "bottom-right",
+  autoClose: 1000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  });
 
 useEffect(()=>{
 
@@ -265,7 +276,7 @@ useEffect(()=>{
        if ('birthday' in fieldValues)
         temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
        if ('workAnnniversary' in fieldValues)
-        temp.workAnnniversary = fieldValues.workAnnniversary && fieldValues.workAnnniversary.length != 0 ? "" : "This field is required."
+        temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
     //   if ('industry' in fieldValues)
     //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
     //   if ('interests' in fieldValues)
@@ -293,7 +304,7 @@ useEffect(()=>{
         resetForm
     } = useForm(initialFValues, true, validate);
 
-    const handleSubmit = e => {
+    const handleSubmitOld = e => {
         e.preventDefault();
        console.log('Photo URL: ', photoURL);
        console.log('File URL: ', file);
@@ -329,13 +340,96 @@ useEffect(()=>{
             dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
             }else{
               dispatch(uploadNewImageforUpdate({...profile,triggers,interests:interests2}, user, file, resetForm));
-              //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
             } 
+              //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
+          }
        }
-    }
+
+
+
+    const handleSubmit = e => {
+      e.preventDefault();
+     console.log('Photo URL: ', photoURL);
+     console.log('File URL: ', file);
+
+     
+    
+
+      e.preventDefault()
+     // if(values.isTechnical == 'nil'){
+     //   setshowError(true);
+     // }else{
+     //   setshowError(false);
+     // }
+     // if(values.lookingFor == 'nil'){
+     //   setshowError2(true);
+     // }else{
+     //   setshowError2(false);
+     // }
+
+
+      
+      if (validate() && triggers.length > 0 && interests2.length > 0){
+        const name = values.name;
+        const email = values.email;
+         const notes = values.notes;
+         const city = values.city;
+         const companyName = values.companyName;
+         const jobTitle = values.jobTitle;
+         const state = values.state;
+         //const triggers = values.triggers;
+         //const interests = values.interests;
+         const industry = values.industry;
+         const frequency = values.frequency;
+         const birthday = values.birthday;
+         const workAnniversary = values.workAnniversary;
+         
+        const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,birthday,workAnniversary};
+        //console.log('Logged User: ', fb.auth().currentUser.uid);
+        console.log("profile ABOUT TO BE SENT IN -->",profile)
+
+        if(photoURL == static_img){
+        dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
+        }else{
+          dispatch(uploadNewImageforUpdate({...profile,triggers,interests:interests2}, user, file, resetForm));
+          //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
+        } 
+      }else if(interests2.length === 0 ||triggers.length === 0 ){
+        if(interests2.length === 0){
+        
+          notifySkip("Please make sure you have added interests before submitting!")
+          return
+        }
+
+
+
+         if(triggers.length === 0){
+          
+          notifySkip("Please make sure you have added triggers before submitting!")
+          return
+        }
+
+        
+      }else {
+        notifySkip("Please make sure you have filled in all fields!")
+      }
+  }
+
 
     return !openCrop ? (
         <Form onSubmit={handleSubmit}>
+
+        <ToastContainer
+              position="bottom-right"
+              autoClose={1000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
       {error && <div><Alert
         severity="error" color="error"
         action={
@@ -394,7 +488,7 @@ useEffect(()=>{
                      accept=".csv"
                      
                      style={{ opacity:"0",position:"absolute",height:"4.6rem",width:"11rem",backgroundColor:"pink" }}
-                     onChange={handleCSVUpload}
+                     //onChange={handleCSVUpload}
                       />
 
 

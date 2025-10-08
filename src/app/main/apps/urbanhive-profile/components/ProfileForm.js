@@ -125,7 +125,15 @@ const notifySkip = (message) => toast.error(message, {
   progress: undefined,
   });
 
-
+  const notifyInvite = (message) => toast.success(message, {
+    position: "bottom-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
 
       /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
 
@@ -243,9 +251,9 @@ const notifySkip = (message) => toast.error(message, {
               "notes",
               "jobTitle",
               "industry",
-             // "frequency",
-             // "city",
-              //"state",
+              "frequency",
+              "city",
+              "state",
               "interests", // uncomment later
               "triggers",
               "companyName",
@@ -286,12 +294,20 @@ const notifySkip = (message) => toast.error(message, {
               const cleanedRow = {};
               textFields.forEach((field) => {
                 if (row[field]) {
-                  if (field === "triggers") {
-                    cleanedRow[field] = row[field]
-                      .split(",")
-                      .map((t) => t.trim())
-                      .filter((t) => t.length > 0);
-                  } else if (field === "frequency") {
+                 // if (field === "triggers") {
+                 //   cleanedRow[field] = row[field]
+                 //     .split(",")
+                 //     .map((t) => t.trim())
+                 //     .filter((t) => t.length > 0);
+                 // } 
+                  //if (field === "interests") {
+                  //  cleanedRow[field] = row[field]
+                  //    .split(",")
+                  //    .map((t) => t.trim())
+                  //    .filter((t) => t.length > 0);
+                  //}
+                  
+                   if (field === "frequency") {
                     cleanedRow[field] = validateFrequency(row[field].trim());
                   } else {
                     cleanedRow[field] = row[field];
@@ -627,7 +643,7 @@ const notifySkip = (message) => toast.error(message, {
                 backgroundColor: "#333"
               }
             }}
-            onClick={()=>{dispatch(batchUploadContacts(parsedData && parsedData,user,"https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png"))  }}
+            onClick={()=>{dispatch(batchUploadContacts(parsedData && parsedData,user,"https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png",setOpen,notifyInvite))  }}
             >
               UPLOAD
             </Button>
