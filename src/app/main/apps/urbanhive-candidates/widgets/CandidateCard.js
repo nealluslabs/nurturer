@@ -427,7 +427,7 @@ function CandidateCard() {
                         </>
                       )
                     ) : (
-                      'This user does not have notes yet!' 
+                      'N/A' 
                       /*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/
                     )}
                     <br />
@@ -439,7 +439,7 @@ function CandidateCard() {
                     <p style={{display:"flex",justifyContent:"flex-start",gap:"1rem",marginTop:"0.5rem"}}>
                     <p>{users.frequency}</p>   <FaPencilAlt/>
                     </p>
-                    : "Monthly"}
+                    : "N/A"}
                     <br />
                     <br />
 
@@ -447,7 +447,13 @@ function CandidateCard() {
                       <b>Triggers</b>
                     </h4>
                     {/* <Divider classes={{root: classes.divider}} /> */}
-                    {"Leadership Changes, New Acquisitions"}
+                    {users.triggers ?
+                   
+                   users.triggers.map((item,index)=>(
+                   `${item}${index !== users.triggers.length-1?',':''} `))
+                   
+                   
+                    : "N/A"}
                     <br />
                     <br />
 
@@ -463,7 +469,7 @@ function CandidateCard() {
                  `${item}${index !== users.interests.length-1?',':''} `))
 
 
-                      : "Cars"}
+                      : "N/A"}
                   </Box>
                 </Grid>
               </Grid>

@@ -236,6 +236,23 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
 export const createNewProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
   console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
+
+  function changeFrequencyToDays(profileFrequency) {
+    // If undefined, return "30" as default
+    if (!profileFrequency) return "30";
+  
+    // Use regex to extract the number from the string (e.g. "2 months")
+    const match = profileFrequency.match(/\d+/);
+  
+    if (match) {
+      const numberOfUnits = parseInt(match[0], 10);
+      const days = numberOfUnits * 30;
+      return days.toString();
+    }
+  
+    // If no number found, default to "30"
+    return "30";
+  }
  
   const userRef = db.collection("contacts");
  
@@ -252,6 +269,9 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     triggers:profile.triggers,
     state: profile.state,
     frequency: profile.frequency,
+    sendDate:changeFrequencyToDays(profile.frequency),
+    frequencyInDays:changeFrequencyToDays(profile.frequency),
+    queryMsg:[],
     interests: profile.interests,
     password:'12345678',
     usedConnection:0,
@@ -303,6 +323,20 @@ export const batchUploadContacts = async (contactsArray, user, url) => {
   const batch = db.batch();
   const newContactIds = [];
 
+  function changeFrequencyToDays(profileFrequency) {
+    // If undefined, return "30" as default
+    if (!profileFrequency) return "30";
+    // Use regex to extract the number from the string (e.g. "2 months")
+    const match = profileFrequency.match(/\d+/);
+    if (match) {
+    const numberOfUnits = parseInt(match[0], 10);
+    const days = numberOfUnits * 30;
+    return days.toString();
+    }
+    // If no number found, default to "30"
+    return "30";
+    }
+
   contactsArray.forEach((profile) => {
     // Generate a new doc ref with an ID
     const newDocRef = contactsRef.doc();
@@ -320,9 +354,12 @@ export const batchUploadContacts = async (contactsArray, user, url) => {
       workAnniversary: profile.workAnniversary || "",
       city: profile.city || "",
       triggers: profile.triggers || [],
+      sendDate:changeFrequencyToDays(profile.frequency|| "1 month"),
+      frequencyInDays:changeFrequencyToDays(profile.frequency || "1 month"),
+      queryMsg:[],
       state: profile.state || "",
       frequency: profile.frequency || "1 month",
-      interests: profile.interests || "",
+      interests: profile.interests || [],
 
       // extra fields
       password: "12345678",
@@ -452,6 +489,20 @@ duplicateCollection("users","contacts")
 export const updateNewProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
   console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
+
+  function changeFrequencyToDays(profileFrequency) {
+    // If undefined, return "30" as default
+    if (!profileFrequency) return "30";
+    // Use regex to extract the number from the string (e.g. "2 months")
+    const match = profileFrequency.match(/\d+/);
+    if (match) {
+    const numberOfUnits = parseInt(match[0], 10);
+    const days = numberOfUnits * 30;
+    return days.toString();
+    }
+    // If no number found, default to "30"
+    return "30";
+    }
  
   const userRef = db.collection("contacts");
  
@@ -467,6 +518,9 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
     workAnniversary:profile.workAnniversary,
     city: profile.city,
     triggers:profile.triggers,
+    sendDate:changeFrequencyToDays(profile.frequency),
+   frequencyInDays:changeFrequencyToDays(profile.frequency),
+     messageQueue:[],
     state: profile.state,
     frequency: profile.frequency,
     interests: profile.interests,

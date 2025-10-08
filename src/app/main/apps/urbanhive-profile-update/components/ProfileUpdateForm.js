@@ -500,7 +500,7 @@ useEffect(()=>{
                 <Grid item xs={11} sm={6}   style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
                    <TextField
-                     label="Add Trigger"
+                     label="Add Trigger (press 'Enter' to add)"
                      variant="outlined"
                     
                      sx={{width:{xs:"70%",sm:"53%"}}}
@@ -580,7 +580,7 @@ useEffect(()=>{
 
                     {/* Text input */}
                <TextField
-               label="Add Interest"
+               label="Add Interest (press 'Enter' to add)"
                variant="outlined"
                sx={{width:{xs:"70%",sm:"53%"}}}
                style={{maxWidth:"27rem"}} //dont delete

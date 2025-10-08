@@ -779,7 +779,7 @@ const notifySkip = (message) => toast.error(message, {
                 <Grid item xs={11} sm={6} style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
                    <TextField
-                     label="Add Trigger"
+                     label="Add Trigger (press 'Enter' to add)"
                      variant="outlined"
                      sx={{width:{sm:"80%",xs:"53%"}}}
                      style={{maxWidth:"27rem"}} //dont delete
@@ -858,7 +858,7 @@ const notifySkip = (message) => toast.error(message, {
                 <Grid item xs={11} sm={6} style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
                    <TextField
-                     label="Add Interest"
+                     label="Add Interest (press 'Enter' to add)"
                      variant="outlined"
                      sx={{width:{sm:"80%",xs:"53%",}
                     }}
