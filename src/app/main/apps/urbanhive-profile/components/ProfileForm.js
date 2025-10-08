@@ -95,6 +95,12 @@ export default function ProfileForm() {
     const [githubUrl, setGithubUrl] = useState(profileData.githubUrl);
     const [triggers, setTriggers] = useState(profileData.triggers||[]);
     const [interests, setInterests] = useState(profileData.interests||[]);
+    const [justSubmitted, setJustSubmitted] = useState(false);
+  const [hasTypedSinceSubmit, setHasTypedSinceSubmit] = useState(false);
+
+  const [justSubmitted2, setJustSubmitted2] = useState(false);
+  const [hasTypedSinceSubmit2, setHasTypedSinceSubmit2] = useState(false);
+
     const [photoURL, setPhotoURL] = useState(profileData.photoUrl != '' ? profileData.photoUrl : user.photoUrl);
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
@@ -342,6 +348,8 @@ const notifySkip = (message) => toast.error(message, {
           setTriggers([...triggers, inputValue.trim()]);
         }
         setInputValue(""); // clear field
+        setJustSubmitted(true);
+      setHasTypedSinceSubmit(false);
       }
     };
 
@@ -352,6 +360,8 @@ const notifySkip = (message) => toast.error(message, {
           setInterests([...interests, inputValue2.trim()]);
         }
         setInputValue2(""); // clear field
+        setJustSubmitted2(true);
+        setHasTypedSinceSubmit2(false);
       }
     };
   
@@ -397,6 +407,54 @@ const notifySkip = (message) => toast.error(message, {
           setPhotoURL(URL.createObjectURL(file));
           setOpenCrop(true);
         }
+      };
+
+
+      const handleTriggerChange = (e) => {
+        const value = e.target.value;
+        setInputValue(value);
+    
+        // Case 1: Empty triggers, first time typing
+        if (triggers.length === 0) {
+          setTriggers([value]);
+          return;
+        }
+    
+        // Case 2: Just submitted with Enter, this is first keypress
+        if (justSubmitted && !hasTypedSinceSubmit) {
+          setTriggers([...triggers, value]);
+          setHasTypedSinceSubmit(true);
+          return;
+        }
+    
+        // Case 3: Normal typing, update last item
+        const updated = [...triggers];
+        updated[updated.length - 1] = value;
+        setTriggers(updated);
+      };
+
+
+      const handleInterestChange = (e) => {
+        const value = e.target.value;
+        setInputValue2(value);
+    
+        // Case 1: Empty interests, first time typing
+        if (interests.length === 0) {
+          setInterests([value]);
+          return;
+        }
+    
+        // Case 2: Just submitted with Enter, this is first keypress
+        if (justSubmitted2 && !hasTypedSinceSubmit2) {
+          setInterests([...interests, value]);
+          setHasTypedSinceSubmit2(true);
+          return;
+        }
+    
+        // Case 3: Normal typing, update last item
+        const updated = [...interests];
+        updated[updated.length - 1] = value;
+        setInterests(updated);
       };
     
     function handleChangeNew(){
@@ -800,7 +858,7 @@ const notifySkip = (message) => toast.error(message, {
                      sx={{width:{sm:"80%",xs:"53%"}}}
                      style={{maxWidth:"27rem"}} //dont delete
                      value={inputValue}
-                     onChange={(e) => setInputValue(e.target.value)}
+                     onChange={handleTriggerChange}
                      onKeyDown={handleKeyDown}
                    />
              
@@ -880,7 +938,7 @@ const notifySkip = (message) => toast.error(message, {
                     }}
                     style={{maxWidth:"27rem"}} //dont delete
                      value={inputValue2}
-                     onChange={(e) => setInputValue2(e.target.value)}
+                     onChange={handleInterestChange}
                      onKeyDown={handleKeyDown2}
                    />
              
@@ -909,6 +967,7 @@ const notifySkip = (message) => toast.error(message, {
                 <Controls.Input
                         label="Birthday"
                         name="birthday"
+                        type="date"
                         value={values.birthday}
                         onChange={handleInputChange}
                         //error={errors.city}
