@@ -134,6 +134,7 @@ function CandidateCard() {
             skills_needed,
             lookingFor,
             intro,
+            notes,
             industry,
             state,
             photoUrl,
@@ -155,6 +156,7 @@ function CandidateCard() {
             lookingFor,
             triggers,
             intro,
+            notes,
             industry,
             state,
             photoUrl,
@@ -297,7 +299,7 @@ function CandidateCard() {
                   p: 10,
                   mx: "1rem",
                   border: "1px solid black",
-                  width: { xs: 270, sm: 300 ,md:400},
+                  width: { xs: 230, sm: 300 ,md:400},
                   height: 210,
                   paddingTop: "30px",
                   marginRight: "0px",
@@ -409,13 +411,13 @@ function CandidateCard() {
                     <h4>
                       <b>Notes</b>
                     </h4>
-                    {users.intro ? (
-                      parseInt(users.intro.length) > 35 ? (
-                        <p>{users.intro}</p>
+                    {users.notes ? (
+                      parseInt(users.notes.length) > 35 ? (
+                        <p>{users.notes}</p>
                       ) : (
                         <>
                           <p>
-                            {users.intro}{" "}
+                            {users.notes}{" "}
                             <span style={{ opacity: "0", userSelect: "none" }}>
                               {
                                 " (:............................................................................................................................................................................................................................................... ................................................... :)"
@@ -425,8 +427,8 @@ function CandidateCard() {
                         </>
                       )
                     ) : (
-                      /*'This user does not have an intro yet!' */
-                      "I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"
+                      'This user does not have notes yet!' 
+                      /*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/
                     )}
                     <br />
                     <h4>

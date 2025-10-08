@@ -16,6 +16,7 @@ import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
 import { createNewProfile, duplicateToContacts, uploadNewImage,batchUploadContacts } from 'redux/actions/profile.action';
 import Papa from "papaparse";
+import { ToastContainer, toast } from 'react-toastify';
 
 import {
   Dialog,
@@ -113,6 +114,16 @@ setNewCities(skillSetService.getCities(newState))
 console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
 
 },[newState])
+
+const notifySkip = (message) => toast.error(message, {
+  position: "bottom-right",
+  autoClose: 1000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  });
 
 
 
@@ -400,8 +411,8 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
         temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
        if ('birthday' in fieldValues)
         temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
-       if ('workAnnniversary' in fieldValues)
-        temp.workAnnniversary = fieldValues.workAnnniversary && fieldValues.workAnnniversary.length != 0 ? "" : "This field is required."
+       if ('workAnniversary' in fieldValues)
+        temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
     //   if ('industry' in fieldValues)
     //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
     //   if ('interests' in fieldValues)
@@ -433,24 +444,25 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
         e.preventDefault();
        console.log('Photo URL: ', photoURL);
        console.log('File URL: ', file);
+
+       
       
 
         e.preventDefault()
-        if(values.isTechnical == 'nil'){
-          setshowError(true);
-        }else{
-          setshowError(false);
-        }
-        if(values.lookingFor == 'nil'){
-          setshowError2(true);
-        }else{
-          setshowError2(false);
-        }
+       // if(values.isTechnical == 'nil'){
+       //   setshowError(true);
+       // }else{
+       //   setshowError(false);
+       // }
+       // if(values.lookingFor == 'nil'){
+       //   setshowError2(true);
+       // }else{
+       //   setshowError2(false);
+       // }
+
 
         
-
-
-        /*if (validate()){*/
+        if (validate() && triggers.length > 0 && interests.length > 0){
           const name = values.name;
           const email = values.email;
            const notes = values.notes;
@@ -475,11 +487,40 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
             dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
-       /*  }*/
+        }else if(interests.length === 0 ||triggers.length === 0 ){
+          if(interests.length === 0){
+          
+            notifySkip("Please make sure you have added interests before submitting!")
+            return
+          }
+  
+  
+  
+           if(triggers.length === 0){
+            
+            notifySkip("Please make sure you have added triggers before submitting!")
+            return
+          }
+
+          
+        }else {
+          notifySkip("Please make sure you have filled in all fields!")
+        }
     }
 
     return !openCrop ? (
         <Form onSubmit={handleSubmit}>
+           <ToastContainer
+              position="bottom-right"
+              autoClose={1000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
       {error && <div><Alert
         severity="error" color="error"
         action={
@@ -698,6 +739,17 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
                     />
                 </Grid>
 
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Job Title"
+                        name="jobTitle"
+                        value={values.jobTitle}
+                        onChange={handleInputChange}
+                        error={errors.jobTitle}
+                    />
+                </Grid>
+
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
                 name="state"
@@ -710,17 +762,7 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
 
                 </Grid>
 
-                
-              
-                <Grid item xs={12} sm={6}>
-                <Controls.Input
-                        label="Job Title"
-                        name="jobTitle"
-                        value={values.jobTitle}
-                        onChange={handleInputChange}
-                        error={errors.jobTitle}
-                    />
-                </Grid>
+             
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
@@ -734,12 +776,13 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
                 </Grid>
               
 
-                <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
+                <Grid item xs={11} sm={6} style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
                    <TextField
                      label="Add Trigger"
                      variant="outlined"
-                    style={{width:"53%"}}
+                     sx={{width:{sm:"80%",xs:"53%"}}}
+                     style={{maxWidth:"27rem"}} //dont delete
                      value={inputValue}
                      onChange={(e) => setInputValue(e.target.value)}
                      onKeyDown={handleKeyDown}
@@ -812,12 +855,14 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
 
 
 
-                <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
+                <Grid item xs={11} sm={6} style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
                    <TextField
                      label="Add Interest"
                      variant="outlined"
-                    style={{width:"53%"}}
+                     sx={{width:{sm:"80%",xs:"53%",}
+                    }}
+                    style={{maxWidth:"27rem"}} //dont delete
                      value={inputValue2}
                      onChange={(e) => setInputValue2(e.target.value)}
                      onKeyDown={handleKeyDown2}
@@ -872,13 +917,13 @@ console.log("what is cities NOW ??",skillSetService.getCities(newState && newSta
                         type="date"
                         value={values.workAnniversary}
                         onChange={handleInputChange}
-                         style={{
-                          width: '53%',
+                         sx={{
+                          width:{ xs:"80%",sm:'53%'},
                           //border:"1px solid #F5F5F5",
                           //padding:"10px",
                           borderRadius:"5px"
                         }}
-                       
+                        style={{minWidth:"25rem"}}
                         InputProps={{
                           sx: { fontSize: '1.3rem' },
                         }}

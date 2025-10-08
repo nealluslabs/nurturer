@@ -460,6 +460,18 @@ useEffect(()=>{
                     />
                 </Grid>
 
+
+
+                <Grid item xs={12} sm={6}>
+                <Controls.Input
+                        label="Job Title"
+                        name="jobTitle"
+                        value={values.jobTitle}
+                        onChange={handleInputChange}
+                        error={errors.jobTitle}
+                    />
+                </Grid>
+
                 <Grid item xs={12} sm={6}>
                       <Controls.Select
                         name="state"
@@ -471,18 +483,6 @@ useEffect(()=>{
                     />
                 </Grid>
 
-
-               
-              
-                <Grid item xs={12} sm={6}>
-                <Controls.Input
-                        label="Job Title"
-                        name="jobTitle"
-                        value={values.jobTitle}
-                        onChange={handleInputChange}
-                        error={errors.jobTitle}
-                    />
-                </Grid>
 
 
                 <Grid item xs={12} sm={6}>
@@ -497,12 +497,14 @@ useEffect(()=>{
                 </Grid>
                
 
-                <Grid item xs={6} sm={6} style={{display:"flex",flexDirection:"column"}}>
+                <Grid item xs={11} sm={6}   style={{display:"flex",flexDirection:"column"}}>
                      {/* Text input */}
                    <TextField
                      label="Add Trigger"
                      variant="outlined"
-                    style={{width:"53%"}}
+                    
+                     sx={{width:{xs:"70%",sm:"53%"}}}
+                     style={{maxWidth:"27rem"}} //dont delete
                      value={inputValue}
                      onChange={(e) => setInputValue(e.target.value)}
                      onKeyDown={handleKeyDown}
@@ -567,7 +569,7 @@ useEffect(()=>{
               
 
 
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={11} sm={6}>
                 {/*<Controls.Input
                         label="Interests"
                         name="interests"
@@ -580,11 +582,13 @@ useEffect(()=>{
                <TextField
                label="Add Interest"
                variant="outlined"
-               style={{width:"53%"}}
+               sx={{width:{xs:"70%",sm:"53%"}}}
+               style={{maxWidth:"27rem"}} //dont delete
                value={inputValue2}
                onChange={(e) => setInputValue2(e.target.value)}
                onKeyDown={handleKeyDown2}
                />
+               
                {/* Chips for interests */}
                <Box sx={{ mt: 1, display:interests2 &&interests2.length?"flex": "none", gap: 1, flexWrap: "wrap",border:interests2 &&!interests2.length?"0px":"0.5px solid gray",width:"55%",height:"max-content" }}>
                {interests2 && interests2.map((interest, index) => (
@@ -615,7 +619,7 @@ useEffect(()=>{
 
 
 
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} >
                 {/*<Controls.Input
                         label="Work Anniversary"
                         name="workAnniversary"
@@ -630,13 +634,16 @@ useEffect(()=>{
                         type="date"
                         value={values.workAnniversary}
                         onChange={handleInputChange}
-                        style={{
-                          width: '53%',
-                         // border:"1px solid #F5F5F5",
-                          //borderRadius:"5px",
+                        sx={{
+                          width:{ xs:"80%",sm:'53%',md:"100%"},
+                          minWidth:"27rem",
+                          border:"1px solid #F5F5F5",
+                          borderRadius:"5px",
                           padding:"10px",
-
+                        
                         }}
+                        style={{minWidth:"25rem"}}
+                       
                        
                         InputProps={{
                           sx: { fontSize: '1.3rem' },
