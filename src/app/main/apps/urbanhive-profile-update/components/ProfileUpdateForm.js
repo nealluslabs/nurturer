@@ -91,6 +91,12 @@ export default function ProfileUpdateForm() {
     const [openCrop, setOpenCrop] = useState(false);
     const [inputValue, setInputValue] = useState("");
 
+    const [justSubmitted, setJustSubmitted] = useState(false);
+    const [hasTypedSinceSubmit, setHasTypedSinceSubmit] = useState(false);
+  
+    const [justSubmitted2, setJustSubmitted2] = useState(false);
+    const [hasTypedSinceSubmit2, setHasTypedSinceSubmit2] = useState(false);
+
     console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",candidateInFocus.interests)
 
     
@@ -98,15 +104,23 @@ export default function ProfileUpdateForm() {
 const [inputValue2, setInputValue2] = useState("");
 
 
-const handleKeyDown2 = (e) => {
-if (e.key === "Enter" && inputValue2.trim() !== "") {
-e.preventDefault(); // prevent form submission
-if (interests2 && !interests2.includes(inputValue2.trim())) {
-setInterests2([...interests2, inputValue2.trim()]);
-}
-setInputValue2(""); // clear field
-}
-};
+
+
+
+
+
+  
+  const handleKeyDown2 = (e) => {
+  if (e.key === "Enter" && inputValue2.trim() !== "") {
+  e.preventDefault(); // prevent form submission
+  if (interests2 && !interests2.includes(inputValue2.trim())) {
+  setInterests2([...interests2, inputValue2.trim()]);
+  }
+  setInputValue2(""); // clear field
+  setJustSubmitted2(true);
+  setHasTypedSinceSubmit2(false);
+  }
+  }
 
 
 const handleDelete2 = (interestToDelete) => {
@@ -196,15 +210,19 @@ useEffect(()=>{
     /**CSV FUNCTIONALITY END AND ITS HELPERS END */
   
 
+
+
     const handleKeyDown = (e) => {
       if (e.key === "Enter" && inputValue.trim() !== "") {
-        e.preventDefault(); // prevent form submission
-        if (triggers && !triggers.includes(inputValue.trim())) {
-          setTriggers([...triggers, inputValue.trim()]);
-        }
-        setInputValue(""); // clear field
+      e.preventDefault(); // prevent form submission
+      if (triggers && !triggers.includes(inputValue.trim())) {
+      setTriggers([...triggers, inputValue.trim()]);
       }
-    };
+      setInputValue(""); // clear field
+      setJustSubmitted(true);
+      setHasTypedSinceSubmit(false);
+      }
+      };
   
     const handleDelete = (triggerToDelete) => {
       setTriggers((prev) => prev.filter((t) => t !== triggerToDelete));
@@ -232,6 +250,46 @@ useEffect(()=>{
       // hireDate: new Date(),
       // isPermanent: false,
   }
+
+  const handleTriggerChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    // Case 1: Empty triggers, first time typing
+    if (triggers.length === 0) {
+    setTriggers([value]);
+    return;
+    }
+    // Case 2: Just submitted with Enter, this is first keypress
+    if (justSubmitted && !hasTypedSinceSubmit) {
+    setTriggers([...triggers, value]);
+    setHasTypedSinceSubmit(true);
+    return;
+    }
+    // Case 3: Normal typing, update last item
+    const updated = [...triggers];
+    updated[updated.length - 1] = value;
+    setTriggers(updated);
+    };
+    
+    const handleInterestChange = (e) => {
+    const value = e.target.value;
+    setInputValue2(value);
+    // Case 1: Empty interests, first time typing
+    if (interests2.length === 0) {
+    setInterests2([value]);
+    return;
+    }
+    // Case 2: Just submitted with Enter, this is first keypress
+    if (justSubmitted2 && !hasTypedSinceSubmit2) {
+    setInterests2([...interests2, value]);
+    setHasTypedSinceSubmit2(true);
+    return;
+    }
+    // Case 3: Normal typing, update last item
+    const updated = [...interests2];
+    updated[updated.length - 1] = value;
+    setInterests2(updated);
+    };
 
 
 
@@ -600,7 +658,7 @@ useEffect(()=>{
                      sx={{width:{xs:"70%",sm:"53%"}}}
                      style={{maxWidth:"27rem"}} //dont delete
                      value={inputValue}
-                     onChange={(e) => setInputValue(e.target.value)}
+                     onChange={handleTriggerChange}
                      onKeyDown={handleKeyDown}
                    />
              
@@ -679,7 +737,7 @@ useEffect(()=>{
                sx={{width:{xs:"70%",sm:"53%"}}}
                style={{maxWidth:"27rem"}} //dont delete
                value={inputValue2}
-               onChange={(e) => setInputValue2(e.target.value)}
+               onChange={handleInterestChange}
                onKeyDown={handleKeyDown2}
                />
                
@@ -701,13 +759,27 @@ useEffect(()=>{
 
 
                 <Grid item xs={12} sm={6}>
-                <Controls.Input
-                        label="Birthday"
-                        name="birthday"
-                        value={values.birthday}
-                        onChange={handleInputChange}
-                        //error={errors.city}
-                    />
+                <TextField
+                label="Birthday"
+                name="birthday"
+                type="date"
+                value={values.birthday}
+                onChange={handleInputChange}
+                sx={{
+                width:{ xs:"80%",sm:'53%'},
+                //border:"1px solid #F5F5F5",
+                //padding:"10px",
+                borderRadius:"5px"
+                }}
+                style={{minWidth:"25rem"}}
+                InputProps={{
+                sx: { fontSize: '1.3rem' },
+                }}
+                InputLabelProps={{
+                sx: { fontSize: '1.3rem' },
+                shrink: true,
+                }}
+                />
                 </Grid>
 
 

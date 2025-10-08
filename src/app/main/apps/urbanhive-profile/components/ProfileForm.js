@@ -964,14 +964,27 @@ const notifySkip = (message) => toast.error(message, {
 
 
                 <Grid item xs={12} sm={6}>
-                <Controls.Input
+                <TextField
                         label="Birthday"
                         name="birthday"
                         type="date"
                         value={values.birthday}
                         onChange={handleInputChange}
-                        //error={errors.city}
-                    />
+                         sx={{
+                          width:{ xs:"80%",sm:'53%'},
+                          //border:"1px solid #F5F5F5",
+                          //padding:"10px",
+                          borderRadius:"5px"
+                        }}
+                        style={{minWidth:"25rem"}}
+                        InputProps={{
+                          sx: { fontSize: '1.3rem' },
+                        }}
+                        InputLabelProps={{
+                          sx: { fontSize: '1.3rem' },
+                          shrink: true,
+                        }}
+                      />
                 </Grid>
 
 
