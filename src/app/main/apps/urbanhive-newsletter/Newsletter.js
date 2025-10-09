@@ -130,6 +130,7 @@ function Newsletter(props) {
 
   const classes = useStyles(props);
   const chatRef = useRef(null);
+  const [loading,setLoading] = useState(false);
   const [messageText, setMessageText] = useState("");
   const [newsletter1Active, setNewsletter1Active] = useState(true); // Individual toggle for newsletter 1
   const [newsletter2Active, setNewsletter2Active] = useState(false); // Individual toggle for newsletter 2
@@ -265,7 +266,7 @@ function Newsletter(props) {
           ref={chatRef}
           className="flex flex-1 flex-col overflow-y-auto"
         >
-          {chatMessages.length || (0 && chatMessages.length > 0) ? (
+          {chatMessages.length || ( chatMessages.length > 0) ? (
             <>
               <div
                 onClick={handleSave}
@@ -281,7 +282,7 @@ function Newsletter(props) {
                 sm:pr-56            
                 "
               >
-                {chatMessagesOutput.map((item, i) => {
+                {chatMessagesOutput && chatMessagesOutput.map((item, i) => {
                   connectStatus = item.status;
                   const contact =
                     item.user1 === user.uid
@@ -864,12 +865,59 @@ function Newsletter(props) {
           </>
         </FuseScrollbars>
         {/* <button onClick={testMe()}>Click Me</button> */}
-        {chatMessages && (
-          <form
-            onSubmit={onMessageSubmit}
-            className="absolute bottom-0 right-0 left-0 py-16 px-8"
-          ></form>
-        )}
+        {/*chatMessages && (*/
+           <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
+           <Paper className="flex items-center relative  shadow" style={{height:"6rem",width:"107%",position:"relative",top:"2rem",left:"-2rem"}}>
+             <TextField
+              style={{height:"6rem"}}
+               autoFocus={false}
+               disabled={connectStatus == 'pending' ? true : false}
+               id="message-input"
+               className="flex-1"
+               InputProps={{
+                 disableUnderline: true,
+                 classes: {
+                   root: 'flex flex-grow flex-shrink-0 mx-16 ltr:mr-48 rtl:ml-48 my-8',
+                   input: '',
+                 },
+                 placeholder: '',
+               }}
+               InputLabelProps={{
+                 shrink: false,
+                 className: classes.bootstrapFormLabel,
+               }}
+               onChange={onInputChange}
+               value={messageText}
+             />
+             {
+             <IconButton className="absolute ltr:right-20 rtl:left-0 top-8" type="submit">
+               <Icon className="text-24" color="action" onClick={(ev)=>{/*sendUpdate(ev)*/}}>
+                 send
+               </Icon>
+             </IconButton>
+             }
+ 
+              {/*
+            
+            <FaStopCircle
+             
+             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
+            */}
+ 
+            {/* !loading && 
+            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
+            <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))}} 
+             
+             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
+            */}
+ 
+           { loading && 
+             <CircularProgress size={20} style={{position:"absolute",top:"1.9rem",right:"8rem",color:"grey"}} />
+             }
+            
+           </Paper>
+         </form>
+        /*)*/}
       </div>
     </>
   );

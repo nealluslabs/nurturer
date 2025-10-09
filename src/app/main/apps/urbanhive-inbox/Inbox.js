@@ -27,6 +27,7 @@ import birthday1 from 'src/app/main/urbanhive-assets/birthday1.png'
 import birthday2 from 'src/images/Birthday_2.png'
 import { saveEditedParagraphs } from 'redux/reducers/user.slice';
 import { ToastContainer, toast } from 'react-toastify';
+import { FaStop, FaStopCircle } from 'react-icons/fa';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -1586,11 +1587,20 @@ label={<Typography fontSize="14px">
               onChange={onInputChange}
               value={messageText}
             />
+            {/*
             <IconButton className="absolute ltr:right-20 rtl:left-0 top-8" type="submit">
               <Icon className="text-24" color="action" onClick={(ev)=>{sendUpdate(ev)}}>
                 send
               </Icon>
             </IconButton>
+            */}
+
+             {
+           
+           <FaStopCircle
+            
+            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
+           }
 
            {/* !loading && 
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,

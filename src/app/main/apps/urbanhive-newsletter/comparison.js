@@ -13,7 +13,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import withReducer from 'app/store/withReducer';
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Chat from './Newsletter';
@@ -136,8 +136,6 @@ const selectedContact = useSelector((state) =>
 selectContactById(state, state.chatApp.contacts.selectedContactId)
 );
 
-
-const [test,setTest] = useState(/*contactSidebarOpen?contactSidebarOpen:*/false)
 const { isAuth, user } = useSelector((state) => state.login);
 const { selectedChatUser } = useSelector((state) => state.chat);
 const { allUsers, isLoading } = useSelector((state) => state.user);
@@ -150,14 +148,14 @@ dispatch(getUserData());
 dispatch(getContacts());
 }, [dispatch]);
 
-useEffect(() => {
- //setTest(contactSidebarOpen)
+//useEffect(() => {
+//
 // console.log("CURRENT CHAT ZERO -->", allContacts[0])
 //dispatch(setCurrentChat(
 // //we are assuming we will always get something..risky dagogo- aug -14 2025
 // allContacts[0]
 //))
-},[contactSidebarOpen])
+//},[])
 
 useEffect(() => {
 unsubscribe = dispatch(fetchRealTimeUsers(user.uid))
@@ -224,8 +222,6 @@ paper: classes.drawerPaper,
 <ChatsSidebar /> 
 </Drawer>
 </Hidden>
-
-
 <SwipeableDrawer
 className="h-full absolute z-30"
 variant="temporary"
@@ -249,7 +245,6 @@ root: 'absolute',
 >
 <UserSidebar />
 </SwipeableDrawer>
-
 
 <main className={clsx(classes.contentWrapper, 'z-10')}>
 {true === false? ( //CONSIDER USING A LESS TEMPORARY CONDITION - daGOGO - AUG -26 2025
@@ -322,7 +317,7 @@ tabIndex={0}
 <SwipeableDrawer
 className=" h-full absolute z-30"
 variant="temporary"
-anchor="left"
+anchor="right"
 open={contactSidebarOpen} 
 onOpen={(ev) => {}}
 onClick={() => dispatch(closeContactSidebar())}

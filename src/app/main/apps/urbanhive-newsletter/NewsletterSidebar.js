@@ -59,7 +59,7 @@ const statusArr = [
 function NewsletterSidebar(props) {
   const dispatch = useDispatch();
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("xs"));
 
   const [searchText, setSearchText] = useState("");
 

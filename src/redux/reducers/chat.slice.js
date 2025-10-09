@@ -18,7 +18,7 @@ const initialState = {
      },
   ],
   isLoading: false,
-  chatStarted: false,
+  chatStarted: true,
   selectedChatUser: null,
   message: '',
   error: '',

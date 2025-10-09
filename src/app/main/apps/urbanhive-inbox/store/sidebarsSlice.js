@@ -5,7 +5,7 @@ const sidebarsSlice = createSlice({
   initialState: {
     mobileChatsSidebarOpen: true,
     userSidebarOpen: false,
-    contactSidebarOpen: true,
+    contactSidebarOpen: false,
   },
   reducers: {
     openMobileChatsSidebar: (state, action) => {

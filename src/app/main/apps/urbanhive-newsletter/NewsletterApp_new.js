@@ -237,7 +237,7 @@ function NewsletterApp(props) {
             <UserSidebar />
           </SwipeableDrawer>
 
-          <main className={clsx(classes.contentWrapper, 'z-10')}>
+          <main  className={clsx(classes.contentWrapper, 'z-10')}>
             {!selectedChatUser ? (
               <div className="flex flex-col flex-1 items-center justify-center p-24">
                 <Paper className="rounded-full p-48 md:p-64 shadow-xl">
