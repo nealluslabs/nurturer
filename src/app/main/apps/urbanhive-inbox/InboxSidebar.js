@@ -138,16 +138,16 @@ function InboxSidebar(props) {
 
 
         // Use filteredContacts from Firebase instead of connectedUsers
-    let connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).sort((a, b) => (a.frequencyInDays || 0) - (b.frequencyInDays || 0)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
-      lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,messageQueue,sendDate},index) => ({
+    let connectedUsersOutput = filteredContacts && filteredContacts.filter((item) => (item.uid !== user.uid)).sort((a, b) => (a.sendDate || 0) - (b.sendDate || 0)).map(({ uid, name, email, city, intro, skillset, skills_needed, 
+      lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,frequencyInDays,messageQueue,sendDate},index) => ({
         uid, name, email, city, intro, skillset, skills_needed, 
         lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
-        companyName, jobTitle, interests, frequency,
+        companyName, jobTitle, interests, frequency,frequencyInDays,
         daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
-  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].sort((a, b) => (a.frequencyInDays || 1000) - (b.frequencyInDays || 1000)) )
+  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].sort((a, b) => (a.sendDate || 1000) - (b.sendDate || 1000)) )
   console.log("CONN USERS-->",connUsers)
 
       useEffect(()=>{

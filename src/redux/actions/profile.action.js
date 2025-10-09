@@ -253,6 +253,39 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     // If no number found, default to "30"
     return "30";
   }
+
+
+
+  function changeBirthdayToSendDate(birthday) {
+    // If undefined or empty, return "365" as default
+    if (!birthday) return "365";
+  
+    // Parse the input date string (dd/mm/yyyy)
+    const [dayStr, monthStr, yearStr] = birthday.split('/');
+    if (!dayStr || !monthStr || !yearStr) return "365";
+  
+    const day = parseInt(dayStr, 10);
+    const month = parseInt(monthStr, 10) - 1; // JS months are 0-based
+    const year = parseInt(yearStr, 10);
+  
+    if (isNaN(day) || isNaN(month) || isNaN(year)) return "365";
+  
+    const targetDate = new Date(year, month, day);
+    const today = new Date();
+  
+    // Clear time part for accurate day difference
+    today.setHours(0, 0, 0, 0);
+    targetDate.setHours(0, 0, 0, 0);
+  
+    let diffTime = targetDate - today;
+    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+    // If target date is in the past, return 0 days
+    if (diffDays < 0) diffDays = 0;
+  
+    return diffDays.toString();
+  }
+  
  
   const userRef = db.collection("contacts");
  
@@ -272,6 +305,8 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     frequency: profile.frequency,
     sendDate:changeFrequencyToDays(profile.frequency),
     frequencyInDays:changeFrequencyToDays(profile.frequency),
+    birthdaySendDate:changeBirthdayToSendDate(profile.birthday),
+    birthdayFrequencyInDays:365,
     queryMsg:[],
     interests: profile.interests,
     password:'12345678',
