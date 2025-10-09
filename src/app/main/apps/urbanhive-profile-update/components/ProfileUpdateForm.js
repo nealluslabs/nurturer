@@ -244,6 +244,7 @@ useEffect(()=>{
       companyName: candidateInFocus.companyName == '' ? '' : candidateInFocus.companyName,
       name: candidateInFocus.name == '' ? '' : candidateInFocus.name,
       email: candidateInFocus.email == '' ? '' : candidateInFocus.email,
+      phone: candidateInFocus.phone == '' ? '' : candidateInFocus.phone,
       birthday: candidateInFocus.birthday == '' ? '' : candidateInFocus.birthday,
       workAnniversary: candidateInFocus.workAnniversary == '' ? '' : candidateInFocus.workAnniversary,
       //skillset: candidateInFocus.skillset == '' ? '' : candidateInFocus.skillset,
@@ -327,14 +328,14 @@ useEffect(()=>{
         temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
        if ('state' in fieldValues)
         temp.state = fieldValues.state &&  fieldValues.state.length != 0 ? "" : "This field is required."
-       if ('industry' in fieldValues)
-        temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
-       if ('frequency' in fieldValues)
-        temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
-       if ('birthday' in fieldValues)
-        temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
-       if ('workAnnniversary' in fieldValues)
-        temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
+   //    if ('industry' in fieldValues)
+   //     temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
+  //     if ('frequency' in fieldValues)
+  //      temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
+  //     if ('birthday' in fieldValues)
+  //      temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
+  //     if ('workAnnniversary' in fieldValues)
+  //      temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
     //   if ('industry' in fieldValues)
     //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
     //   if ('interests' in fieldValues)
@@ -380,6 +381,7 @@ useEffect(()=>{
         if (validate()){
           const name = values.name;
           const email = values.email;
+          const phone = values.phone;
            const notes = values.notes;
            const city = values.city;
            const companyName = values.companyName;
@@ -391,7 +393,7 @@ useEffect(()=>{
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,birthday,workAnniversary,uid:candidateInFocus.uid};
+          const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,phone,birthday,workAnniversary,uid:candidateInFocus.uid};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL){
@@ -430,6 +432,7 @@ useEffect(()=>{
       if (validate() && triggers.length > 0 && interests2.length > 0){
         const name = values.name;
         const email = values.email;
+        const phone = values.phone;
          const notes = values.notes;
          const city = values.city;
          const companyName = values.companyName;
@@ -442,7 +445,7 @@ useEffect(()=>{
          const birthday = values.birthday;
          const workAnniversary = values.workAnniversary;
          
-        const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,birthday,workAnniversary};
+        const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
         //console.log('Logged User: ', fb.auth().currentUser.uid);
         console.log("profile ABOUT TO BE SENT IN -->",profile)
 
@@ -597,6 +600,17 @@ useEffect(()=>{
                         value={values.email}
                         onChange={handleInputChange}
                         error={errors.email}
+                    />
+                </Grid>
+
+
+                <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
+                <Controls.Input
+                        label="Phone Number"
+                        name="phone"
+                        value={values.phone}
+                        onChange={handleInputChange}
+                        error={errors.phone}
                     />
                 </Grid>
 

@@ -147,7 +147,7 @@ function InboxSidebar(props) {
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
-  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].sort((a, b) => (a.frequencyInDays || 0) - (b.frequencyInDays || 0)) )
+  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].sort((a, b) => (a.frequencyInDays || 1000) - (b.frequencyInDays || 1000)) )
   console.log("CONN USERS-->",connUsers)
 
       useEffect(()=>{

@@ -137,6 +137,7 @@ function CandidateCard() {
             notes,
             industry,
             state,
+            sendDate,
             photoUrl,
             lastActive,
             skillset,
@@ -157,6 +158,7 @@ function CandidateCard() {
             triggers,
             intro,
             notes,
+            sendDate,
             industry,
             state,
             photoUrl,
@@ -203,6 +205,34 @@ function CandidateCard() {
       unsubscribe.then((f) => f()).catch((error) => console.log(error));
     };
   }, []);
+
+
+  function getFutureDate(sendDate) {
+    const daysToAdd = parseInt(sendDate, 10);
+    const today = new Date();
+    const futureDate = new Date(today);
+    futureDate.setDate(today.getDate() + daysToAdd);
+  
+    const day = futureDate.getDate();
+    const month = futureDate.toLocaleString('default', { month: 'long' });
+    const year = futureDate.getFullYear();
+  
+    // Get ordinal suffix (st, nd, rd, th)
+    const getOrdinalSuffix = (n) => {
+      if (n >= 11 && n <= 13) return 'th';
+      switch (n % 10) {
+        case 1: return 'st';
+        case 2: return 'nd';
+        case 3: return 'rd';
+        default: return 'th';
+      }
+    };
+  
+    const dayWithSuffix = `${day}${getOrdinalSuffix(day)}`;
+  
+    return `${month} ${dayWithSuffix} ${year}`;
+  }
+  
 
   const connectsById = Object.fromEntries(
     connects.map(({ user2, type, status, invited_amt, skipped_amt }) => [
@@ -273,7 +303,7 @@ function CandidateCard() {
                     style={{ fontSize: "13px" }}
                   >
                     {/* Last Active • {timeSince(users.lastActive)} ago */}
-                    Follow Up Date • {"August 1st 2025"}{" "}
+                    Follow Up Date • {users.sendDate? getFutureDate(users.sendDate):"August 1st 2025"}{" "}
                     {/*timeSince(parseInt(users.lastActive))*/}
                   </Typography>
                   <br />
@@ -290,6 +320,24 @@ function CandidateCard() {
                       }
                     </b>
                   </Typography>
+                  <br />
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    style={{ fontSize: "13px" }}
+                  >
+                   {users.email && users.email}
+                  </Typography>
+                  <br />
+
+                  <Typography
+                    variant="body2"
+                    gutterBottom
+                    style={{ fontSize: "13px" }}
+                  >
+                   {users.phone && users.phone}
+                  </Typography>
+                  <br />
                 </Grid>
               </Grid>
 
@@ -411,7 +459,9 @@ function CandidateCard() {
                     <h4>
                       <b>Notes</b>
                     </h4>
-                    {users.notes ? (
+                    {users.notes && users.notes.length && 
+                    <>
+                    {
                       parseInt(users.notes.length) > 35 ? (
                         <p>{users.notes}</p>
                       ) : (
@@ -426,27 +476,38 @@ function CandidateCard() {
                           </p>
                         </>
                       )
-                    ) : (
+                    }
+                    
+                   { /*: (
                       'N/A' 
-                      /*"I’m a native Swahili speaker passionate about helping others learn and improve their skills. I’m also learning Yoruba, so I understand the challenges of language learning. Let’s connect to practice conversation, share cultural insights, and support each other’s language goals!"*/
-                    )}
+                      
+                    )*/}
+                    </>
+                    }
+
+             {users.frequency &&
+                    <>
                     <br />
                     <h4>
                       <b>Frequency</b>
                     </h4>
-                    {/* <Divider classes={{root: classes.divider}} /> */}
-                    {users.frequency ? 
+                   
+                    
                     <p style={{display:"flex",justifyContent:"flex-start",gap:"1rem",marginTop:"0.5rem"}}>
                     <p>{users.frequency}</p>   <FaPencilAlt/>
                     </p>
-                    : "N/A"}
+                   
                     <br />
                     <br />
+                    </>
+                     }
 
+                     {users.triggers && users.triggers.length &&
+                     <>
                     <h4>
                       <b>Triggers</b>
                     </h4>
-                    {/* <Divider classes={{root: classes.divider}} /> */}
+                   
                     {users.triggers ?
                    
                    users.triggers.map((item,index)=>(
@@ -456,13 +517,16 @@ function CandidateCard() {
                     : "N/A"}
                     <br />
                     <br />
+                    </>
+                    }
 
+
+                {users.interests && users.interests.length &&
+                <> 
                     <h4>
                       <b>Interests</b>
                     </h4>
-                    {/* <Divider classes={{root: classes.divider}} /> */}
-                    {/*users.skillset */}
-                    {/*Hausa, Igbo  */}
+                   
                     {users.interests ?
 
                      users.interests.map((item,index)=>(
@@ -470,6 +534,10 @@ function CandidateCard() {
 
 
                       : "N/A"}
+                    </>
+                     }
+
+
                   </Box>
                 </Grid>
               </Grid>

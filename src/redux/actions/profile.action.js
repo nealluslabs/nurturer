@@ -259,6 +259,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
    userRef.add({
    name: profile.name,
    email: profile.email,
+   phone: profile.phone,
     notes: profile.notes,
    companyName: profile.companyName,
    industry: profile.industry,
@@ -346,6 +347,7 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
     const contactData = {
       name: profile.name || "",
       email: profile.email || "",
+      phone: profile.phone || "",
       notes: profile.notes || "",
       companyName: profile.companyName || "",
       industry: profile.industry || "",
@@ -512,6 +514,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
    userRef.add({
    name: profile.name,
    email: profile.email,
+   phone: profile.phone,
     intro: profile.notes,
     notes: profile.notes,
    companyName: profile.companyName,
@@ -608,6 +611,7 @@ export const updateProfile = (profile, user, file, resetForm, url) => async (dis
    userRef.update({
    name: profile.name,
    email: profile.email,
+   phone: profile.phone,
     notes: profile.notes,
     intro: profile.notes,
    companyName: profile.companyName,

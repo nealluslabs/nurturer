@@ -391,6 +391,7 @@ const notifySkip = (message) => toast.error(message, {
       companyName: profileData.companyName == '' ? '' : profileData.companyName,
       name: profileData.name == '' ? '' : profileData.name,
       email: profileData.email == '' ? '' : profileData.email,
+      phone: profileData.phone  ? profileData.phone :'' ,
       birthday: profileData.birthday == '' ? '' : profileData.birthday,
       workAnniversary: profileData.workAnniversary == '' ? '' : profileData.workAnniversary,
       //skillset: profileData.skillset == '' ? '' : profileData.skillset,
@@ -470,8 +471,8 @@ const notifySkip = (message) => toast.error(message, {
         if ('companyName' in fieldValues)
           temp.companyName = fieldValues.companyName ? "" : "This field is required."
       
-        if ('notes' in fieldValues)
-            temp.notes = fieldValues.notes ? "" : "This field is required."
+     //   if ('notes' in fieldValues)
+     //       temp.notes = fieldValues.notes ? "" : "This field is required."
       // if ('skillset' in fieldValues)
       //      temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
        if ('city' in fieldValues)
@@ -481,12 +482,12 @@ const notifySkip = (message) => toast.error(message, {
        if ('state' in fieldValues)
         temp.state = fieldValues.state && fieldValues.state.length != 0 ? "" : "This field is required."
       
-       if ('frequency' in fieldValues)
-        temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
-       if ('birthday' in fieldValues)
-        temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
-       if ('workAnniversary' in fieldValues)
-        temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
+      // if ('frequency' in fieldValues)
+      //  temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
+     //  if ('birthday' in fieldValues)
+     //   temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
+     //  if ('workAnniversary' in fieldValues)
+     //   temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
     //   if ('industry' in fieldValues)
     //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
     //   if ('interests' in fieldValues)
@@ -536,9 +537,10 @@ const notifySkip = (message) => toast.error(message, {
 
 
         
-        if (validate() && triggers.length > 0 && interests.length > 0){
+    if (validate() /*&& triggers.length > 0 && interests.length > 0*/){
           const name = values.name;
           const email = values.email;
+          const phone = values.phone;
            const notes = values.notes;
            const city = values.city;
            const companyName = values.companyName;
@@ -551,7 +553,7 @@ const notifySkip = (message) => toast.error(message, {
            const birthday = values.birthday;
            const workAnniversary = values.workAnniversary;
            
-          const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,birthday,workAnniversary};
+          const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
           //console.log('Logged User: ', fb.auth().currentUser.uid);
           console.log("profile ABOUT TO BE SENT IN -->",profile)
 
@@ -561,7 +563,7 @@ const notifySkip = (message) => toast.error(message, {
             dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
-        }else if(interests.length === 0 ||triggers.length === 0 ){
+        }/*else if(interests.length === 0 ||triggers.length === 0 ){
           if(interests.length === 0){
           
             notifySkip("Please make sure you have added interests before submitting!")
@@ -577,7 +579,7 @@ const notifySkip = (message) => toast.error(message, {
           }
 
           
-        }else {
+        }*/else {
           notifySkip("Please make sure you have filled in all fields!")
         }
     }
@@ -799,6 +801,19 @@ const notifySkip = (message) => toast.error(message, {
                         error={errors.email}
                     />
                 </Grid>
+
+
+
+                <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
+                <Controls.Input
+                        label="Phone Number"
+                        name="phone"
+                        value={values.phone}
+                        onChange={handleInputChange}
+                        error={errors.phone}
+                    />
+                </Grid>
+
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
