@@ -243,7 +243,7 @@ const notifySkip = (message) => toast.error(message, {
       
         Papa.parse(file, {
           header: true,
-          skipEmptyLines: true,
+          skipEmptyLines: false,
           complete: (results) => {
             if (!results || !results.data || results.data.length === 0) {
               alert("CSV file is empty or invalid");
@@ -259,6 +259,7 @@ const notifySkip = (message) => toast.error(message, {
               "industry",
               "frequency",
               "city",
+              "phone",
               "state",
               "interests", // uncomment later
               "triggers",
@@ -320,7 +321,7 @@ const notifySkip = (message) => toast.error(message, {
                   }
                 } else {
                   // default values
-                  cleanedRow[field] = field === "frequency" ? "1 month" : "";
+                  cleanedRow[field] = field === "frequency" ? "1 month" : row[field];
                 }
               });
               return cleanedRow;
