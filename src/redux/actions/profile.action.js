@@ -243,7 +243,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
 
 
   
-    if (profileFrequency === "None") return "0";
+    if (profileFrequency === "None") return "None";
     // Use regex to extract the number from the string (e.g. "2 months")
     const match = profileFrequency.match(/\d+/);
   
@@ -254,7 +254,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     }
   
     // If no number found, default to "30"
-    return "0";
+    return "None";
   }
 
 

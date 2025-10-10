@@ -159,8 +159,8 @@ function CandidateApp(props) {
     position: "relative",
     top: "3rem",
     left: "2.5rem",
-    width: "100%",
-    maxWidth:"100%",
+    width: {md:"78%",sm:"85%"},
+    maxWidth:{md:"78%",sm:"85%"},
     marginBottom: "1.5rem",
     zIndex: 1000,
     flexWrap: "nowrap",   // 🚀 ensures both items stay on same line
@@ -219,7 +219,7 @@ function CandidateApp(props) {
             <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 
             </div>
-
+          {/*
             <div style={{
               display: "flex",
               gap: "12px",
@@ -229,7 +229,7 @@ function CandidateApp(props) {
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div style={{ display: 'flex', alignItems: "center" }}>
                     <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-                    <h3>Recent Touchpoints</h3>
+                    <h3>Recent Interactions</h3>
                   </div>
                   <button 
                     style={{ 
@@ -271,7 +271,7 @@ function CandidateApp(props) {
                             />
                             <div>
                               <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-                              <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
+                              <p style={{ fontSize: "12px" }}>{/*item.subtitle}</p>
                             </div>
                           </div>
                           <p 
@@ -338,6 +338,7 @@ function CandidateApp(props) {
                 </div>
               </div>
             </div>
+                  */}
         </div>
       }
       // rightSidebarContent={<CandidateAppSidebar />}

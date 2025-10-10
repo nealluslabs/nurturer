@@ -457,12 +457,14 @@ function CandidateCard() {
                 <Grid item xs={12} sm={12} md={12}>
                   <Box m={0} p={2}>
                     {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
-
-                    <h4 style={{display:"flex",justifyContent:"flex-start",gap:"1rem"}}>
-                    <FaPencilAlt/>   <b>Notes</b>
-                    </h4>
+                   
                     {users.notes && users.notes.length && 
-                    <>
+                   <>
+                   <h4 style={{display:"flex",justifyContent:"flex-start",gap:"1rem"}}>
+                      <b>Notes</b>
+                    </h4>
+                    
+                    
                     {
                       parseInt(users.notes.length) > 35 ? (
                         <p>{users.notes}</p>
