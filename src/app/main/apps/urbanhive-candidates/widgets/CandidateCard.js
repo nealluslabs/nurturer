@@ -511,7 +511,7 @@ function CandidateCard() {
                     </>
                      }
 
-                     {users.triggers && users.triggers.length &&
+                     {users.triggers && users.triggers.length > 0 &&
                      <>
                     <h4>
                       <b>Triggers</b>
@@ -530,7 +530,7 @@ function CandidateCard() {
                     }
 
 
-                {users.interests && users.interests.length &&
+                {users.interests && users.interests.length > 0 &&
                 <> 
                     <h4>
                       <b>Interests</b>
