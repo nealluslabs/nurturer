@@ -121,7 +121,7 @@ const sesClient = new SESClient({
               Data: "Welcome to Nurturer – Your Account is Ready",
             },
           }, 
-          Source: 'nealluslabs@gmail.com'//process.env.SES_FROM_EMAIL, // must be a verified SES sender
+          Source: 'info@nurturer.ai'//process.env.SES_FROM_EMAIL, // must be a verified SES sender
         };
     
         const command = new SendEmailCommand(params);

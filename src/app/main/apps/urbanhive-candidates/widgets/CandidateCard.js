@@ -142,6 +142,7 @@ function CandidateCard() {
             lastActive,
             skillset,
             city,
+            phone,
             companyName,
             jobTitle,
             birthday,
@@ -161,6 +162,7 @@ function CandidateCard() {
             sendDate,
             industry,
             state,
+            phone,
             photoUrl,
             lastActive,
             skillset,
@@ -320,7 +322,7 @@ function CandidateCard() {
                       }
                     </b>
                   </Typography>
-                  <br />
+                 
                   <Typography
                     variant="body2"
                     gutterBottom
@@ -328,7 +330,7 @@ function CandidateCard() {
                   >
                    {users.email && users.email}
                   </Typography>
-                  <br />
+                 
 
                   <Typography
                     variant="body2"
@@ -337,7 +339,7 @@ function CandidateCard() {
                   >
                    {users.phone && users.phone}
                   </Typography>
-                  <br />
+                 
                 </Grid>
               </Grid>
 
@@ -456,8 +458,8 @@ function CandidateCard() {
                   <Box m={0} p={2}>
                     {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
 
-                    <h4>
-                      <b>Notes</b>
+                    <h4 style={{display:"flex",justifyContent:"flex-start",gap:"1rem"}}>
+                    <FaPencilAlt/>   <b>Notes</b>
                     </h4>
                     {users.notes && users.notes.length && 
                     <>

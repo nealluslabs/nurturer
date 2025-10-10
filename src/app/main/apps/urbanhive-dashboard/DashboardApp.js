@@ -831,7 +831,7 @@ if (allContacts.length > 0) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-                <h3>Recent Touchpoints</h3>
+                <h3>Recent Interactions</h3>
               </div>
               <button 
                 style={{ 
@@ -882,7 +882,7 @@ if (allContacts.length > 0) {
                       />
                       <div>
                         <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-                        <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
+                        {<p style={{ fontSize: "12px" }}>{/*item.subtitle*/}</p>}
                       </div>
                     </div>
                     <p

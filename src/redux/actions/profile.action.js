@@ -240,7 +240,10 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
   function changeFrequencyToDays(profileFrequency) {
     // If undefined, return "30" as default
     if (!profileFrequency) return "30";
+
+
   
+    if (profileFrequency === "None") return "0";
     // Use regex to extract the number from the string (e.g. "2 months")
     const match = profileFrequency.match(/\d+/);
   
@@ -251,7 +254,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     }
   
     // If no number found, default to "30"
-    return "30";
+    return "0";
   }
 
 

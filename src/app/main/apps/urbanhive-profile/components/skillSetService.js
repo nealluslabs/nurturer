@@ -2726,6 +2726,7 @@ export const getStates = () => ([
   
 
 export const getFrequency = ()=>([
+  { id: 'None', title: 'None' },
     { id: '1 Month', title: '1 Month' },
     { id: '2 Months', title: '2 Months' },
     { id: '3 Months', title: '3 Months' },
