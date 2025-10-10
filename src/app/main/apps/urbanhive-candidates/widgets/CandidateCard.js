@@ -6,6 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
+
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import ReactSwipe from "react-swipe";
@@ -24,6 +25,9 @@ import { useHistory } from "react-router";
 import { saveCandidateInFocus } from "redux/reducers/user.slice";
 import AddIcon from "@mui/icons-material/Add";
 import { FaPencilAlt } from "react-icons/fa";
+import { InputAdornment, TextField } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+import SendIcon from '@mui/icons-material/Send';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +55,8 @@ function CandidateCard() {
     connects,
     isLoading,
   } = useSelector((state) => state.user);
+
+
   const { user } = useSelector((state) => state.login);
   const history = useHistory();
 
@@ -143,6 +149,7 @@ function CandidateCard() {
             skillset,
             city,
             phone,
+            messageQueue,
             companyName,
             jobTitle,
             birthday,
@@ -170,6 +177,7 @@ function CandidateCard() {
             companyName,
             jobTitle,
             birthday,
+            messageQueue,
             workAnniversary,
             interests,
             frequency,
@@ -458,7 +466,7 @@ function CandidateCard() {
                   <Box m={0} p={2}>
                     {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
                    
-                    {users.notes && users.notes.length && 
+                    {/*users.notes && users.notes.length && 
                    <>
                    <h4 style={{display:"flex",justifyContent:"flex-start",gap:"1rem"}}>
                       <b>Notes</b>
@@ -482,12 +490,9 @@ function CandidateCard() {
                       )
                     }
                     
-                   { /*: (
-                      'N/A' 
-                      
-                    )*/}
+                   
                     </>
-                    }
+                    */}
 
              {users.frequency &&
                     <>
@@ -546,6 +551,138 @@ function CandidateCard() {
                 </Grid>
               </Grid>
             </Grid>
+
+
+
+
+       {/*
+            <Box sx={{
+              display: "flex",
+              flexDirection:{xs:"column",md:"row"},
+              gap: "12px",
+              margin:"0px 0",
+              //marginTop:{xs:"-15rem",sm:"-5rem"}
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div style={{ display: 'flex', alignItems: "center" }}>
+                    <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
+                    <h3>Recent Interactions</h3>
+                  </div>
+                  <button 
+                    style={{ 
+                      border: `2px solid grey`, 
+                      padding: "4px 7px", borderRadius: "6px", color: "grey"
+                    }}
+                    onClick={() => history.push('/apps/inbox')}
+                  >
+                    View All
+                  </button>
+                </div>
+
+                <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem" }}>
+                  {users.messageQueue && users.messageQueue.length === 0 ? (
+                    <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
+                      No interactions found.
+                    </div>
+                  ) : (
+                    users.messageQueue &&  users.messageQueue.map((item) => {
+                      const IconComponent = item.icon;
+                      return (
+                        <div 
+                          key={item.subject} 
+                          style={{ 
+                            display: "flex", 
+                            alignItems: "center", 
+                            justifyContent: "space-between", 
+                            marginBottom: "16px" 
+                          }}
+                        >
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <IconComponent 
+                              sx={{ 
+                                width: 16, 
+                                height: 16, 
+                                marginRight: "6px", 
+                                color: item.iconColor 
+                              }} 
+                            />
+                            <div>
+                              <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.subject}</p>
+                              <p style={{ fontSize: "12px" }}>{/*item.subtitle}</p>
+                            </div>
+                          </div>
+                          <p 
+                            style={{ 
+                              padding: "4px 12px", 
+                              background: item.statusBackground, 
+                              color: item.statusColor, 
+                              borderRadius: "4px" 
+                            }}
+                          >
+                            {item.messageStatus}
+                          </p>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+              <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: "center" }}>
+                    <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
+                    <h3>Notes</h3>
+                  </div>
+
+                <div style={{ background: "white", height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                  <TextField
+                    multiline
+                    rows={12}
+                    placeholder="Enter your notes here..."
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      width: '90%',
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: '#1DDDE4',
+                        },
+                        '&:hover fieldset': {
+                          borderColor: '#1DDDE4',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#1DDDE4',
+                        },
+                      },
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                 
+                    style={{
+                      backgroundColor: "#20dbe4",
+                      marginTop: "20px",
+                      fontSize: "14px",
+                      color: "white",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      textTransform: "none",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      fontWeight: "bold",
+                      '&:hover': {
+                        backgroundColor: "#18c8d0",
+                      },
+                    }}
+                  >
+                    Update
+                  </Button>
+                </div>
+              </div>
+            </Box>
+            */}
           </Grid>
         );
       })
@@ -561,11 +698,78 @@ function CandidateCard() {
 
   return (
     <>
+                  <Grid 
+  container 
+  spacing={0}
+  sx={{
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    position: "relative",
+    top: "3rem",
+    left: "2.5rem",
+    width: {md:"78%",sm:"85%"},
+    maxWidth:{md:"78%",sm:"85%"},
+    marginBottom: "1.5rem",
+    zIndex: 1000,
+    flexWrap: "nowrap",   // 🚀 ensures both items stay on same line
+    columnGap: "1rem"     // 🚀 sets fixed 1rem gap between items
+  }}
+>
+  {/* 1 */}
+  <Grid item sx={{ flex: "0 0 85%" }}>
+    <TextField
+      placeholder="Search..."
+      onChange={(e) => { /*handleSearchResults(e.target.value)*/ }}
+      fullWidth
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <SearchIcon
+              style={{ cursor:"pointer" }} 
+              onClick={(e)=>{/*handleSearchResults(e.target.value)*/}} 
+            />
+          </InputAdornment>
+        ),
+        sx: {
+          height: "3.8rem",
+          paddingLeft:"10px",
+          "& input": {
+            height: "3rem",
+            paddingLeft:"10px",
+            padding: 0,
+            fontSize: "1rem",
+          },
+        },
+      }}
+    />
+  </Grid>
+
+  {/* 2 */}
+  <Grid item sx={{ flex: "0 0 20%" }}>
+    <button 
+      onClick={() => { history.push('/apps/profile') }}
+      style={{ 
+        backgroundColor: "#20dbe4",
+        color: 'white',
+        padding: '10px 20px',
+        borderRadius: '8px',
+        textTransform: 'none',
+        
+      }}
+    >
+      <AddIcon sx={{ marginRight: '4px' }} />
+      New Contact
+    </button>
+  </Grid>
+</Grid>
+
+
       {isLoading ? (
         <center> {/*<LinearProgress color="secondary" />*/}</center>
       ) : (
         userList.length > 0 && (
-          <div style={{ height: "100vh", width: "70vw" }}>
+          <Box sx={{ height: {xs:"120vh",sm:"100vh"}, width: "70vw" }}>
             <ReactSwipe
               key={userList.length}
               className="carousel"
@@ -574,7 +778,7 @@ function CandidateCard() {
             >
               {userList}
             </ReactSwipe>
-          </div>
+          </Box>
         )
       )}
     </>

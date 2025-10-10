@@ -12,7 +12,7 @@ import CandidateCard from './widgets/CandidateCard';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
-import { Button, Grid, InputAdornment, TextField } from '@mui/material';
+import { Box, Button, Grid, InputAdornment, TextField } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts } from 'redux/reducers/user.slice';
@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     backgroundColor:"white",
     width:"100%",
+    
     '& canvas': {
       maxHeight: '100%',
     },
@@ -71,16 +72,15 @@ function CandidateApp(props) {
   const touchpointData = [
     {
       id: 1,
-      title: 'Follow-up Email',
-      subtitle: 'John Doe - john@example.com',
+      title: 'Catch Up Email',
+      subtitle: 'John Doe - johnsmith@boeing.com',
       status: 'Pending',
       statusColor: 'grey',
       statusBackground: 'yellow',
       icon: MailIcon,
       iconColor: '#1976d2'
     },
-    {
-      id: 2,
+    /*   id: 2,
       title: 'Meeting Reminder',
       subtitle: 'Sarah Smith - sarah@example.com',
       status: 'Pending',
@@ -118,7 +118,7 @@ function CandidateApp(props) {
       statusBackground: 'yellow',
       icon: MailIcon,
       iconColor: '#1976d2'
-    }
+    }*/
   ];
 
 
@@ -148,7 +148,7 @@ function CandidateApp(props) {
 
 
 
-
+ {/*
             <Grid 
   container 
   spacing={0}
@@ -167,7 +167,7 @@ function CandidateApp(props) {
     columnGap: "1rem"     // 🚀 sets fixed 1rem gap between items
   }}
 >
-  {/* 1 */}
+ 
   <Grid item sx={{ flex: "0 0 85%" }}>
     <TextField
       placeholder="Search..."
@@ -196,7 +196,7 @@ function CandidateApp(props) {
     />
   </Grid>
 
-  {/* 2 */}
+ 
   <Grid item sx={{ flex: "0 0 20%" }}>
     <button 
       onClick={() => { history.push('/apps/profile') }}
@@ -215,15 +215,19 @@ function CandidateApp(props) {
   </Grid>
 </Grid>
 
+*/}
+
 
             <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 
             </div>
-          {/*
-            <div style={{
+          
+            <Box sx={{
               display: "flex",
+              flexDirection:{xs:"column",md:"row"},
               gap: "12px",
-              margin:"26px 0"
+              margin:"0px 0",
+              marginTop:{sm:"-15rem",xs:"0rem"}
             }}>
               <div style={{ flex: 1 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -245,7 +249,7 @@ function CandidateApp(props) {
                 <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem" }}>
                   {touchpointData.length === 0 ? (
                     <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
-                      No pending touchpoints found.
+                      No interactions found.
                     </div>
                   ) : (
                     touchpointData.map((item) => {
@@ -271,7 +275,7 @@ function CandidateApp(props) {
                             />
                             <div>
                               <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-                              <p style={{ fontSize: "12px" }}>{/*item.subtitle}</p>
+                              <p style={{ fontSize: "12px" }}>{/*item.subtitle*/}</p>
                             </div>
                           </div>
                           <p 
@@ -292,9 +296,10 @@ function CandidateApp(props) {
               </div>
 
               <div style={{ flex: 1 }}>
-                <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
-                  <h3>Notes</h3>
-                </div>
+              <div style={{ display: 'flex', alignItems: "center" }}>
+                    <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
+                    <h3>Notes</h3>
+                  </div>
 
                 <div style={{ background: "white", height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
                   <TextField
@@ -320,13 +325,18 @@ function CandidateApp(props) {
                   />
                   <Button
                     variant="contained"
-                    sx={{
+                 
+                    style={{
+                      backgroundColor: "#20dbe4",
                       marginTop: "20px",
-                      backgroundColor: "#1DDDE4",
+                      fontSize: "14px",
                       color: "white",
-                      padding: "12px 35px",
-                      borderRadius: "6px",
-                      fontSize: "16px",
+                      padding: "10px 20px",
+                      borderRadius: "8px",
+                      textTransform: "none",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
                       fontWeight: "bold",
                       '&:hover': {
                         backgroundColor: "#18c8d0",
@@ -337,8 +347,8 @@ function CandidateApp(props) {
                   </Button>
                 </div>
               </div>
-            </div>
-                  */}
+            </Box>
+                  
         </div>
       }
       // rightSidebarContent={<CandidateAppSidebar />}

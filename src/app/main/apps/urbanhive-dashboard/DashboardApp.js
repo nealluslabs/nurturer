@@ -703,7 +703,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white",  height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+            <div style={{ background: "white", height:{xs:"48.6rem",sm:"34.6rem"},borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <event.mainIcon sx={{ width: 65, height: 65 }} />
               </div>
@@ -776,7 +776,7 @@ if (allContacts.length > 0) {
               </button>
             </div>
 
-            <div style={{ background: "white",  height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+            <div style={{ background: "white",  height:{xs:"48.6rem",sm:"34.6rem"},borderRadius: "4px", marginTop: "18px", padding: "42px 12px",position:"relative",boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
               <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <event.mainIcon sx={{ width: 65, height: 65 }} />
               </div>
@@ -831,7 +831,7 @@ if (allContacts.length > 0) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-                <h3>Recent Touchpoints</h3>
+                <h3>Recent Interactions</h3>
               </div>
               <button 
                 style={{ 
