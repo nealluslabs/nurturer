@@ -12,7 +12,7 @@ import CandidateCard from './widgets/CandidateCard';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
-import { Box, Button, Grid, InputAdornment, TextField } from '@mui/material';
+import { Box, Button, Grid, InputAdornment, TextField, Switch } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts } from 'redux/reducers/user.slice';
@@ -259,51 +259,71 @@ function CandidateApp(props) {
                   </button>
                 </div>
 
-                <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem" }}>
+                <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem", display: "flex", flexDirection: "column" }}>
                   {touchpointData.length === 0 ? (
                     <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
-                      No interactions found.
+                      No pending touchpoints found.
                     </div>
                   ) : (
-                    touchpointData.map((item) => {
-                      const IconComponent = item.icon;
-                      return (
-                        <div 
-                          key={item.id} 
-                          style={{ 
-                            display: "flex", 
-                            alignItems: "center", 
-                            justifyContent: "space-between", 
-                            marginBottom: "16px" 
-                          }}
-                        >
-                          <div style={{ display: "flex", alignItems: "center" }}>
-                            <IconComponent 
-                              sx={{ 
-                                width: 16, 
-                                height: 16, 
-                                marginRight: "6px", 
-                                color: item.iconColor 
-                              }} 
-                            />
-                            <div>
-                              <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-                              <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
-                            </div>
-                          </div>
-                          <p 
-                            style={{ 
-                              padding: "4px 12px", 
-                              background: item.statusBackground, 
-                              color: item.statusColor, 
-                              borderRadius: "4px" 
+                    <>
+                      <div style={{ flex: 1 }}>
+                        {touchpointData.map((item) => (
+                          <div
+                            key={item.id}
+                            style={{
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "space-between",
+                              marginBottom: "20px",
+                              padding: "7px 0"
                             }}
                           >
-                            {item.status}
-                          </p>
-                        </div>
-                      );
-                    })
+                            <span style={{ fontSize: "16px", fontWeight: "500" }}>{item.title}</span>
+                            <Switch
+                              checked={item.enabled}
+                              sx={{
+                                '& .MuiSwitch-switchBase': {
+                                  color: '#1DDDE4',
+                                  '&:hover': {
+                                    backgroundColor: 'rgba(29, 221, 228, 0.08)',
+                                  },
+                                },
+                                '& .MuiSwitch-switchBase.Mui-checked': {
+                                  color: '#1DDDE4',
+                                  '&:hover': {
+                                    backgroundColor: 'rgba(29, 221, 228, 0.08)',
+                                  },
+                                },
+                                '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+                                  backgroundColor: '#1DDDE4',
+                                },
+                                '& .MuiSwitch-track': {
+                                  backgroundColor: 'rgba(29, 221, 228, 0.3)',
+                                },
+                              }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ display: "flex", justifyContent: "center", paddingTop: "20px" }}>
+                        <Button
+                          variant="contained"
+                          sx={{
+                            backgroundColor: "#1DDDE4",
+                            color: "white",
+                            padding: "12px 35px",
+                            borderRadius: "6px",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            '&:hover': {
+                              backgroundColor: "#18c8d0",
+                            },
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -365,7 +385,6 @@ function CandidateApp(props) {
                   
         </div>
       }
-      // rightSidebarContent={<CandidateAppSidebar />}
       ref={pageLayout}
     />
 
