@@ -682,7 +682,7 @@ function CandidateCard() {
                 </div>
               </div>
             </Box>
-            */}
+                  */}
           </Grid>
         );
       })
@@ -765,7 +765,7 @@ function CandidateCard() {
 </Grid>
 
 
-      {isLoading ? (
+      { isLoading?(
         <center> {/*<LinearProgress color="secondary" />*/}</center>
       ) : (
         userList.length > 0 && (
