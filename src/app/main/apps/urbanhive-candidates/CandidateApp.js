@@ -18,6 +18,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts } from 'redux/reducers/user.slice';
 import { fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import AddIcon from '@mui/icons-material/Add';
+import MailIcon from '@mui/icons-material/Mail';
+import SendIcon from '@mui/icons-material/Send';
 
 
 
@@ -66,6 +68,60 @@ function CandidateApp(props) {
   }
 
 
+  const touchpointData = [
+    {
+      id: 1,
+      title: 'Follow-up Email',
+      subtitle: 'John Doe - john@example.com',
+      status: 'Pending',
+      statusColor: 'grey',
+      statusBackground: 'yellow',
+      icon: MailIcon,
+      iconColor: '#1976d2'
+    },
+    {
+      id: 2,
+      title: 'Meeting Reminder',
+      subtitle: 'Sarah Smith - sarah@example.com',
+      status: 'Pending',
+      statusColor: 'grey',
+      statusBackground: 'yellow',
+      icon: MailIcon,
+      iconColor: '#1976d2'
+    },
+    {
+      id: 3,
+      title: 'Project Update',
+      subtitle: 'Mike Johnson - mike@example.com',
+      status: 'Pending',
+      statusColor: 'grey',
+      statusBackground: 'yellow',
+      icon: MailIcon,
+      iconColor: '#1976d2'
+    },
+    {
+      id: 4,
+      title: 'Thank You Note',
+      subtitle: 'Emma Wilson - emma@example.com',
+      status: 'Pending',
+      statusColor: 'grey',
+      statusBackground: 'yellow',
+      icon: MailIcon,
+      iconColor: '#1976d2'
+    },
+    {
+      id: 5,
+      title: 'Proposal Review',
+      subtitle: 'David Brown - david@example.com',
+      status: 'Pending',
+      statusColor: 'grey',
+      statusBackground: 'yellow',
+      icon: MailIcon,
+      iconColor: '#1976d2'
+    }
+  ];
+
+
   if (!isAuth) return <Redirect to={'/login'}/>
   // If user has no contacts, redirect to profile page to add contacts
   if (allContacts && Array.isArray(allContacts) && allContacts.length === 0) {
@@ -84,7 +140,7 @@ function CandidateApp(props) {
       }}
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
-        <div className='p-56 lg:ltr:pr-0 lg:rtl:pl-0' >
+        <div className='p-24 lg:ltr:pr-0 lg:rtl:pl-0' >
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 
@@ -103,8 +159,8 @@ function CandidateApp(props) {
     position: "relative",
     top: "3rem",
     left: "2.5rem",
-    width: "80%",
-    maxWidth:"80%",
+    width: "100%",
+    maxWidth:"100%",
     marginBottom: "1.5rem",
     zIndex: 1000,
     flexWrap: "nowrap",   // 🚀 ensures both items stay on same line
@@ -160,8 +216,127 @@ function CandidateApp(props) {
 </Grid>
 
 
-            <div style={{marginTop:"2rem",width:"150%"}}>
+            <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 
+            </div>
+
+            <div style={{
+              display: "flex",
+              gap: "12px",
+              margin:"26px 0"
+            }}>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                  <div style={{ display: 'flex', alignItems: "center" }}>
+                    <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
+                    <h3>Recent Touchpoints</h3>
+                  </div>
+                  <button 
+                    style={{ 
+                      border: `2px solid grey`, 
+                      padding: "4px 7px", borderRadius: "6px", color: "grey"
+                    }}
+                    onClick={() => history.push('/apps/inbox')}
+                  >
+                    View All
+                  </button>
+                </div>
+
+                <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem" }}>
+                  {touchpointData.length === 0 ? (
+                    <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
+                      No pending touchpoints found.
+                    </div>
+                  ) : (
+                    touchpointData.map((item) => {
+                      const IconComponent = item.icon;
+                      return (
+                        <div 
+                          key={item.id} 
+                          style={{ 
+                            display: "flex", 
+                            alignItems: "center", 
+                            justifyContent: "space-between", 
+                            marginBottom: "16px" 
+                          }}
+                        >
+                          <div style={{ display: "flex", alignItems: "center" }}>
+                            <IconComponent 
+                              sx={{ 
+                                width: 16, 
+                                height: 16, 
+                                marginRight: "6px", 
+                                color: item.iconColor 
+                              }} 
+                            />
+                            <div>
+                              <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
+                              <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
+                            </div>
+                          </div>
+                          <p 
+                            style={{ 
+                              padding: "4px 12px", 
+                              background: item.statusBackground, 
+                              color: item.statusColor, 
+                              borderRadius: "4px" 
+                            }}
+                          >
+                            {item.status}
+                          </p>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              </div>
+
+              <div style={{ flex: 1 }}>
+                <div style={{ display: "flex", justifyContent: "flex-start", alignItems: "center" }}>
+                  <h3>Notes</h3>
+                </div>
+
+                <div style={{ background: "white", height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                  <TextField
+                    multiline
+                    rows={12}
+                    placeholder="Enter your notes here..."
+                    variant="outlined"
+                    fullWidth
+                    sx={{
+                      width: '90%',
+                      '& .MuiOutlinedInput-root': {
+                        '& fieldset': {
+                          borderColor: '#1DDDE4',
+                        },
+                        '&:hover fieldset': {
+                          borderColor: '#1DDDE4',
+                        },
+                        '&.Mui-focused fieldset': {
+                          borderColor: '#1DDDE4',
+                        },
+                      },
+                    }}
+                  />
+                  <Button
+                    variant="contained"
+                    sx={{
+                      marginTop: "20px",
+                      backgroundColor: "#1DDDE4",
+                      color: "white",
+                      padding: "12px 35px",
+                      borderRadius: "6px",
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      '&:hover': {
+                        backgroundColor: "#18c8d0",
+                      },
+                    }}
+                  >
+                    Update
+                  </Button>
+                </div>
+              </div>
             </div>
         </div>
       }
