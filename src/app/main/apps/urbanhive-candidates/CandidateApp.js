@@ -45,6 +45,19 @@ function CandidateApp(props) {
   const classes = useStyles(props);
   const pageLayout = useRef(null);
   const [tabValue, setTabValue] = useState(0);
+  const [testWork, setTestWork] = useState(false)
+
+   // Fetch contacts when component mounts
+   useEffect(() => {
+    setTimeout(()=>{
+    setTestWork(true)
+    },1200
+    )
+
+
+  }, [filteredContacts]);
+
+
 
   // Fetch contacts when component mounts
   useEffect(() => {
@@ -221,13 +234,13 @@ function CandidateApp(props) {
             <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 
             </div>
-          
+          {/*testWork &&
             <Box sx={{
               display: "flex",
               flexDirection:{xs:"column",md:"row"},
               gap: "12px",
               margin:"0px 0",
-              marginTop:{sm:"-15rem",xs:"0rem"}
+              marginTop:{sm:"-7rem",xs:"0rem"}
             }}>
               <div style={{ flex: 1 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -275,7 +288,7 @@ function CandidateApp(props) {
                             />
                             <div>
                               <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-                              <p style={{ fontSize: "12px" }}>{/*item.subtitle*/}</p>
+                              <p style={{ fontSize: "12px" }}>{item.subtitle}</p>
                             </div>
                           </div>
                           <p 
@@ -348,6 +361,7 @@ function CandidateApp(props) {
                 </div>
               </div>
             </Box>
+            */}
                   
         </div>
       }
