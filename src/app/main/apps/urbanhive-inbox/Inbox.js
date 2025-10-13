@@ -172,6 +172,17 @@ function Inbox(props) {
       draggable: true,
       progress: undefined,
       });
+
+
+      const notifySkipCustom = (message) => toast.error(message, {
+        position: "bottom-right",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
  //New Hooks
 
 //  const [connectStatus, setconnectStatus] = useState('');
@@ -1612,15 +1623,24 @@ label={<Typography fontSize="14px">
             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
            }
 
-           {/* !loading && 
+           { !loading && 
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
-           <RiAiGenerate2 onClick={()=>{dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))}} 
+           <RiAiGenerate2 onClick={()=>{
+
+            if(/*selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length && selectedChatUser.messageQueue.every((msg) => msg.messageStatus !== "Pending" ) ||*/selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length === 0)
+          {
+            dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))
+            }
+            else{
+              notifySkipCustom("You can't generate a new message until your previous message has been sent!")
+            }
+          }} 
             
-            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
-           */}
+            style={{position:"absolute",top:"2rem",right:"12rem",fontSize:"2.4rem",color:"grey"}} />
+           }
 
           { loading && 
-            <CircularProgress size={20} style={{position:"absolute",top:"1.9rem",right:"8rem",color:"grey"}} />
+            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"12rem",color:"grey"}} />
             }
            
           </Paper>

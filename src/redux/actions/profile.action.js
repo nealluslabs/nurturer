@@ -311,6 +311,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     birthdaySendDate:changeBirthdayToSendDate(profile.birthday),
     birthdayFrequencyInDays:365,
     queryMsg:[],
+    messageQueue:[],
     interests: profile.interests,
     password:'12345678',
     usedConnection:0,
