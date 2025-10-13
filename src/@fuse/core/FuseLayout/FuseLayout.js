@@ -86,7 +86,7 @@ function FuseLayout(props) {
   const matched = matchRoutes(routes, pathname)[0];
   const newSettings = useRef(null);
 
-  console.log("I'M NOT DEAD AM I")
+  //console.log("I'M NOT DEAD AM I")
 
   const shouldAwaitRender = useCallback(() => {
     let _newSettings;

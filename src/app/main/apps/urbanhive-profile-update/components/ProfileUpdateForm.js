@@ -97,7 +97,7 @@ export default function ProfileUpdateForm() {
     const [justSubmitted2, setJustSubmitted2] = useState(false);
     const [hasTypedSinceSubmit2, setHasTypedSinceSubmit2] = useState(false);
 
-    console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",candidateInFocus.interests)
+    //console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",candidateInFocus.interests)
 
     
 
@@ -144,7 +144,7 @@ useEffect(()=>{
 
   setNewCities(skillSetService.getCities(newState))
 
-  console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
+  ////console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
 
 },[newState])
 
@@ -228,7 +228,7 @@ useEffect(()=>{
       setTriggers((prev) => prev.filter((t) => t !== triggerToDelete));
     };
 
-    console.log("candidate in focus is--->",candidateInFocus)
+    //console.log("candidate in focus is--->",candidateInFocus)
     const initialFValues = {
       //id: user.uid,
       notes: candidateInFocus.notes == '' ? '' : candidateInFocus.notes,
@@ -301,12 +301,12 @@ useEffect(()=>{
           setPhotoURL({selectedFile:file,selectedFileName:file.name});
           setOpenCrop(true);
 
-          console.log("photoURL isOOO-->",photoURL)
+          //console.log("photoURL isOOO-->",photoURL)
         }
       };
     
     function handleChangeNew(){
-        console.log('changed');
+        //console.log('changed');
     }
 
     const validate = (fieldValues = values) => {
@@ -365,8 +365,8 @@ useEffect(()=>{
 
     const handleSubmitOld = e => {
         e.preventDefault();
-       console.log('Photo URL: ', photoURL);
-       console.log('File URL: ', file);
+       //console.log('Photo URL: ', photoURL);
+       //console.log('File URL: ', file);
         e.preventDefault()
         if(values.isTechnical == 'nil'){
           setshowError(true);
@@ -394,8 +394,8 @@ useEffect(()=>{
            const workAnniversary = values.workAnniversary;
            
           const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,phone,birthday,workAnniversary,uid:candidateInFocus.uid};
-          //console.log('Logged User: ', fb.auth().currentUser.uid);
-          console.log("profile ABOUT TO BE SENT IN -->",profile)
+          ////console.log('Logged User: ', fb.auth().currentUser.uid);
+          //console.log("profile ABOUT TO BE SENT IN -->",profile)
           if(photoURL){
             dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
             }else{
@@ -409,8 +409,8 @@ useEffect(()=>{
 
     const handleSubmit = e => {
       e.preventDefault();
-     console.log('Photo URL: ', photoURL);
-     console.log('File URL: ', file);
+     //console.log('Photo URL: ', photoURL);
+     //console.log('File URL: ', file);
 
      
     
@@ -446,8 +446,8 @@ useEffect(()=>{
          const workAnniversary = values.workAnniversary;
          
         const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
-        //console.log('Logged User: ', fb.auth().currentUser.uid);
-        console.log("profile ABOUT TO BE SENT IN -->",profile)
+        ////console.log('Logged User: ', fb.auth().currentUser.uid);
+        //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
         if(photoURL == static_img){
         dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
@@ -643,7 +643,9 @@ useEffect(()=>{
                         name="state"
                         label="State"
                         value={values.state}
-                        onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);console.log("JUST SELECTED A STATE --->",e.target.value) }}
+                        onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);
+                          //console.log("JUST SELECTED A STATE --->",e.target.value) 
+                        }}
                         options={skillSetService.getStates()}
                         error={errors.state}
                     />

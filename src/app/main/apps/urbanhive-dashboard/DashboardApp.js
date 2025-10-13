@@ -73,7 +73,7 @@ let touchpointData = [];
 let onlyTouchpointMessagesData = [];
 let onlyEventsMessagesData = [];
 
-console.log("WHAT IS ALL CONTACTS DATA,ON DASHBOARD THAT IS-->",allContacts)
+//console.log("WHAT IS ALL CONTACTS DATA,ON DASHBOARD THAT IS-->",allContacts)
 if (allContacts.length > 0) {
   let allMessages = [];
   allContacts.forEach(contact => {
@@ -614,7 +614,7 @@ if (allContacts.length > 0) {
                   <div 
                   
                   onClick={()=>{
-                    console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.uid === item.uid))[0])
+                    //console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.uid === item.uid))[0])
                     
                     dispatch(setCurrentChat(
                       //we are assuming we will always get something..risky dagogo- aug -14 2025
@@ -854,7 +854,7 @@ if (allContacts.length > 0) {
                 return (
                   <div 
                   onClick={()=>{
-                    console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.uid === item.uid))[0])
+                    //console.log("FROM DASHBOARD, THE USER WE SELECTED IS -->" ,allContacts.filter((contact)=>(contact.uid === item.uid))[0])
                     dispatch(setCurrentChat(
                       //we are assuming we will always get something..risky dagogo- aug -14 2025
                       allContacts.filter((contact)=>(contact.uid === item.uid))[0]
@@ -944,7 +944,7 @@ if (allContacts.length > 0) {
                   >
                     <div style={{ display: "flex", alignItems: "center"}}
                      onClick={()=>{
-                     console.log("FILTERED USERS FROM DASHBOARD-->",user)
+                     //console.log("FILTERED USERS FROM DASHBOARD-->",user)
                       resortFilteredUsersAndPush(user.uid)
 
                      }}

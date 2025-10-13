@@ -38,7 +38,7 @@ function ContactListItem(props) {
   const { allUsers,filteredUsers, connects, isLoading } = useSelector((state) => state.user);
   const selectedContactId = props.user.uid;
 
- console.log("WHAT IS USER?--->",props.user)
+ //("WHAT IS USER?--->",props.user)
 
 
  const resortFilteredUsersAndPush = (userId)=>{
@@ -66,7 +66,7 @@ setTimeout(()=>{
     const user1 = users.uid;
     const user2 = user.uid;
   
-    console.log('Accepted User: ', user);
+    //console.log('Accepted User: ', user);
     dispatch(updateConnection(user1, user2, status, history));
   }
   
@@ -74,8 +74,8 @@ setTimeout(()=>{
      const user1 = users.uid;
      const user2 = user.uid;
 
-     console.log('User 1:- ', user1);
-     console.log('User 2:- ', user2);
+     //console.log('User 1:- ', user1);
+     //console.log('User 2:- ', user2);
      dispatch(unMatchConnect(user1, user2, history));
   }
 

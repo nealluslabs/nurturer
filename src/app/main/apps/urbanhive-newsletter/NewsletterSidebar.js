@@ -126,7 +126,7 @@ function NewsletterSidebar(props) {
     setUserUid(user2.uid);
 
     dispatch(fetchChats(user1, user2));
-    console.log("IsMobile: ", isMobile);
+    //console.log("IsMobile: ", isMobile);
     if (isMobile) {
       dispatch(closeMobileChatsSidebar());
     }
@@ -186,7 +186,7 @@ function NewsletterSidebar(props) {
           })
         );
 
-    console.log("Connected Users Mapped: ", connectedUsersOutput);
+    //console.log("Connected Users Mapped: ", connectedUsersOutput);
   };
 
   const connectsById = Object.fromEntries(

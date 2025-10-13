@@ -52,7 +52,7 @@ const [state, setState] = useState({
 })
 
 useEffect(() => {
-  console.log(state)
+  //console.log(state)
 }, [state])
 
 
@@ -111,19 +111,19 @@ const handleSubmit = () => {
    dispatch(buyBootcamp(state, user.uid, today, history));
 }
   const validateBootcamp = (initializePayment) => {
-    console.log('Val:- ', state);
+    //console.log('Val:- ', state);
     let verify = Object.values(state.type);
      let verifyTrue = verify.includes(true);
      count = verify.reduce((total,x) => (x==true ? total+1 : total), 0)
      if(verifyTrue){
        amount = amount * count;
              // handleOpen();
-      console.log('Count:=', count);
-      console.log('Price:=', amount);
+      //console.log('Count:=', count);
+      //console.log('Price:=', amount);
         initializePayment();
      }else{
       alert('You have not checked any bootcamp course');
-      console.log('Empty o...', state.type);
+      //console.log('Empty o...', state.type);
      }
 
   }

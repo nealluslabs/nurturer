@@ -10,7 +10,7 @@ import { fetchUserData } from './auth.action';
 
 export const uploadImage = (profile, user, file, resetForm) => async (dispatch) => {
   const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
-  console.log('File Name: ', imageName);
+  //console.log('File Name: ', imageName);
   dispatch(createDevPending());
   const uploadTask = storage.ref(`developer_images/${imageName}`).put(file);
   uploadTask.on(
@@ -22,7 +22,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
       // setProgress(progress);
     },
     error => {
-      console.log(error);
+      //console.log(error);
     },
     () => {
       storage
@@ -30,7 +30,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
         .child(imageName)
         .getDownloadURL()
         .then(url => {
-          console.log('Image URL: ', url);
+          //console.log('Image URL: ', url);
           dispatch(createProfile(profile, user, file, resetForm, url)); /*WE ARE DISPATCHING THE ACTIONS IMMEDIATELY BELOW */
         });
     }
@@ -38,7 +38,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
 }
 
 export const createProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
-  console.log('All data: ',{profile, user, url});
+  //console.log('All data: ',{profile, user, url});
   dispatch(createDevPending());
   var userRef = db.collection("developers");
     userRef.add({
@@ -64,7 +64,7 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
   })
   .catch((error) => {
     var errorMessage = error.message;
-    console.log('Error creating profile', errorMessage);
+    //console.log('Error creating profile', errorMessage);
     dispatch(createDevFailed({ errorMessage }));
   });
 
@@ -75,19 +75,19 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
     // dispatch(fetchProfilePending());
     docRef.get().then((doc) => {
         if (doc.exists) {
-            console.log("Document data:", doc.data());
+            //console.log("Document data:", doc.data());
             const profileData = doc.data();
-            console.log('Profile Data ', profileData.intro);
+            //console.log('Profile Data ', profileData.intro);
             if(profileData.intro != undefined){
             dispatch(fetchProfileSuccess({ profileData }));
              }
         } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+            //console.log("No such document!");
         }
     }).catch((error) => {
       var errorMessage = error.message;
-      console.log('Error creating profile', errorMessage);
+      //console.log('Error creating profile', errorMessage);
       // dispatch(fetchProfileFailed({ errorMessage }));
     });
       };

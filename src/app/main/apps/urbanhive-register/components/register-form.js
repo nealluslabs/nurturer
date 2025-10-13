@@ -91,7 +91,7 @@ function RegisterForm(props) {
 useEffect(()=>{
   companyId  = id?id:null
 
-  console.log("OUR ROUTE PARAMS ID IS---->",companyId)
+ // console.log("OUR ROUTE PARAMS ID IS---->",companyId)
 }
 ,[id])
 

@@ -127,7 +127,7 @@ function Inbox(props) {
   
   const handleSave = () => {
     const updatedContent = editableRef.current.innerHTML;
-    console.log('Saved content:', updatedContent);
+    ////console.log('Saved content:', updatedContent);
     // You can now send `updatedContent` to your backend or store it
     }
 
@@ -170,7 +170,7 @@ function Inbox(props) {
  const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
  //const [paragraphs, setParagraphs] = useState([selectedChatUser.message.firstParagraph, selectedChatUser.message.secondParagraph, selectedChatUser.message.thirdParagraph]);
  const thisUser =user && user
- console.log("IN INBOX DAGOGO, WHO IS SELECTED CHAT USER--->",selectedChatUser)
+ //console.log("IN INBOX DAGOGO, WHO IS SELECTED CHAT USER--->",selectedChatUser)
 //HOW WE DECIDE WHICH MESSAGE THE AI WILL MODEL - START 
 
 const [aiMessageToModel,setAiMessageToModel] = useState({});
@@ -205,7 +205,7 @@ const handleInput = () => {
     //PERHAPS CONSIDER SETTING BULLET POINTS --AS THEY MAY DISAPPEAR WHEN YOU START TYPING.. OR NOT, WE MAY NOT NEED TO TYPE  DAGOGO -SEP 12 2025
     messageType:'Trigger'
   };
-  console.log("HANDLE INPUTS IS WORKING",paragraphs)
+  //console.log("HANDLE INPUTS IS WORKING",paragraphs)
   setParagraphs({...paragraphs,...paraData});
   dispatch(saveEditedParagraphs({...paragraphs,...paraData}))
 };
@@ -215,14 +215,14 @@ let updatedBulletPoints = [...paragraphs.bulletPoints]
 
 
 if(updatedBulletPoints.filter((item)=>(item.id === newBulletPoint.id)).length ){
-  console.log("ITS THERE SO WE REMOVE IT---> ARTICLE IS UPDATING")
-  console.log("WHAT IS NEW BULLET POINT ID--->",newBulletPoint.id)
-  console.log("WHAT IS UPDATED BULLET POINTS--->",updatedBulletPoints)
+  //console.log("ITS THERE SO WE REMOVE IT---> ARTICLE IS UPDATING")
+  //console.log("WHAT IS NEW BULLET POINT ID--->",newBulletPoint.id)
+  //console.log("WHAT IS UPDATED BULLET POINTS--->",updatedBulletPoints)
 
   updatedBulletPoints = updatedBulletPoints.filter((item)=>(item.id !== newBulletPoint.id))
 }
 else{
-  console.log("ITS NOT THERE,SO WE ADD IT---> ARTICLE IS UPDATING")
+  //console.log("ITS NOT THERE,SO WE ADD IT---> ARTICLE IS UPDATING")
 
   updatedBulletPoints = [...updatedBulletPoints,newBulletPoint]
 }
@@ -241,7 +241,7 @@ const [paragraphs, setParagraphs] = useState(selectedChatUser.messageQueue  && s
   thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" "
 });
 
-console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", selectedChatUser.messageQueue )
+//console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", selectedChatUser.messageQueue )
 
 const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints
   :
@@ -252,8 +252,8 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
  const { connects,chatGptAnswer } = useSelector((state) => state.user);
  let connectStatus;
 
- console.log("SELECTED CHAT USER IS--->",selectedChatUser)
- console.log("PARAGRAPHS IS--->",user.message)
+ //console.log("SELECTED CHAT USER IS--->",selectedChatUser)
+ //console.log("PARAGRAPHS IS--->",user.message)
 
   useEffect(() => {
     if (chatMessages) {
@@ -274,9 +274,9 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
 
    // let paraData = chatGptAnswer && chatGptAnswer.bulletPoints && chatGptAnswer.bulletPoints.length ?  JSON.parse(chatGptAnswer):{firstParagraph:user.messages && user.messages.firstParagraph && user.messages.firstParagraph,secondParagraph:user.messages && user.messages.secondParagraph && user.messages.secondParagraph,thirdParagraph:user.messages &&  user.messages.thirdParagraph && user.messages.thirdParagraph} 
 
-   // console.log("CHAT GPT ANSwER IS--->",chatGptAnswer)
+   // //console.log("CHAT GPT ANSwER IS--->",chatGptAnswer)
 
-   // console.log("CURRENT PARAGRAPHS IS--->",paragraphs)
+   // //console.log("CURRENT PARAGRAPHS IS--->",paragraphs)
    if(editedParagraphs && editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
 
     setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
@@ -394,7 +394,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
   }
 
   const sendUpdate = ()=>{
-    console.log("Message has begun its progress--->",editedParagraphs.firstParagraph)
+    //console.log("Message has begun its progress--->",editedParagraphs.firstParagraph)
     dispatch( 
       updateUserBroadcast(editedParagraphs,user,notifyInvite,selectedChatUser)
     ).then(() => {
@@ -404,7 +404,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
 
  
   const testMe = () => {
-    console.log('Connection Status is: ', connectStatus);
+    //console.log('Connection Status is: ', connectStatus);
   }
 
   const connectsById = Object.fromEntries(
@@ -1381,7 +1381,7 @@ We had some great conversations previously, and I really valued the opportunity 
             checked={paragraphs.bulletPoints.some(bp => bp.id === point.id)}
             
             onClick={()=>{
-              console.log("WHAT IS POINT FROM JOHN SMITH -->",point)
+              //console.log("WHAT IS POINT FROM JOHN SMITH -->",point)
               updateArticle(
             {
               id:point.id,

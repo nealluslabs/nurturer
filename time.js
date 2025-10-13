@@ -25,10 +25,10 @@ function timeSince(timeStamp){
 // const currentTimeStamp = new Date(parseInt('1659377138217'));
 //   const currentTimeStamp = new Date().getTime();
 
-// console.log(timeSince(currentTimeStamp));
+// //console.log(timeSince(currentTimeStamp));
 
 const today = new Date();
 
-console.log(today.toISOString()); 
+//console.log(today.toISOString()); 
 
 

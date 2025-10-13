@@ -14,11 +14,11 @@ import { clearChat } from 'src/redux/reducers/chat.slice';
             .get()
             .then((snapshot) => {
                 const appointments = snapshot.docs.map((doc) => ({ ...doc.data(),id:doc.id }));
-                console.log('Appointments, ', appointments);
+                //console.log('Appointments, ', appointments);
                 dispatch(fetchAppointmentsSuccess(appointments));
         }).catch((error) => {
                 var errorMessage = error.message;
-                console.log('Error fetching profile', errorMessage);
+                //console.log('Error fetching profile', errorMessage);
                 dispatch(fetchAppointmentsFailed({ errorMessage }));
         });
     
@@ -37,10 +37,10 @@ export const updateAppointment = (id,updates) => async (dispatch) => {
                 const msg = 'Appointment successfully updated!'
                 const appointment = true /*snapshot.docs.map((doc) => ({ ...doc.data() }))*/
                 dispatch(updateAppointmentSuccess(appointment,msg));
-                console.log('Appointment has been updated for real !') 
+                //console.log('Appointment has been updated for real !') 
     }).catch((error) => {
             var errorMessage = error.message;
-            console.log('Error fetching profile', errorMessage);
+            //console.log('Error fetching profile', errorMessage);
             dispatch(updateAppointmentFailed({ errorMessage }));
     });
 
@@ -56,11 +56,11 @@ export const fetchSelectedAppointment = (id) => async (dispatch) => {
         .get()
         .then((doc) => {
             const appointments = doc.data()/*s.map((doc) => ({ ...doc.data(),id:doc.id}))*/;
-            console.log('Appointments, ', appointments);
+            //console.log('Appointments, ', appointments);
             dispatch(fetchSelectedAppointmentSuccess(appointments));
     }).catch((error) => {
             var errorMessage = error.message;
-            console.log('Error fetching profile', errorMessage);
+            //console.log('Error fetching profile', errorMessage);
             dispatch(fetchSelectedAppointmentFailed({ errorMessage }));
     });
 
@@ -76,11 +76,11 @@ export const deleteSelectedAppointment = (id) => async (dispatch) => {
         .delete()
         .then((doc) => {
             const appointments = doc.data()/*s.map((doc) => ({ ...doc.data(),id:doc.id}))*/;
-            console.log('Appointment Deleted, ', appointments);
+            //console.log('Appointment Deleted, ', appointments);
             dispatch(clearAppointments());
     }).catch((error) => {
             var errorMessage = error.message;
-            console.log('Error in deleting appointment', errorMessage);
+            //console.log('Error in deleting appointment', errorMessage);
             dispatch(fetchSelectedAppointmentFailed({ errorMessage }));
             /*I will create a deleted failed reducer but for now i am using the fetching failed reducer */
     });

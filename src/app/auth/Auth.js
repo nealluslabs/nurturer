@@ -101,13 +101,13 @@ class Auth extends Component {
       firebaseService.init((success) => {
         if (!success) {
           resolve();
-          console.log("I, FIREBASE HAVE RESOLVED INIT")
+          //console.log("I, FIREBASE HAVE RESOLVED INIT")
         }
       });
 
       firebaseService.onAuthStateChanged((authUser) => {
         if (authUser) {
-          console.log("I, FIREBASE HAVE AN AUTH USER")
+          //console.log("I, FIREBASE HAVE AN AUTH USER")
           this.props.showMessage({ message: 'Logging in with Firebase' });
 
           /**
@@ -127,7 +127,7 @@ class Auth extends Component {
           );
         } else {
           resolve();
-          console.log("I, FIREBASE, DO NOT HAVE AN AUTH USER")
+          //console.log("I, FIREBASE, DO NOT HAVE AN AUTH USER")
         }
       });
 

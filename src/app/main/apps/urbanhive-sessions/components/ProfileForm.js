@@ -49,7 +49,7 @@ export default function ProfileForm() {
     const nodeRef = useRef(null);
     
     function handleChangeNew(){
-        console.log('changed');
+       // console.log('changed');
     }
 
     const validate = (fieldValues = values) => {

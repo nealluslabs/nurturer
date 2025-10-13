@@ -123,7 +123,7 @@ function InboxSidebar(props) {
 
     dispatch(clearChats(user1, user2))
      dispatch(fetchChats(user1, user2))
-     console.log('IsMobile: ', isMobile);
+     //console.log('IsMobile: ', isMobile);
      if (isMobile) {
         dispatch(closeMobileChatsSidebar());
       }
@@ -160,7 +160,7 @@ function InboxSidebar(props) {
     return aDate - bDate;
 }))
 
-  console.log("CONN USERS-->",connUsers)
+  //console.log("CONN USERS-->",connUsers)
 
       useEffect(()=>{
 

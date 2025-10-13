@@ -16,6 +16,14 @@ import { persistStore } from 'redux-persist';
 let persistor = persistStore(store);
 
 
+//COME ANd comment out this console method IF YOU WANT YOUR CONSOLE.LOGS TO SHOW AGAIN
+if(!window.console) window.console = {};
+var methods = ["log", "debug", "warn", "info"];
+for(var i=0;i<methods.length;i++){
+    console[methods[i]] = function(){};
+}
+
+
 ReactDOM.render(
     // <PersistGate loading={null} persistor={persistor}>
     <App />

@@ -106,7 +106,7 @@ export default function ProfileForm() {
       };
     
     function handleChangeNew(){
-        console.log('changed');
+        //console.log('changed');
     }
 
     const validate = (fieldValues = values) => {
@@ -148,8 +148,8 @@ export default function ProfileForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-       console.log('Photo URL: ', photoURL);
-       console.log('File URL: ', file);
+       //console.log('Photo URL: ', photoURL);
+       //console.log('File URL: ', file);
         e.preventDefault()
         if(values.isTechnical == 'nil'){
           setshowError(true);
@@ -170,7 +170,7 @@ export default function ProfileForm() {
            const lookingFor = values.lookingFor;
 
           const profile = { firstName,LastName ,intro, skillset, city, skills_needed, isTechnical, lookingFor};
-          console.log('Logged User: ', fb.auth().currentUser.uid);
+          //console.log('Logged User: ', fb.auth().currentUser.uid);
           if(photoURL == static_img){
           dispatch(createProfile(profile, user, file, resetForm, photoURL));
           }else{

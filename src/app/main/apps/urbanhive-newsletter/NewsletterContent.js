@@ -144,7 +144,7 @@ function NewsletterContent(props) {
       }
     };
 
-    console.log('Sending newsletter:', newsletterData);
+    //console.log('Sending newsletter:', newsletterData);
     
     // You can dispatch an action here to send the newsletter
     if (props.onSendNewsletter) {

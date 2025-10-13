@@ -82,8 +82,8 @@ export default function BasicTable() {
 
   useEffect(() => {
     dispatch(fetchAllDevelopers());
-    console.log(allDevelopers)
-    console.log(error)
+    //console.log(allDevelopers)
+    //console.log(error)
      rows = [...allDevelopers]
   }, [])
  

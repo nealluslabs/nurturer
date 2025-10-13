@@ -121,7 +121,7 @@ export default function SettingsForm() {
       };
     
     function handleChangeNew(){
-        console.log('changed');
+        //console.log('changed');
     }
 
     const validate = (fieldValues = values) => {

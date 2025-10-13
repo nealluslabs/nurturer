@@ -6,8 +6,8 @@ import { db, fb, auth, storage } from '../../config/firebase';
 export const fetchChats = (user1, user2_data) => async (dispatch) => {
     const user2 = user2_data.uid;
     const users =  {user1, user2};
-    console.log('User 1: ', user1);
-    console.log('User 2 chat data: ', user2);
+    //console.log('User 1: ', user1);
+    //console.log('User 2 chat data: ', user2);
 
     dispatch(setCurrentChat({}));
      dispatch(setCurrentChat(user2_data));
@@ -24,7 +24,7 @@ export const clearChats = () => async (dispatch) => {
 
 export const sendChat = (msgObj) => async (dispatch) => {
     
-    console.log('Msg Obj: ', msgObj);
+    //console.log('Msg Obj: ', msgObj);
     // const today = new Date();
     // const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
@@ -44,10 +44,10 @@ export const sendChat = (msgObj) => async (dispatch) => {
     })
     .then((snapshot) => {
         dispatch(getRealtimeChat(users))
-        console.log('Sent Chat: ', snapshot);
+        //console.log('Sent Chat: ', snapshot);
 }).catch((error) => {
         var errorMessage = error.message;
-        console.log('Error sending chat', errorMessage);
+        //console.log('Error sending chat', errorMessage);
 });
 
 };
@@ -69,8 +69,8 @@ export const getRealtimeChat = (users) => async (dispatch) => {
         });
 
         dispatch(fetchChatsSuccess(chats));
-        console.log('Realtime Fetched Chats: ', chats);
-        console.log('Realtime Chat Length: ', chats.length);
+        //console.log('Realtime Fetched Chats: ', chats);
+        //console.log('Realtime Chat Length: ', chats.length);
     })
 };
 

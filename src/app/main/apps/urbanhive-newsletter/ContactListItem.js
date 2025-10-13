@@ -44,7 +44,7 @@ function ContactListItem(props) {
     const user1 = users.uid;
     const user2 = user.uid;
   
-    console.log('Accepted User: ', user);
+    //console.log('Accepted User: ', user);
     dispatch(updateConnection(user1, user2, status, history));
   }
   
@@ -52,8 +52,8 @@ function ContactListItem(props) {
      const user1 = users.uid;
      const user2 = user.uid;
 
-     console.log('User 1:- ', user1);
-     console.log('User 2:- ', user2);
+     //console.log('User 1:- ', user1);
+     //console.log('User 2:- ', user2);
      dispatch(unMatchConnect(user1, user2, history));
   }
 
@@ -75,7 +75,7 @@ function ContactListItem(props) {
       onChange={(e) => {
         e.stopPropagation();
         // Handle checkbox change here
-        console.log('Checkbox changed for user:', props.user.uid);
+        //console.log('Checkbox changed for user:', props.user.uid);
       }}
     />
     

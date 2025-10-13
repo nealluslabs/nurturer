@@ -17,7 +17,7 @@ export const getChat = createAsyncThunk(
     });
     const { chat, userChatList } = await response.data;
 
-     console.log('Contact ID: ', contactId);
+     //console.log('Contact ID: ', contactId);
     // dispatch(setSelectedContactId(contactId));
     // dispatch(updateUserChatList(userChatList));
 

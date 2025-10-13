@@ -84,8 +84,8 @@ function NewsletterSidebar(props) {
   };
   
   useEffect(() => {
-    console.log('All Users', allUsers);
-    console.log('user isso--->', user.uid);
+    //console.log('All Users', allUsers);
+    //console.log('user isso--->', user.uid);
   }, [])
  
   useEffect(() => {
@@ -96,7 +96,7 @@ function NewsletterSidebar(props) {
       return unsubscribe;
     })
     .catch(error => {
-      console.log(error);
+      //console.log(error);
     })
   }, []);
   
@@ -105,7 +105,11 @@ function NewsletterSidebar(props) {
     useEffect(() => {
       return () => {
         //cleanup
-        unsubscribe.then(f => f()).catch(error => console.log(error));
+        unsubscribe.then(f => f()).catch(error => 
+         { //console.log(error)
+          
+         }
+        );
       }
     }, []);
   
@@ -156,7 +160,7 @@ function NewsletterSidebar(props) {
 
     dispatch(clearChats())
      dispatch(fetchChats(user1, user2))
-     console.log('IsMobile: ', isMobile);
+     //console.log('IsMobile: ', isMobile);
      if (isMobile) {
         dispatch(closeMobileChatsSidebar());
       }
@@ -177,7 +181,7 @@ function NewsletterSidebar(props) {
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
-    console.log('Connected Users Mapped: ', connectedUsersOutput);
+    //console.log('Connected Users Mapped: ', connectedUsersOutput);
   }
 
 

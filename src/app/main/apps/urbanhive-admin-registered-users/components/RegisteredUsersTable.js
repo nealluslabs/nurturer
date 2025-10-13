@@ -83,8 +83,8 @@ export default function BasicTable() {
 
   useEffect(() => {
     dispatch(fetchAllAdminUsers());
-    console.log(allAdminUsers)
-    console.log(error)
+    //console.log(allAdminUsers)
+    //console.log(error)
      rows = [...allAdminUsers]
   }, [])
  

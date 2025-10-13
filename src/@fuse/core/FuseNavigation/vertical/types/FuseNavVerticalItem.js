@@ -12,7 +12,7 @@ import FuseNavBadge from '../../FuseNavBadge';
 
 const useStyles = makeStyles((theme) => ({
   item: (props) => {
-    console.log('STYLE PROPS IS -->',props)
+    //console.log('STYLE PROPS IS -->',props)
     return {
     height: 40,
     width: '100%',
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 function FuseNavVerticalItem(props) {
   const dispatch = useDispatch();
   const { item, nestedLevel, onItemClick } = props;
-  console.log("FUSE NAV ITEM SETTING--->",props)
+  //console.log("FUSE NAV ITEM SETTING--->",props)
   const classes = useStyles({
     itemPadding: nestedLevel > 0 ? 28 + nestedLevel * 16 : 12,
     ...props

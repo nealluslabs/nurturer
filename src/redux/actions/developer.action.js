@@ -22,7 +22,7 @@ import { clearChat } from 'src/redux/reducers/chat.slice';
                 
         }).catch((error) => {
                 var errorMessage = error.message;
-                console.log('Error fetching developers list', errorMessage);
+                //console.log('Error fetching developers list', errorMessage);
                 dispatch(fetchDevelopersFailed({ errorMessage }));
         });
     
@@ -42,7 +42,7 @@ export const fetchRealTimeDevelopers = (uid) => async (dispatch) => {
         // }
         });
         dispatch(fetchRealTimeDevelopersSuccess(developers));
-        console.log("RealTime Fetched Developers: ", developers);
+        //console.log("RealTime Fetched Developers: ", developers);
     });
 
     return unsubscribe;
@@ -62,7 +62,7 @@ export const initiateConnection = (type, developer1, developer2) => (dispatch) =
         connect.get()
         .then((querySnapshot) => {
             if(querySnapshot.empty){
-                console.log("No such document");
+                //console.log("No such document");
                 const res = db.collection('connections').add({
                 developer1: developer1,
                 developer2: developer2, 
@@ -72,7 +72,7 @@ export const initiateConnection = (type, developer1, developer2) => (dispatch) =
                 skipped_amt: type == 0 ? 1 : 0,
                 })
                 .then((docRef) => {
-                  console.log("created new connection successfully!");
+                  //console.log("created new connection successfully!");
                   const messageText = 'Hello, I will like to connect with you. Kindly accept my Invite. Cheers!';
                   dispatch(sendChat({
                         messageText,
@@ -82,16 +82,16 @@ export const initiateConnection = (type, developer1, developer2) => (dispatch) =
                 })
                 .catch((err) => {
                   var errorMessage = error.message;
-                  console.log('error creating new connection: ', errorMessage);
+                  //console.log('error creating new connection: ', errorMessage);
                 });
             }else{
                 //update record
 
-                 console.log('Type is: ', type);
+                 //console.log('Type is: ', type);
                 querySnapshot.forEach((doc) => {
 
-                console.log('Fetched Doc: ', doc.data());
-                // console.log('Doc ID: ', doc.id);
+                //console.log('Fetched Doc: ', doc.data());
+                // //console.log('Doc ID: ', doc.id);
                 const docID = doc.id;
                 const docType = doc.data().type;
                 const skipped_amt = doc.data().skipped_amt;
@@ -99,15 +99,15 @@ export const initiateConnection = (type, developer1, developer2) => (dispatch) =
 
                 if(type == 1 && doc.data().type == 1 || type == 0 && doc.data().type == 1){
                  var errorMessage = 'You have already invited this developer';
-                 console.log('Error Msg: ', errorMessage);
+                 //console.log('Error Msg: ', errorMessage);
                  dispatch(initiateFailed({ errorMessage }));
                 }else if(type == 1 && doc.data().type == 0){
                  var errorMessage = 'You cannot invite, untill you undo this developer from skipped';
-                 console.log('Error Msg: ', errorMessage);
+                 //console.log('Error Msg: ', errorMessage);
                  dispatch(initiateFailed({ errorMessage }));
                 }else if(type == 0 && doc.data().type == 0){
                   //update Firestore
-                  console.log('Type is 0: and doc data is : 0');
+                  //console.log('Type is 0: and doc data is : 0');
                 db.collection("connections").doc(docID).set({
                 developer1: doc.data().developer1,
                 developer2: doc.data().developer2,
@@ -116,11 +116,11 @@ export const initiateConnection = (type, developer1, developer2) => (dispatch) =
                 invited_amt:  type == 1 ? invited_amt + 1 : invited_amt,
                 skipped_amt: type == 0 ? skipped_amt + 1 : skipped_amt,
                 }).then(() => {
-                console.log('updated connect');
+                //console.log('updated connect');
                 })
                 .catch((error) => {
                 var errorMessage = error.message;
-                console.log('error updating connect: ', errorMessage);
+                //console.log('error updating connect: ', errorMessage);
                 });
 
                }
@@ -130,7 +130,7 @@ export const initiateConnection = (type, developer1, developer2) => (dispatch) =
             }
         })
         .catch((error) => {
-            console.log("Error fetching connections: ", error.message);
+            //console.log("Error fetching connections: ", error.message);
         });
 };
   
@@ -146,7 +146,7 @@ export const fetchRealTimeConnections = (uid) => async (dispatch) => {
         // }
         });
         dispatch(initiateSuccess(connects));
-        console.log("connections fetched: ", connects);
+        //console.log("connections fetched: ", connects);
     });
 
     return unsubscribe;
@@ -163,7 +163,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
         // }
         });
         dispatch(initiateSuccess2(connects));
-        console.log("connections fetched for developer2: ", connects);
+        //console.log("connections fetched for developer2: ", connects);
     });
 
     return unsubscribe;
@@ -185,18 +185,18 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
             // }
             });
             // dispatch(fetchRealTimeDevelopersSuccess(developers));
-            console.log("Connected developers ID: ", developers);
+            //console.log("Connected developers ID: ", developers);
             if(developers.length > 0){
                 db.collection('developers')
                 .where('uid', 'in', developers)
                 .get()
                 .then((snapshot) => {
                     const connectedDevelopers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-                    console.log('Connected Developers Data, ', connectedDevelopers);
+                    //console.log('Connected Developers Data, ', connectedDevelopers);
                     dispatch(fetchConnectedDeveloperSuccess(connectedDevelopers));
             }).catch((error) => {
                     var errorMessage = error.message;
-                    console.log('Error Connected Developers Data', errorMessage);
+                    //console.log('Error Connected Developers Data', errorMessage);
                     dispatch(fetchDevelopersFailed({ errorMessage }));
             });
         
@@ -223,18 +223,18 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                 // }
                 });
                 // dispatch(fetchRealTimeDevelopersSuccess(developers));
-                console.log("Connected Developers ID for Developer2 : ", developers);
+                //console.log("Connected Developers ID for Developer2 : ", developers);
                 if(developers.length > 0){
                     db.collection('developers')
                     .where('uid', 'in', developers)
                     .get()
                     .then((snapshot) => {
                         const connectedDevelopers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-                        console.log('Connected Developers Data for Developer2, ', connectedDevelopers);
+                        //console.log('Connected Developers Data for Developer2, ', connectedDevelopers);
                         dispatch(fetchConnectedDeveloperSuccess(connectedDevelopers));
                 }).catch((error) => {
                         var errorMessage = error.message;
-                        console.log('Error Connected Developers Data for developer 2', errorMessage);
+                        //console.log('Error Connected Developers Data for developer 2', errorMessage);
                         dispatch(fetchDevelopersFailed({ errorMessage }));
                 });
             
@@ -254,7 +254,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                 connect.get()
                 .then((querySnapshot) => {
                     if(querySnapshot.empty){
-                        console.log("No such document, cannot update connections");
+                        //console.log("No such document, cannot update connections");
                     }else{
                     // check for status type
                         //update record
@@ -269,7 +269,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                     invited_amt:  doc.data().invited_amt,
                                     skipped_amt: doc.data().skipped_amt,
                                     }).then(() => {
-                                    console.log('updated connections');
+                                    //console.log('updated connections');
                                     alert('Accepted Connection Successfully');
                                     dispatch(clearDeveloper());
                                     dispatch(clearChat());
@@ -277,15 +277,15 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                     })
                                     .catch((error) => {
                                     var errorMessage = error.message;
-                                    console.log('error updating connections: ', errorMessage);
+                                    //console.log('error updating connections: ', errorMessage);
                                     });
                              }else{
                                 db.collection("connections").doc(docID).delete().then(() => {
-                                    console.log("Connection successfully deleted!");
+                                    //console.log("Connection successfully deleted!");
                                     //delete chats
                                     //first select chat collections
-                                    console.log('Developer1 is ',developer1)
-                                    console.log('Developer2 is ',developer2)
+                                    //console.log('Developer1 is ',developer1)
+                                    //console.log('Developer2 is ',developer2)
                                     var chats = db.collection("chats")
                                     chats = chats.where("developer1", "==", developer1)
                                     chats = chats.where("developer2", "==", developer2)
@@ -296,7 +296,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                         var batch = db.batch();
                                         querySnapshot.forEach((doc) => {
                                             // docArr.push(doc.id);
-                                            // console.log('Doc ID: ',docArr);
+                                            // //console.log('Doc ID: ',docArr);
                                             // For each doc, add a delete operation to the batch
                                              batch.delete(doc.ref);  
                                         });
@@ -304,7 +304,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                          return batch.commit();
                                         }).then(function() {
                                             // Delete completed!
-                                              console.log("Chats successfully deleted!");
+                                              //console.log("Chats successfully deleted!");
                                               alert('Rejected Connection Successfully');
                                               dispatch(clearDeveloper());
                                               dispatch(clearChat());
@@ -312,7 +312,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                         })
                                     
                                     .catch((error) => {
-                                        console.log("Error fetching chats doc: ", error.message);
+                                        //console.log("Error fetching chats doc: ", error.message);
                                     });
 
                                 }).catch((error) => {
@@ -323,7 +323,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                     }
                 })
                 .catch((error) => {
-                    console.log("Error fetching connections: ", error.message);
+                    //console.log("Error fetching connections: ", error.message);
                 });
               }
 
@@ -364,22 +364,22 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
         //       getConnections().then(result => {
         //         result.forEach(doc => {
         //           developers.push(doc.data().developer2);
-        //           console.log("Connected Developers ID: ", developers);
+        //           //console.log("Connected Developers ID: ", developers);
                   
         //         });
         //     }).then(() => {
-        //         console.log('Unto the next query: ', developers);
+        //         //console.log('Unto the next query: ', developers);
         //         if(developers.length > 0){
         //             db.collection('developers')
         //             .where('uid', 'in', developers)
         //             .get()
         //             .then((snapshot) => {
         //                 const connectedDevelopers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-        //                 console.log('Connected Developers Data, ', connectedDevelopers);
+        //                 //console.log('Connected Developers Data, ', connectedDevelopers);
         //                 dispatch(fetchConnectedDeveloperSuccess(connectedDevelopers));
         //         }).catch((error) => {
         //                 var errorMessage = error.message;
-        //                 console.log('Error Connected Developers Data', errorMessage);
+        //                 //console.log('Error Connected Developers Data', errorMessage);
         //                 dispatch(fetchDevelopersFailed({ errorMessage }));
         //         });
         //         }

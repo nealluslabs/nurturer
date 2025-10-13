@@ -53,7 +53,7 @@ function EventsScreen() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.values(errors).every((x) => x === "")) {
-      console.log("Form submitted:", values);
+      //console.log("Form submitted:", values);
       resetForm();
     }
   };

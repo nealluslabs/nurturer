@@ -117,7 +117,7 @@ skillSetService.getCities(newState)
 
 setNewCities(skillSetService.getCities(newState))
 
-console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
+//console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
 
 },[newState])
 
@@ -148,7 +148,7 @@ const notifySkip = (message) => toast.error(message, {
       const [open, setOpen] = useState(false); // dialog open state
 
       const isValidOption = (options, value) =>{
-        console.log("INSIDE VALID OPTIONS NOW, WHAT IS THE CSV FILE SAYING?-->",value)
+        //console.log("INSIDE VALID OPTIONS NOW, WHAT IS THE CSV FILE SAYING?-->",value)
         options.some((opt) => opt.title.toLowerCase() === value.toLowerCase());
       }
 
@@ -220,7 +220,7 @@ const notifySkip = (message) => toast.error(message, {
               state: skillSetService.getStates ? skillSetService.getStates() : [],
             };
 
-            console.log('WHAT IS OBJECT FIELDS SELECT MAPPINGS SEF--->',Object.keys(selectMappings))
+            //console.log('WHAT IS OBJECT FIELDS SELECT MAPPINGS SEF--->',Object.keys(selectMappings))
       
             Object.keys(selectMappings).forEach((field) => {
               
@@ -327,7 +327,7 @@ const notifySkip = (message) => toast.error(message, {
               return cleanedRow;
             });
       
-            console.log("Processed CSV rows:", processedData);
+            //console.log("Processed CSV rows:", processedData);
             setParsedData(processedData); // store all rows in state
       
             // ✅ open dialog after parsing
@@ -460,7 +460,7 @@ const notifySkip = (message) => toast.error(message, {
       };
     
     function handleChangeNew(){
-        console.log('changed');
+        //console.log('changed');
     }
 
     const validate = (fieldValues = values) => {
@@ -518,8 +518,8 @@ const notifySkip = (message) => toast.error(message, {
 
     const handleSubmit = e => {
         e.preventDefault();
-       console.log('Photo URL: ', photoURL);
-       console.log('File URL: ', file);
+       //console.log('Photo URL: ', photoURL);
+       //console.log('File URL: ', file);
 
        
       
@@ -555,8 +555,8 @@ const notifySkip = (message) => toast.error(message, {
            const workAnniversary = values.workAnniversary;
            
           const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
-          //console.log('Logged User: ', fb.auth().currentUser.uid);
-          console.log("profile ABOUT TO BE SENT IN -->",profile)
+          ////console.log('Logged User: ', fb.auth().currentUser.uid);
+          //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
           if(photoURL == static_img){
           dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL));
@@ -845,7 +845,9 @@ const notifySkip = (message) => toast.error(message, {
                 name="state"
                 label="State"
                 value={values.state}
-                onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);console.log("JUST SELECTED A STATE --->",e.target.value) }}
+                onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);
+                  //console.log("JUST SELECTED A STATE --->",e.target.value) 
+                }}
                 options={skillSetService.getStates()}
                 error={errors.state}
                 />

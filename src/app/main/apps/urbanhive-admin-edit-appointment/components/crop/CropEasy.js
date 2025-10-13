@@ -45,7 +45,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
       //   timeout: 5000,
       //   location: 'modal',
       // });
-      console.log(error);
+      //console.log(error);
     }
 
     // setLoading(false);

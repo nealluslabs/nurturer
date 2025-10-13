@@ -101,16 +101,16 @@ function BookDevCard () {
 
     const handleChange = (event, newtime) => {
         // setTime(newtime);
-      //   console.log('Event: ', event);
-      //   console.log('User ID: ', uid);
+      //   //console.log('Event: ', event);
+      //   //console.log('User ID: ', uid);
       //  setnTime(newtime);
       //   if(date == null){
       //     notifyError();
       //    }else{
       //     setIsOpen(true);
-      //    console.log('Date Val: ', date);
-      //    console.log('Selected Time is:', newtime);
-      //    console.log('Selected Time2 is:', nTime);
+      //    //console.log('Date Val: ', date);
+      //    //console.log('Selected Time is:', newtime);
+      //    //console.log('Selected Time2 is:', nTime);
       //    }
     };
 
@@ -122,9 +122,9 @@ function BookDevCard () {
           alert('Select time from the dev date selected');
          } else{
           setIsOpen(true);
-         console.log('UID: ', uid);
-         console.log('Date Val: ', date);
-         console.log('Selected Time is:', newtime);
+         //console.log('UID: ', uid);
+         //console.log('Date Val: ', date);
+         //console.log('Selected Time is:', newtime);
          }
     };
 

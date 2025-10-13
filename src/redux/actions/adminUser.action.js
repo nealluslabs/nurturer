@@ -12,11 +12,11 @@ import { clearChat } from 'src/redux/reducers/chat.slice';
             .get()
             .then((snapshot) => {
                 const adminUsers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-                console.log('Users, ', adminUsers);
+                //console.log('Users, ', adminUsers);
                 dispatch(fetchAdminUsersSuccess(adminUsers));
         }).catch((error) => {
                 var errorMessage = error.message;
-                console.log('Error fetching profile', errorMessage);
+                //console.log('Error fetching profile', errorMessage);
                 dispatch(fetchAdminUsersFailed({ errorMessage }));
         });
     
@@ -36,7 +36,7 @@ export const fetchRealTimeUsers = (uid) => async (dispatch) => {
         // }
         });
         dispatch(fetchRealTimeUsersSuccess(users));
-        console.log("RealTime Fetched Users: ", users);
+        //console.log("RealTime Fetched Users: ", users);
     });
 
     return unsubscribe;
@@ -56,7 +56,7 @@ export const initiateConnection = (type, user1, user2) => (dispatch) => {
         connect.get()
         .then((querySnapshot) => {
             if(querySnapshot.empty){
-                console.log("No such document");
+                //console.log("No such document");
                 const res = db.collection('connections').add({
                 user1: user1,
                 user2: user2, 
@@ -66,7 +66,7 @@ export const initiateConnection = (type, user1, user2) => (dispatch) => {
                 skipped_amt: type == 0 ? 1 : 0,
                 })
                 .then((docRef) => {
-                  console.log("created new connection successfully!");
+                  //console.log("created new connection successfully!");
                   const messageText = 'Hello, I will like to connect with you. Kindly accept my Invite. Cheers!';
                   dispatch(sendChat({
                         messageText,
@@ -76,16 +76,16 @@ export const initiateConnection = (type, user1, user2) => (dispatch) => {
                 })
                 .catch((err) => {
                   var errorMessage = error.message;
-                  console.log('error creating new connection: ', errorMessage);
+                  //console.log('error creating new connection: ', errorMessage);
                 });
             }else{
                 //update record
 
-                 console.log('Type is: ', type);
+                 //console.log('Type is: ', type);
                 querySnapshot.forEach((doc) => {
 
-                console.log('Fetched Doc: ', doc.data());
-                // console.log('Doc ID: ', doc.id);
+                //console.log('Fetched Doc: ', doc.data());
+                // //console.log('Doc ID: ', doc.id);
                 const docID = doc.id;
                 const docType = doc.data().type;
                 const skipped_amt = doc.data().skipped_amt;
@@ -93,15 +93,15 @@ export const initiateConnection = (type, user1, user2) => (dispatch) => {
 
                 if(type == 1 && doc.data().type == 1 || type == 0 && doc.data().type == 1){
                  var errorMessage = 'You have already invited this user';
-                 console.log('Error Msg: ', errorMessage);
+                 //console.log('Error Msg: ', errorMessage);
                  dispatch(initiateFailed({ errorMessage }));
                 }else if(type == 1 && doc.data().type == 0){
                  var errorMessage = 'You cannot invite, untill you undo this user from skipped';
-                 console.log('Error Msg: ', errorMessage);
+                 //console.log('Error Msg: ', errorMessage);
                  dispatch(initiateFailed({ errorMessage }));
                 }else if(type == 0 && doc.data().type == 0){
                   //update Firestore
-                  console.log('Type is 0: and doc data is : 0');
+                  //console.log('Type is 0: and doc data is : 0');
                 db.collection("connections").doc(docID).set({
                 user1: doc.data().user1,
                 user2: doc.data().user2,
@@ -110,11 +110,11 @@ export const initiateConnection = (type, user1, user2) => (dispatch) => {
                 invited_amt:  type == 1 ? invited_amt + 1 : invited_amt,
                 skipped_amt: type == 0 ? skipped_amt + 1 : skipped_amt,
                 }).then(() => {
-                console.log('updated connect');
+                //console.log('updated connect');
                 })
                 .catch((error) => {
                 var errorMessage = error.message;
-                console.log('error updating connect: ', errorMessage);
+                //console.log('error updating connect: ', errorMessage);
                 });
 
                }
@@ -124,7 +124,7 @@ export const initiateConnection = (type, user1, user2) => (dispatch) => {
             }
         })
         .catch((error) => {
-            console.log("Error fetching connections: ", error.message);
+            //console.log("Error fetching connections: ", error.message);
         });
 };
   
@@ -140,7 +140,7 @@ export const fetchRealTimeConnections = (uid) => async (dispatch) => {
         // }
         });
         dispatch(initiateSuccess(connects));
-        console.log("connections fetched for user1: ", connects);
+        //console.log("connections fetched for user1: ", connects);
     });
 
     return unsubscribe;
@@ -157,7 +157,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
         // }
         });
         dispatch(initiateSuccess2(connects));
-        console.log("connections fetched for user2: ", connects);
+        //console.log("connections fetched for user2: ", connects);
     });
 
     return unsubscribe;
@@ -179,18 +179,18 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
             // }
             });
             // dispatch(fetchRealTimeUsersSuccess(users));
-            console.log("Connected Users ID: ", users);
+            //console.log("Connected Users ID: ", users);
             if(users.length > 0){
                 db.collection('users')
                 .where('uid', 'in', users)
                 .get()
                 .then((snapshot) => {
                     const connectedUsers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-                    console.log('Connected Users Data, ', connectedUsers);
+                    //console.log('Connected Users Data, ', connectedUsers);
                     dispatch(fetchConnectedUserSuccess(connectedUsers));
             }).catch((error) => {
                     var errorMessage = error.message;
-                    console.log('Error Connected Users Data', errorMessage);
+                    //console.log('Error Connected Users Data', errorMessage);
                     dispatch(fetchUsersFailed({ errorMessage }));
             });
         
@@ -217,18 +217,18 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                 // }
                 });
                 // dispatch(fetchRealTimeAdminUsersSuccess(users));
-                console.log("Connected AdminUsers ID for AdminUser2 : ", users);
+                //console.log("Connected AdminUsers ID for AdminUser2 : ", users);
                 if(users.length > 0){
                     db.collection('users')
                     .where('uid', 'in', users)
                     .get()
                     .then((snapshot) => {
                         const connectedAdminUsers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-                        console.log('Connected AdminUsers Data for AdminUser2, ', connectedAdminUsers);
+                        //console.log('Connected AdminUsers Data for AdminUser2, ', connectedAdminUsers);
                         dispatch(fetchConnectedAdminUserSuccess(connectedAdminUsers));
                 }).catch((error) => {
                         var errorMessage = error.message;
-                        console.log('Error Connected AdminUsers Data for user 2', errorMessage);
+                        //console.log('Error Connected AdminUsers Data for user 2', errorMessage);
                         dispatch(fetchAdminUsersFailed({ errorMessage }));
                 });
             
@@ -248,7 +248,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                 connect.get()
                 .then((querySnapshot) => {
                     if(querySnapshot.empty){
-                        console.log("No such document, cannot update connections");
+                        //console.log("No such document, cannot update connections");
                     }else{
                     // check for status type
                         //update record
@@ -263,7 +263,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                     invited_amt:  doc.data().invited_amt,
                                     skipped_amt: doc.data().skipped_amt,
                                     }).then(() => {
-                                    console.log('updated connections');
+                                    //console.log('updated connections');
                                     alert('Accepted Connection Successfully');
                                     dispatch(clearAdminUser());
                                     dispatch(clearChat());
@@ -271,15 +271,15 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                     })
                                     .catch((error) => {
                                     var errorMessage = error.message;
-                                    console.log('error updating connections: ', errorMessage);
+                                    //console.log('error updating connections: ', errorMessage);
                                     });
                              }else{
                                 db.collection("connections").doc(docID).delete().then(() => {
-                                    console.log("Connection successfully deleted!");
+                                    //console.log("Connection successfully deleted!");
                                     //delete chats
                                     //first select chat collections
-                                    console.log('AdminUser1 is ',user1)
-                                    console.log('AdminUser2 is ',user2)
+                                    //console.log('AdminUser1 is ',user1)
+                                    //console.log('AdminUser2 is ',user2)
                                     var chats = db.collection("chats")
                                     chats = chats.where("user1", "==", user1)
                                     chats = chats.where("user2", "==", user2)
@@ -290,7 +290,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                         var batch = db.batch();
                                         querySnapshot.forEach((doc) => {
                                             // docArr.push(doc.id);
-                                            // console.log('Doc ID: ',docArr);
+                                            // //console.log('Doc ID: ',docArr);
                                             // For each doc, add a delete operation to the batch
                                              batch.delete(doc.ref);  
                                         });
@@ -298,7 +298,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                          return batch.commit();
                                         }).then(function() {
                                             // Delete completed!
-                                              console.log("Chats successfully deleted!");
+                                              //console.log("Chats successfully deleted!");
                                               alert('Rejected Connection Successfully');
                                               dispatch(clearAdminUser());
                                               dispatch(clearChat());
@@ -306,7 +306,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                                         })
                                     
                                     .catch((error) => {
-                                        console.log("Error fetching chats doc: ", error.message);
+                                        //console.log("Error fetching chats doc: ", error.message);
                                     });
 
                                 }).catch((error) => {
@@ -317,7 +317,7 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
                     }
                 })
                 .catch((error) => {
-                    console.log("Error fetching connections: ", error.message);
+                    //console.log("Error fetching connections: ", error.message);
                 });
               }
 
@@ -358,22 +358,22 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
         //       getConnections().then(result => {
         //         result.forEach(doc => {
         //           users.push(doc.data().user2);
-        //           console.log("Connected AdminUsers ID: ", users);
+        //           //console.log("Connected AdminUsers ID: ", users);
                   
         //         });
         //     }).then(() => {
-        //         console.log('Unto the next query: ', users);
+        //         //console.log('Unto the next query: ', users);
         //         if(users.length > 0){
         //             db.collection('users')
         //             .where('uid', 'in', users)
         //             .get()
         //             .then((snapshot) => {
         //                 const connectedAdminUsers = snapshot.docs.map((doc) => ({ ...doc.data() }));
-        //                 console.log('Connected AdminUsers Data, ', connectedAdminUsers);
+        //                 //console.log('Connected AdminUsers Data, ', connectedAdminUsers);
         //                 dispatch(fetchConnectedAdminUserSuccess(connectedAdminUsers));
         //         }).catch((error) => {
         //                 var errorMessage = error.message;
-        //                 console.log('Error Connected AdminUsers Data', errorMessage);
+        //                 //console.log('Error Connected AdminUsers Data', errorMessage);
         //                 dispatch(fetchUsersFailed({ errorMessage }));
         //         });
         //         }

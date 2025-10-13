@@ -16,7 +16,7 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 
 // export const signup = (user, history) => async (dispatch) => {
-//   console.log(user);
+//   //console.log(user);
 //    dispatch(signupPending());
 //    const res = db.collection('users').add({
 //         name: user.name,
@@ -24,8 +24,8 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 //         password: user.password,
 //     })
 //     .then((docRef) => {
-//         console.log("Document written with ID: ", docRef.id);
-//         console.log('Response is: ', res);
+//         //console.log("Document written with ID: ", docRef.id);
+//         //console.log('Response is: ', res);
 //         dispatch(signupSuccess());
 //         history.push("/login");
 //     })
@@ -38,12 +38,12 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 
 export const signup = (user, history,notifySkip) => async (dispatch) => {
-      console.log(user);
+      //console.log(user);
        dispatch(signupPending());
 
 
 const sesClient = new SESClient({
-  region: "eu-west-2", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
+  region: "eu-west-3", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
   credentials: {
     accessKeyId:process.env.REACT_APP_ACCESS_KEY_ID,
     secretAccessKey:process.env.REACT_APP_SECRET_ACCESS_KEY,
@@ -60,8 +60,8 @@ const sesClient = new SESClient({
               const  validCompanyIds = snapshot.docs.map((doc) => (doc.data().companyID));
 
     
-              console.log("WHAT IS VALID COMPANY IDS--->",validCompanyIds)
-              console.log("WHAT IS COMPANY ID SUBMITTED FOR USER--->",user.companyID)
+              //console.log("WHAT IS VALID COMPANY IDS--->",validCompanyIds)
+              //console.log("WHAT IS COMPANY ID SUBMITTED FOR USER--->",user.companyID)
               
        if(validCompanyIds.includes(user.companyID)){  
         fb.auth().createUserWithEmailAndPassword(
@@ -127,7 +127,7 @@ const sesClient = new SESClient({
         const command = new SendEmailCommand(params);
         const response = await sesClient.send(command);
     
-        console.log("✅ Email sent successfully:", response.MessageId);
+        //console.log("✅ Email sent successfully:", response.MessageId);
         return response;
       } catch (error) {
         console.error("❌ Error sending email:", error);
@@ -170,14 +170,14 @@ const sesClient = new SESClient({
     .then((userCredential) => {
       // Signed in
       var user = userCredential.user;
-      console.log('Signed In user is: ', user.email);
+      //console.log('Signed In user is: ', user.email);
       const currentUserProfile = db.collection("users").doc(user.uid);
   
       currentUserProfile.get()
       .then((doc) => {
           const user = doc.data();
           var uid = userCredential.user.uid;
-          console.log(user)
+          //console.log(user)
           dispatch(loginSuccess({ user, uid }));
           dispatch(fetchProfile());
           dispatch(updateLastActive(uid));
@@ -189,9 +189,9 @@ const sesClient = new SESClient({
     .catch((error) => {
       var errorCode = error.code;
       var errorMessage = error.message;
-      console.log('Error Code is: ', errorCode, + ' Msg is: ', errorMessage);
+      //console.log('Error Code is: ', errorCode, + ' Msg is: ', errorMessage);
 
-      console.log('Error Msg is:---> ', errorMessage);
+      //console.log('Error Msg is:---> ', errorMessage);
      
      if(errorMessage){
       dispatch(loginFailed({errorMessage:"Invalid Login Credentials"} ));
@@ -206,7 +206,7 @@ const sesClient = new SESClient({
 export const logout = (history) => async (dispatch) => {
   dispatch(updateLastActive(fb.auth().currentUser.uid));
   fb.auth().signOut().then(() => {
-    console.log('logout successful!');
+    //console.log('logout successful!');
     dispatch(clearProfile());
     dispatch(clearUser());
     dispatch(clearChat());
@@ -214,7 +214,7 @@ export const logout = (history) => async (dispatch) => {
     history.push('/login');
   }).catch((error) => {
     // An error happened.
-    console.log('logout failed response: ', error.message);
+    //console.log('logout failed response: ', error.message);
   });
   
 }
@@ -226,7 +226,7 @@ export const fetchUserData = (uid) => async (dispatch) => {
       currentUserProfile.get()
       .then((doc) => {
           const user = doc.data();
-          console.log(user)
+          //console.log(user)
           dispatch(loginSuccess({ user }));
       })
 }
@@ -239,10 +239,10 @@ export const updateLastActive = (uid) => async (dispatch) => {
       lastActive: currentTimeStamp,
   })
   .then(() => {
-    console.log('Timestamp updated');
+    //console.log('Timestamp updated');
   })
   .catch((error) => {
     var errorMessage = error.message;
-    console.log('Error updating timestamp:', errorMessage);
+    //console.log('Error updating timestamp:', errorMessage);
   });
 }

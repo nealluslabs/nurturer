@@ -163,7 +163,10 @@ function NewsletterApp(props) {
     useEffect(() => {
       return () => {
         //cleanup
-        unsubscribe.then(f => f()).catch(error => console.log(error));
+        unsubscribe.then(f => f()).catch(error => {
+          //console.log(error)
+
+        });
       }
     }, []);
 

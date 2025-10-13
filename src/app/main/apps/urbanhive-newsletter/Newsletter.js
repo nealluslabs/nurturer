@@ -124,7 +124,7 @@ function Newsletter(props) {
 
   const handleSave = () => {
     const updatedContent = editableRef.current.innerHTML;
-    console.log("Saved content:", updatedContent);
+    //console.log("Saved content:", updatedContent);
     // You can now send `updatedContent` to your backend or store it
   };
 
@@ -144,7 +144,7 @@ function Newsletter(props) {
   const { connects } = useSelector((state) => state.user);
   let connectStatus;
 
-  console.log("SELECTED CHAT USER IS--->", selectedChatUser);
+  //console.log("SELECTED CHAT USER IS--->", selectedChatUser);
 
   useEffect(() => {
     if (chatMessages) {
@@ -205,7 +205,7 @@ function Newsletter(props) {
   }
 
   const testMe = () => {
-    console.log("Connection Status is: ", connectStatus);
+    //console.log("Connection Status is: ", connectStatus);
   };
 
   const connectsById = Object.fromEntries(
@@ -243,7 +243,7 @@ function Newsletter(props) {
   const [imgSrc, setImgSrc] = useState(images?.["First Image"] || avatar);
   const [imgSrc2, setImgSrc2] = useState(images?.["Second Image"] || avatar2);
   const [imgSrc3, setImgSrc3] = useState(images?.["Third Image"] || avatar3);
-  console.log("selected font ============>>>>>>", selectedFont);
+  //console.log("selected font ============>>>>>>", selectedFont);
   useEffect(() => {
     if (images?.["First Image"]) {
       setImgSrc(images["First Image"]);
