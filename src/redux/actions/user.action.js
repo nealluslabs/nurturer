@@ -304,22 +304,24 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
 
 
-export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => async (dispatch) => {
+export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser,notifyInvite) => async (dispatch) => {
   //console.log("MESSAGE IS IN PHASE 2:", user.uid);
   
   try {
       //console.log("Fetching the user itself:", user.uid);
       
       // Query contacts collection where contacterId matches the user's uid
+
+      console.log("USER IN UPDATE MESSAGE--->",user)
+      console.log("CONTACT IN UPDATE MESSAGE--->",selectedChatUser)
+
       const contactsSnapshot = db.collection('users').doc(user && user.uid)
 
       const contactDoc = db.collection('contacts').doc(selectedChatUser && selectedChatUser.uid)
          
-      const  userToUpdate =   contactsSnapshot.get().then(async(doc)=>{ 
+    contactsSnapshot.get().then(async(doc)=>{ 
 
 
-        
-      
       if (doc.exists) {
 
         //console.log("RAW MESSAGE IS -->", updatedParagraphs)
@@ -332,7 +334,7 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => 
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
           updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
           updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
-          updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Trigger"
+          updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Email"
 
          //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
 
@@ -351,6 +353,95 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => 
         .then(() => {
           //console.log("Message Updated Successfully in ut1@nurturer")
          // notifyInvite()
+        })
+
+
+         
+      }
+     
+    }) 
+    
+  } catch (error) {
+      const errorMessage = error.message;
+      //console.log('Error updating user message:', errorMessage);
+      //console.log("MESSAGE HAS FAILED IN CATCH:", user.uid);
+     
+  }
+};
+
+
+
+export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChatUser,notifyInvite) => async (dispatch) => {
+  //console.log("MESSAGE IS IN PHASE 2:", user.uid);
+  
+  try {
+      //console.log("Fetching the user itself:", user.uid);
+      
+      // Query contacts collection where contacterId matches the user's uid
+
+      console.log("USER IN UPDATE MESSAGE--->",user)
+      console.log("CONTACT IN UPDATE MESSAGE--->",selectedChatUser)
+
+      const contactsSnapshot = db.collection('users').doc(user && user.uid)
+
+      const contactDoc = db.collection('contacts').doc(selectedChatUser && selectedChatUser.uid)
+         
+    contactsSnapshot.get().then(async(doc)=>{ 
+
+
+      if (doc.exists) {
+
+        //console.log("RAW MESSAGE IS -->", updatedParagraphs)
+        let updatedMessage =  {...doc.data().message}
+
+        
+
+          updatedMessage.firstParagraph = updatedParagraphs && updatedParagraphs.firstParagraph
+         updatedMessage.secondParagraph = updatedParagraphs &&  updatedParagraphs.secondParagraph
+          updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
+          updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
+          updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
+          updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Email"
+
+         //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+          contactDoc.get()
+         .then((doc)=>{
+          if (doc.exists) {
+           const data = doc.data()
+            const messageQueue = data.messageQueue || [];
+       
+         if (messageQueue.length === 0) {
+           console.error("No messages in queue for contact doc of a contact");
+           return;
+         }
+       
+         // Replace the last element
+         const updatedQueue = [...messageQueue];
+         updatedQueue[updatedQueue.length - 1] = {
+           ...updatedQueue[updatedQueue.length - 1],
+           ...updatedMessage, // merge updates
+         };
+
+         contactDoc.update({
+          messageQueue: updatedQueue,
+        }).then(() => contactDoc.get())
+        .then((doc) => {
+          if (doc.exists) {
+            dispatch(setCurrentChat(doc.data()));
+          }
+        })
+          }
+
+         })
+        
+
+        contactsSnapshot.update({
+          message:updatedMessage
+        })
+        .then(() => {
+          //console.log("Message Updated Successfully in ut1@nurturer")
+          notifyInvite()
         })
 
 

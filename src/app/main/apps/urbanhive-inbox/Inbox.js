@@ -14,7 +14,7 @@ import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
 import { sendChat } from 'src/redux/actions/chat.action';
 import { Checkbox, CircularProgress, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
-import { generateAiMessage,stopMessageSending, updateUserBroadcast, updateUserChat } from 'redux/actions/user.action';
+import { generateAiMessage,stopMessageSending, updateUserBroadcast, updateUserBroadcastWithNotif, updateUserChat } from 'redux/actions/user.action';
 import { RiAiGenerate2 } from "react-icons/ri";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
@@ -27,7 +27,7 @@ import birthday1 from 'src/app/main/urbanhive-assets/birthday1.png'
 import birthday2 from 'src/images/Birthday_2.png'
 import { saveEditedParagraphs } from 'redux/reducers/user.slice';
 import { ToastContainer, toast } from 'react-toastify';
-import { FaStop, FaStopCircle } from 'react-icons/fa';
+import { FaFileUpload, FaRegEdit, FaStop, FaStopCircle } from 'react-icons/fa';
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -224,7 +224,8 @@ const handleInput = () => {
     secondParagraph: editableRef.current.querySelector(".secondParagraph")?.innerText || "",
     thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || "",
     //PERHAPS CONSIDER SETTING BULLET POINTS --AS THEY MAY DISAPPEAR WHEN YOU START TYPING.. OR NOT, WE MAY NOT NEED TO TYPE  DAGOGO -SEP 12 2025
-    messageType:'Trigger'
+    messageType:'Email',
+    messageStatus:"Pending"
   };
   //console.log("HANDLE INPUTS IS WORKING",paragraphs)
   setParagraphs({...paragraphs,...paraData});
@@ -408,7 +409,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
     
    
     dispatch( 
-      updateUserBroadcast(editedParagraphs,user)
+      updateUserBroadcast(editedParagraphs,user,selectedChatUser,notifyInvite)
     ).then(() => {
       setMessageText('');
     });
@@ -417,7 +418,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
   const sendUpdate = ()=>{
     //console.log("Message has begun its progress--->",editedParagraphs.firstParagraph)
     dispatch( 
-      updateUserBroadcast(editedParagraphs,user,notifyInvite,selectedChatUser)
+      updateUserBroadcastWithNotif(editedParagraphs,user,selectedChatUser,notifyInvite)
     ).then(() => {
     // notifyInvite()
     });
@@ -497,7 +498,8 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
                         ref={editableRef}
                         contentEditable={true}
                         suppressContentEditableWarning={true}
-                        onInput={handleInput}
+                        onBlur={handleInput}
+                        onMouseLeave={handleInput}
                        >     
 
 
@@ -1611,17 +1613,12 @@ label={<Typography fontSize="14px">
             {/*
             <IconButton className="absolute ltr:right-20 rtl:left-0 top-8" type="submit">
               <Icon className="text-24" color="action" onClick={(ev)=>{sendUpdate(ev)}}>
-                send
+                update
               </Icon>
             </IconButton>
             */}
 
-             {
-           
-           <FaStopCircle onClick={()=>{ dispatch(stopMessageSending(notifyInviteCustom,selectedChatUser))}}
             
-            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
-           }
 
            { !loading && 
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
@@ -1636,11 +1633,29 @@ label={<Typography fontSize="14px">
             }
           }} 
             
-            style={{position:"absolute",top:"2rem",right:"12rem",fontSize:"2.4rem",color:"grey"}} />
+            style={{position:"absolute",top:"2rem",right:"16rem",fontSize:"2.4rem",color:"grey"}} />
+           }
+     
+
+
+            {
+           
+           <FaRegEdit onClick={(ev)=>{sendUpdate(ev) }}
+           
+            
+            style={{position:"absolute",top:"1.9rem",right:"12rem",fontSize:"2.4rem",color:"grey"}} />
+           }
+
+
+          {
+           
+           <FaStopCircle onClick={()=>{ dispatch(stopMessageSending(notifyInviteCustom,selectedChatUser))}}
+            
+            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
            }
 
           { loading && 
-            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"12rem",color:"grey"}} />
+            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"16rem",color:"grey"}} />
             }
            
           </Paper>
