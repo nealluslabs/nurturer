@@ -1624,7 +1624,7 @@ label={<Typography fontSize="14px">
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
            <RiAiGenerate2 onClick={()=>{
 
-            if(/*selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length && selectedChatUser.messageQueue.every((msg) => msg.messageStatus !== "Pending" ) ||*/selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length === 0)
+            if(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length && selectedChatUser.messageQueue.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length === 0)
           {
             dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))
             }

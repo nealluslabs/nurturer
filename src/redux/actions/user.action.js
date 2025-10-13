@@ -285,9 +285,9 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
  
 
      if(fullJobDetailsResponse){
-      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
+      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
-      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
+      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
       dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date()},user,selectedChatUser))
      }
