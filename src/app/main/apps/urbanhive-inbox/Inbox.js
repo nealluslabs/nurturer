@@ -14,7 +14,7 @@ import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
 import { sendChat } from 'src/redux/actions/chat.action';
 import { Checkbox, CircularProgress, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
-import { generateAiMessage, updateUserBroadcast, updateUserChat } from 'redux/actions/user.action';
+import { generateAiMessage,stopMessageSending, updateUserBroadcast, updateUserChat } from 'redux/actions/user.action';
 import { RiAiGenerate2 } from "react-icons/ri";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
@@ -162,6 +162,16 @@ function Inbox(props) {
     progress: undefined,
     });
 
+
+    const notifyInviteCustom = (message) => toast.success(message, {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
  //New Hooks
 
 //  const [connectStatus, setconnectStatus] = useState('');
@@ -1597,7 +1607,7 @@ label={<Typography fontSize="14px">
 
              {
            
-           <FaStopCircle
+           <FaStopCircle onClick={()=>{ dispatch(stopMessageSending(notifyInviteCustom,selectedChatUser))}}
             
             style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
            }

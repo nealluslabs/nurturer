@@ -72,6 +72,46 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
     }
 };
 
+
+export const stopMessageSending = (notifyInvite,selectedChatUser) => async (dispatch) => {
+  if(window.confirm('Are you sure you want to turn off message sending for this user?')){
+       
+
+    const contactDoc = db.collection('contacts').doc(selectedChatUser && selectedChatUser.uid)
+
+     contactDoc.get().then(async(doc)=>{ 
+
+      if (doc.exists) {
+
+        //console.log("RAW MESSAGE IS -->", updatedParagraphs)
+        let updatedMessage =  {...doc.data().message}
+
+
+         //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+         contactDoc.update({
+          frequency:"None",
+          sendDate:doc.data().frequencyInDays && doc.data().frequencyInDays.toString()
+        }).then(() => contactDoc.get())
+        .then((doc) => {
+          if (doc.exists) {
+            notifyInvite(`Message sending has been paused for${selectedChatUser.name}!`)
+          }
+        })
+
+        
+
+
+         
+      }
+     
+    }) 
+
+
+  }
+}
+
+
 export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Interests,setLoading,previousMessage,user,notifyInvite,selectedChatUser) => async (dispatch) => {
             
    if(setLoading){setLoading(true)}

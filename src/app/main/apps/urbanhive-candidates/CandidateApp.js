@@ -234,7 +234,8 @@ function CandidateApp(props) {
             <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 
             </div>
-          {testWork &&
+          {/*
+          testWork &&
            <Box sx={{
             display: "flex",
             flexDirection:{xs:"column",md:"row"},
@@ -361,7 +362,7 @@ function CandidateApp(props) {
             </div>
             </div>
             </Box>
-            }
+            */}
                   
         </div>
       }
