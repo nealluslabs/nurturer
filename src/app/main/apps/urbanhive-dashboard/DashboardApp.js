@@ -95,7 +95,7 @@ if (allContacts.length > 0) {
     return 0;
   });
 
-onlyTouchpointMessagesData = allMessages.filter((item)=>(item.messageType === 'Email')).map((msg, idx) => ({
+onlyTouchpointMessagesData = allMessages.filter((item)=>(item/*.messageType === 'Email'||item.messageType === 'Event'*/ )).map((msg, idx) => ({
   id: msg.id || idx,
   title: msg.title || msg.subject || 'No Title',
   subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
@@ -586,7 +586,7 @@ if (allContacts.length > 0) {
 
 
 {onlyEventsMessagesData.length > 0  &&
-   <div >
+   <div style={{background:"red"}}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <CalendarMonthIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
@@ -681,7 +681,7 @@ if (allContacts.length > 0) {
 
         
      
-          <div style={{}}>   
+          <div style={{background:"yellow",display:"none"}}>   
 { 
         eventsData.map((event) => (
           <div key={event.id} style={{}}>
@@ -754,7 +754,7 @@ if (allContacts.length > 0) {
 
 
 
-         <div style={{}}>   
+         <div style={{background:"pink",display:"none"}}>   
 { 
         smartSuggestions.map((event) => (
           <div key={event.id} style={{}}>

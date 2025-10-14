@@ -502,17 +502,16 @@ function CandidateCard() {
                     </h4>
                    
                     
-                    <p style={{display:"flex",justifyContent:"flex-start",gap:"1rem",marginTop:"0.5rem"}}>
-                    <p>{users.frequency}</p>   <FaPencilAlt/>
+                    <p style={{display:"flex",justifyContent:"flex-start",gap:"1rem",marginTop:"0.5rem",marginBottom:"0.6rem"}}>
+                    <p>{users.frequency}</p>   
                     </p>
                    
-                    <br />
-                    <br />
+                    
                     </>
                      }
 
                      {users.triggers && users.triggers.length > 0 &&
-                     <>
+                     <div style={{marginBottom:"0.6rem"}}>
                     <h4>
                       <b>Triggers</b>
                     </h4>
@@ -524,9 +523,9 @@ function CandidateCard() {
                    
                    
                     : "N/A"}
+                    
                     <br />
-                    <br />
-                    </>
+                    </div>
                     }
 
 

@@ -230,50 +230,19 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
     :
   
-  ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON).Articles should be not be older than ${Frequency},and links for the articles should from these sites only - PWC, Deloitte, McKinsey, Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes. Make sure the property messageStatus is in the JSON object, and it has a value of Pending .For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
-     {"subject":" ",
-     messageType:"Email",
-     "messageStatus":"Pending"
-      "firstParagraph":" ",
-      "secondParagraph":" ",
-      "thirdParagraph":" ",
-      "bulletPoints":[
-        {
-         "bulletPointBold":" ",
-         "bulletPointRest":" ",
-         "link":" ",
-         "id":"0",
-        },{
-          "bulletPointBold":" ",
-          "bulletPointRest":" ",
-          "link":" ",
-          "id":"1",
-        },{
-          "bulletPointBold":" ",
-          "bulletPointRest":" ",
-          "link":" ",
-          "id":"2",
-        },{
-          "bulletPointBold":" ",
-          "bulletPointRest":" ",
-          "link":" ",
-          "id":"3",
-        },{
-          "bulletPointBold":" ",
-          "bulletPointRest":" ",
-          "link":" ",
-          "id":"4",
-        },
-      ]
-     } .The first paragraph should be about how you haven't spoken to ${Name} in ${Frequency} days and how you've been thinking about their role.
-         Don't start the paragraph with Dear ${Name}, just jump into the writing.
-        second parargaph should be about how you have found some articles that relate to their industry ${Industry}.
-        The third paragraph should be about how you'd love to hear from them and you wish them luck in their future endeavors and hobbies: ${Interests}.
-        The Subject should be composed from the content of the paragraphs above and should have some sort of "catch up" phrase in it.
+  `I want to send five articles to a business contact. Search the web for five articles that were written in 2025 along with a url to that article that can be publicly accessed from these websites - PWC, Deloitte, McKinsey, Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes. Provide the title of the articles and the url to them. I want articles that are relevant to the contacts info - ${JobTitle}, ${Company}, ${Industry}, ${Interests}.
+  Generate an email subject of 5 words maximum with and 3 really short paragraphs of text and fill in this object and return it as your answer(keep the object in valid JSON). Put an emoji at the end of the subject. Make sure the property messageStatus is in the JSON object, and it has a value of Pending .
+  For the id in each object of the bulletPoints array, please keep the id in the object below, do not delete them when generating your own object.
+  {"subject":" ",  
+     messageType:"Email",  
+     "messageStatus":"Pending" 
+      "firstParagraph":" ",  
+     "secondParagraph":" ", 
+          "thirdParagraph":" ",   
+       "bulletPoints":[        {         "bulletPointBold":" ",         "bulletPointRest":" ",         "link":" ",         "id":"0",        },{          "bulletPointBold":" ",          "bulletPointRest":" ",          "link":" ",          "id":"1",        },{          "bulletPointBold":" ",          "bulletPointRest":" ",          "link":" ",          "id":"2",        },{          "bulletPointBold":" ",          "bulletPointRest":" ",          "link":" ",          "id":"3",        },{          "bulletPointBold":" ",          "bulletPointRest":" ",          "link":" ",          "id":"4",        },      ]     }
+  The first paragraph should be a professional greeting paragraph for an email to a business contact. Don't start the paragraph with Dear ${Name}, just jump into the writing. Second paragraph should be about how you have found some articles that relate to their industry ${Industry}. The third paragraph should be about how you'd love to hear from them and you wish them luck in their future endeavors and hobbies: ${Interests}.  For each article, put it's title into "bulletPointBold", it's source into "bulletPointRest" and a link to the article into "link". Make each paragraph relevant to the user's job: ${JobTitle}, company:${Company}, industry:${Industry} and interests:${Interests}. Please go through the javascript object ${JSON.stringify(previousMessage)}, and try to adapt to my writing style,so you can sound like me,when providing your answer`
 
-     for each article, put in it's title into "bulletPointBold", it's source into "bulletPointRest" and a link to the article into "link"
 
-     make each paragraph relevant to the user's job: ${JobTitle},company:${Company},industry:${Industry}  and interests:${Interests}.Please make sure each article fetched is from this year. Please go through the javascript object ${JSON.stringify(previousMessage)}, and try to adapt to my writing style,so you can sound like me,when providing your answer`
 
 
   const jobResponse = await axios.post(apiEndpoint,{prompt:prompt})

@@ -983,12 +983,12 @@ We had some great conversations previously, and I really valued the opportunity 
 
 
            
-{<Box sx={{display:"flex",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
+{<Box sx={{display:selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
  {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') ?
    
 
-    selectedChatUser.name === 'Carol Garcia'?
+    selectedChatUser.name === 'Carol Garcia' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1053,7 +1053,7 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
     :
-    selectedChatUser.name === 'Alice Chen'?
+    selectedChatUser.name === 'Alice Chen' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1124,7 +1124,7 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
     :
-    selectedChatUser.name === 'David Lee'?
+    selectedChatUser.name === 'David Lee' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1190,7 +1190,7 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
     :
-    selectedChatUser.name === 'Alice Chen'?
+    selectedChatUser.name === 'Alice Chen' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1259,7 +1259,7 @@ We had some great conversations previously, and I really valued the opportunity 
  </>
     :
 
-    selectedChatUser.name === 'David Lee'?
+    selectedChatUser.name === 'David Lee' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1341,7 +1341,7 @@ We had some great conversations previously, and I really valued the opportunity 
  </>
        :
 
-       selectedChatUser.name === 'John Smith'?
+       selectedChatUser.name === 'John Smith' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
        <>
                        <Typography
                         style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1424,7 +1424,7 @@ We had some great conversations previously, and I really valued the opportunity 
      </FormControl>
     </>
 
-     :
+     : selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0 && 
    <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
