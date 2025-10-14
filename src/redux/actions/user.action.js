@@ -125,7 +125,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
 //console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
   const prompt = 
-    selectedChatUser && selectedChatUser.name === "Emily White"?
+    selectedChatUser && selectedChatUser.name === "Emily Whiterr"?
 
      
 
@@ -179,11 +179,11 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
 
     :
-    selectedChatUser && selectedChatUser.name === "Bob Johnson"?
+    selectedChatUser && selectedChatUser.name === "Bob Johnsonopia"?
 
 
       
-    ` Generate an email subject of 5 words maximum, wishing the user a Happy Birthday, and 3 really short paragraphs of text, and fill in this object and return it as your answer(keep the object in valid JSON).Make sure the property messageStatus is in the JSON object, and it has a value of Pending. For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
+    ` Generate an email subject of 5 words maximum, wishing the user a Happy Birthday, and 3 really short paragraphs of text, and fill in this object and return it as your answer(keep the object in valid JSON).Articles should be not be older than ${Frequency},and links for the articles should from these sites only - PWC, Deloitte, McKinsey, Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes.Make sure the property messageStatus is in the JSON object, and it has a value of Pending. For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
     {"subject":"Happy Fourth ofJuly",
     messageType:"Event",
     "messageStatus":"Pending"
@@ -230,7 +230,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
     :
   
-  ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON). Make sure the property messageStatus is in the JSON object, and it has a value of Pending .For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
+  ` Generate an email subject of 5 words maximum, and 3 really short paragraphs of text and 5 articles to refer to, and fill in this object and return it as your answer(keep the object in valid JSON).Articles should be not be older than ${Frequency},and links for the articles should from these sites only - PWC, Deloitte, McKinsey, Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes. Make sure the property messageStatus is in the JSON object, and it has a value of Pending .For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
      {"subject":" ",
      messageType:"Email",
      "messageStatus":"Pending"
