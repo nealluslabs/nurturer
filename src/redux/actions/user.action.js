@@ -123,6 +123,8 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
   //const apiEndpoint =`https://nurturer-helper-api.vercel.app/api/om/chatgpt`
  const apiEndpoint =`https://pmserver.vercel.app/api/om/chatgpt`
 
+  //const apiEndpoint =`http://localhost:5008/api/om/chatgpt`
+
 //console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
   const prompt = 
     selectedChatUser && selectedChatUser.name === "Emily Whiterr"?
@@ -232,7 +234,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
   
   `I want to send five articles to a business contact. Search the internet for five legitimate,real articles that were written in 2025
    along with a url to that article that can be publicly accessed from these websites - PWC, Deloitte, McKinsey,
-    Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes.Do not create the article links/urls yourself,copy them from links that already exist.
+    Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes.
      Provide the title of the articles and the url
      to them. I want articles that are relevant to the contacts info - ${JobTitle}, ${Company}, ${Industry}, ${Interests}.
   Generate an email subject of 5 words maximum with and 3 really short paragraphs of text and fill in this object and 
@@ -265,9 +267,12 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
   const jobResponse = await axios.post(apiEndpoint,{prompt:prompt})
 
-     //console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT-->",JSON.parse(jobResponse.data.text))
+     console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT-->",jobResponse.data)
 
-     const fullJobDetailsResponse = JSON.parse(jobResponse.data.text)
+   
+
+
+     const fullJobDetailsResponse = jobResponse.data  /* JSON.parse(jobResponse.data)*/
 
  
 
