@@ -529,7 +529,8 @@ if (allContacts.length > 0) {
           sm: "repeat(4, 1fr)", // small screens
           md: "repeat(4, 1fr)"  // medium+
         },
-        gap: "16px"
+        gap: "16px",
+        margin:"26px 22px"
       }}>
         {statsData.map((item, key) => {
           const IconComponent = item.icon;
@@ -580,7 +581,7 @@ if (allContacts.length > 0) {
           md: "repeat(2, 1fr)"  // medium+
         },
         gap: {sm:"16px",xs:"24px"},
-        margin:"26px 2px"
+        margin:"26px 22px"
       }}>
 
 

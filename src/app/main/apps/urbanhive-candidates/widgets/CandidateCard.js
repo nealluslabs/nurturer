@@ -54,11 +54,12 @@ function CandidateCard() {
     filteredContacts,
     connects,
     isLoading,
+    candidateInFocus,
   } = useSelector((state) => state.user);
-
 
   const { user } = useSelector((state) => state.login);
   const history = useHistory();
+  const [startIndex, setStartIndex] = useState(0);
 
   let unsubscribe;
   const notifyInvite = () =>
@@ -128,9 +129,12 @@ function CandidateCard() {
   };
 
   useEffect(() => {
-    if (filteredContacts && filteredContacts.length > 0) {
+    // Use candidateInFocus if available (from table view), otherwise use filteredContacts
+    const contactsToUse = (candidateInFocus && candidateInFocus.length > 0) ? candidateInFocus : filteredContacts;
+    
+    if (contactsToUse && contactsToUse.length > 0) {
       setOutput(
-        filteredContacts.map(
+        contactsToUse.map(
           ({
             uid,
             name,
@@ -191,11 +195,30 @@ function CandidateCard() {
         )
       );
     }
-  }, [filteredContacts, connects]);
+  }, [filteredContacts, connects, candidateInFocus]);
 
   useEffect(() => {
     dispatch(updateLastActive(user.uid));
   }, []);
+
+  // Handle selected contact from table view
+  useEffect(() => {
+    const selectedContactIndex = localStorage.getItem('selectedContactIndex');
+    if (selectedContactIndex && candidateInFocus && candidateInFocus.length > 0) {
+      const index = parseInt(selectedContactIndex);
+      setStartIndex(index);
+      // Clear the stored index after using it
+      localStorage.removeItem('selectedContactIndex');
+      localStorage.removeItem('selectedContact');
+      
+      // Navigate to the selected contact after a brief delay to ensure ReactSwipe is ready
+      setTimeout(() => {
+        if (reactSwipeEl && reactSwipeEl.slide) {
+          reactSwipeEl.slide(index, 0); // Navigate to specific index with 0ms duration
+        }
+      }, 100);
+    }
+  }, [candidateInFocus]);
 
   useEffect(() => {
     unsubscribe = dispatch(fetchRealTimeConnections(user.uid));
@@ -770,9 +793,12 @@ function CandidateCard() {
         userList.length > 0 && (
           <Box sx={{ height: {xs:"120vh",sm:"100vh"}, width: "70vw" }}>
             <ReactSwipe
-              key={userList.length}
+              key={`${userList.length}-${startIndex}`}
               className="carousel"
-              swipeOptions={{ continuous: true }}
+              swipeOptions={{ 
+                continuous: true,
+                startSlide: startIndex
+              }}
               ref={(el) => (reactSwipeEl = el)}
             >
               {userList}

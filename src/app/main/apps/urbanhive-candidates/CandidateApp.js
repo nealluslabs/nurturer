@@ -9,17 +9,21 @@ import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import reducer from './store';
 import CandidateCard from './widgets/CandidateCard';
+import CandidateCardView from './widgets/CandidateCardView';
+import CandidateTableView from './widgets/CandidateTableView';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
-import { Box, Button, Grid, InputAdornment, TextField, Switch } from '@mui/material';
+import { Box, Button, Grid, InputAdornment, TextField, Switch, IconButton } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { saveFilteredUsers, saveFilteredContacts } from 'redux/reducers/user.slice';
+import { saveFilteredUsers, saveFilteredContacts, saveCandidateInFocus } from 'redux/reducers/user.slice';
 import { fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import AddIcon from '@mui/icons-material/Add';
 import MailIcon from '@mui/icons-material/Mail';
 import SendIcon from '@mui/icons-material/Send';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ViewListIcon from '@mui/icons-material/ViewList';
 
 
 
@@ -45,9 +49,9 @@ function CandidateApp(props) {
   const classes = useStyles(props);
   const pageLayout = useRef(null);
   const [tabValue, setTabValue] = useState(0);
-  const [testWork, setTestWork] = useState(false)
+  const [testWork, setTestWork] = useState(false);
+  const [viewMode, setViewMode] = useState('card'); 
 
-   // Fetch contacts when component mounts
    useEffect(() => {
     setTimeout(()=>{
     setTestWork(true)
@@ -66,6 +70,23 @@ function CandidateApp(props) {
     }
   }, [dispatch, user]);
 
+  // Listen for switch to card view event from table
+  useEffect(() => {
+    const handleSwitchToCardView = (event) => {
+      if (event.detail && event.detail.contactsData) {
+        // Set the contacts data in Redux so CandidateCard can use it
+        dispatch(saveCandidateInFocus(event.detail.contactsData));
+      }
+      setViewMode('card');
+    };
+
+    window.addEventListener('switchToCardView', handleSwitchToCardView);
+
+    return () => {
+      window.removeEventListener('switchToCardView', handleSwitchToCardView);
+    };
+  }, [dispatch]);
+
   const handleSearchResults = (searchTerm)=>{
 
    dispatch(saveFilteredContacts(
@@ -80,6 +101,12 @@ function CandidateApp(props) {
     })
   ))
   }
+
+  const switchItems = [
+    { id: 1, title: 'Birthdays', enabled: false },
+    { id: 2, title: 'Holiday', enabled: false },
+    { id: 3, title: 'Triggers', enabled: false },
+  ]
 
 
   const touchpointData = [
@@ -154,6 +181,7 @@ function CandidateApp(props) {
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
         <div className='p-24 lg:ltr:pr-0 lg:rtl:pl-0' >
+<<<<<<< HEAD
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 
@@ -243,70 +271,59 @@ function CandidateApp(props) {
             gap: "12px",
             margin:"0px 0",
             marginTop:{xs:"-0rem",sm:"-11rem"}
+=======
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'flex-end', 
+              marginBottom: '20px',
+              marginTop: '1rem'
+>>>>>>> d2302792597719f1d1d65c0ba9b1485d18bd6d51
             }}>
-            <div style={{ flex: 1 }}>
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <div style={{ display: 'flex', alignItems: "center" }}>
-            <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-            <h3>Recent Interactions</h3>
-            </div>
-            <button 
-            style={{ 
-            border: `2px solid grey`, 
-            padding: "4px 7px", borderRadius: "6px", color: "grey"
-            }}
-            onClick={() => history.push('/apps/inbox')}
-            >
-            View All
-            </button>
+              <div style={{ 
+                display: 'flex', 
+                backgroundColor: '#f5f5f5', 
+                borderRadius: '8px', 
+                padding: '4px' 
+              }}>
+                <IconButton
+                  onClick={() => setViewMode('card')}
+                  sx={{
+                    backgroundColor: viewMode === 'card' ? '#20dbe4' : 'transparent',
+                    color: viewMode === 'card' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
+                    },
+                    marginRight: '4px'
+                  }}
+                >
+                  <ViewModuleIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setViewMode('list')}
+                  sx={{
+                    backgroundColor: viewMode === 'list' ? '#20dbe4' : 'transparent',
+                    color: viewMode === 'list' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
+                    }
+                  }}
+                >
+                  <ViewListIcon />
+                </IconButton>
+              </div>
             </div>
             
-            <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem" }}>
-            {touchpointData.length === 0 ? (
-            <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
-            No interactions found.
-            </div>
+            {viewMode === 'card' ? (
+              <>
+                <div style={{marginTop:"2rem"}}>
+                  <CandidateCard /> 
+                </div>
+                <CandidateCardView />
+              </>
             ) : (
-            touchpointData.map((item) => {
-            const IconComponent = item.icon;
-            return (
-            <div 
-            key={item.id} 
-            style={{ 
-            display: "flex", 
-            alignItems: "center", 
-            justifyContent: "space-between", 
-            marginBottom: "16px" 
-            }}
-            >
-            <div style={{ display: "flex", alignItems: "center" }}>
-            <IconComponent 
-            sx={{ 
-            width: 16, 
-            height: 16, 
-            marginRight: "6px", 
-            color: item.iconColor 
-            }} 
-            />
-            <div>
-            <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
-            <p style={{ fontSize: "12px" }}>{" "}</p>
-            </div>
-            </div>
-            <p 
-            style={{ 
-            padding: "4px 12px", 
-            background: item.statusBackground, 
-            color: item.statusColor, 
-            borderRadius: "4px" 
-            }}
-            >
-            {item.status}
-            </p>
-            </div>
-            );
-            })
+              <CandidateTableView />
             )}
+<<<<<<< HEAD
             </div>
             </div>
             
@@ -364,6 +381,9 @@ function CandidateApp(props) {
             </Box>
             */}
                   
+=======
+
+>>>>>>> d2302792597719f1d1d65c0ba9b1485d18bd6d51
         </div>
       }
       ref={pageLayout}
