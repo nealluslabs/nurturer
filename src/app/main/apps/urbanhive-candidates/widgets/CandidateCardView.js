@@ -36,7 +36,7 @@ function CandidateCardView() {
         width: "95%",
         gap: "12px",
         margin: "0px 0",
-        marginTop: { xs: "-0rem", sm: "-11rem" }
+        marginTop: { xs: "-0rem", sm: "-25rem" }
       }}>
         <div style={{ flex: 1 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
