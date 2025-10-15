@@ -43,10 +43,10 @@ export const signup = (user, history,notifySkip) => async (dispatch) => {
 
 
 const sesClient = new SESClient({
-  region: "eu-west-3", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
+  region: "eu-north-1", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
   credentials: {
-    accessKeyId:process.env.REACT_APP_ACCESS_KEY_ID,
-    secretAccessKey:process.env.REACT_APP_SECRET_ACCESS_KEY,
+    accessKeyId:process.env.REACT_APP_ACCESSKEYID_NURTURER,
+    secretAccessKey:process.env.REACT_APP_SECRETACCESSKEY_NURTURER,
   },
 });
 
