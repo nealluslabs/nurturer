@@ -181,7 +181,6 @@ function CandidateApp(props) {
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
         <div className='p-24 lg:ltr:pr-0 lg:rtl:pl-0' >
-<<<<<<< HEAD
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
 
@@ -271,13 +270,11 @@ function CandidateApp(props) {
             gap: "12px",
             margin:"0px 0",
             marginTop:{xs:"-0rem",sm:"-11rem"}
-=======
             <div style={{ 
               display: 'flex', 
               justifyContent: 'flex-end', 
               marginBottom: '20px',
               marginTop: '1rem'
->>>>>>> d2302792597719f1d1d65c0ba9b1485d18bd6d51
             }}>
               <div style={{ 
                 display: 'flex', 
@@ -323,7 +320,6 @@ function CandidateApp(props) {
             ) : (
               <CandidateTableView />
             )}
-<<<<<<< HEAD
             </div>
             </div>
             
@@ -381,9 +377,7 @@ function CandidateApp(props) {
             </Box>
             */}
                   
-=======
 
->>>>>>> d2302792597719f1d1d65c0ba9b1485d18bd6d51
         </div>
       }
       ref={pageLayout}
