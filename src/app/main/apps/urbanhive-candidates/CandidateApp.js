@@ -388,7 +388,7 @@ function CandidateApp(props) {
         width: "95%",
         gap: "12px",
         margin: "0px 0",
-        marginTop: { xs: "-0rem", sm: "-21rem" },
+        marginTop: { xs: "-0rem", sm: "-16rem" },
       }}
     >
       
@@ -559,9 +559,10 @@ function CandidateApp(props) {
                         marginBottom: "20px",
                         padding: "7px 0",
                         height:"1.5rem",
-                        
+                       
+                        width:"100%"
 
-                        
+            
                       }}
                     >
                       <span style={{ fontSize: "16px", fontWeight: "500" }}>{item.title}</span>

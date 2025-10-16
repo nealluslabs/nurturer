@@ -231,6 +231,7 @@ function CandidateCardView() {
                         justifyContent: "space-between",
                         marginBottom: "20px",
                         padding: "7px 0",
+                        
                       }}
                     >
                       <span style={{ fontSize: "16px", fontWeight: "500" }}>{item.title}</span>
@@ -281,6 +282,8 @@ function CandidateCardView() {
               </>
             )}
           </div>
+
+
         </div>
 
         <div style={{ flex: 1 }}>
