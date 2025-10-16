@@ -94,7 +94,7 @@ export const updateCandidateNotes = (contactId,notes,notifyInvite) => async (dis
         }).then(() => contactDoc.get())
         .then((doc) => {
           if (doc.exists) {
-            notifyInvite(`Notes have been updated for this user`)
+            notifyInvite(`Notes have been updated for this contact`)
           }
         })
 
