@@ -201,6 +201,21 @@ function CandidateCard() {
     dispatch(updateLastActive(user.uid));
   }, []);
 
+  const [currentIndex,setCurrentIndex] = useState(0)
+
+
+  useEffect(() => {
+    //we 
+    if(candidateInFocus && !candidateInFocus.name || !candidateInFocus){
+    dispatch(saveCandidateInFocus(filteredContacts[0]));
+
+    }
+
+    if(candidateInFocus){
+      dispatch(saveCandidateInFocus(filteredContacts.filter((item)=>(item.uid === candidateInFocus.uid))[0]));
+    }
+  }, [filteredContacts]);
+
   // Handle selected contact from table view
   useEffect(() => {
     const selectedContactIndex = localStorage.getItem('selectedContactIndex');
@@ -295,7 +310,7 @@ function CandidateCard() {
   const userList =
     output && output.length ? (
       // allUsers.map(users => {
-      output.map((users) => {
+      output.map((users,index) => {
         return (
           <Grid container sx={{ marginTop: "2rem" }}>
             <ToastContainer
@@ -440,8 +455,29 @@ function CandidateCard() {
                   >
                     <Button
                       onClick={() => {
+                        
                         reactSwipeEl.prev();
                         inviteSkip(-1, users.uid);
+
+                         // find prev candidate safely
+                         const prevIndex =currentIndex - 1;
+                         const prevUser = output[prevIndex];
+                     
+                         // only dispatch if there is a prev user
+                         if (prevUser) {
+                           dispatch(saveCandidateInFocus(prevUser));
+                         }else{
+                          dispatch(saveCandidateInFocus(output[output.length-1]));
+                         }
+                        
+                  
+                       if(prevIndex !== -1){
+                        setCurrentIndex(prevIndex);
+                       }else{
+                        setCurrentIndex(output.length-1);
+                       }
+                      
+
                       }}
                       style={{ backgroundColor: !canSwipe && "#20dbe4" }}
                     >
@@ -461,8 +497,43 @@ function CandidateCard() {
                     {users.uid != user.uid ? (
                       <Button
                         onClick={() => {
+
+
+                           // find next candidate safely
+                           const nextIndex = index+1/*currentIndex + 1*/;
+                           const nextUser = output[nextIndex];
+                       
+                           // only dispatch if there is a next user
+                           if (nextUser) {
+                             dispatch(saveCandidateInFocus(nextUser));
+                             
+                           }
+
+
+                           if (nextUser) {
+                            dispatch(saveCandidateInFocus(nextUser));
+                          }else{
+                           dispatch(saveCandidateInFocus(output[0]));
+                          }
+                         
+                   
+                        if(nextIndex <= output.length){
+                         setCurrentIndex(nextIndex);
+                        }else{
+                         setCurrentIndex(0);
+                        }
+
+
+
+
+
                           reactSwipeEl.next();
+                          //dispatch(saveCandidateInFocus());
                           inviteSkip(0, users.uid);
+                         
+
+                          setCurrentIndex(nextIndex);
+                        
                         }}
                         style={{ backgroundColor: !canSwipe && "#20dbe4" }}
                       >

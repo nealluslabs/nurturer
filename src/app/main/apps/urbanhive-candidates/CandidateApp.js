@@ -18,12 +18,16 @@ import { Box, Button, Grid, InputAdornment, TextField, Switch, IconButton } from
 
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts, saveCandidateInFocus } from 'redux/reducers/user.slice';
-import { fetchAllContactForOneUser } from 'src/redux/actions/user.action';
+import { fetchAllContactForOneUser,updateCandidateNotes } from 'src/redux/actions/user.action';
 import AddIcon from '@mui/icons-material/Add';
 import MailIcon from '@mui/icons-material/Mail';
 import SendIcon from '@mui/icons-material/Send';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
+import { update } from 'lodash';
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -45,12 +49,14 @@ function CandidateApp(props) {
  
   const history = useHistory();
   const { isAuth, user } = useSelector((state) => state.login);
-  const { allUsers, allContacts, filteredUsers, filteredContacts, isLoading } = useSelector((state) => state.user);
+  const { allUsers, allContacts, filteredUsers, filteredContacts,candidateInFocus, isLoading } = useSelector((state) => state.user);
   const classes = useStyles(props);
   const pageLayout = useRef(null);
   const [tabValue, setTabValue] = useState(0);
   const [testWork, setTestWork] = useState(false);
   const [viewMode, setViewMode] = useState('card'); 
+
+  const [candidateNotes, setCandidateNotes] = useState(candidateInFocus.notes && candidateInFocus.notes)
 
    useEffect(() => {
     setTimeout(()=>{
@@ -60,6 +66,18 @@ function CandidateApp(props) {
 
 
   }, [filteredContacts]);
+
+  const notifyInvite = (message) =>
+    toast.success(message, {
+    position: "bottom-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+    
 
 
 
@@ -109,10 +127,17 @@ function CandidateApp(props) {
   ]
 
 
-  const touchpointData = [
+  useEffect(()=>{
+
+    setTouchpointData(candidateInFocus && candidateInFocus.messageQueue)
+
+    setCandidateNotes(candidateInFocus && candidateInFocus.notes)
+  },[candidateInFocus])
+
+  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue?candidateInFocus.messageQueue:[
     {
       id: 1,
-      title: 'Catch Up Email',
+      subject: 'Catch Up Email',
       subtitle: 'John Doe - johnsmith@boeing.com',
       status: 'Pending',
       statusColor: 'grey',
@@ -159,7 +184,7 @@ function CandidateApp(props) {
       icon: MailIcon,
       iconColor: '#1976d2'
     }*/
-  ];
+  ]);
 
 
   if (!isAuth) return <Redirect to={'/login'}/>
@@ -170,6 +195,17 @@ function CandidateApp(props) {
   }
   return (
     <div style={{margin: "30px"}}>
+      <ToastContainer
+              position="bottom-right"
+              autoClose={1000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
     <FusePageSimple
       classes={{
        // header:
@@ -260,7 +296,7 @@ function CandidateApp(props) {
 
             <div style={{marginTop:"2rem"}}>
             <CandidateCard /> 
-            </div>
+            </div> 
           {/*
           testWork &&
            <Box sx={{
@@ -397,14 +433,15 @@ function CandidateApp(props) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: 'flex', alignItems: "center" }}>
               <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-              <h3>Recent Interactions</h3>
+              <h5>Recent Interactions</h5>
             </div>
             <button 
               style={{ 
                 border: `2px solid grey`, 
                 padding: "4px 7px", 
                 borderRadius: "6px", 
-                color: "grey"
+                color: "grey",
+                fontSize:"0.8rem"
               }}
               onClick={() => history.push('/apps/inbox')}
             >
@@ -420,13 +457,13 @@ function CandidateApp(props) {
             boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
             height: "20.6rem" 
           }}>
-            {touchpointData.length === 0 ? (
+            {candidateInFocus && touchpointData &&  touchpointData.length === 0 ? (
               <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
                 No interactions found.
               </div>
             ) : (
-              touchpointData.map((item) => {
-                const IconComponent = item.icon;
+              candidateInFocus && touchpointData &&  touchpointData.map((item) => {
+                //const IconComponent = item.icon;
                 return (
                   <div 
                     key={item.id} 
@@ -438,28 +475,28 @@ function CandidateApp(props) {
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
-                      <IconComponent 
+                      <MailIcon 
                         sx={{ 
                           width: 16, 
                           height: 16, 
                           marginRight: "6px", 
-                          color: item.iconColor 
+                          color: '#1976d2' 
                         }} 
                       />
                       <div>
-                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
+                        <p style={{ fontSize: "11px", fontWeight: "bold" }}>{item.subject && item.subject}</p>
                         <p style={{ fontSize: "12px" }}>{" "}</p>
                       </div>
                     </div>
                     <p 
                       style={{ 
                         padding: "4px 12px", 
-                        background: item.statusBackground, 
+                        background: 'yellow', 
                         color: item.statusColor, 
                         borderRadius: "4px" 
                       }}
                     >
-                      {item.status}
+                      {item.messageStatus?item.messageStatus:"Pending"}
                     </p>
                   </div>
                 );
@@ -472,7 +509,7 @@ function CandidateApp(props) {
        <div style={{ flex: 1.5 }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-          <h3>Notes</h3>
+          <h5>Notes</h5>
         </div>
 
         <div
@@ -494,6 +531,8 @@ function CandidateApp(props) {
             rows={6}
             placeholder="Enter your notes here..."
             variant="outlined"
+            value={candidateNotes}
+            onChange={(e)=>{setCandidateNotes(e.target.value)}}
             fullWidth
             sx={{
               width: "90%",
@@ -505,6 +544,7 @@ function CandidateApp(props) {
             }}
           />
           <Button
+          onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite))}}
             variant="contained"
             sx={{
               backgroundColor: "#20dbe4",
@@ -527,7 +567,7 @@ function CandidateApp(props) {
       <div style={{ flex: 1 }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-          <h3>Contact Settings</h3>
+          <h5>Contact Settings</h5>
         </div>
 
         <div
@@ -544,7 +584,7 @@ function CandidateApp(props) {
           >
             {switchItems.length === 0 ? (
               <div style={{ textAlign: "center", color: "#888", padding: "16px 0" }}>
-                No touchpoints found.
+                No Interactions.
               </div>
             ) : (
               <>
@@ -634,4 +674,4 @@ function CandidateApp(props) {
   
 }
 
-export default withReducer('candidateApp', reducer)(CandidateApp);
+export default  withReducer('candidateApp', reducer)(CandidateApp);

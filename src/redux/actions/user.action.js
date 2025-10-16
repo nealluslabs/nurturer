@@ -73,6 +73,45 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
 };
 
 
+export const updateCandidateNotes = (contactId,notes,notifyInvite) => async (dispatch) => {
+  
+       
+    const contactDoc = db.collection('contacts').doc(contactId && contactId)
+
+     contactDoc.get().then(async(doc)=>{ 
+
+      if (doc.exists) {
+
+        //console.log("RAW MESSAGE IS -->", updatedParagraphs)
+        let updatedMessage =  {...doc.data().message}
+
+
+         //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+         contactDoc.update({
+          notes:notes,
+          
+        }).then(() => contactDoc.get())
+        .then((doc) => {
+          if (doc.exists) {
+            notifyInvite(`Notes have been updated for this user`)
+          }
+        })
+
+        
+
+
+         
+      }
+     
+    }) 
+
+
+  
+}
+
+
+
 export const stopMessageSending = (notifyInvite,selectedChatUser) => async (dispatch) => {
   if(window.confirm('Are you sure you want to turn off message sending for this user?')){
        
@@ -110,6 +149,9 @@ export const stopMessageSending = (notifyInvite,selectedChatUser) => async (disp
 
   }
 }
+
+
+
 
 
 export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Interests,setLoading,previousMessage,user,notifyInvite,selectedChatUser) => async (dispatch) => {
