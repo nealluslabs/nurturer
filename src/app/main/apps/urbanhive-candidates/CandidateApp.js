@@ -228,12 +228,12 @@ function CandidateApp(props) {
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
 
-        loading ? (
+        /*loading ? (
           // When loading, return `null` or a loader placeholder
           <center>
           <FuseLoading/>
           </center>
-        ) : 
+        ) :*/ 
         <div className='p-24 lg:ltr:pr-0 lg:rtl:pl-0' >
             {/* <HomeTab /> */}
             {/* <Advanced />  */}
@@ -431,7 +431,8 @@ function CandidateApp(props) {
             </Box>
           */}
 
-
+{
+  testWork && (
   <Box
         sx={{
           height: "3rem",
@@ -446,6 +447,9 @@ function CandidateApp(props) {
       >
         
       </Box>
+  )
+}
+
 {
   testWork && (
     <Box

@@ -864,11 +864,11 @@ function CandidateCard() {
 
 
       { userList && !userList.length?(
-        <center> {
+        <center style={{position:"relative",top:"5rem",zIndex:"1000"}}> {
         <FuseLoading />
         
         }</center>
-      ) : (
+      ) : ( 
         userList.length > 0 && (
           <Box sx={{ height: {xs:"120vh",sm:"100%"}, width: "70vw" }}>
             <ReactSwipe
