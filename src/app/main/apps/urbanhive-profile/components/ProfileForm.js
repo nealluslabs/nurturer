@@ -243,7 +243,7 @@ const notifySkip = (message) => toast.error(message, {
       
         Papa.parse(file, {
           header: true,
-          skipEmptyLines: true,
+          skipEmptyLines: false,
           complete: (results) => {
             if (!results || !results.data || results.data.length === 0) {
               alert("CSV file is empty or invalid");
@@ -300,7 +300,7 @@ const notifySkip = (message) => toast.error(message, {
             const processedData = results.data.map((row) => {
               const cleanedRow = {};
               textFields.forEach((field) => {
-                if (row[field]) {
+               /* if (row[field]) {*/
                  // if (field === "triggers") {
                  //   cleanedRow[field] = row[field]
                  //     .split(",")
@@ -313,30 +313,31 @@ const notifySkip = (message) => toast.error(message, {
                   //    .map((t) => t.trim())
                   //    .filter((t) => t.length > 0);
                   //}
+                  console.log("MY NAME IS SLIM SHADY -->",row[field])
                 
-                  if (field == "name" && row[field].trim() === " " ) {
-                    alert(`Name cannot be empty for some values`);
-                    console.log("MY NAME IS SLIM SHADY -->",row[field].trim())
+                  if (field == "name" && (!row[field] || row[field] === " ") ) {
+                    alert(`Make sure ALL rows have a Name`);
+                    console.log("MY NAME IS SLIM SHADY 2 -->",row[field])
                    return;
                   }
-                  if (field == "city" && row[field].trim() === " "  ) {
-                    alert(`City cannot be empty for some values`);
+                  if (field == "city" && (!row[field] || row[field] === "")  ) {
+                    alert(`Make sure ALL rows have a City `);
                     return;
                   }
-                  if (field == "state" && row[field].trim() === " "  ) {
-                    alert(`State cannot be empty for some values`);
+                  if (field == "state" && (!row[field] || row[field] === "")  ) {
+                    alert(` Make sure ALL rows have a State `);
                     return;
                   }
-                  if (field == "email" && row[field].trim() === " "  ) {
-                    alert(`Email cannot be empty for some values`);
+                  if (field == "email" && (!row[field] || row[field] === "")  ) {
+                    alert(` Make sure ALL rows have an Email `);
                     return;
                   }
-                  if (field == "companyName" && row[field].trim() === " "  ) {
-                    alert(`Company name cannot be empty for some values`);
+                  if (field == "companyName" && (!row[field] || row[field] === "")  ) {
+                    alert(`Make sure ALL rows have a Company name`);
                     return;
                   }
-                  if (field == "jobTitle" && row[field].trim() === " "  ) {
-                    alert(`Job title cannot be empty for some values`);
+                  if (field == "jobTitle" && (!row[field] || row[field] === "")  ) {
+                    alert(`Make sure ALL rows have a Job title`);
                     return;
                   }
             
@@ -346,10 +347,10 @@ const notifySkip = (message) => toast.error(message, {
                   } else {
                     cleanedRow[field] = row[field];
                   }
-                } else {
+               /* } else {
                   // default values
                   cleanedRow[field] = field === "frequency" ? "1 month" : row[field] ;
-                }
+                }*/
               });
               return cleanedRow;
             });
@@ -810,7 +811,7 @@ const notifySkip = (message) => toast.error(message, {
 
             <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
-                        label="Name"
+                        label="Name (Required)"
                         name="name"
                         value={values.name}
                         onChange={handleInputChange}
@@ -822,7 +823,7 @@ const notifySkip = (message) => toast.error(message, {
 
                 <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
-                        label="Email"
+                        label="Email (Required)"
                         name="email"
                         value={values.email}
                         onChange={handleInputChange}
@@ -859,7 +860,7 @@ const notifySkip = (message) => toast.error(message, {
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
-                        label="Job Title"
+                        label="Job Title (Required)"
                         name="jobTitle"
                         value={values.jobTitle}
                         onChange={handleInputChange}
@@ -870,7 +871,7 @@ const notifySkip = (message) => toast.error(message, {
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
                 name="state"
-                label="State"
+                label="State (Required)"
                 value={values.state}
                 onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);
                   //console.log("JUST SELECTED A STATE --->",e.target.value) 
@@ -886,7 +887,7 @@ const notifySkip = (message) => toast.error(message, {
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
                  name="city"
-                 label="City"
+                 label="City (Required)"
                  value={values.city}
                  onChange={handleInputChange}
                  options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
@@ -928,7 +929,7 @@ const notifySkip = (message) => toast.error(message, {
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
-                        label="Company Name"
+                        label="Company Name (Required)"
                         name="companyName"
                         value={values.companyName}
                         onChange={handleInputChange}

@@ -36,6 +36,7 @@ import {
 import UserSidebar from './UserSidebar';
 import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
+import { saveFilteredContacts } from 'redux/reducers/user.slice';
 
 const drawerWidth = 400;
 const headerHeight = 200;
@@ -128,12 +129,41 @@ const useStyles = makeStyles((theme) => ({
 
 function InboxApp(props) {
   const dispatch = useDispatch();
+  const history = useHistory();
+
   const chat = useSelector(({ chatApp }) => chatApp.chat);
   const mobileChatsSidebarOpen = useSelector(
     ({ chatApp }) => chatApp.sidebars.mobileChatsSidebarOpen
   );
   const userSidebarOpen = useSelector(({ chatApp }) => chatApp.sidebars.userSidebarOpen);
   const contactSidebarOpen = useSelector(({ chatApp }) => chatApp.sidebars.contactSidebarOpen);
+
+  const {filteredUsers, connects } = useSelector((state) => state.user);
+  //const selectedContactId = props.user.uid;
+
+
+ const resortFilteredUsersAndPush = (userId)=>{
+    
+ const replica = [...filteredUsers]
+
+  const index = replica.findIndex(user => user.uid === userId);
+
+  if (index > -1) {
+    const [matchedUser] = replica.splice(index, 1);
+    replica.unshift(matchedUser);
+  }
+
+  
+ dispatch(saveFilteredContacts(replica))
+
+setTimeout(()=>{
+  history.push('/candidates')
+   },300)
+
+ }
+
+
+
   const selectedContact = useSelector((state) =>
     selectContactById(state, state.chatApp.contacts.selectedContactId)
   );
@@ -313,7 +343,10 @@ function InboxApp(props) {
                         <div className="absolute right-0 bottom-0 -m-4 z-10">
                           <StatusIcon status={'online'} />
                         </div>
-                        {<Avatar src={selectedChatUser && selectedChatUser.photoUrl} alt={selectedChatUser && selectedChatUser.name}>
+                        {<Avatar src={selectedChatUser && selectedChatUser.photoUrl} alt={selectedChatUser && selectedChatUser.name}
+                        
+                        onClick={()=>{resortFilteredUsersAndPush(selectedChatUser && selectedChatUser.uid)}}
+                        >
                           {!selectedChatUser&&  !selectedChatUser.photoUrl || selectedChatUser && selectedChatUser.photoUrl === ''
                             ? selectedChatUser && selectedChatUser.name[0]
                             : ''}

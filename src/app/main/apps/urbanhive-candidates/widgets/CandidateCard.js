@@ -204,6 +204,7 @@ function CandidateCard() {
 
   const [currentIndex,setCurrentIndex] = useState(0)
 
+  
 
   useEffect(() => {
     //we 
@@ -281,6 +282,8 @@ function CandidateCard() {
   
     return `${month} ${dayWithSuffix} ${year}`;
   }
+
+ 
   
 
   const connectsById = Object.fromEntries(
@@ -291,6 +294,7 @@ function CandidateCard() {
   );
 
   const [output, setOutput] = useState([]);
+  console.log("OUTPUT IS --->",output)
 
   const handleSearchResults = (searchTerm) => {
     setOutput(
@@ -352,7 +356,7 @@ function CandidateCard() {
                     style={{ fontSize: "13px" }}
                   >
                     {/* Last Active • {timeSince(users.lastActive)} ago */}
-                    Follow Up Date • {users.sendDate? getFutureDate(users.sendDate):"August 1st 2025"}{" "}
+                    Follow Up Date • {users.sendDate? getFutureDate(users.sendDate):"-"}{" "}
                     {/*timeSince(parseInt(users.lastActive))*/}
                   </Typography>
                   <br />
@@ -589,7 +593,7 @@ function CandidateCard() {
                     </>
                     */}
 
-             {users.frequency &&
+             {users.frequency && users.frequency !== "None" && users.frequency.length > 0 && users.frequency != " " &&
                     <>
                     <br />
                     <h4>

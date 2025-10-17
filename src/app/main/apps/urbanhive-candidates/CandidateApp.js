@@ -131,9 +131,10 @@ function CandidateApp(props) {
 
 
   const switchItems = [
-    { id: 1, title: 'Birthdays', enabled: false },
-    { id: 2, title: 'Holiday', enabled: false },
-    { id: 3, title: 'Triggers', enabled: false },
+    { id: 1, title: 'Events', enabled: false },
+    { id: 2, title: 'Triggers', enabled: false },
+    { id: 3, title: 'Touches', enabled: false },
+    
   ]
 
 

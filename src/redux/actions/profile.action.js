@@ -305,7 +305,7 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     city: profile.city||" ",
     triggers:profile.triggers||" ",
     state: profile.state||" ",
-    frequency: profile.frequency||" ",
+    frequency: profile.frequency||"None",
     sendDate:changeFrequencyToDays(profile.frequency)||" ",
     frequencyInDays:changeFrequencyToDays(profile.frequency)||" ",
     birthdaySendDate:changeBirthdayToSendDate(profile.birthday)||" ",
@@ -395,11 +395,11 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
       workAnniversary: profile.workAnniversary || "",
       city: profile.city || "",
       triggers: profile.triggers? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
-      sendDate:changeFrequencyToDays(profile.frequency|| "1 month"),
-      frequencyInDays:changeFrequencyToDays(profile.frequency || "1 month"),
+      sendDate:changeFrequencyToDays(profile.frequency|| "0 month"),
+      frequencyInDays:changeFrequencyToDays(profile.frequency || "0"),
       queryMsg:[],
       state: profile.state || "",
-      frequency: profile.frequency || "1 month",
+      frequency: profile.frequency || "None",
       interests: profile.interests?profile.interests.split(',').map(interest => interest.trim()) : [],
 
       // extra fields

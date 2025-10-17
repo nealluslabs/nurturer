@@ -583,7 +583,7 @@ useEffect(()=>{
 
             <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
-                        label="Name"
+                        label="Name (Required)"
                         name="name"
                         value={values.name}
                         onChange={handleInputChange}
@@ -595,7 +595,7 @@ useEffect(()=>{
 
                 <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
-                        label="Email"
+                        label="Email (Required)"
                         name="email"
                         value={values.email}
                         onChange={handleInputChange}
@@ -630,7 +630,7 @@ useEffect(()=>{
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
-                        label="Job Title"
+                        label="Job Title (Required)"
                         name="jobTitle"
                         value={values.jobTitle}
                         onChange={handleInputChange}
@@ -656,7 +656,7 @@ useEffect(()=>{
                 <Grid item xs={12} sm={6}>
                 <Controls.Select
                         name="city"
-                        label="City"
+                        label="City (Required)"
                         value={values.city}
                         onChange={handleInputChange}
                         options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
@@ -703,7 +703,7 @@ useEffect(()=>{
 
                 <Grid item xs={12} sm={6}>
                 <Controls.Input
-                        label="Company Name"
+                        label="Company Name (Required)"
                         name="companyName"
                         value={values.companyName}
                         onChange={handleInputChange}
