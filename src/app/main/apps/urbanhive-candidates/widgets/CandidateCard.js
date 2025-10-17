@@ -558,7 +558,7 @@ function CandidateCard() {
             <Grid>
               <Grid item container>
                 <Grid item xs={12} sm={12} md={12}>
-                  <Box m={0} p={2} style={{display:"block",width:"18rem"}}>
+                  <Box m={0} p={2} style={{display:"block",width:"28rem"}}>
                     {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
                    
                     {/*users.notes && users.notes.length && 
