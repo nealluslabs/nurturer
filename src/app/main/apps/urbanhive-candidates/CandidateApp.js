@@ -56,7 +56,7 @@ function CandidateApp(props) {
   const [testWork, setTestWork] = useState(false);
   const [viewMode, setViewMode] = useState('card'); 
 
-  const [candidateNotes, setCandidateNotes] = useState(candidateInFocus.notes && candidateInFocus.notes)
+  const [candidateNotes, setCandidateNotes] = useState(candidateInFocus && candidateInFocus.notes && candidateInFocus.notes)
 
    useEffect(() => {
     setTimeout(()=>{
