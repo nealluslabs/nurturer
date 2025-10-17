@@ -243,7 +243,7 @@ const notifySkip = (message) => toast.error(message, {
       
         Papa.parse(file, {
           header: true,
-          skipEmptyLines: false,
+          skipEmptyLines: true,
           complete: (results) => {
             if (!results || !results.data || results.data.length === 0) {
               alert("CSV file is empty or invalid");
@@ -274,10 +274,10 @@ const notifySkip = (message) => toast.error(message, {
               (field) => !csvHeaders.includes(field)
             );
       
-            if (missingHeaders.length > 0) {
-              alert(`Missing required headers in CSV: ${missingHeaders.join(", ")}`);
-              return;
-            }
+           // if (missingHeaders.length > 0) {
+           //   alert(`Missing required headers in CSV: ${missingHeaders.join(", ")}`);
+           //   return;
+           // }
       
             // helper function to validate frequency
             const validateFrequency = (value) => {
@@ -313,6 +313,33 @@ const notifySkip = (message) => toast.error(message, {
                   //    .map((t) => t.trim())
                   //    .filter((t) => t.length > 0);
                   //}
+                
+                  if (field == "name" && row[field].trim() === " " ) {
+                    alert(`Name cannot be empty for some values`);
+                    console.log("MY NAME IS SLIM SHADY -->",row[field].trim())
+                   return;
+                  }
+                  if (field == "city" && row[field].trim() === " "  ) {
+                    alert(`City cannot be empty for some values`);
+                    return;
+                  }
+                  if (field == "state" && row[field].trim() === " "  ) {
+                    alert(`State cannot be empty for some values`);
+                    return;
+                  }
+                  if (field == "email" && row[field].trim() === " "  ) {
+                    alert(`Email cannot be empty for some values`);
+                    return;
+                  }
+                  if (field == "companyName" && row[field].trim() === " "  ) {
+                    alert(`Company name cannot be empty for some values`);
+                    return;
+                  }
+                  if (field == "jobTitle" && row[field].trim() === " "  ) {
+                    alert(`Job title cannot be empty for some values`);
+                    return;
+                  }
+            
                   
                    if (field === "frequency") {
                     cleanedRow[field] = validateFrequency(row[field].trim());
@@ -321,7 +348,7 @@ const notifySkip = (message) => toast.error(message, {
                   }
                 } else {
                   // default values
-                  cleanedRow[field] = field === "frequency" ? "1 month" : row[field];
+                  cleanedRow[field] = field === "frequency" ? "1 month" : row[field] ;
                 }
               });
               return cleanedRow;
