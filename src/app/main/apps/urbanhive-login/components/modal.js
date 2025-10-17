@@ -46,7 +46,7 @@ export default function AlertDialogSlide() {
         <Divider />
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description" style={{color: 'black'}}>
-          <Typography variant="h5">Login & explore bridge-lang!</Typography>
+          <Typography variant="h5">Login & explore Nurturer!</Typography>
           </DialogContentText>
         </DialogContent>
         <Divider />
