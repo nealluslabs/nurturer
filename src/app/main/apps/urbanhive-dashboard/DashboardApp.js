@@ -573,6 +573,22 @@ if (allContacts.length > 0) {
         })}
       </Box>
 
+
+  <Box
+        sx={{
+          height: "3rem",
+          width: "150%",
+          backgroundColor: "#f3f4f6",
+          marginTop: "-0rem",
+          marginBottom:"2rem", // optional top and bottom space
+          borderRadius: "0px", // optional, for softer corners
+          position:"relative",
+          left:"-10rem"
+        }}
+      >
+        
+      </Box>
+
       <Box sx={{
         display: "grid",
         gridTemplateColumns: {

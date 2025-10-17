@@ -28,6 +28,7 @@ import { update } from 'lodash';
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FuseLoading from '@fuse/core/FuseLoading';
 
 
 
@@ -119,6 +120,15 @@ function CandidateApp(props) {
     })
   ))
   }
+
+  const [loading, setLoading] = useState(true);
+
+  // Force a 1-second delay before showing the actual content
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
 
   const switchItems = [
     { id: 1, title: 'Birthdays', enabled: false },
@@ -216,6 +226,13 @@ function CandidateApp(props) {
       }}
       // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
+
+        loading ? (
+          // When loading, return `null` or a loader placeholder
+          <center>
+          <FuseLoading/>
+          </center>
+        ) : 
         <div className='p-24 lg:ltr:pr-0 lg:rtl:pl-0' >
             {/* <HomeTab /> */}
             {/* <Advanced />  */}

@@ -28,6 +28,7 @@ import { FaPencilAlt } from "react-icons/fa";
 import { InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import SendIcon from '@mui/icons-material/Send';
+import FuseLoading from "@fuse/core/FuseLoading";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -557,7 +558,7 @@ function CandidateCard() {
             <Grid>
               <Grid item container>
                 <Grid item xs={12} sm={12} md={12}>
-                  <Box m={0} p={2}>
+                  <Box m={0} p={2} style={{display:"block",width:"18rem"}}>
                     {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
                    
                     {/*users.notes && users.notes.length && 
@@ -858,8 +859,11 @@ function CandidateCard() {
 </Grid>
 
 
-      { isLoading?(
-        <center> {/*<LinearProgress color="secondary" />*/}</center>
+      { userList && !userList.length?(
+        <center> {
+        <FuseLoading />
+        
+        }</center>
       ) : (
         userList.length > 0 && (
           <Box sx={{ height: {xs:"120vh",sm:"100%"}, width: "70vw" }}>
