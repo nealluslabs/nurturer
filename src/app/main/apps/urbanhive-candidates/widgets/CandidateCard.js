@@ -862,7 +862,7 @@ function CandidateCard() {
         <center> {/*<LinearProgress color="secondary" />*/}</center>
       ) : (
         userList.length > 0 && (
-          <Box sx={{ height: {xs:"120vh",sm:"100vh"}, width: "70vw" }}>
+          <Box sx={{ height: {xs:"120vh",sm:"100%"}, width: "70vw" }}>
             <ReactSwipe
               key={`${userList.length}-${startIndex}`}
               className="carousel"

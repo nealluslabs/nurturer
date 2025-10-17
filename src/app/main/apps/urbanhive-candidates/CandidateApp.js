@@ -294,7 +294,7 @@ function CandidateApp(props) {
 */}
 
 
-            <div style={{marginTop:"2rem"}}>
+            <div style={{marginTop:"0rem"}}>
             <CandidateCard /> 
             </div> 
           {/*
@@ -414,7 +414,20 @@ function CandidateApp(props) {
           */}
 
 
-
+  <Box
+        sx={{
+          height: "3rem",
+          width: "150%",
+          backgroundColor: "#f3f4f6",
+          marginTop: "-0rem",
+          marginBottom:"2rem", // optional top and bottom space
+          borderRadius: "0px", // optional, for softer corners
+          position:"relative",
+          left:"-10rem"
+        }}
+      >
+        
+      </Box>
 {
   testWork && (
     <Box
@@ -424,9 +437,11 @@ function CandidateApp(props) {
         width: "95%",
         gap: "12px",
         margin: "0px 0",
-        marginTop: { xs: "-0rem", sm: "-16rem" },
+        marginTop: { xs: "-0rem", sm: "-0rem" },
       }}
     >
+
+    
       
        {/**RECENT TOUCHPOINTS */}
       <div style={{ flex: 1 }}>
@@ -567,7 +582,7 @@ function CandidateApp(props) {
       <div style={{ flex: 1 }}>
         <div style={{ display: "flex", alignItems: "center" }}>
           <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-          <h5>Contact Settings</h5>
+          <h5>Settings</h5>
         </div>
 
         <div
@@ -599,8 +614,8 @@ function CandidateApp(props) {
                         marginBottom: "20px",
                         padding: "7px 0",
                         height:"1.5rem",
-                       
-                        width:"100%"
+                    
+                        width:"80%"
 
             
                       }}
