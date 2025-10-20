@@ -587,9 +587,9 @@ const notifySkip = (message) => toast.error(message, {
           //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
           if(photoURL == static_img){
-          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL));
+          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL,notifyInvite,notifySkip));
           }else{
-            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm));
+            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm,notifyInvite,notifySkip));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }/*else if(interests.length === 0 ||triggers.length === 0 ){
@@ -626,7 +626,7 @@ const notifySkip = (message) => toast.error(message, {
               draggable
               pauseOnHover
             />
-      {error && <div><Alert
+      {/*error && <div><Alert
         severity="error" color="error"
         action={
           <Button color="inherit" size="small" style={{ fontSize: '15px' }} onClick={() => {dispatch(resetMsg())}}>
@@ -635,9 +635,10 @@ const notifySkip = (message) => toast.error(message, {
         }
       >
         <p style={{ fontSize: '11px' }}><b>{error}</b></p>
-      </Alert><br/></div>}
+      </Alert><br/></div>
+      /*}
 
-      {message && <div><Alert
+      {/*message && <div><Alert
         severity="success" color="success"
         action={
           <Button color="inherit" size="small" style={{ fontSize: '15px' }} onClick={() => {dispatch(resetMsg())}}>
@@ -646,7 +647,8 @@ const notifySkip = (message) => toast.error(message, {
         }
       >
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
-      </Alert><br/></div>}
+      </Alert><br/></div>
+      */}
             <p>Fill out contact details.</p><br/>
 
 

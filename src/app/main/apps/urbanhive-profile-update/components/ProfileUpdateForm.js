@@ -128,6 +128,16 @@ setInterests2((prev) => prev.filter((t) => t !== interestToDelete));
 };
 
 
+const notifyInvite = (message) => toast.success(message, {
+  position: "bottom-right",
+  autoClose: 1000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  });
+
 const notifySkip = (message) => toast.error(message, {
   position: "bottom-right",
   autoClose: 1000,
@@ -310,50 +320,48 @@ useEffect(()=>{
     }
 
     const validate = (fieldValues = values) => {
-        let temp = { ...errors }
-        if ('name' in fieldValues)
-          temp.name = fieldValues.name ? "" : "This field is required."
-        if ('email' in fieldValues)
-          temp.email = fieldValues.email ? "" : "This field is required."
-        if ('companyName' in fieldValues)
-          temp.companyName = fieldValues.companyName ? "" : "This field is required."
-      
-        if ('notes' in fieldValues)
-            temp.notes = fieldValues.notes ? "" : "This field is required."
-      // if ('skillset' in fieldValues)
-      //      temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
-       if ('city' in fieldValues)
-            temp.city = fieldValues.city &&  fieldValues.city.length != 0 ? "" : "This field is required."
-       if ('jobTitle' in fieldValues)
-        temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
-       if ('state' in fieldValues)
-        temp.state = fieldValues.state &&  fieldValues.state.length != 0 ? "" : "This field is required."
-   //    if ('industry' in fieldValues)
-   //     temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
-  //     if ('frequency' in fieldValues)
-  //      temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
-  //     if ('birthday' in fieldValues)
-  //      temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
-  //     if ('workAnnniversary' in fieldValues)
-  //      temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
-    //   if ('industry' in fieldValues)
-    //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
-    //   if ('interests' in fieldValues)
-    //    temp.interests =fieldValues.interests &&   fieldValues.interests.length != 0 ? "" : "This field is required."
-      // if ('skills_needed' in fieldValues)
-      //      temp.skills_needed = fieldValues.skills_needed.length != 0 ? "" : "This field is required."
-        // if ('email' in fieldValues)
-        //     temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
-        // if ('mobile' in fieldValues)
-        //     temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
-        setErrors({
-            ...temp
-        })
+      let temp = { ...errors }
+      if ('name' in fieldValues)
+        temp.name = fieldValues.name ? "" : "This field is required."
+      if ('email' in fieldValues)
+        temp.email = fieldValues.email ? "" : "This field is required."
+      if ('companyName' in fieldValues)
+        temp.companyName = fieldValues.companyName ? "" : "This field is required."
+    
+   //   if ('notes' in fieldValues)
+   //       temp.notes = fieldValues.notes ? "" : "This field is required."
+    // if ('skillset' in fieldValues)
+    //      temp.skillset = fieldValues.skillset.length != 0 ? "" : "This field is required."
+     if ('city' in fieldValues)
+          temp.city = fieldValues.city.length != 0 ? "" : "This field is required."
+     if ('jobTitle' in fieldValues)
+      temp.jobTitle = fieldValues.jobTitle &&  fieldValues.jobTitle.length != 0 ? "" : "This field is required."
+     if ('state' in fieldValues)
+      temp.state = fieldValues.state && fieldValues.state.length != 0 ? "" : "This field is required."
+    
+    // if ('frequency' in fieldValues)
+    //  temp.frequency = fieldValues.frequency && fieldValues.frequency.length != 0 ? "" : "This field is required."
+   //  if ('birthday' in fieldValues)
+   //   temp.birthday = fieldValues.birthday && fieldValues.birthday.length != 0 ? "" : "This field is required."
+   //  if ('workAnniversary' in fieldValues)
+   //   temp.workAnniversary = fieldValues.workAnniversary && fieldValues.workAnniversary.length != 0 ? "" : "This field is required."
+  //   if ('industry' in fieldValues)
+  //    temp.industry = fieldValues.industry &&  fieldValues.industry.length != 0 ? "" : "This field is required."
+  //   if ('interests' in fieldValues)
+  //    temp.interests =fieldValues.interests &&   fieldValues.interests.length != 0 ? "" : "This field is required."
+    // if ('skills_needed' in fieldValues)
+    //      temp.skills_needed = fieldValues.skills_needed.length != 0 ? "" : "This field is required."
+      // if ('email' in fieldValues)
+      //     temp.email = (/$^|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
+      // if ('mobile' in fieldValues)
+      //     temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required."
+      setErrors({
+          ...temp
+      })
 
-        if (fieldValues == values)
-            return Object.values(temp).every(x => x == "")
-    }
-
+      if (fieldValues == values)
+          return Object.values(temp).every(x => x == "")
+  }
     const {
         values,
         setValues,
@@ -363,47 +371,7 @@ useEffect(()=>{
         resetForm
     } = useForm(initialFValues, true, validate);
 
-    const handleSubmitOld = e => {
-        e.preventDefault();
-       //console.log('Photo URL: ', photoURL);
-       //console.log('File URL: ', file);
-        e.preventDefault()
-        if(values.isTechnical == 'nil'){
-          setshowError(true);
-        }else{
-          setshowError(false);
-        }
-        if(values.lookingFor == 'nil'){
-          setshowError2(true);
-        }else{
-          setshowError2(false);
-        }
-        if (validate()){
-          const name = values.name;
-          const email = values.email;
-          const phone = values.phone;
-           const notes = values.notes;
-           const city = values.city;
-           const companyName = values.companyName;
-           const jobTitle = values.jobTitle;
-           const state = values.state;
-           const interests = values.interests;
-           const industry = values.industry;
-           const frequency = values.frequency;
-           const birthday = values.birthday;
-           const workAnniversary = values.workAnniversary;
-           
-          const profile = { notes, frequency, city, jobTitle,state,triggers, interests, companyName,industry,name,email,phone,birthday,workAnniversary,uid:candidateInFocus.uid};
-          ////console.log('Logged User: ', fb.auth().currentUser.uid);
-          //console.log("profile ABOUT TO BE SENT IN -->",profile)
-          if(photoURL){
-            dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
-            }else{
-              dispatch(uploadNewImageforUpdate({...profile,triggers,interests:interests2}, user, file, resetForm));
-            } 
-              //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
-          }
-       }
+
 
 
 
@@ -429,51 +397,52 @@ useEffect(()=>{
 
 
       
-      if (validate() && triggers.length > 0 && interests2.length > 0){
-        const name = values.name;
-        const email = values.email;
-        const phone = values.phone;
-         const notes = values.notes;
-         const city = values.city;
-         const companyName = values.companyName;
-         const jobTitle = values.jobTitle;
-         const state = values.state;
-         //const triggers = values.triggers;
-         //const interests = values.interests;
-         const industry = values.industry;
-         const frequency = values.frequency;
-         const birthday = values.birthday;
-         const workAnniversary = values.workAnniversary;
-         
-        const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
-        ////console.log('Logged User: ', fb.auth().currentUser.uid);
-        //console.log("profile ABOUT TO BE SENT IN -->",profile)
+      
+    if (validate() /*&& triggers.length > 0 && interests.length > 0*/){
+      const name = values.name;
+      const email = values.email;
+      const phone = values.phone;
+       const notes = values.notes;
+       const city = values.city;
+       const companyName = values.companyName;
+       const jobTitle = values.jobTitle;
+       const state = values.state;
+       //const triggers = values.triggers;
+       //const interests = values.interests;
+       const industry = values.industry;
+       const frequency = values.frequency;
+       const birthday = values.birthday;
+       const workAnniversary = values.workAnniversary;
+       
+      const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
+      ////console.log('Logged User: ', fb.auth().currentUser.uid);
+      //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
-        if(photoURL == static_img){
-        dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL));
-        }else{
-          dispatch(uploadNewImageforUpdate({...profile,triggers,interests:interests2}, user, file, resetForm));
-          //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
-        } 
-      }else if(interests2.length === 0 ||triggers.length === 0 ){
-        if(interests2.length === 0){
-        
-          notifySkip("Please make sure you have added interests before submitting!")
-          return
-        }
-
-
-
-         if(triggers.length === 0){
-          
-          notifySkip("Please make sure you have added triggers before submitting!")
-          return
-        }
-
-        
-      }else {
-        notifySkip("Please make sure you have filled in all fields!")
+      if(photoURL == static_img){
+        dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL,notifyInvite,notifySkip));
+      }else{
+        dispatch(uploadNewImage({...profile,triggers,interests:interests2}, user, file, resetForm,notifyInvite,notifySkip));
+        //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
+      } 
+    }/*else if(interests.length === 0 ||triggers.length === 0 ){
+      if(interests.length === 0){
+      
+        notifySkip("Please make sure you have added interests before submitting!")
+        return
       }
+
+
+
+       if(triggers.length === 0){
+        
+        notifySkip("Please make sure you have added triggers before submitting!")
+        return
+      }
+
+      
+    }*/else {
+      notifySkip("Please make sure you have filled in all fields!")
+    }
   }
 
 
@@ -491,7 +460,7 @@ useEffect(()=>{
               draggable
               pauseOnHover
             />
-      {error && <div><Alert
+      {/*error && <div><Alert
         severity="error" color="error"
         action={
           <Button color="inherit" size="small" style={{ fontSize: '15px' }} onClick={() => {dispatch(resetMsg())}}>
@@ -500,9 +469,9 @@ useEffect(()=>{
         }
       >
         <p style={{ fontSize: '11px' }}><b>{error}</b></p>
-      </Alert><br/></div>}
+      </Alert><br/></div>*/}
 
-      {message && <div><Alert
+      {/*message && <div><Alert
         severity="success" color="success"
         action={
           <Button color="inherit" size="small" style={{ fontSize: '15px' }} onClick={() => {dispatch(resetMsg())}}>
@@ -511,8 +480,12 @@ useEffect(()=>{
         }
       >
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
-      </Alert><br/></div>}
-            <p>Fill out contact details.</p><br/>
+      </Alert><br/>
+      </div>
+      */}
+
+            <p>Fill out contact details.
+              </p><br/>
 
            
 

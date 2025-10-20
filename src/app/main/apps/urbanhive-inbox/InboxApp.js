@@ -138,13 +138,14 @@ function InboxApp(props) {
   const userSidebarOpen = useSelector(({ chatApp }) => chatApp.sidebars.userSidebarOpen);
   const contactSidebarOpen = useSelector(({ chatApp }) => chatApp.sidebars.contactSidebarOpen);
 
-  const {filteredUsers, connects } = useSelector((state) => state.user);
+  const {filteredUsers,filteredContacts, connects } = useSelector((state) => state.user);
   //const selectedContactId = props.user.uid;
 
 
  const resortFilteredUsersAndPush = (userId)=>{
     
- const replica = [...filteredUsers]
+ const replica = [...filteredContacts] //NOT FILTERED USERS...YOU CAN MESS UP CODE ELSEWHERE BY USING FILTERED USERS
+ 
 
   const index = replica.findIndex(user => user.uid === userId);
 
@@ -153,6 +154,7 @@ function InboxApp(props) {
     replica.unshift(matchedUser);
   }
 
+  console.log("INSIDE RESORT FILTERED USERS AND PUSH --->",replica)
   
  dispatch(saveFilteredContacts(replica))
 
@@ -345,7 +347,7 @@ setTimeout(()=>{
                         </div>
                         {<Avatar src={selectedChatUser && selectedChatUser.photoUrl} alt={selectedChatUser && selectedChatUser.name}
                         
-                        onClick={()=>{resortFilteredUsersAndPush(selectedChatUser && selectedChatUser.uid)}}
+                        onClick={()=>{resortFilteredUsersAndPush(/*selectedChatUser && */selectedChatUser.uid)}}
                         >
                           {!selectedChatUser&&  !selectedChatUser.photoUrl || selectedChatUser && selectedChatUser.photoUrl === ''
                             ? selectedChatUser && selectedChatUser.name[0]

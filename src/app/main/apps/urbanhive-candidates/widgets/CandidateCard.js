@@ -593,7 +593,7 @@ function CandidateCard() {
                     </>
                     */}
 
-             {users.frequency && users.frequency !== "None" && users.frequency.length > 0 && users.frequency != " " &&
+             {/*users.frequency && users.frequency !== "None" && users.frequency.length > 0 && users.frequency != " " &&*/
                     <>
                     <br />
                     <h4>

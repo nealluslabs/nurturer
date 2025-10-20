@@ -81,7 +81,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
 
 
 
-export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async (dispatch) => {
+export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInvite,notifySkip) => async (dispatch) => {
   const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
   const uploadToS3 = async (file) => {
 
@@ -113,7 +113,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
   uploadToS3(file)
   .then( async(url) => {
           //console.log('Image URL: ', url);
-          dispatch(updateProfile(profile, user, file, resetForm, url));
+          dispatch(updateProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip));
         });
     
  
@@ -122,7 +122,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
 
 
 
-  export const uploadNewImage = (profile, user, file, resetForm) => async (dispatch) => {
+  export const uploadNewImage = (profile, user, file, resetForm,uploadNewImage,notifyInvite,notifySkip) => async (dispatch) => {
     const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
     const uploadToS3 = async (file) => {
 
@@ -154,7 +154,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
     uploadToS3(file)
     .then( async(url) => {
             //console.log('Image URL: ', url);
-            dispatch(createNewProfile(profile, user, file, resetForm, url));
+            dispatch(createNewProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip));
           });
       
    
@@ -162,7 +162,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
 
 
 
-  export const updateProfileWithImage = (profile, user, file, resetForm) => async (dispatch) => {
+  export const updateProfileWithImage = (profile, user, file, resetForm,notifyInvite,notifySkip) => async (dispatch) => {
     const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
     const uploadToS3 = async (file) => {
 
@@ -194,7 +194,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm) => async
     uploadToS3(file)
     .then( async(url) => {
             //console.log('Image URL: ', url);
-            dispatch(updateProfile(profile, user, file, resetForm, url));
+            dispatch(updateProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip));
           });
       
    
@@ -233,7 +233,7 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
 }
 
 
-export const createNewProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
+export const createNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
 
@@ -337,10 +337,11 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
     return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
   .then(() => {
-    const msg = 'Profile successfully created!';
-    //console.log(msg);
-     dispatch(createProfileSuccessOnly({ msg }));
+    //const msg = 'Profile successfully created!';
+   
+    // dispatch(createProfileSuccessOnly({ msg }));
      dispatch(fetchAllUsers(user.uid));
+     notifyInvite('Profile Created Successfully!')
     // dispatch(fetchProfile());
     // dispatch(fetchUserData(fb.auth().currentUser.uid));
     // resetForm();
@@ -348,7 +349,8 @@ export const createNewProfile = (profile, user, file, resetForm, url) => async (
   .catch((error) => {
     var errorMessage = error.message;
     //console.log('Error creating profile', errorMessage);
-    dispatch(createProfileFailed({ errorMessage }));
+    notifySkip('Problem creating profile,please try again!')
+    //dispatch(createProfileFailed({ errorMessage }));
   });
 
 }
@@ -530,9 +532,9 @@ duplicateCollection("users","contacts")
 
 }
 
-export const updateNewProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
+export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
-  dispatch(createProfilePending());
+  //dispatch(createProfilePending());
 
   function changeFrequencyToDays(profileFrequency) {
     // If undefined, return "30" as default
@@ -548,9 +550,9 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
     return "30";
     }
  
-  const userRef = db.collection("contacts");
+  const userRef = db.collection("contacts").doc(profile.uid);
  
-   userRef.add({
+   userRef.update({
    name: profile.name,
    email: profile.email,
    phone: profile.phone,
@@ -565,7 +567,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
     triggers:profile.triggers,
     sendDate:changeFrequencyToDays(profile.frequency),
    frequencyInDays:changeFrequencyToDays(profile.frequency),
-     messageQueue:[],
+     
     state: profile.state,
     frequency: profile.frequency,
     interests: profile.interests,
@@ -624,24 +626,26 @@ export const updateNewProfile = (profile, user, file, resetForm, url) => async (
     return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
   .then(() => {
-    const msg = 'Profile successfully updated!';
+    //const msg = 'Profile successfully updated!';
     //console.log(msg);
-     dispatch(createProfileSuccessOnly({ msg }));
+     //dispatch(createProfileSuccessOnly({ msg }));
      dispatch(fetchAllUsers(user.uid));
+     notifyInvite('Profile Updated Successfully!')
     // dispatch(fetchProfile());
     // dispatch(fetchUserData(fb.auth().currentUser.uid));
     // resetForm();
   })
   .catch((error) => {
     var errorMessage = error.message;
+    notifySkip('Problem Updating Profile, please try again!')
     //console.log('Error creating profile', errorMessage);
-    dispatch(createProfileFailed({ errorMessage }));
+    //dispatch(createProfileFailed({ errorMessage }));
   });
 
 }
 
 
-export const updateProfile = (profile, user, file, resetForm, url) => async (dispatch) => {
+export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
  
@@ -679,7 +683,8 @@ export const updateProfile = (profile, user, file, resetForm, url) => async (dis
   .then(() => {
     const msg = 'Profile successfully updated!';
     //console.log(msg);
-     dispatch(createProfileSuccessOnly({ msg }));
+    // dispatch(createProfileSuccessOnly({ msg }));
+    notifyInvite(msg)
      dispatch(fetchAllUsers(user.uid));
     // dispatch(fetchProfile());
     // dispatch(fetchUserData(fb.auth().currentUser.uid));
@@ -689,6 +694,7 @@ export const updateProfile = (profile, user, file, resetForm, url) => async (dis
     var errorMessage = error.message;
     //console.log('Error updating profile', errorMessage);
     dispatch(createProfileFailed({ errorMessage }));
+    notifySkip('Error updating profile, please try again!')
   });
 
 }
