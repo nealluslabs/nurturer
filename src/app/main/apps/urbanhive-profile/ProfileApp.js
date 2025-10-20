@@ -51,7 +51,7 @@ function ProfileApp() {
               no1 cross matcher platform
             </Typography>
           </div> */}
-          <Paper height="100vh" display="flex" flexDirection="column" sx={{ padding: 5 }}>
+          <Paper height="auto" display="flex" flexDirection="column" sx={{ padding: 5 }}>
           <ProfileForm />
           </Paper>
         </div>

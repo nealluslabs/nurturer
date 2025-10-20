@@ -154,7 +154,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInv
     uploadToS3(file)
     .then( async(url) => {
             //console.log('Image URL: ', url);
-            dispatch(createNewProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip));
+            dispatch(createNewProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers));
           });
       
    
@@ -233,7 +233,7 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
 }
 
 
-export const createNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
+export const createNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
 
@@ -337,11 +337,16 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
     return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
   .then(() => {
-    //const msg = 'Profile successfully created!';
+    const msg = 'Profile successfully created!';
    
-    // dispatch(createProfileSuccessOnly({ msg }));
+     dispatch(createProfileSuccessOnly({ msg }));
      dispatch(fetchAllUsers(user.uid));
      notifyInvite('Profile Created Successfully!')
+
+     setValues(initialFValues)
+     setInterests([])
+     setTriggers([])
+     
     // dispatch(fetchProfile());
     // dispatch(fetchUserData(fb.auth().currentUser.uid));
     // resetForm();
@@ -350,7 +355,7 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
     var errorMessage = error.message;
     //console.log('Error creating profile', errorMessage);
     notifySkip('Problem creating profile,please try again!')
-    //dispatch(createProfileFailed({ errorMessage }));
+    dispatch(createProfileFailed({ errorMessage }));
   });
 
 }
@@ -393,7 +398,7 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
       companyName: profile.companyName || "",
       industry: profile.industry || "",
       jobTitle: profile.jobTitle || "",
-      birthday: profile.birthday || "",
+      birthday: profile.birthday || "1/1/1980",
       workAnniversary: profile.workAnniversary || "",
       city: profile.city || "",
       triggers: profile.triggers? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
@@ -561,7 +566,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,
-    birthday:profile.birthday,
+    birthday:profile.birthday||"1/1/1980",
     workAnniversary:profile.workAnniversary,
     city: profile.city,
     triggers:profile.triggers,
@@ -626,9 +631,9 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
     return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
   .then(() => {
-    //const msg = 'Profile successfully updated!';
+    const msg = 'Profile successfully updated!';
     //console.log(msg);
-     //dispatch(createProfileSuccessOnly({ msg }));
+     dispatch(createProfileSuccessOnly({ msg }));
      dispatch(fetchAllUsers(user.uid));
      notifyInvite('Profile Updated Successfully!')
     // dispatch(fetchProfile());
@@ -638,8 +643,8 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
   .catch((error) => {
     var errorMessage = error.message;
     notifySkip('Problem Updating Profile, please try again!')
-    //console.log('Error creating profile', errorMessage);
-    //dispatch(createProfileFailed({ errorMessage }));
+    console.log('Error creating profile', errorMessage);
+    dispatch(createProfileFailed({ errorMessage }));
   });
 
 }
@@ -660,7 +665,7 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,
-    birthday:profile.birthday,
+    birthday:profile.birthday||'1/1/1980',
     workAnniversary:profile.workAnniversary,
     city: profile.city,
     state: profile.state,
@@ -683,7 +688,7 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
   .then(() => {
     const msg = 'Profile successfully updated!';
     //console.log(msg);
-    // dispatch(createProfileSuccessOnly({ msg }));
+     dispatch(createProfileSuccessOnly({ msg }));
     notifyInvite(msg)
      dispatch(fetchAllUsers(user.uid));
     // dispatch(fetchProfile());
@@ -692,7 +697,7 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
   })
   .catch((error) => {
     var errorMessage = error.message;
-    //console.log('Error updating profile', errorMessage);
+    console.log('Error updating profile', errorMessage);
     dispatch(createProfileFailed({ errorMessage }));
     notifySkip('Error updating profile, please try again!')
   });

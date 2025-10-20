@@ -429,6 +429,31 @@ const notifySkip = (message) => toast.error(message, {
   }
 
 
+  const clearingValues = {
+    //id: user.uid,
+    notes: '',
+   // skills_needed: profileData.skills_needed == '' ? '' : profileData.skills_needed,
+   // isTechnical: profileData.isTechnical == '' ? 'nil' : profileData.isTechnical,
+   // lookingFor: profileData.lookingFor == '' ? 'nil' : profileData.lookingFor,
+    city: '',
+    state: '',
+    //triggers: profileData.triggers && profileData.triggers.length ===0   ? [] : profileData.triggers,
+    frequency: '',
+    jobTitle:'',
+    //interests: profileData.interests == '' ? '' : profileData.interests,
+    industry: '',
+    companyName: '',
+    name: '',
+    email:'',
+    phone: '' ,
+    birthday: '',
+    workAnniversary: '',
+    //skillset: profileData.skillset == '' ? '' : profileData.skillset,
+    // hireDate: new Date(),
+    // isPermanent: false,
+}
+
+
 
     const handleChange = (e) => {
         const file = e.target.files[0];
@@ -587,9 +612,9 @@ const notifySkip = (message) => toast.error(message, {
           //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
           if(photoURL == static_img){
-          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL,notifyInvite,notifySkip));
+          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers));
           }else{
-            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm,notifyInvite,notifySkip));
+            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }/*else if(interests.length === 0 ||triggers.length === 0 ){
