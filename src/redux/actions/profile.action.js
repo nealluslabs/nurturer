@@ -122,7 +122,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInv
 
 
 
-  export const uploadNewImage = (profile, user, file, resetForm,uploadNewImage,notifyInvite,notifySkip) => async (dispatch) => {
+  export const uploadNewImage = (profile, user, file, resetForm,uploadNewImage,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers,setNewState,) => async (dispatch) => {
     const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
     const uploadToS3 = async (file) => {
 
@@ -154,7 +154,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInv
     uploadToS3(file)
     .then( async(url) => {
             //console.log('Image URL: ', url);
-            dispatch(createNewProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers));
+            dispatch(createNewProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers,setNewState));
           });
       
    
@@ -233,7 +233,7 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
 }
 
 
-export const createNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers) => async (dispatch) => {
+export const createNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip,setValues,initialFValues,setInterests,setTriggers,setNewState) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
 
@@ -300,7 +300,7 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
    companyName: profile.companyName||" ",
    industry: profile.industry||" ",
     jobTitle: profile.jobTitle||" ",
-    birthday:profile.birthday||" ",
+    birthday:profile.birthday||"1/1/1980",
     workAnniversary:profile.workAnniversary||" ",
     city: profile.city||" ",
     triggers:profile.triggers||" ",
@@ -346,6 +346,10 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
      setValues(initialFValues)
      setInterests([])
      setTriggers([])
+     setNewState(  {
+      "id": " ",
+      "title": " "
+    },)
      
     // dispatch(fetchProfile());
     // dispatch(fetchUserData(fb.auth().currentUser.uid));

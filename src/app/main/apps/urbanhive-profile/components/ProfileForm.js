@@ -101,7 +101,7 @@ export default function ProfileForm() {
   const [justSubmitted2, setJustSubmitted2] = useState(false);
   const [hasTypedSinceSubmit2, setHasTypedSinceSubmit2] = useState(false);
 
-    const [photoURL, setPhotoURL] = useState(profileData.photoUrl != '' ? profileData.photoUrl : user.photoUrl);
+    const [photoURL, setPhotoURL] = useState(profileData.photoUrl !== '' ? profileData.photoUrl : '');
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
 
@@ -456,10 +456,10 @@ const notifySkip = (message) => toast.error(message, {
 
 
     const handleChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          setFile(file);
-          setPhotoURL(URL.createObjectURL(file));
+        const fileNew = e.target.files[0];
+        if (fileNew) {
+          setFile(fileNew);
+          setPhotoURL(URL.createObjectURL(fileNew));
           setOpenCrop(true);
         }
       };
@@ -512,10 +512,7 @@ const notifySkip = (message) => toast.error(message, {
         setInterests(updated);
       };
     
-    function handleChangeNew(){
-        //console.log('changed');
-    }
-
+  
     const validate = (fieldValues = values) => {
         let temp = { ...errors }
         if ('name' in fieldValues)
@@ -612,9 +609,9 @@ const notifySkip = (message) => toast.error(message, {
           //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
           if(photoURL == static_img){
-          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers));
+          dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers,setNewState));
           }else{
-            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers));
+            dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers,setNewState));
             //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
           } 
         }/*else if(interests.length === 0 ||triggers.length === 0 ){
