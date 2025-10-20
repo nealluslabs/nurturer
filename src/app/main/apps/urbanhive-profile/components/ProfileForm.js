@@ -110,6 +110,7 @@ export default function ProfileForm() {
 
     const [newState,setNewState]=useState(null)
 const [newCities,setNewCities]=useState([])
+const [oldStates,setOldStates]=useState([])
 
 useEffect(()=>{
 
@@ -120,6 +121,9 @@ setNewCities(skillSetService.getCities(newState))
 //console.log("what is cities NOW ??",skillSetService.getCities(newState && newState))
 
 },[newState])
+
+
+
 
 const notifySkip = (message) => toast.error(message, {
   position: "bottom-right",
@@ -436,7 +440,7 @@ const notifySkip = (message) => toast.error(message, {
    // isTechnical: profileData.isTechnical == '' ? 'nil' : profileData.isTechnical,
    // lookingFor: profileData.lookingFor == '' ? 'nil' : profileData.lookingFor,
     city: '',
-    state: '',
+    state: null,
     //triggers: profileData.triggers && profileData.triggers.length ===0   ? [] : profileData.triggers,
     frequency: '',
     jobTitle:'',
@@ -608,7 +612,7 @@ const notifySkip = (message) => toast.error(message, {
           ////console.log('Logged User: ', fb.auth().currentUser.uid);
           //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
-          if(photoURL == static_img){
+          if(!file){
           dispatch(createNewProfile({...profile,triggers,interests}, user, file, resetForm, photoURL,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers,setNewState));
           }else{
             dispatch(uploadNewImage({...profile,triggers,interests}, user, file, resetForm,notifyInvite,notifySkip,setValues,clearingValues,setInterests,setTriggers,setNewState));
@@ -896,7 +900,7 @@ const notifySkip = (message) => toast.error(message, {
                 <Controls.Select
                 name="state"
                 label="State (Required)"
-                value={values.state}
+                value={values.state||''}
                 onChange={(e)=>{handleInputChange(e);setNewState(e.target.value);
                   //console.log("JUST SELECTED A STATE --->",e.target.value) 
                 }}
