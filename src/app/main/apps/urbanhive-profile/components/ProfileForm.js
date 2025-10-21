@@ -461,12 +461,27 @@ const notifySkip = (message) => toast.error(message, {
 
     const handleChange = (e) => {
         const fileNew = e.target.files[0];
+
         if (fileNew) {
+
+          if (!/\.(jpg|jpeg|png|gif|webp)$/i.test(fileNew.name)) {
+            alert("Unsupported image format");
+            return;
+          }
+  
           setFile(fileNew);
           setPhotoURL(URL.createObjectURL(fileNew));
           setOpenCrop(true);
         }
       };
+
+
+      // cleanup - this is important apparently
+useEffect(() => {
+  return () => {
+    if (photoURL) URL.revokeObjectURL(photoURL);
+  };
+}, [photoURL]);
 
 
       const handleTriggerChange = (e) => {

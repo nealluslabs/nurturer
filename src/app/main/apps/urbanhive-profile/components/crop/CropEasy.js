@@ -60,10 +60,12 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
           height: 400,
           width: 'auto',
           minWidth: { sm: 500 },
+          overflow: 'visible', // ✅ important
         }}
       >
+        {photoURL &&
         <Cropper
-          image={photoURL}
+          image={photoURL && photoURL}
           crop={crop}
           zoom={zoom}
           rotation={rotation}
@@ -73,6 +75,7 @@ const CropEasy = ({ photoURL, setOpenCrop, setPhotoURL, setFile }) => {
           onCropChange={setCrop}
           onCropComplete={cropComplete}
         />
+        }
       </DialogContent>
       <DialogActions sx={{ flexDirection: 'column', mx: 3, my: 2 }}>
         <Box sx={{ width: '100%', mb: 1 }}>
