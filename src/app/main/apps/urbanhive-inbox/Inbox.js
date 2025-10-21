@@ -200,17 +200,17 @@ useEffect(()=>{
 
 
 
-
-if(user && selectedChatUser && selectedChatUser.name == "Emily White"){
+//WE CAN ONLY MODEL AFTER EMAIL MESSAGES NOW, NO MORE HOLIDAY AND BIRTHDAY FOR EMILY WHITE AND BOB JOHNSON
+/*if(user && selectedChatUser && selectedChatUser.name == "Emily White"){
 
 
   setAiMessageToModel(user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Holiday')) && user.queryMsg.filter((item)=>(item.messageType ==='Holiday'))[0])
 }else if(user && selectedChatUser && selectedChatUser.name == "Bob Johnson"){
 
   setAiMessageToModel(user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Birthday')) && user.queryMsg.filter((item)=>(item.messageType ==='Birthday'))[0])
-}else{
+}else{*/
   setAiMessageToModel(user.queryMsg && user.queryMsg.filter((item)=>(item.messageType ==='Email')) && user.queryMsg.filter((item)=>(item.messageType ==='Email'))[0])
-}
+/*}*/
 
 
 },[selectedChatUser])
@@ -352,15 +352,15 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    }, [chatGptAnswer]);
 
 
-  useEffect(() => {
-    if (selectedChatUser && selectedChatUser.name === "Bob Johnson" ||selectedChatUser && selectedChatUser.name === "Emily White"  ) {
-      
-     setBirthdayMessage1(false)
-     setBirthdayMessage2(false)
-     setHolidayMessage1(false)
-
-    }
-  }, [selectedChatUser]);
+  //useEffect(() => {
+  //  if (selectedChatUser && selectedChatUser.name === "Bob Johnson" ||selectedChatUser && selectedChatUser.name === "Emily White"  ) {
+  //    
+  //   setBirthdayMessage1(false)
+  //   setBirthdayMessage2(false)
+  //   setHolidayMessage1(false)
+//
+  //  }
+  //}, [selectedChatUser]);
 
 
 
@@ -838,8 +838,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         {
 
         <>
-         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') &&<> <br /><br /> </>}
-         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+         {!(selectedChatUser.name === 'Emily Whiterr' || selectedChatUser.name === 'Bob Johnsonopia') &&<> <br /><br /> </>}
+         {!(selectedChatUser.name === 'Emily Whiterr' || selectedChatUser.name === 'Bob Johnsonopia') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
           <>
         • <b>{point.bulletPointBold}</b>
         <br />
@@ -921,7 +921,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         <br /><br /><br /><br />
 
       
-       {(selectedChatUser && (selectedChatUser.name !== "Emily White" ||selectedChatUser.name !== "Bob Johnson") )&& (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
+       {(selectedChatUser && (selectedChatUser.name !== "Emily Whiterr" ||selectedChatUser.name !== "Bob Johnsonpoia") )&& (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
          <>
         <span>
           Regards,
@@ -985,7 +985,7 @@ We had some great conversations previously, and I really valued the opportunity 
            
 {<Box sx={{display:selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
- {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') ?
+ {!(selectedChatUser.name === 'EmOly WhOte' || selectedChatUser.name === 'Bib Johnsonopia') ?
    
 
     selectedChatUser.name === 'Carol Garcia' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
@@ -1092,8 +1092,8 @@ We had some great conversations previously, and I really valued the opportunity 
         />
         */}
         <>
-         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') &&<> <br /><br /> </>}
-         {!(selectedChatUser.name === 'Emily White' || selectedChatUser.name === 'Bob Johnson') && paragraphs.bulletPoints && bulletPointChoice &&  bulletPointChoice.map((point,index)=>( 
+         {/*!(selectedChatUser.name === 'Emoly White' || selectedChatUser.name === 'Bib Johnson') &&*/<> <br /><br /> </>}
+         {/*!(selectedChatUser.name === 'Emoly White' || selectedChatUser.name === 'Bib Johnson') &&*/ paragraphs.bulletPoints && bulletPointChoice &&  bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
@@ -1515,7 +1515,7 @@ We had some great conversations previously, and I really valued the opportunity 
 </Typography>
 
 <FormControl component="fieldset">
-{selectedChatUser.name === 'Bob Johnson' ?
+{selectedChatUser.name === 'Bob JohnsonOPIA' ?
 <Stack spacing={2}>
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
