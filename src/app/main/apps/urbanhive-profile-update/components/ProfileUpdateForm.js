@@ -3,7 +3,7 @@ import Controls from "./controls/Controls";
 import { useForm, Form } from './useForm';
 import { TextField,InputLabel, MenuItem, Select, Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import {Avatar, Badge, Chip, Divider, Stack, Alert, IconButton,Button } from '@mui/material';
+import {Avatar, Badge, Chip, Divider, Stack, Alert, IconButton,Button, CardMedia } from '@mui/material';
 import { Crop } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import * as skillSetService from "./skillSetService";
@@ -160,6 +160,18 @@ useEffect(()=>{
 
     /*CSV FUNCTIONALITY  AND IT'S HELPERS*/
 
+
+    const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
+
+
+      const handleselectedFile = event => {
+      setSelectedFile({
+      selectedFile: event.target.files[0],
+      selectedFileName: event.target.files[0].name
+      });
+      setFile(event.target.files[0]);
+      setPhotoURL(URL.createObjectURL(event.target.files[0]));
+      };
  
 
     const isValidOption = (options, value) =>
@@ -828,6 +840,7 @@ useEffect(()=>{
 
         <Grid item xs={12} sm={6}>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+         
           <label htmlFor="profilePhoto">
           <p>Upload your profile pic</p><br/>
             <input
@@ -838,7 +851,7 @@ useEffect(()=>{
               onChange={handleChange}
             />
 
-         <Badge
+        {/* <Badge
         overlap="circular"
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
         badgeContent={
@@ -849,9 +862,50 @@ useEffect(()=>{
               src={photoURL == null ? 'assets/images/avatars/profile.jpg' : photoURL}
               sx={{ width: 75, height: 75, cursor: 'pointer' }}
             />
-      </Badge>
+      </Badge>*/}
+
+
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
+          <CardMedia
+          style={{ border: '0.2px solid black', backgroundColor: '#fff', width: '200px' }}
+          component="img"
+          height="100"
+          width="150"
+          image={ photoURL !== "" ? photoURL : 'assets/images/avatars/profile.jpg'}
+          alt="IMG"
+          />
+          <Button component="label" variant="contained" 
+          sx={{
+          backgroundColor: "#20dbe4",
+          color: "white",
+          height:"4.5rem",
+          width:"11rem",
+          fontSize:"1.8rem",
+          padding: "0.5rem 0.8rem",
+          borderRadius: "0.3rem",
+          marginTop:"1.5rem",
+          padding: '10px 20px',
+          borderRadius: '8px',
+          textTransform: "none",
+          "&:hover": {
+          backgroundColor: "#333"
+          }
+          }}
+          >
+          UPLOAD
+          <input
+          type="file"
+          style={{ display: 'none' }}
+          onChange={handleselectedFile}
+          />
+          </Button>
+          
+          </div>
           </label>
-          {file && (
+
+
+
+          {/*file && (
             <IconButton
               aria-label="Crop"
               color="primary"
@@ -859,7 +913,7 @@ useEffect(()=>{
             >
               <Crop />
             </IconButton>
-          )}
+          )*/}
         </Box>
          </Grid>
 

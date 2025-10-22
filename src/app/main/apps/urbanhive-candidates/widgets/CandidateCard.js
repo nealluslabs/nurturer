@@ -796,18 +796,19 @@ function CandidateCard() {
 
   return (
     <>
-                  <Grid 
+      <Grid 
   container 
   spacing={0}
   sx={{
     display: "flex",
-    flexDirection: "row",
+    flexDirection: {xs:"column",sm:"row"},
     alignItems: "center",
+    justifyContent:{sm:"flex-start",xs:"flex-start"},
     position: "relative",
     top: "3rem",
-    left: "2.5rem",
-    width: {md:"78%",sm:"85%"},
-    maxWidth:{md:"78%",sm:"85%"},
+    left: {xs:"-3rem",sm:"2.5rem"},
+    width: {md:"78%",sm:"85%",xs:"100%"},
+    maxWidth:{md:"78%",sm:"85%",xs:"100%"},
     marginBottom: "1.5rem",
     zIndex: 1000,
     flexWrap: "nowrap",   // 🚀 ensures both items stay on same line
@@ -844,7 +845,7 @@ function CandidateCard() {
   </Grid>
 
   {/* 2 */}
-  <Grid item sx={{ flex: "0 0 20%" }}>
+  <Grid item sx={{ flex: "0 0 20%",marginTop:{sm:"0rem",xs:"1rem"} }}>
     <button 
       onClick={() => { history.push('/apps/profile') }}
       style={{ 
@@ -870,7 +871,7 @@ function CandidateCard() {
         }</center>
       ) : ( 
         userList.length > 0 && (
-          <Box sx={{ height: {xs:"120vh",sm:"100%"}, width: "70vw" }}>
+          <Box sx={{ height: {xs:"120vh",sm:"100%",display:{xs:"flex",sm:"block"},justifyContent:"center",alignItems:"center"}, width: "70vw" }}>
             <ReactSwipe
               key={`${userList.length}-${startIndex}`}
               className="carousel"

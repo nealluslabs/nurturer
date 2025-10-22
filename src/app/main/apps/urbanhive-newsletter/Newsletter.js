@@ -261,10 +261,20 @@ function Newsletter(props) {
   }, [images?.["Third Image"]]);
   return (
     <>
-      <div className={clsx("flex flex-col relative", props.className)}>
+      <div className={clsx("flex flex-col relative", props.className)}
+        
+      >
         <FuseScrollbars
           ref={chatRef}
           className="flex flex-1 flex-col overflow-y-auto"
+          style={{
+            width: "100%",
+            maxWidth: "100vw",
+            overflowY: "scroll",
+            overflowX: "hidden",
+            boxSizing: "border-box",
+            scrollbarGutter: "stable", // ✅ keeps scrollbar space visible
+          }}
         >
           {chatMessages.length || ( chatMessages.length > 0) ? (
             <>
@@ -867,7 +877,18 @@ function Newsletter(props) {
         {/* <button onClick={testMe()}>Click Me</button> */}
         {/*chatMessages && (*/
            <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
-           <Paper className="flex items-center relative  shadow" style={{height:"6rem",width:"107%",position:"relative",top:"2rem",left:"-2rem"}}>
+           <Paper className="flex items-center relative  shadow" 
+           style={{
+            height: "6rem",
+            width: "100%", // ✅ keep it contained
+            maxWidth: "100vw", // ✅ don’t let it push out
+            position: "relative",
+            top: "2rem",
+            left: 0, // ✅ removed -2rem
+            overflowY: "scroll", // ✅ ensures scrollbar area stays visible
+            boxSizing: "border-box",
+          }}
+           >
              <TextField
               style={{height:"6rem"}}
                autoFocus={false}
@@ -890,7 +911,7 @@ function Newsletter(props) {
                value={messageText}
              />
              {
-             <IconButton className="absolute ltr:right-20 rtl:left-0 top-8" type="submit">
+             <IconButton className="absolute ltr:right-44 rtl:left-0 top-8" type="submit">
                <Icon className="text-24" color="action" onClick={(ev)=>{/*sendUpdate(ev)*/}}>
                  send
                </Icon>

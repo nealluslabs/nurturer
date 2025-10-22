@@ -99,7 +99,7 @@ setTimeout(()=>{
         <StatusIcon status={'online'} />
       </div>
 
-       <div onClick={()=>{resortFilteredUsersAndPush(props.user.uid)}}>
+       <div /*onClick={()=>{resortFilteredUsersAndPush(props.user.uid)}}*/>
       <Avatar src={props.user.photoUrl} alt={props.user.name}>
         {!props.user.photoUrl || props.user.photoUrl === '' ? props.user.name[0] : ''}
       </Avatar>

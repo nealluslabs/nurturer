@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Controls from "./controls/Controls";
 import { useForm, Form } from './useForm';
-import { TextField,InputLabel, MenuItem, Select, Grid } from '@material-ui/core';
+import { TextField,InputLabel, MenuItem, Select,Grid } from '@material-ui/core';
 import Box from '@material-ui/core/Box';
-import {Avatar, Badge, Chip, Divider, Stack, Alert, IconButton,Button } from '@mui/material';
+import {Avatar, Badge, Chip, Divider, Stack, Alert, IconButton,Button, CardMedia} from '@mui/material';
 import { Crop } from '@mui/icons-material';
 import { styled } from '@mui/material/styles';
 import * as skillSetService from "./skillSetService";
@@ -11,7 +11,7 @@ import CropEasy from './crop/CropEasy';
 import '../../app.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom';
-import { createProfile, fetchProfile, uploadImage } from 'src/redux/actions/profile.action';
+
 import { resetMsg } from 'src/redux/reducers/profile.slice';
 import { fb, static_img } from 'config/firebase';
 import { createNewProfile, duplicateToContacts, uploadNewImage,batchUploadContacts } from 'redux/actions/profile.action';
@@ -104,6 +104,21 @@ export default function ProfileForm() {
     const [photoURL, setPhotoURL] = useState(profileData.photoUrl !== '' ? profileData.photoUrl : '');
     // const [photoURL, setPhotoURL] = useState(null);
     const [openCrop, setOpenCrop] = useState(false);
+
+
+    const [selectedFile, setSelectedFile] = useState({selectedFile: [], selectedFileName: []});
+ 
+
+  const handleselectedFile = event => {
+    setSelectedFile({
+        selectedFile: event.target.files[0],
+        selectedFileName: event.target.files[0].name
+    });
+    setFile(event.target.files[0]);
+    setPhotoURL(URL.createObjectURL(event.target.files[0]));
+};
+
+
 
     const [inputValue, setInputValue] = useState("");
     const [inputValue2, setInputValue2] = useState("");
@@ -690,7 +705,7 @@ useEffect(() => {
         <p style={{ fontSize: '11px' }}><b>{message}</b></p>
       </Alert><br/></div>
       */}
-            <p>Fill out contact details.</p><br/>
+            
 
 
              {/* Material UI Dialog */}
@@ -784,10 +799,14 @@ useEffect(() => {
       </Dialog>
 
            
-
-            <Grid container spacing={4} style={{position:"relative",marginTop:"2rem"}}>
-
-            <Grid container spacing={0} style={{ display: "flex", justifyContent: "space-between" ,position:"absolute",top:"-8rem",right:"0.5rem",width:"23rem",flexDirection:"row",marginBottom:"1.5rem"}}>
+      <Grid container spacing={0} 
+            style={{display: "flex", alignItems:"center",justifyContent: "space-between",position:"relative",top:{xs:"-3rem",sm:"0rem"},right:"0.5rem",width:"150%",flexDirection:{sm:"row",xs:"row-reverse"},marginBottom:"1.5rem",gap:{xs:"3rem",sm:"0rem"}}}>
+           
+            <Grid xs={6} item> 
+            <p>Fill out contact details.</p><br/>
+            </Grid>
+              
+            <Grid xs={6} container spacing={1} sx={{ display: "flex", justifyContent: "space-between" }}>
                <Grid item>
                  <Button  onClick={() => document.getElementById("csvInput").click()}
                    sx={{
@@ -850,10 +869,19 @@ useEffect(() => {
                    API
                  </Button>
                </Grid>
+
+            </Grid>
+
              </Grid>
 
-            <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
+
+
+            <Grid container spacing={4} sx={{display:"flex",justifyContent:"flex-start",flexDirection:"column",position:"relative",marginTop:"2rem",background:"pink"}}>
+           
+            
+              <Grid item xs={12} sm={6} style={{marginTop:"1rem"}}>
                 <Controls.Input
+                
                         label="Name (Required)"
                         name="name"
                         value={values.name}
@@ -873,6 +901,8 @@ useEffect(() => {
                         error={errors.email}
                     />
                 </Grid>
+
+            
 
 
 
@@ -1139,6 +1169,7 @@ useEffect(() => {
               onChange={handleChange}
             />
 
+        {/*
          <Badge
         overlap="circular"
         anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
@@ -1151,8 +1182,49 @@ useEffect(() => {
               sx={{ width: 75, height: 75, cursor: 'pointer' }}
             />
       </Badge>
+      */}
+
+      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
+          <CardMedia
+            style={{ border: '0.2px solid black', backgroundColor: '#fff', width: '200px' }}
+            component="img"
+            height="100"
+            width="150"
+            image={ photoURL !== "" ? photoURL : 'assets/images/avatars/profile.jpg'}
+            alt="IMG"
+          />
+          <Button component="label" variant="contained" 
+           sx={{
+            backgroundColor: "#20dbe4",
+            color: "white",
+             height:"4.5rem",
+            width:"11rem",
+            fontSize:"1.8rem",
+            padding: "0.5rem 0.8rem",
+            borderRadius: "0.3rem",
+             marginTop:"1.5rem",
+            padding: '10px 20px',
+            borderRadius: '8px',
+            
+            textTransform: "none",
+            "&:hover": {
+              backgroundColor: "#333"
+            }
+          }}
+          >
+            UPLOAD
+            <input
+              type="file"
+              style={{ display: 'none' }}
+              onChange={handleselectedFile}
+            />
+          </Button>
+
+
+          
+        </div>
           </label>
-          {file && (
+          {/*file && (
             <IconButton
               aria-label="Crop"
               color="primary"
@@ -1160,7 +1232,7 @@ useEffect(() => {
             >
               <Crop />
             </IconButton>
-          )}
+          )*/}
         </Box>
          </Grid>
 
