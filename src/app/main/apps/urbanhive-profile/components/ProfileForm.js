@@ -17,6 +17,7 @@ import { fb, static_img } from 'config/firebase';
 import { createNewProfile, duplicateToContacts, uploadNewImage,batchUploadContacts } from 'redux/actions/profile.action';
 import Papa from "papaparse";
 import { ToastContainer, toast } from 'react-toastify';
+import './profile.css'
 
 import {
   Dialog,
@@ -800,13 +801,16 @@ useEffect(() => {
 
            
       <Grid container spacing={0} 
-            style={{display: "flex", alignItems:"center",justifyContent: "space-between",position:"relative",top:{xs:"-3rem",sm:"0rem"},right:"0.5rem",width:"150%",flexDirection:{sm:"row",xs:"row-reverse"},marginBottom:"1.5rem",gap:{xs:"3rem",sm:"0rem"}}}>
+      className="csvapigrid"
+            style={{display: "flex", alignItems:"center",position:"relative",top:{xs:"-3rem",sm:"0rem"},right:"0.5rem",marginBottom:"1.5rem",gap:{xs:"3rem",sm:"0rem"}}}>
            
-            <Grid xs={6} item> 
+            <Grid xs={5} item> 
             <p>Fill out contact details.</p><br/>
             </Grid>
               
-            <Grid xs={6} container spacing={1} sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Grid
+            className="csvapiarea"
+            xs={12} sm={5} container spacing={1} >
                <Grid item>
                  <Button  onClick={() => document.getElementById("csvInput").click()}
                    sx={{

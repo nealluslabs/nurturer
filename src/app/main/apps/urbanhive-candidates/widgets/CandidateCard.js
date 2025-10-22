@@ -865,8 +865,10 @@ function CandidateCard() {
 
 
       { userList && !userList.length?(
-        <center style={{position:"relative",top:"5rem",zIndex:"1000"}}> {
+        <center style={{position:"relative",top:"5rem",zIndex:"1000",height:"100vh"}}> {
+        <div style={{marginTop:"15rem"}}>
         <FuseLoading />
+        </div>
         
         }</center>
       ) : ( 
