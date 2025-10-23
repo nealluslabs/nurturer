@@ -160,7 +160,7 @@ function InboxSidebar(props) {
     return aDate - bDate;
 }))
 
-  //console.log("CONN USERS-->",connUsers)
+  console.log("CONN USERS-->",connUsers)
 
       useEffect(()=>{
 

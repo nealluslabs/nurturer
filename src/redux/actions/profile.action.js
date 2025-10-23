@@ -14,8 +14,8 @@ import { fetchAllUsers } from './user.action';
 import { S3 } from "aws-sdk";
 
 const s3 = new S3({
-  accessKeyId:process.env.REACT_APP_ACCESSKEYID,
-  secretAccessKey:process.env.REACT_APP_SECRETACCESSKEY,
+  accessKeyId:process.env.REACT_APP_ACCESSKEYID_NURTURER,
+  secretAccessKey:process.env.REACT_APP_SECRETACCESSKEY_NURTURER,
   region:process.env.REACT_APP_REGION,
 });
 
