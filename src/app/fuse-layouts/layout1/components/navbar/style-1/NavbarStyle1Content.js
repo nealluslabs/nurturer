@@ -43,7 +43,7 @@ function NavbarStyle1Content(props) {
 
   return (
     <div
-    style={{backgroundColor:' #20dbe4',color:"#FFF"}}
+    style={{backgroundColor:' #21C9CF',color:"#FFF"}}
       className={clsx(
         'flex flex-auto flex-col overflow-hidden h-full',
         classes.root,
@@ -52,12 +52,12 @@ function NavbarStyle1Content(props) {
     >
       <FuseScrollbars
         className={clsx(classes.content)}
-        style={{backgroundColor:' #20dbe4',color:"#FFF"}}
+        style={{backgroundColor:' #21C9CF',color:"#FFF"}}
         option={{ suppressScrollX: true, wheelPropagation: false }}
       >
         <UserNavbarHeader />
 
-        <Navigation layout="vertical"  style={{backgroundColor:' #20dbe4',color:"#FFF"}}  />
+        <Navigation layout="vertical"  style={{backgroundColor:' #21C9CF',color:"#FFF"}}  />
       </FuseScrollbars>
     </div>
   );

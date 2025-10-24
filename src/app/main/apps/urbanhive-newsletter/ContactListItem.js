@@ -128,7 +128,7 @@ function ContactListItem(props) {
      {/* Show accept / reject buttons */}
     
      {/* <ButtonGroup size="large" color="primary" aria-label="large outlined primary button group"> */}
-     {/* <ButtonGroup color="secondary" aria-label="outlined secondary button group"> */}
+     {/* <ButtonGroup style={{color:"#21C9CF"}} aria-label="outlined secondary button group"> */}
      {
       props.user.status == 'pending' ?
       <ButtonGroup size="small" aria-label="small outlined button group">

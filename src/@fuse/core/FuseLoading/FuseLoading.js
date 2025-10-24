@@ -19,7 +19,7 @@ function FuseLoading(props) {
         !showLoading && 'hidden'
       )}
     >
-      <Typography className="text-13 sm:text-20 mb-16" color="textSecondary">
+      <Typography className="text-13 sm:text-20 mb-16" style={{color:"#21C9CF"}}>
         Loading...
       </Typography>
       <LinearProgress className="w-192 sm:w-320 max-w-full rounded-2" color="secondary" />

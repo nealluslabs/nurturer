@@ -224,7 +224,7 @@ function ChatsSidebar(props) {
               >
                 {filteredChatList.length > 0 && (
                   <motion.div variants={item}>
-                    <Typography className="font-medium text-20 px-16 py-24" color="secondary">
+                    <Typography className="font-medium text-20 px-16 py-24" style={{color:"#21C9CF"}}>
                       Emails
                     </Typography>
                   </motion.div>
@@ -241,7 +241,7 @@ function ChatsSidebar(props) {
 
                 {filteredContacts.length > 0 && (
                   <motion.div variants={item}>
-                    <Typography className="font-medium text-20 px-16 py-24" color="secondary">
+                    <Typography className="font-medium text-20 px-16 py-24" style={{color:"#21C9CF"}}>
                       Contacts
                     </Typography>
                   </motion.div>

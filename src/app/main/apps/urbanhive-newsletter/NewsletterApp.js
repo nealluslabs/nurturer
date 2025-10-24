@@ -55,7 +55,7 @@ position: 'relative',
 flex: '1 1 auto',
 height: 'auto',
 backgroundColor: theme.palette.background.default,
-// backgroundColor: '#20dbe4',
+// backgroundColor: '#21C9CF',
 },
 topBg: {
 position: 'absolute',
@@ -65,7 +65,7 @@ top: 0,
 height: headerHeight,
 backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
 // backgroundColor: theme.palette.primary.dark,
-backgroundColor: '#20dbe4',
+backgroundColor: '#21C9CF',
 backgroundSize: 'cover',
 pointerEvents: 'none',
 },
@@ -115,7 +115,7 @@ background: `linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 
 theme.palette.background.paper,
 0.6
 )} 20%,${alpha(theme.palette.background.paper, 0.8)})`,
-// background: '#20dbe4',
+// background: '#21C9CF',
 },
 content: {
 display: 'flex',
@@ -255,7 +255,7 @@ root: 'absolute',
 {true === false? ( //CONSIDER USING A LESS TEMPORARY CONDITION - daGOGO - AUG -26 2025
 <div className="flex flex-col flex-1 items-center justify-center p-24">
 <Paper className="rounded-full p-48 md:p-64 shadow-xl">
-<Icon className="block text-48 md:text-64" color="secondary">
+<Icon className="block text-48 md:text-64" style={{color:"#21C9CF"}}>
 email
 </Icon>
 </Paper>

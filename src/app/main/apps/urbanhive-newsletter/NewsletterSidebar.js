@@ -299,7 +299,7 @@ function NewsletterSidebar(props) {
             <motion.div variants={item}>
               <Typography
                 className="font-medium text-20 px-16 py-16"
-                color="secondary"
+                style={{color:"#21C9CF"}}
               >
                 Settings
               </Typography>
@@ -611,7 +611,7 @@ function NewsletterSidebar(props) {
             <motion.div variants={item}>
               <Typography
                 className="font-medium text-20 px-16 py-24"
-                color="secondary"
+                style={{color:"#21C9CF"}}
               >
                 Recipients
               </Typography>

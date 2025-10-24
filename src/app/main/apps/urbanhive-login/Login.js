@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
   leftSection: {},
   rightSection: {
     //blue - dagogo
-    background:/*"#20dbe4"*/theme.palette.background.themeBlue,
+    background:"#21C9CF"/*theme.palette.background.themeBlue - YOU REALLY SHOULD USE UR THEME*/,
    // background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
    //   theme.palette.primary.dark,
    //   0.5
@@ -136,11 +136,11 @@ function Login() {
           <div className="flex flex-row space-between items-center justify-around pb-32" style={{width:"90%"}}>
             <div>
               <span className="font-normal mr-8">Don't have an account?</span>
-              <Link className="font-normal" to="/register">
+              <Link className="font-normal" to="/register" style={{color:"#21C9CF"}}>
                 Register
               </Link>
             </div>
-            { <Link className="font-normal mt-8" to="/forgot-password" style={{position:"relative",top:"-0.5rem"}}>
+            { <Link className="font-normal mt-8" to="/forgot-password" style={{position:"relative",top:"-0.5rem",color:"#21C9CF"}}>
               Forgot Password?
             </Link> }
           </div>

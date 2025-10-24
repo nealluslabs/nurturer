@@ -121,7 +121,7 @@ function QuickPanel(props) {
             <ListItemText primary="Cloud Sync" />
             <ListItemSecondaryAction>
               <Switch
-                color="secondary"
+                style={{color:"#21C9CF"}}
                 onChange={handleToggle('cloudSync')}
                 checked={checked.indexOf('cloudSync') !== -1}
               />

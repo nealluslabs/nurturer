@@ -53,7 +53,7 @@ function NavbarStyle1(props) {
     <>
       <Hidden mdDown>
         <div
-         style={{   backgroundColor:'#20dbe4;'}}
+         style={{   backgroundColor:'#21C9CF;'}}
           className={clsx(
             classes.navbar,
             classes.navbarPaper,

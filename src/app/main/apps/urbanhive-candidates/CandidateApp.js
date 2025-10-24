@@ -295,7 +295,7 @@ function CandidateApp(props) {
     <button 
       onClick={() => { history.push('/apps/profile') }}
       style={{ 
-        backgroundColor: "#20dbe4",
+        backgroundColor: "#21C9CF",
         color: 'white',
         padding: '10px 20px',
         borderRadius: '8px',
@@ -339,7 +339,7 @@ function CandidateApp(props) {
                 <IconButton
                   onClick={() => setViewMode('card')}
                   sx={{
-                    backgroundColor: viewMode === 'card' ? '#20dbe4' : 'transparent',
+                    backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
                     color: viewMode === 'card' ? 'white' : '#666',
                     '&:hover': {
                       backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
@@ -352,7 +352,7 @@ function CandidateApp(props) {
                 <IconButton
                   onClick={() => setViewMode('list')}
                   sx={{
-                    backgroundColor: viewMode === 'list' ? '#20dbe4' : 'transparent',
+                    backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
                     color: viewMode === 'list' ? 'white' : '#666',
                     '&:hover': {
                       backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
@@ -408,7 +408,7 @@ function CandidateApp(props) {
             <Button
             variant="contained"
             style={{
-            backgroundColor: "#20dbe4",
+            backgroundColor: "#21C9CF",
             marginTop: "20px",
             fontSize: "12px",
             color: "white",
@@ -584,7 +584,7 @@ function CandidateApp(props) {
           onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite))}}
             variant="contained"
             sx={{
-              backgroundColor: "#20dbe4",
+              backgroundColor: "#21C9CF",
               marginTop: "20px",
               fontSize: "12px",
               color: "white",
@@ -673,7 +673,7 @@ function CandidateApp(props) {
                 <Button
             variant="contained"
             sx={{
-              backgroundColor: "#20dbe4",
+              backgroundColor: "#21C9CF",
               marginTop: "20px",
               fontSize: "12px",
               color: "white",

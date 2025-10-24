@@ -269,7 +269,7 @@ const userList = output.length ? (
   return (
      <>
      {isLoading ? 
-      <center> <LinearProgress color="secondary" /></center>
+      <center> <LinearProgress style={{color:"#21C9CF"}} /></center>
      : 
      userList.length >0 && 
      <div style={{height:"100vh",width:"70vw"}}>

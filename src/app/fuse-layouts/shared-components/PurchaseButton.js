@@ -12,7 +12,7 @@ function PurchaseButton({ className }) {
       role="button"
       className={clsx('', className)}
       variant="contained"
-      color="secondary"
+      style={{color:"#21C9CF"}}
     >
       <Icon className="text-16">shopping_cart</Icon>
       <span className="mx-4">Purchase FUSE React</span>

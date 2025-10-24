@@ -748,7 +748,7 @@ useEffect(() => {
             
 
             sx={{
-              backgroundColor: "#20dbe4",
+              backgroundColor: "#21C9CF",
               color: "white",
               height:"4.5rem",
               width:"11rem",
@@ -773,7 +773,7 @@ useEffect(() => {
             <Button variant="contained"
             
             sx={{
-              backgroundColor: "#20dbe4",
+              backgroundColor: "#21C9CF",
               color: "white",
               height:"4.5rem",
               width:"11rem",
@@ -814,7 +814,7 @@ useEffect(() => {
                <Grid item>
                  <Button  onClick={() => document.getElementById("csvInput").click()}
                    sx={{
-                     backgroundColor: "#20dbe4",
+                     backgroundColor: "#21C9CF",
                      color: "white",
                      height:"4.5rem",
                      width:"11rem",
@@ -853,7 +853,7 @@ useEffect(() => {
                <Grid item>
                  <Button
                    sx={{
-                     backgroundColor: "#20dbe4",
+                     backgroundColor: "#21C9CF",
                      color: "white",
                       height:"4.5rem",
                      width:"11rem",
@@ -990,7 +990,7 @@ useEffect(() => {
                      {triggers && triggers.map((trigger, index) => (
                       
                        <Chip
-                         style={{width:"max-content",zIndex:"1000",color:"#20dbe4"}}
+                         style={{width:"max-content",zIndex:"1000",color:"#21C9CF"}}
                          key={index}
                          label={trigger}
                          onDelete={() => handleDelete(trigger)}
@@ -1199,7 +1199,7 @@ useEffect(() => {
           />
           <Button component="label" variant="contained" 
            sx={{
-            backgroundColor: "#20dbe4",
+            backgroundColor: "#21C9CF",
             color: "white",
              height:"4.5rem",
             width:"11rem",

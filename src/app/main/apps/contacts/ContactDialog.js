@@ -371,7 +371,7 @@ function ContactDialog(props) {
             <div className="px-16">
               <Button
                 variant="contained"
-                color="secondary"
+                style={{color:"#21C9CF"}}
                 type="submit"
                 disabled={_.isEmpty(dirtyFields) || !isValid}
               >
@@ -384,7 +384,7 @@ function ContactDialog(props) {
             <div className="px-16">
               <Button
                 variant="contained"
-                color="secondary"
+                style={{color:"#21C9CF"}}
                 type="submit"
                 disabled={_.isEmpty(dirtyFields) || !isValid}
               >

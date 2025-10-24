@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
       transition: theme.transitions.create(['width', 'height'], {
         duration: theme.transitions.duration.shortest,
         easing: theme.transitions.easing.easeInOut,
-        backgroundColor:'#20dbe4'
+        backgroundColor:'#21C9CF'
       }),
     },
     '& .react-badge, & .logo-text': {
@@ -28,7 +28,7 @@ function Logo() {
   const classes = useStyles();
 
   return (
-    <div className={clsx(classes.root, 'flex items-center bg-[#20dbe4]')}>
+    <div className={clsx(classes.root, 'flex items-center bg-[#21C9CF]')}>
       <img className="logo-icon w-24 h-24" src="assets/images/logos/nurturer-logo.png" alt="logo" />
       <Typography className="text-16 leading-none mx-12 font-medium logo-text" color="inherit">
         urbanhive

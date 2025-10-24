@@ -358,7 +358,7 @@ const [meetupDate,setMeetupDate] = useState(new Date())
           <p>Cancel this appointment? </p><br/>
           <Controls.Button
                     text="Cancel"
-                    color="secondary"
+                    style={{color:"#21C9CF"}}
                     onClick={()=>{dispatch(deleteSelectedAppointment(appointmentId));
                       history.push('/apps/admin/assignedbookings')  
                         }

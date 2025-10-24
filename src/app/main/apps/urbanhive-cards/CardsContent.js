@@ -22,7 +22,7 @@ function CardsContent() {
 
         <button 
           sx={{ 
-            background: '#20dbe4',
+            background: '#21C9CF',
             color: 'white',
             padding: '10px 20px',
             borderRadius: '8px',
@@ -185,7 +185,7 @@ function CardsContent() {
 
             <button
               style={{ 
-                background: '#20dbe4',
+                background: '#21C9CF',
                 color: 'white',
                 padding: '10px 20px',
                 borderRadius: '8px',
@@ -306,7 +306,7 @@ function CardsContent() {
 
             <button
               style={{ 
-                background: '#20dbe4',
+                background: '#21C9CF',
                 color: 'white',
                 padding: '10px 20px',
                 borderRadius: '8px',

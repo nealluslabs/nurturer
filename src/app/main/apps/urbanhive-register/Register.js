@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   leftSection: {},
   rightSection: {
     //blue - dagogo
-    background:"#20dbe4",
+    background:"#21C9CF",
    // background: `linear-gradient(to right, ${theme.palette.primary.dark} 0%, ${darken(
    //   theme.palette.primary.dark,
    //   0.5

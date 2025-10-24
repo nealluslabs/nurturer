@@ -53,7 +53,7 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         size="small"
         sx={{
-          backgroundColor: page === 0 ? '#f5f5f5' : '#20dbe4',
+          backgroundColor: page === 0 ? '#f5f5f5' : '#21C9CF',
           color: page === 0 ? '#ccc' : 'white',
           '&:hover': {
             backgroundColor: page === 0 ? '#f5f5f5' : '#18c8d0',
@@ -71,7 +71,7 @@ function TablePaginationActions(props) {
         disabled={page === 0}
         size="small"
         sx={{
-          backgroundColor: page === 0 ? '#f5f5f5' : '#20dbe4',
+          backgroundColor: page === 0 ? '#f5f5f5' : '#21C9CF',
           color: page === 0 ? '#ccc' : 'white',
           '&:hover': {
             backgroundColor: page === 0 ? '#f5f5f5' : '#18c8d0',
@@ -89,7 +89,7 @@ function TablePaginationActions(props) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         size="small"
         sx={{
-          backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#f5f5f5' : '#20dbe4',
+          backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#f5f5f5' : '#21C9CF',
           color: page >= Math.ceil(count / rowsPerPage) - 1 ? '#ccc' : 'white',
           '&:hover': {
             backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#f5f5f5' : '#18c8d0',
@@ -107,7 +107,7 @@ function TablePaginationActions(props) {
         disabled={page >= Math.ceil(count / rowsPerPage) - 1}
         size="small"
         sx={{
-          backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#f5f5f5' : '#20dbe4',
+          backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#f5f5f5' : '#21C9CF',
           color: page >= Math.ceil(count / rowsPerPage) - 1 ? '#ccc' : 'white',
           '&:hover': {
             backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#f5f5f5' : '#18c8d0',
@@ -185,7 +185,7 @@ function CandidateTableView() {
             top: 0, 
             zIndex: 100,
             '& th': {
-              backgroundColor: '#20dbe4 !important',
+              backgroundColor: '#21C9CF !important',
               color: 'white !important',
               fontWeight: 'bold !important',
               fontSize: '16px !important',
@@ -193,15 +193,15 @@ function CandidateTableView() {
             }
           }}>
             <TableRow sx={{ 
-              backgroundColor: "#20dbe4 !important",
+              backgroundColor: "#21C9CF !important",
               '& th': {
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 color: 'white !important'
               }
             }}>
               <StyledTableCell sx={{ 
                 color: 'white !important', 
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
                 fontSize: '16px !important'
               }}>
@@ -209,7 +209,7 @@ function CandidateTableView() {
               </StyledTableCell>
               <StyledTableCell align="right" sx={{ 
                 color: 'white !important', 
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
                 fontSize: '16px !important'
               }}>
@@ -217,7 +217,7 @@ function CandidateTableView() {
               </StyledTableCell>
               <StyledTableCell align="right" sx={{ 
                 color: 'white !important', 
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
                 fontSize: '16px !important'
               }}>
@@ -225,7 +225,7 @@ function CandidateTableView() {
               </StyledTableCell>
               <StyledTableCell align="right" sx={{ 
                 color: 'white !important', 
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
                 fontSize: '16px !important'
               }}>
@@ -233,7 +233,7 @@ function CandidateTableView() {
               </StyledTableCell>
               <StyledTableCell align="right" sx={{ 
                 color: 'white !important', 
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
                 fontSize: '16px !important'
               }}>
@@ -241,7 +241,7 @@ function CandidateTableView() {
               </StyledTableCell>
               <StyledTableCell align="right" sx={{ 
                 color: 'white !important', 
-                backgroundColor: '#20dbe4 !important',
+                backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
                 fontSize: '16px !important'
               }}>
@@ -289,7 +289,7 @@ function CandidateTableView() {
                     variant="contained"
                     size="small"
                     style={{
-                      background: "#20dbe4",
+                      background: "#21C9CF",
                       color: "white",
                       fontSize: "12px",
                     }}

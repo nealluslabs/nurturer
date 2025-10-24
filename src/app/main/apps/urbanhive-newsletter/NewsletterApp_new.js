@@ -244,7 +244,7 @@ function NewsletterApp(props) {
             {!selectedChatUser ? (
               <div className="flex flex-col flex-1 items-center justify-center p-24">
                 <Paper className="rounded-full p-48 md:p-64 shadow-xl">
-                  <Icon className="block text-48 md:text-64" color="secondary">
+                  <Icon className="block text-48 md:text-64" style={{color:"#21C9CF"}}>
                     email
                   </Icon>
                 </Paper>

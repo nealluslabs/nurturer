@@ -174,7 +174,7 @@ function NotificationPanel(props) {
               <Typography className="text-28 font-semibold leading-none">Notifications</Typography>
               <Typography
                 className="text-12 underline cursor-pointer"
-                color="secondary"
+                style={{color:"#21C9CF"}}
                 onClick={handleDismissAll}
               >
                 dismiss all

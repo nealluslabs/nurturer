@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     position: 'relative',
     flex: '1 1 auto',
     height: 'auto',
-   // backgroundColor: ' #20dbe4',
+   // backgroundColor: ' #21C9CF',
      backgroundColor: theme.palette.background.default,
   },
   topBg: {
@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     height: headerHeight,
     backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
-    backgroundColor: ' #20dbe4',
+    backgroundColor: ' #21C9CF',
     // backgroundColor: theme.palette.primary.dark,
     backgroundSize: 'cover',
     pointerEvents: 'none',
@@ -93,7 +93,7 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 1 100%',
     flexDirection: 'row',
     backgroundImage: 'url("/assets/images/patterns/rain-grey.png")',
-   // backgroundColor:' #20dbe4',
+   // backgroundColor:' #21C9CF',
     backgroundColor: theme.palette.background.paper,
     minHeight: 0,
     overflow: 'hidden',
@@ -112,7 +112,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     flex: '1 1 100%',
     zIndex: 10,
-    // background: ' #20dbe4'
+    // background: ' #21C9CF'
   },
     background: `linear-gradient(to bottom, ${alpha(theme.palette.background.paper, 0.8)} 0,${alpha(
       theme.palette.background.paper,
@@ -300,7 +300,7 @@ setTimeout(()=>{
             {!selectedChatUser ? (
               <div className="flex flex-col flex-1 items-center justify-center p-24">
                 <Paper className="rounded-full p-48 md:p-64 shadow-xl">
-                  <Icon className="block text-48 md:text-64" color="secondary">
+                  <Icon className="block text-48 md:text-64" style={{color:"#21C9CF"}}>
                     chat
                   </Icon>
                 </Paper>

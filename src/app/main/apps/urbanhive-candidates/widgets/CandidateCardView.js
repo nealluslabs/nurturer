@@ -155,7 +155,7 @@ function CandidateCardView() {
             <Button
               variant="contained"
               style={{
-                backgroundColor: "#20dbe4",
+                backgroundColor: "#21C9CF",
                 marginTop: "20px",
                 fontSize: "12px",
                 color: "white",

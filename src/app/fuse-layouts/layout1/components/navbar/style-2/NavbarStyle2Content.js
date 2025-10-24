@@ -11,7 +11,7 @@ import { memo } from 'react';
 const useStyles = makeStyles((theme) => ({
   root: {
    // backgroundColor: theme.palette.background.default,
-   backgroundColor:'#20dbe4',
+   backgroundColor:'#21C9CF',
     //color: theme.palette.text.primary,
     color: /*theme.palette.text.primary,*/'#FFF',
     '& ::-webkit-scrollbar-thumb': {
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     overflowY: 'auto',
     '-webkit-overflow-scrolling': 'touch',
     backgroundColor:
-      '#20dbe4',
+      '#21C9CF',
       color: /*theme.palette.text.primary,*/'#FFF',
     backgroundRepeat: 'no-repeat',
     backgroundSize: '100% 40px, 100% 10px',
@@ -46,7 +46,7 @@ function NavbarStyle2Content(props) {
   return (
     <div
       className={clsx(
-        'flex flex-auto flex-col overflow-hidden h-full bg-[#20dbe4]',
+        'flex flex-auto flex-col overflow-hidden h-full bg-[#21C9CF]',
         classes.root,
         props.className
       )}
@@ -54,9 +54,9 @@ function NavbarStyle2Content(props) {
       <AppBar
         color="primary"
         position="static"
-        className="flex flex-row items-center flex-shrink h-48 md:h-64 min-h-48 md:min-h-64 px-12 shadow-0 bg-[#20dbe4]"
+        className="flex flex-row items-center flex-shrink h-48 md:h-64 min-h-48 md:min-h-64 px-12 shadow-0 bg-[#21C9CF]"
       >
-        <div className="flex flex-1 mx-4 bg-[#20dbe4]">
+        <div className="flex flex-1 mx-4 bg-[#21C9CF]">
           <Logo />
         </div>
 

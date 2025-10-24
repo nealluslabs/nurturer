@@ -22,7 +22,7 @@ function Navigation(props) {
 
   return (
     <FuseNavigation
-      className={clsx('navigation bg-[#20dbe4] text-white hover:text-white active:text-white', props.className)}
+      className={clsx('navigation bg-[#21C9CF] text-white hover:text-white active:text-white', props.className)}
       navigation={navigation}
       layout={props.layout}
       dense={props.dense}

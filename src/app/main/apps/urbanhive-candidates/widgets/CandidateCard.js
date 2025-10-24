@@ -426,7 +426,7 @@ function CandidateCard() {
                         });
                       }}
                       style={{
-                        backgroundColor: "#20dbe4",
+                        backgroundColor: "#21C9CF",
                         color: "white",
                         padding: "10px 20px",
                         borderRadius: "8px",
@@ -484,7 +484,7 @@ function CandidateCard() {
                       
 
                       }}
-                      style={{ backgroundColor: !canSwipe && "#20dbe4" }}
+                      style={{ backgroundColor: !canSwipe && "#21C9CF" }}
                     >
                       Prev
                     </Button>
@@ -495,7 +495,7 @@ function CandidateCard() {
                           history.push("/apps/profile-update");
                         }, 700);
                       }}
-                      style={{ backgroundColor: "#20dbe4", color: "#fff6bd" }}
+                      style={{ backgroundColor: "#21C9CF", color: "#fff6bd" }}
                     >
                       Edit
                     </Button>
@@ -540,7 +540,7 @@ function CandidateCard() {
                           setCurrentIndex(nextIndex);
                         
                         }}
-                        style={{ backgroundColor: !canSwipe && "#20dbe4" }}
+                        style={{ backgroundColor: !canSwipe && "#21C9CF" }}
                       >
                         Next
                       </Button>
@@ -549,7 +549,7 @@ function CandidateCard() {
                         onClick={() => {
                           alert("You cannot invite yourself");
                         }}
-                        style={{ backgroundColor: "#20dbe4", color: "black" }}
+                        style={{ backgroundColor: "#21C9CF", color: "black" }}
                       >
                         Next
                       </Button>
@@ -759,7 +759,7 @@ function CandidateCard() {
                     variant="contained"
                  
                     style={{
-                      backgroundColor: "#20dbe4",
+                      backgroundColor: "#21C9CF",
                       marginTop: "20px",
                       fontSize: "14px",
                       color: "white",
@@ -849,7 +849,7 @@ function CandidateCard() {
     <button 
       onClick={() => { history.push('/apps/profile') }}
       style={{ 
-        backgroundColor: "#20dbe4",
+        backgroundColor: "#21C9CF",
         color: 'white',
         padding: '10px 20px',
         borderRadius: '8px',

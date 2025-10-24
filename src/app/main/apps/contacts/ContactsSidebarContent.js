@@ -64,10 +64,10 @@ function ContactsSidebarContent(props) {
 
         <Divider />
 
-        <div className="p-24" style={{backgroundColor: "#20dbe4"}}>
+        <div className="p-24" style={{backgroundColor: "#21C9CF"}}>
           <Button
             variant="contained"
-            color="secondary"
+            style={{color:"#21C9CF"}}
             className="w-full"
             onClick={(ev) => dispatch(openNewContactDialog())}
           >
