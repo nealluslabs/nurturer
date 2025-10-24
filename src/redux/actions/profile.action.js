@@ -408,23 +408,17 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
       triggers: profile.triggers? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
       sendDate:changeFrequencyToDays(profile.frequency|| "0 month"),
       frequencyInDays:changeFrequencyToDays(profile.frequency || "0"),
-      queryMsg:[],
+      messageQueue:[],
       state: profile.state || "",
       frequency: profile.frequency || "None",
       interests: profile.interests?profile.interests.split(',').map(interest => interest.trim()) : [],
-
       // extra fields
       password: "12345678",
-      usedConnection: 0,
+      
       lastActive: Date.now(),
       contacterId: user.uid,
-      message: user.message ? user.message : "",
-      skillset: "",
-      skills_needed: "",
-      isTechnical: "no",
-      lookingFor: "",
-      githubUrl: "",
-      photoUrl: url || "https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png",
+     
+      photoUrl: url || "https://nurturer-2.s3.eu-west-3.amazonaws.com/no-pic.png",
 
       // Add IDs
       uid: newId,
@@ -584,44 +578,8 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
     usedConnection:0,
     lastActive:1663862737170,
     contacterId:user.uid,
-    message:user.message? user.message:{
-      firstParagraph:"I hope you're doing well and navigating this season with clarity. I saw the recent news about the leadership restructuring at Boeing and immediately thought of you. I can only imagine how much is being navigated at your level—balancing strategic realignment while keeping day-to-day momentum. It must be a challenging but transformative time for your team.",
-      secondParagrpah:"While reading through some industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes that are relevant to leadership transition, innovation under pressure, and shifting talent strategies in large organizations:",
-      thirdParagraph:"We had some great conversations previously, and I really valued the opportunity to understand what you were working toward. Let me know if you have time for a brief catch-up in the coming weeks. Either way, wishing you continued momentum.",
-      bulletPoints:[
-        {bulletPointBold:"Deloitte Global's 2025 Airline CEO Survey",
-        bulletPointRest:"Deloitte, May 30, 2025 Deloitte Link",
-        id:"7",
-        link:""
-
-      },
-      {bulletPointBold:"A breath of fresh air for the national aviation industry"
-      ,
-      bulletPointRest: "PwC, June 3, 2025 PwC Link",
-      id:"8",
-      link:""
-
-    },
-    {bulletPointBold:"Navigating Headwinds: KPMG’s 2025 Global Aviation Outlook"
-    ,
-    bulletPointRest:"– KPMG, June 10, 2025",
-    id:"9",
-    link:"https://www.mckinsey.com/capabilities/mckinsey-digital/our-insights/tech-forward/cloud-20-serverless-architecture-and-the-next-wave-of-enterprise-offerings"
-
-  },
-      ]
-
-
-    
-    },
-
-  
-    skillset: '',
    
-    skills_needed: '',
-    isTechnical: 'no',
-    lookingFor:'',
-    githubUrl: '',
+  
     photoUrl: url,
   })
   .then((docRef) => {

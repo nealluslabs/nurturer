@@ -80,8 +80,7 @@ const sesClient = new SESClient({
         password: user.password,
         photoUrl: static_img,
         lastActive: new Date().getTime(),
-        monthlyConnection: 5,
-        usedConnection: 0,
+       queryMsg:[],
         registeredOn:new Date()
       })
       

@@ -178,82 +178,6 @@ const notifySkip = (message) => toast.error(message, {
    
     
       
-      const handleCSVUploadOld = (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
-      
-        Papa.parse(file, {
-          header: true, // assumes first row is header (name,email,etc)
-          skipEmptyLines: true,
-          complete: (results) => {
-            const row = results.data[0]; // take first row for simplicity, or loop over multiple
-      
-            // list of simple text fields
-            const textFields = [
-              "name",
-              "email",
-              "notes",
-              "jobTitle",
-              "industry",
-              "interests",
-               "triggers",
-              "companyName",
-              "workAnniversary",
-              "birthday",
-            ];
-      
-            // update simple text fields
-            textFields.forEach((field) => {
-              if (row[field]) {
-                if (field === "triggers") {
-                  // split by commas, trim each trigger
-                  const triggerArray = row[field]
-                    .split(",")
-                    .map((t) => t.trim())
-                    .filter((t) => t.length > 0);
-      
-                  setTriggers(triggerArray);
-                }
-                if (field === "interests") {
-                  // split by commas, trim each trigger
-                  const interestArray = row[field]
-                    .split(",")
-                    .map((t) => t.trim())
-                    .filter((t) => t.length > 0);
-      
-                  setInterests(interestArray);
-                }
-                
-                
-                else {
-                handleInputChange({
-                  target: { name: field, value: row[field] },
-                });
-              }
-               }
-            });
-      
-            // check select fields (frequency, city, state)
-            const selectMappings = {
-              frequency:skillSetService.getCities ? skillSetService.getFrequency() : [],
-              city: skillSetService.getCities ? skillSetService.getCities() : [],
-              state: skillSetService.getStates ? skillSetService.getStates() : [],
-            };
-
-            //console.log('WHAT IS OBJECT FIELDS SELECT MAPPINGS SEF--->',Object.keys(selectMappings))
-      
-            Object.keys(selectMappings).forEach((field) => {
-              
-              if (row[field] && isValidOption(selectMappings[field], row[field])) {
-                
-                handleInputChange({
-                  target: { name: field, value:row[field] },
-                });
-              }
-            });
-          },
-        });
-      };
 
 
 
@@ -263,7 +187,7 @@ const notifySkip = (message) => toast.error(message, {
       
         Papa.parse(file, {
           header: true,
-          skipEmptyLines: false,
+          skipEmptyLines: true,
           complete: (results) => {
             if (!results || !results.data || results.data.length === 0) {
               alert("CSV file is empty or invalid");
@@ -315,63 +239,31 @@ const notifySkip = (message) => toast.error(message, {
               // fallback
               return "1 month";
             };
-      
+
+            //TRYING TO PROCESS FIELDS NOW
+        try{
             // ✅ process all rows
-            const processedData = results.data.map((row) => {
-              const cleanedRow = {};
-              textFields.forEach((field) => {
-               /* if (row[field]) {*/
-                 // if (field === "triggers") {
-                 //   cleanedRow[field] = row[field]
-                 //     .split(",")
-                 //     .map((t) => t.trim())
-                 //     .filter((t) => t.length > 0);
-                 // } 
-                  //if (field === "interests") {
-                  //  cleanedRow[field] = row[field]
-                  //    .split(",")
-                  //    .map((t) => t.trim())
-                  //    .filter((t) => t.length > 0);
-                  //}
-                  console.log("MY NAME IS SLIM SHADY -->",row[field])
-                
-                  if (field == "name" && (!row[field] || row[field] === " ") ) {
-                    alert(`Make sure ALL rows have a Name`);
-                    console.log("MY NAME IS SLIM SHADY 2 -->",row[field])
-                   return;
-                  }
-                  if (field == "city" && (!row[field] || row[field] === "")  ) {
-                    alert(`Make sure ALL rows have a City `);
-                    return;
-                  }
-                  if (field == "state" && (!row[field] || row[field] === "")  ) {
-                    alert(` Make sure ALL rows have a State `);
-                    return;
-                  }
-                  if (field == "email" && (!row[field] || row[field] === "")  ) {
-                    alert(` Make sure ALL rows have an Email `);
-                    return;
-                  }
-                  if (field == "companyName" && (!row[field] || row[field] === "")  ) {
-                    alert(`Make sure ALL rows have a Company name`);
-                    return;
-                  }
-                  if (field == "jobTitle" && (!row[field] || row[field] === "")  ) {
-                    alert(`Make sure ALL rows have a Job title`);
-                    return;
-                  }
+            const requiredFields = ["name", "city", "state", "email", "companyName", "jobTitle"];
+           
+            const processedData = results.data.map((row, index) => {
+              // Check all required fields before doing anything else
+              const missingField = requiredFields.find(field => !row[field] || row[field].trim() === "");
             
-                  
-                   if (field === "frequency") {
-                    cleanedRow[field] = validateFrequency(row[field].trim());
-                  } else {
-                    cleanedRow[field] = row[field];
-                  }
-               /* } else {
-                  // default values
-                  cleanedRow[field] = field === "frequency" ? "1 month" : row[field] ;
-                }*/
+              if (missingField) {
+                alert(`Error in row ${index + 1}: "${missingField}" is missing.\nPlease make sure all rows have a value.`);
+                throw new Error(`Row ${index + 1} missing ${missingField}`);
+              }
+            
+              const cleanedRow = {};
+            
+              textFields.forEach((field) => {
+                if (field === "frequency" && row[field]) {
+                  cleanedRow[field] = validateFrequency(row[field].trim());
+                } else {
+                  cleanedRow[field] = row[field];
+                }
               });
+            
               return cleanedRow;
             });
       
@@ -380,6 +272,14 @@ const notifySkip = (message) => toast.error(message, {
       
             // ✅ open dialog after parsing
             setOpen(true);
+
+           }
+            catch (err) {
+              console.error(err.message);
+              return; // stop further processing
+            }
+
+
           },
         });
       };
