@@ -250,7 +250,7 @@ const notifySkip = (message) => toast.error(message, {
               const missingField = requiredFields.find(field => !row[field] || row[field].trim() === "");
             
               if (missingField) {
-                alert(`Error in row ${index + 1}: "${missingField}" is missing.\nPlease make sure all rows have a value.`);
+                alert(`Error in row ${index + 1}: "${missingField}" is missing.\nPlease make sure all rows have the required values.`);
                 throw new Error(`Row ${index + 1} missing ${missingField}`);
               }
             
