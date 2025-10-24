@@ -312,156 +312,54 @@ function CandidateApp(props) {
 */}
 
 
-            <div style={{marginTop:"0rem"}}>
-            <CandidateCard /> 
-            </div> 
-          {/*
-          testWork &&
-           <Box sx={{
-            display: "flex",
-            flexDirection:{xs:"column",md:"row"},
-            width:"95%",
-            gap: "12px",
-            margin:"0px 0",
-            marginTop:{xs:"-0rem",sm:"-11rem"}
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'flex-end', 
-              marginBottom: '20px',
-              marginTop: '1rem'
-            }}>
-              <div style={{ 
-                display: 'flex', 
-                backgroundColor: '#f5f5f5', 
-                borderRadius: '8px', 
-                padding: '4px' 
-              }}>
-                <IconButton
-                  onClick={() => setViewMode('card')}
-                  sx={{
-                    backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
-                    color: viewMode === 'card' ? 'white' : '#666',
-                    '&:hover': {
-                      backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
-                    },
-                    marginRight: '4px'
-                  }}
-                >
-                  <ViewModuleIcon />
-                </IconButton>
-                <IconButton
-                  onClick={() => setViewMode('list')}
-                  sx={{
-                    backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
-                    color: viewMode === 'list' ? 'white' : '#666',
-                    '&:hover': {
-                      backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
-                    }
-                  }}
-                >
-                  <ViewListIcon />
-                </IconButton>
-              </div>
-            </div>
-            
+           
+
+
+
             {viewMode === 'card' ? (
               <>
                 <div style={{marginTop:"2rem"}}>
-                  <CandidateCard /> 
-                </div>
-                <CandidateCardView />
-              </>
-            ) : (
-              <CandidateTableView />
-            )}
-            </div>
-            </div>
-            
-            <div style={{ flex: 1 }}>
-            <div style={{ display: 'flex', alignItems: "center" }}>
-            <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-            <h3>Notes</h3>
-            </div>
-            
-            <div style={{ background: "white", height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-            <TextField
-            multiline
-            rows={12}
-            placeholder="Enter your notes here..."
-            variant="outlined"
-            fullWidth
-            sx={{
-            width: '90%',
-            '& .MuiOutlinedInput-root': {
-            '& fieldset': {
-            borderColor: '#1DDDE4',
-            },
-            '&:hover fieldset': {
-            borderColor: '#1DDDE4',
-            },
-            '&.Mui-focused fieldset': {
-            borderColor: '#1DDDE4',
-            },
-            },
-            }}
-            />
-            <Button
-            variant="contained"
-            style={{
-            backgroundColor: "#21C9CF",
-            marginTop: "20px",
-            fontSize: "12px",
-            color: "white",
-            padding: "7px 30px",
-            borderRadius: "8px",
-            textTransform: "none",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontWeight: "bold",
-            '&:hover': {
-            backgroundColor: "#18c8d0",
-            },
-            }}
-            >
-            Update
-            </Button>
-            </div>
-            </div>
-            </Box>
-          */}
+                
+                
+                <div style={{marginTop:"0rem"}}>
+                   <CandidateCard /> 
+                 </div> 
 
-{
-  testWork && (
-  <Box
-        sx={{
-          height: "3rem",
-          width: "150%",
-          backgroundColor: "#f3f4f6",
-          marginTop: "-0rem",
-          marginBottom:"2rem", // optional top and bottom space
-          borderRadius: "0px", // optional, for softer corners
-          position:"relative",
-          left:"-10rem"
-        }}
-      >
-        
-      </Box>
-  )
-}
 
-{
-  testWork && (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        width: "95%",
-        gap: "12px",
-        margin: "0px 0",
-        marginTop: { xs: "-0rem", sm: "-0rem" },
-      }}
-    >
+
+        {
+       testWork && ( //THIS IS THE GREY BACKGROUND DIVIDER IN CARD MODE
+       <Box
+             sx={{
+               height: "3rem",
+               width: "150%",
+               backgroundColor: "#f3f4f6",
+               marginTop: "-0rem",
+               marginBottom:"2rem", // optional top and bottom space
+               borderRadius: "0px", // optional, for softer corners
+               position:"relative",
+               left:"-10rem"
+             }}
+           >
+             
+           </Box>
+       )
+      }
+
+
+
+          {
+           testWork && (
+             <Box
+               sx={{
+                 display: "flex",
+                 flexDirection: { xs: "column", md: "row" },
+                 width: "95%",
+                 gap: "12px",
+                 margin: "0px 0",
+                 marginTop: { xs: "-0rem", sm: "-0rem" },
+               }}
+             >
 
     
       
@@ -697,7 +595,80 @@ function CandidateApp(props) {
   )
 }
 
-                  
+
+                </div>
+             
+              </>
+            ) : (
+              <CandidateTableView />
+            )}
+
+
+
+
+
+          {
+          //THIS IS THE TOGGLE BUTTON WHICH IS AT THE TOP OF THE SCREEN, DO NOT DELETE -BETWEEN CARD MODE AND TABLE MODE
+           <Box sx={{
+            display: "flex",
+            justifyContent:"flex-end",
+            flexDirection:{xs:"column",md:"row"},
+            width:"95%",
+            
+            gap: "12px",
+            margin:"0px 0",
+            position:"absolute",
+            top:"20px",
+            right:"50px"
+           }}
+            >
+            
+
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'flex-end', 
+              marginBottom: '20px',
+              marginTop: '1rem'
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                backgroundColor: '#f5f5f5', 
+                borderRadius: '8px', 
+                padding: '4px' 
+              }}>
+                <IconButton
+                  onClick={() => setViewMode('card')}
+                  sx={{
+                    backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
+                    color: viewMode === 'card' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
+                    },
+                    marginRight: '4px'
+                  }}
+                >
+                  <ViewModuleIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setViewMode('list')}
+                  sx={{
+                    backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
+                    color: viewMode === 'list' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
+                    }
+                  }}
+                >
+                  <ViewListIcon />
+                </IconButton>
+              </div>
+            </div>
+            
+           
+            
+            </Box>
+          }
+
 
         </div>
       }

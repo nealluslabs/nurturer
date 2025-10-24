@@ -207,7 +207,7 @@ function CandidateTableView() {
               }}>
                 Name
               </StyledTableCell>
-              <StyledTableCell align="right" sx={{ 
+              <StyledTableCell align="left" sx={{ 
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
@@ -215,7 +215,7 @@ function CandidateTableView() {
               }}>
                 Email
               </StyledTableCell>
-              <StyledTableCell align="right" sx={{ 
+              <StyledTableCell align="left" sx={{ 
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
@@ -223,7 +223,7 @@ function CandidateTableView() {
               }}>
                 Company
               </StyledTableCell>
-              <StyledTableCell align="right" sx={{ 
+              <StyledTableCell align="left" sx={{ 
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
@@ -231,7 +231,7 @@ function CandidateTableView() {
               }}>
                 Role
               </StyledTableCell>
-              <StyledTableCell align="right" sx={{ 
+              <StyledTableCell align="left" sx={{ 
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
@@ -239,7 +239,7 @@ function CandidateTableView() {
               }}>
                 Frequency
               </StyledTableCell>
-              <StyledTableCell align="right" sx={{ 
+              <StyledTableCell align="left" sx={{ 
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
@@ -268,30 +268,31 @@ function CandidateTableView() {
                     || "-"}
                 </StyledTableCell>
 
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {contact.email || contact.contactEmail || "-"}
                 </StyledTableCell>
 
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {contact.company || contact.companyName || contact.organization || "-"}
                 </StyledTableCell>
 
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {contact.role || contact.position || contact.title || contact.jobTitle || "-"}
                 </StyledTableCell>
 
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   {contact.frequency || getFrequency(contact)}
                 </StyledTableCell>
 
-                <StyledTableCell align="right">
+                <StyledTableCell align="left">
                   <Button
                     variant="contained"
-                    size="small"
+                    size="large"
                     style={{
                       background: "#21C9CF",
                       color: "white",
-                      fontSize: "12px",
+                      fontSize: "14px",
+                      width:"15rem",
                     }}
                     onClick={() => viewContactFxn(contact)}
                   >
