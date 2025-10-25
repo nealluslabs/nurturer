@@ -317,7 +317,7 @@ function CandidateCard() {
       // allUsers.map(users => {
       output.map((users,index) => {
         return (
-          <Grid container sx={{ marginTop: "2rem" }}>
+          <Grid container sx={{ marginTop: "2rem",width:"100%",display:"flex",justifyContent:"flex-start",gap:"0rem" }}>
             <ToastContainer
               position="top-right"
               autoClose={1000}
@@ -329,238 +329,234 @@ function CandidateCard() {
               draggable
               pauseOnHover
             />
+             <Grid
+      container
+      sx={{
+        marginTop: "2rem",
+        display: "flex",
+        flexDirection: { xs: "column", sm: "row" },
+        alignItems: "flex-start",
+        justifyContent: "space-between", // ensures fixed-width box is at end
+        
+        width: "97.5%",
+        gap: { xs: "1rem", sm: "0" },
+      }}
+    >
+      {/* 1️⃣ LEFT SECTION - Avatar */}
+      <Grid
+        item
+        sx={{
+          flex: 1,
+          mx: "0.3rem",
+          marginTop: "1rem",
+         
+          display: "flex",
+          justifyContent: "flex-start",
+        }}
+      >
+        <Avatar
+          alt={users.name}
+          src={users.photoUrl}
+          sx={{
+            width: 180,
+            height: 180,
+            position: "relative",
+            left: "0.8rem",
+          }}
+        />
+      </Grid>
 
-            <Grid item sx={{ mx: "0.3rem", marginTop: "1rem" }}>
-              {/* <ButtonBase sx={{ width: 500, height: 500 }}> */}
-              <Avatar
-                alt="Remy Sharp"
-                src={users.photoUrl}
-                style={{ width: "180px", height: "180px" }}
-              />
-              {/* </ButtonBase> */}
-            </Grid>
-            <Grid item xs={12} sm container sx={{ marginTop: "1rem" }}>
-              <Grid item xs container direction="column" sx={{ mx: "2rem" }}>
-                <Grid item xs>
-                  <Typography
-                    gutterBottom
-                    variant="subtitle5"
-                    component="div"
-                    style={{ fontSize: "23px" }}
-                  >
-                    <b>{users.name}</b>
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    gutterBottom
-                    style={{ fontSize: "13px" }}
-                  >
-                    {/* Last Active • {timeSince(users.lastActive)} ago */}
-                    Follow Up Date • {users.sendDate? getFutureDate(users.sendDate):"-"}{" "}
-                    {/*timeSince(parseInt(users.lastActive))*/}
-                  </Typography>
-                  <br />
-                  <Typography
-                    variant="body2"
-                    gutterBottom
-                    style={{ fontSize: "15px", maxWidth: "15rem" }}
-                  >
-                    <b>
-                      {
-                        users && users.jobTitle && users.companyName
-                          ? `${users.companyName} - ${users.jobTitle}`
-                          : "Boeing - CFO" /*users.city*/
-                      }
-                    </b>
-                  </Typography>
-                 
-                  <Typography
-                    variant="body2"
-                    gutterBottom
-                    style={{ fontSize: "13px" }}
-                  >
-                   {users.email && users.email}
-                  </Typography>
-                 
+      {/* 2️⃣ MIDDLE SECTION - Info */}
+      <Grid
+        item
+        sx={{
+          flex: 1,
+          mx: "0rem",
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          
+          padding: "1rem",
+        }}
+      >
+        <Typography
+          gutterBottom
+          variant="subtitle5"
+          component="div"
+          sx={{ fontSize: "23px", fontWeight: "bold" }}
+        >
+          {users.name}
+        </Typography>
 
-                  <Typography
-                    variant="body2"
-                    gutterBottom
-                    style={{ fontSize: "13px" }}
-                  >
-                   {users.phone && users.phone}
-                  </Typography>
-                 
-                </Grid>
-              </Grid>
+        <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
+          Follow Up Date • {users.sendDate ? getFutureDate(users.sendDate) : "-"}
+        </Typography>
 
-              <Box
-                component="span"
-                sx={{
-                  p: 10,
-                  mx: "1rem",
-                  border: "1px solid black",
-                  width: { xs: 230, sm: 300 ,md:400},
-                  height: 210,
-                  paddingTop: "30px",
-                  marginRight: "0px",
+        <Box mt={1} />
+
+        <Typography
+          variant="body2"
+          gutterBottom
+          sx={{ fontSize: "15px", maxWidth: "15rem", fontWeight: "bold" }}
+        >
+          {users?.companyName && users?.jobTitle
+            ? `${users.companyName} - ${users.jobTitle}`
+            : "Boeing - CFO"}
+        </Typography>
+
+        {users.email && (
+          <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
+            {users.email}
+          </Typography>
+        )}
+
+        {users.phone && (
+          <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
+            {users.phone}
+          </Typography>
+        )}
+      </Grid>
+
+      {/* 3️⃣ RIGHT SECTION - Fixed-width Box */}
+      <Grid
+        item
+        sx={{
+          flexShrink: 0,
+          width: { xs: 230, sm: 300, md: 350 },
+          marginTop: "1rem",
+        }}
+      >
+        <Box
+          sx={{
+            border: "1px solid black",
+            height: 210,
+            paddingTop: "30px",
+            px: 2,
+          }}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mb: "3rem",
+            }}
+          >
+            <Button
+              onClick={() =>
+                history.push({
+                  pathname: "/events",
+                  state: {
+                    name: users.name,
+                    email: users.email,
+                  },
+                })
+              }
+              style={{
+                backgroundColor: "#21C9CF",
+                color: "white",
+                px: 2,
+                py: 1,
+                borderRadius: "8px",
+                textTransform: "none",
+                display: "flex",
+                alignItems: "center",
+                "&:hover": { backgroundColor: "#1db8be" },
+              }}
+            >
+              <AddIcon sx={{ mr: 1 }} />
+              Add Events
+            </Button>
+          </Box>
+
+          <Divider sx={{ border: "1px dotted grey", mb: 3 }} />
+
+          <Box className={classes.root}>
+            <ButtonGroup
+              size="large"
+              variant="contained"
+              color="primary"
+              aria-label="large contained primary button group"
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                backgroundColor: "transparent",
+                boxShadow: "none",
+              }}
+            >
+              {/* Prev Button */}
+              <Button
+                onClick={() => {
+                  reactSwipeEl.prev();
+                  inviteSkip(-1, users.uid);
+                  const prevIndex = currentIndex - 1;
+                  const prevUser =
+                    output[prevIndex] || output[output.length - 1];
+                  dispatch(saveCandidateInFocus(prevUser));
+                  setCurrentIndex(
+                    prevIndex !== -1 ? prevIndex : output.length - 1
+                  );
+                }}
+                style={{
+                  backgroundColor: !canSwipe ? "#21C9CF" : undefined,
                 }}
               >
-                <Grid item sx={{ flex: "0 0 20%" }}>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginBottom: "3rem",
-                    }}
-                  >
-                    <button
-                      onClick={() => {
-                        history.push({
-                          pathname: "/events",
-                          state: {
-                            name: users.name,
-                            email: users.email,
-                          },
-                        });
-                      }}
-                      style={{
-                        backgroundColor: "#21C9CF",
-                        color: "white",
-                        padding: "10px 20px",
-                        borderRadius: "8px",
-                        textTransform: "none",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    >
-                      <AddIcon sx={{ marginRight: "4px" }} />
-                      Add Events
-                    </button>
-                  </div>
-                </Grid>
+                Prev
+              </Button>
 
-                <Divider style={{ border: "1px dotted grey" }} />
-                <br />
-                <br />
-                <div className={classes.root}>
-                  <ButtonGroup
-                    size="large"
-                    variant="contained"
-                    color="primary"
-                    aria-label="large contained primary button group"
-                    style={{
-                      display: "flex",
-                      justifyContent: "center",
-                      backgroundColor: "transparent",
-                      boxShadow: "none",
-                    }}
-                  >
-                    <Button
-                      onClick={() => {
-                        
-                        reactSwipeEl.prev();
-                        inviteSkip(-1, users.uid);
+              {/* Edit Button */}
+              <Button
+                onClick={() => {
+                  dispatch(saveCandidateInFocus(users));
+                  setTimeout(() => history.push("/apps/profile-update"), 700);
+                }}
+                style={{
+                  backgroundColor: "#21C9CF",
+                  color: "#fff6bd",
+                }}
+              >
+                Edit
+              </Button>
 
-                         // find prev candidate safely
-                         const prevIndex =currentIndex - 1;
-                         const prevUser = output[prevIndex];
-                     
-                         // only dispatch if there is a prev user
-                         if (prevUser) {
-                           dispatch(saveCandidateInFocus(prevUser));
-                         }else{
-                          dispatch(saveCandidateInFocus(output[output.length-1]));
-                         }
-                        
-                  
-                       if(prevIndex !== -1){
-                        setCurrentIndex(prevIndex);
-                       }else{
-                        setCurrentIndex(output.length-1);
-                       }
-                      
-
-                      }}
-                      style={{ backgroundColor: !canSwipe && "#21C9CF" }}
-                    >
-                      Prev
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        dispatch(saveCandidateInFocus(users));
-                        setTimeout(() => {
-                          history.push("/apps/profile-update");
-                        }, 700);
-                      }}
-                      style={{ backgroundColor: "#21C9CF", color: "#fff6bd" }}
-                    >
-                      Edit
-                    </Button>
-                    {users.uid != user.uid ? (
-                      <Button
-                        onClick={() => {
-
-
-                           // find next candidate safely
-                           const nextIndex = index+1/*currentIndex + 1*/;
-                           const nextUser = output[nextIndex];
-                       
-                           // only dispatch if there is a next user
-                           if (nextUser) {
-                             dispatch(saveCandidateInFocus(nextUser));
-                             
-                           }
-
-
-                           if (nextUser) {
-                            dispatch(saveCandidateInFocus(nextUser));
-                          }else{
-                           dispatch(saveCandidateInFocus(output[0]));
-                          }
-                         
-                   
-                        if(nextIndex <= output.length){
-                         setCurrentIndex(nextIndex);
-                        }else{
-                         setCurrentIndex(0);
-                        }
-
-
-
-
-
-                          reactSwipeEl.next();
-                          //dispatch(saveCandidateInFocus());
-                          inviteSkip(0, users.uid);
-                         
-
-                          setCurrentIndex(nextIndex);
-                        
-                        }}
-                        style={{ backgroundColor: !canSwipe && "#21C9CF" }}
-                      >
-                        Next
-                      </Button>
-                    ) : (
-                      <Button
-                        onClick={() => {
-                          alert("You cannot invite yourself");
-                        }}
-                        style={{ backgroundColor: "#21C9CF", color: "black" }}
-                      >
-                        Next
-                      </Button>
-                    )}
-                  </ButtonGroup>
-                </div>
-              </Box>
-            </Grid>
+              {/* Next Button */}
+              {users.uid !== user.uid ? (
+                <Button
+                  onClick={() => {
+                    const nextIndex = currentIndex + 1;
+                    const nextUser =
+                      output[nextIndex] || output[0];
+                    dispatch(saveCandidateInFocus(nextUser));
+                    setCurrentIndex(
+                      nextIndex < output.length ? nextIndex : 0
+                    );
+                    reactSwipeEl.next();
+                    inviteSkip(0, users.uid);
+                  }}
+                  style={{
+                    backgroundColor: !canSwipe ? "#21C9CF" : undefined,
+                  }}
+                >
+                  Next
+                </Button>
+              ) : (
+                <Button
+                  onClick={() => alert("You cannot invite yourself")}
+                  sx={{
+                    backgroundColor: "#21C9CF",
+                    color: "black",
+                  }}
+                >
+                  Next
+                </Button>
+              )}
+            </ButtonGroup>
+          </Box>
+        </Box>
+      </Grid>
+    </Grid>
 
             <Grid>
-              <Grid item container>
+              <Grid item container sx={{display:"flex",justifyContent:"flex-start",width:"100%"}}>
                 <Grid item xs={12} sm={12} md={12}>
                   <Box m={0} p={2} style={{display:"block",width:"28rem"}}>
                     {/* <Button onClick={rollOver} style={{ backgroundColor: 'black', color: 'white'}}>Roll Over Invite</Button> */}
@@ -653,134 +649,7 @@ function CandidateCard() {
 
 
 
-       {/*
-            <Box sx={{
-              display: "flex",
-              flexDirection:{xs:"column",md:"row"},
-              gap: "12px",
-              margin:"0px 0",
-              //marginTop:{xs:"-15rem",sm:"-5rem"}
-            }}>
-              <div style={{ flex: 1 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                  <div style={{ display: 'flex', alignItems: "center" }}>
-                    <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-                    <h3>Recent Interactions</h3>
-                  </div>
-                  <button 
-                    style={{ 
-                      border: `2px solid grey`, 
-                      padding: "4px 7px", borderRadius: "6px", color: "grey"
-                    }}
-                    onClick={() => history.push('/apps/inbox')}
-                  >
-                    View All
-                  </button>
-                </div>
-
-                <div style={{ background: "white", borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)',height:"34.6rem" }}>
-                  {users.messageQueue && users.messageQueue.length === 0 ? (
-                    <div style={{ textAlign: 'center', color: '#888', padding: '16px 0' }}>
-                      No interactions found.
-                    </div>
-                  ) : (
-                    users.messageQueue &&  users.messageQueue.map((item) => {
-                      const IconComponent = item.icon;
-                      return (
-                        <div 
-                          key={item.subject} 
-                          style={{ 
-                            display: "flex", 
-                            alignItems: "center", 
-                            justifyContent: "space-between", 
-                            marginBottom: "16px" 
-                          }}
-                        >
-                          <div style={{ display: "flex", alignItems: "center" }}>
-                            <IconComponent 
-                              sx={{ 
-                                width: 16, 
-                                height: 16, 
-                                marginRight: "6px", 
-                                color: item.iconColor 
-                              }} 
-                            />
-                            <div>
-                              <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.subject}</p>
-                              <p style={{ fontSize: "12px" }}>{/*item.subtitle}</p>
-                            </div>
-                          </div>
-                          <p 
-                            style={{ 
-                              padding: "4px 12px", 
-                              background: item.statusBackground, 
-                              color: item.statusColor, 
-                              borderRadius: "4px" 
-                            }}
-                          >
-                            {item.messageStatus}
-                          </p>
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
-              </div>
-
-              <div style={{ flex: 1 }}>
-              <div style={{ display: 'flex', alignItems: "center" }}>
-                    <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-                    <h3>Notes</h3>
-                  </div>
-
-                <div style={{ background: "white", height:"34.6rem",borderRadius: "4px", marginTop: "18px", padding: "42px 12px",boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-                  <TextField
-                    multiline
-                    rows={12}
-                    placeholder="Enter your notes here..."
-                    variant="outlined"
-                    fullWidth
-                    sx={{
-                      width: '90%',
-                      '& .MuiOutlinedInput-root': {
-                        '& fieldset': {
-                          borderColor: '#1DDDE4',
-                        },
-                        '&:hover fieldset': {
-                          borderColor: '#1DDDE4',
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#1DDDE4',
-                        },
-                      },
-                    }}
-                  />
-                  <Button
-                    variant="contained"
-                 
-                    style={{
-                      backgroundColor: "#21C9CF",
-                      marginTop: "20px",
-                      fontSize: "14px",
-                      color: "white",
-                      padding: "10px 20px",
-                      borderRadius: "8px",
-                      textTransform: "none",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      fontWeight: "bold",
-                      '&:hover': {
-                        backgroundColor: "#18c8d0",
-                      },
-                    }}
-                  >
-                    Update
-                  </Button>
-                </div>
-              </div>
-            </Box>
-                  */}
+      
           </Grid>
         );
       })
@@ -795,7 +664,7 @@ function CandidateCard() {
     );
 
   return (
-    <>
+    <Grid style={{width:"100%"}}>
       <Grid 
   container 
   spacing={0}
@@ -807,8 +676,9 @@ function CandidateCard() {
     position: "relative",
     top: "3rem",
     left: {xs:"-3rem",sm:"2.5rem"},
-    width: {md:"78%",sm:"85%",xs:"100%"},
-    maxWidth:{md:"78%",sm:"85%",xs:"100%"},
+   // width: {md:"78%",sm:"85%",xs:"100%"},
+   // maxWidth:{md:"78%",sm:"85%",xs:"100%"},
+   width:{lg:"90%",md:"90%"},
     marginBottom: "1.5rem",
     zIndex: 1000,
     flexWrap: "nowrap",   // 🚀 ensures both items stay on same line
@@ -816,7 +686,7 @@ function CandidateCard() {
   }}
 >
   {/* 1 */}
-  <Grid item sx={{ flex: "0 0 85%" }}>
+  <Grid item sx={{ flex: "0 0 84%" }}>
     <TextField
       placeholder="Search..."
       onChange={(e) => { /*handleSearchResults(e.target.value)*/ }}
@@ -873,7 +743,7 @@ function CandidateCard() {
         }</center>
       ) : ( 
         userList.length > 0 && (
-          <Box sx={{ height: {xs:"120vh",sm:"100%",display:{xs:"flex",sm:"block"},justifyContent:"center",alignItems:"center"}, width: "70vw" }}>
+          <Box sx={{ height: {xs:"120vh",sm:"100%",display:{xs:"flex",sm:"block"},justifyContent:"center",alignItems:"center"}, width: "97%" }}>
             <ReactSwipe
               key={`${userList.length}-${startIndex}`}
               className="carousel"
@@ -888,7 +758,7 @@ function CandidateCard() {
           </Box>
         )
       )}
-    </>
+    </Grid>
   );
 }
 

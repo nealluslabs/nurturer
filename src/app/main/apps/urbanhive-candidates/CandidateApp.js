@@ -321,7 +321,7 @@ function CandidateApp(props) {
                 <div style={{marginTop:"2rem"}}>
                 
                 
-                <div style={{marginTop:"0rem"}}>
+                <div style={{marginTop:"0rem",width:"100%"}}>
                    <CandidateCard /> 
                  </div> 
 
@@ -332,8 +332,9 @@ function CandidateApp(props) {
        <Box
              sx={{
                height: "3rem",
-               width: "150%",
+               width: "113%",
                backgroundColor: "#f3f4f6",
+              
                marginTop: "-0rem",
                marginBottom:"2rem", // optional top and bottom space
                borderRadius: "0px", // optional, for softer corners
