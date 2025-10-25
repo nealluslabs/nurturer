@@ -14,7 +14,7 @@ function ProfileUpdateApp() {
   return (
     <FusePageSimple
       header={
-        <div className="flex flex-1 items-center justify-between p-12 md:p-24" style={{backgroundColor: "#000000"}}>
+        <div className="flex flex-1 items-center justify-between p-12 md:p-24" style={{ backgroundColor: "#21C9CF"}}>
           <div className="flex flex-col">
             <div className="flex items-center mb-16">
               <Icon className="text-18" color="action">

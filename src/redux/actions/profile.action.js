@@ -615,6 +615,20 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
 export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
+
+  console.log("PROFILE BEFORE UPDATING TO DB, WHAT IS BIRTHDAY --->",profile.birthday)
+
+  function transformDate(dateStr) {
+    // Split the input string into year, month, and day
+    const [year, month, day] = dateStr.split('-');
+    
+    // Convert month and day to numbers to remove any leading zeros
+    const m = Number(month);
+    const d = Number(day);
+    
+    // Return the formatted date
+    return `${m}/${d}/${year}`;
+  }
  
   const userRef = db.collection("contacts").doc(profile.uid)
  
@@ -623,27 +637,19 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
    email: profile.email,
    phone: profile.phone,
     notes: profile.notes,
-    intro: profile.notes,
+    
    companyName: profile.companyName,
    industry: profile.industry,
     jobTitle: profile.jobTitle,
-    birthday:profile.birthday||'1/1/1980',
-    workAnniversary:profile.workAnniversary,
+    birthday:profile.birthday?transformDate(profile.birthday): '1/1/1980',
+    workAnniversary:profile.workAnniversary?  transformDate(profile.workAnniversary) :'1/1/2007',
     city: profile.city,
     state: profile.state,
     frequency: profile.frequency,
     interests: profile.interests,
   
-    usedConnection:0,
     lastActive:1663862737170,
-    
   
-    skillset: '',
-   
-    skills_needed: '',
-    isTechnical: 'no',
-    lookingFor:'',
-    githubUrl: '',
     photoUrl: url,
   })
  

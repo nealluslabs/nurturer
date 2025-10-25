@@ -231,7 +231,7 @@ useEffect(()=>{
 
     /**CSV FUNCTIONALITY END AND ITS HELPERS END */
   
-
+console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
 
 
     const handleKeyDown = (e) => {
@@ -252,7 +252,7 @@ useEffect(()=>{
 
     //console.log("candidate in focus is--->",candidateInFocus)
     const initialFValues = {
-      //id: user.uid,
+      uid: candidateInFocus.uid == '' ? '' : candidateInFocus.uid,
       notes: candidateInFocus.notes == '' ? '' : candidateInFocus.notes,
      // skills_needed: candidateInFocus.skills_needed == '' ? '' : candidateInFocus.skills_needed,
      // isTechnical: candidateInFocus.isTechnical == '' ? 'nil' : candidateInFocus.isTechnical,
@@ -426,11 +426,11 @@ useEffect(()=>{
        const birthday = values.birthday;
        const workAnniversary = values.workAnniversary;
        
-      const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary};
+      const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary,uid:candidateInFocus && candidateInFocus.uid};
       ////console.log('Logged User: ', fb.auth().currentUser.uid);
       //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
-      if(photoURL == static_img){
+      if(!file){
         dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL,notifyInvite,notifySkip));
       }else{
         dispatch(uploadNewImage({...profile,triggers,interests:interests2}, user, file, resetForm,notifyInvite,notifySkip));
@@ -508,7 +508,7 @@ useEffect(()=>{
                  <Button
                   onClick={() => document.getElementById("csvInput").click()}
                    sx={{
-                     backgroundColor: "black",
+                    backgroundColor: "#21C9CF",
                      color: "white",
                      height:"4.5rem",
                      width:"11rem",
@@ -542,7 +542,7 @@ useEffect(()=>{
                <Grid item>
                  <Button
                    sx={{
-                     backgroundColor: "black",
+                    backgroundColor: "#21C9CF",
                      color: "white",
                       height:"4.5rem",
                      width:"11rem",
