@@ -18,7 +18,7 @@ import { Box, Button, Grid, InputAdornment, TextField, Switch, IconButton } from
 
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts, saveCandidateInFocus } from 'redux/reducers/user.slice';
-import { fetchAllContactForOneUser,updateCandidateNotes } from 'src/redux/actions/user.action';
+import { fetchAllContactForOneUser,updateCandidateNotes,updateCandidateEventsAlert,updateCandidateTouchesAlert,updateCandidateTriggerAlert } from 'src/redux/actions/user.action';
 import AddIcon from '@mui/icons-material/Add';
 import MailIcon from '@mui/icons-material/Mail';
 import SendIcon from '@mui/icons-material/Send';
@@ -29,6 +29,7 @@ import { update } from 'lodash';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FuseLoading from '@fuse/core/FuseLoading';
+import { deleteCandidate } from 'redux/actions/user.action';
 
 
 
@@ -57,7 +58,17 @@ function CandidateApp(props) {
   const [testWork, setTestWork] = useState(false);
   const [viewMode, setViewMode] = useState('card'); 
 
+  console.log("candidateInFocus in the contacts page--->",candidateInFocus)
+
   const [candidateNotes, setCandidateNotes] = useState(candidateInFocus && candidateInFocus.notes && candidateInFocus.notes)
+
+
+  const [candidateTriggersAlert, setCandidateTriggersAlert] = useState(candidateInFocus && candidateInFocus.triggersAlert && candidateInFocus.triggersAlert)
+
+  const [candidateTouchesAlert, setCandidateTouchesAlert] = useState(candidateInFocus && candidateInFocus.touchesAlert && candidateInFocus.touchesAlert)
+
+  const [candidateEventsAlert, setCandidateEventsAlert] = useState(candidateInFocus && candidateInFocus.eventsAlert && candidateInFocus.eventsAlert)
+
 
    useEffect(() => {
     setTimeout(()=>{
@@ -140,12 +151,26 @@ function CandidateApp(props) {
 
   useEffect(()=>{
 
-    setTouchpointData(candidateInFocus && candidateInFocus.messageQueue)
+    setTouchpointData(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0  && candidateInFocus.messageQueue.slice(0,4))
 
     setCandidateNotes(candidateInFocus && candidateInFocus.notes)
+
+  
+
   },[candidateInFocus])
 
-  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue?candidateInFocus.messageQueue:[
+  useEffect(()=>{
+
+  
+
+    setCandidateTriggersAlert(candidateInFocus && candidateInFocus.triggersAlert)
+    setCandidateTouchesAlert(candidateInFocus && candidateInFocus.touchesAlert)
+    setCandidateEventsAlert(candidateInFocus && candidateInFocus.eventsAlert)
+
+  },[candidateInFocus])
+
+
+  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue?candidateInFocus.messageQueue.slice(0,4):[
     {
       id: 1,
       subject: 'Catch Up Email',
@@ -480,7 +505,7 @@ function CandidateApp(props) {
             }}
           />
           <Button
-          onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite))}}
+          onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite) )}}
             variant="contained"
             sx={{
               backgroundColor: "#21C9CF",
@@ -518,7 +543,7 @@ function CandidateApp(props) {
               flexDirection: "column",
             }}
           >
-            {switchItems.length === 0 ? (
+            {switchItems && switchItems.length === 0 ? (
               <div style={{ textAlign: "center", color: "#888", padding: "16px 0" }}>
                 No Interactions.
               </div>
@@ -542,8 +567,16 @@ function CandidateApp(props) {
                       }}
                     >
                       <span style={{ fontSize: "16px", fontWeight: "500" }}>{item.title}</span>
+                    {item.title === "Events" && 
                       <Switch
-                        checked={item.enabled}
+                        checked={candidateEventsAlert !==null  && candidateEventsAlert}
+                        onClick={()=>{
+                          if(item.title === "Events"){
+                          dispatch(updateCandidateEventsAlert(candidateInFocus.uid) )
+                        }
+                        
+                 
+                      }}
                         sx={{
                           "& .MuiSwitch-switchBase": {
                             color: "#1DDDE4",
@@ -565,12 +598,89 @@ function CandidateApp(props) {
                           },
                         }}
                       />
+                      }
+
+
+                   {item.title === "Triggers" && 
+                      <Switch
+                        checked={candidateTriggersAlert !==null  && candidateTriggersAlert}
+                        onClick={()=>{
+                        
+                            if(item.title === "Triggers"){
+                              dispatch(updateCandidateTriggerAlert(candidateInFocus.uid) )
+                            }
+                              
+
+
+                        
+                      }}
+                        sx={{
+                          "& .MuiSwitch-switchBase": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                            backgroundColor: "#1DDDE4",
+                          },
+                          "& .MuiSwitch-track": {
+                            backgroundColor: "rgba(29, 221, 228, 0.3)",
+                          },
+                        }}
+                      />
+      }
+
+
+                    {item.title === "Touches" && 
+                       <Switch
+                        checked={candidateTouchesAlert  && candidateTouchesAlert}
+                        onClick={()=>{
+                          if(item.title === "Touches"){
+                          dispatch(updateCandidateTouchesAlert(candidateInFocus.uid) )
+                        }
+                     
+                      }}
+                        sx={{
+                          "& .MuiSwitch-switchBase": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                            backgroundColor: "#1DDDE4",
+                          },
+                          "& .MuiSwitch-track": {
+                            backgroundColor: "rgba(29, 221, 228, 0.3)",
+                          },
+                        }}
+                      />
+               }
                     </div>
                   ))}
                 </div>
                 <div style={{ display: "flex", justifyContent: "center", paddingTop: "20px" }}>
                 <Button
             variant="contained"
+          
+            onClick={()=>{
+            if(window.confirm("Are you sure you want to delete this contact? This is an irreversible action!")){ 
+           dispatch(deleteCandidate(candidateInFocus.uid,notifyInvite,notifySkip) )
+          }
+             }}
             sx={{
               backgroundColor: "#21C9CF",
               marginTop: "20px",

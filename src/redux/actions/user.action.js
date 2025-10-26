@@ -6,7 +6,7 @@ import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from 'src/redux/reducers/chat.slice';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
-import { saveChatGptAnswer, saveEditedParagraphs,saveAiTrigger } from 'redux/reducers/user.slice';
+import { saveChatGptAnswer, saveEditedParagraphs,saveAiTrigger, saveCandidateInFocus } from 'redux/reducers/user.slice';
 import axios from 'axios';
 
 import firebase from "firebase/app";
@@ -87,7 +87,6 @@ export const updateCandidateNotes = (contactId,notes,notifyInvite) => async (dis
 
 
          //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
-
          contactDoc.update({
           notes:notes,
           
@@ -109,6 +108,152 @@ export const updateCandidateNotes = (contactId,notes,notifyInvite) => async (dis
 
   
 }
+
+
+export const updateCandidateEventsAlert = (contactId) => async (dispatch) => {
+  
+       
+  const contactDoc = db.collection('contacts').doc(contactId && contactId)
+
+   contactDoc.get().then(async(doc)=>{ 
+
+    if (doc.exists) {
+
+      //console.log("RAW MESSAGE IS -->", updatedParagraphs)
+      let updatedMessage =  {...doc.data().message}
+
+
+       //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+       contactDoc.update({
+        eventsAlert:doc.data() &&  doc.data().eventsAlert?!(doc.data().eventsAlert):true,
+        
+      }).then(()=>{
+        const newContactDoc = db.collection('contacts').doc(contactId && contactId)
+        newContactDoc.get().then(async(doc)=>{ 
+
+          if (doc.exists) {
+      
+        dispatch(saveCandidateInFocus(doc.data()))
+          }
+        })
+
+      })
+      
+
+    }
+   
+  }) 
+
+
+
+}
+
+
+export const updateCandidateTouchesAlert = (contactId) => async (dispatch) => {
+  
+       
+  const contactDoc = db.collection('contacts').doc(contactId && contactId)
+
+   contactDoc.get().then(async(doc)=>{ 
+
+    if (doc.exists) {
+
+      //console.log("RAW MESSAGE IS -->", updatedParagraphs)
+      let updatedMessage =  {...doc.data().message}
+
+
+       //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+       contactDoc.update({
+        touchesAlert:doc.data() &&  doc.data().touchesAlert?!(doc.data().touchesAlert):true,
+        
+      }).then(()=>{
+        const newContactDoc = db.collection('contacts').doc(contactId && contactId)
+        newContactDoc.get().then(async(doc)=>{ 
+
+          if (doc.exists) {
+      
+        dispatch(saveCandidateInFocus(doc.data()))
+          }
+        })
+
+      })
+      
+
+    }
+   
+  }) 
+
+
+
+}
+
+
+export const updateCandidateTriggerAlert = (contactId) => async (dispatch) => {
+  
+       
+  const contactDoc = db.collection('contacts').doc(contactId && contactId)
+
+   contactDoc.get().then(async(doc)=>{ 
+
+    if (doc.exists) {
+
+      //console.log("RAW MESSAGE IS -->", updatedParagraphs)
+      let updatedMessage =  {...doc.data().message}
+
+
+       //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
+
+       contactDoc.update({
+        triggersAlert:doc.data() &&  doc.data().triggersAlert?!(doc.data().triggersAlert):true,
+        
+      }).then(()=>{
+        const newContactDoc = db.collection('contacts').doc(contactId && contactId)
+        newContactDoc.get().then(async(doc)=>{ 
+
+          if (doc.exists) {
+      
+        dispatch(saveCandidateInFocus(doc.data()))
+          }
+        })
+
+      })
+      
+
+    }
+   
+  }) 
+
+
+
+}
+
+
+
+export const deleteCandidate = (contactId, notifyInvite, notifyError) => async (dispatch) => {
+  if (!contactId) {
+    notifyError?.('Invalid contact ID');
+    return;
+  }
+
+  const contactDoc = db.collection('contacts').doc(contactId);
+
+  try {
+    const doc = await contactDoc.get();
+
+    if (doc.exists) {
+      await contactDoc.delete();
+      notifyInvite?.('Contact has been deleted successfully');
+    } else {
+      notifyError?.('Contact not found');
+    }
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    notifyError?.('Error deleting contact, please try again');
+  }
+};
+
 
 
 
