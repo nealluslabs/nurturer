@@ -75,6 +75,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1400,
     display: 'flex',
     flexDirection: 'column',
+   
     flex: '1 0 auto',
     width: '100%',
     minWidth: '0',
@@ -123,6 +124,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flex: '1 1 100%',
     minHeight: 0,
+    
   
   },
 }));
@@ -296,7 +298,14 @@ setTimeout(()=>{
             <UserSidebar />
           </SwipeableDrawer>
 
-          <main className={clsx(classes.contentWrapper, 'z-10')}>
+          <main className={clsx(classes.contentWrapper, 'z-10')}   
+          style={{
+             overflowY: 'scroll',    // Enable vertical scrolling
+             overflowX: 'hidden',
+             height: '100%',      // Fill the full viewport height (adjust as necessary)
+              // Optional: space for scrollbar if needed
+             position: 'relative', // Ensure that it can be positioned correctly within its parent (optional)
+           }}>
             {!selectedChatUser ? (
               <div className="flex flex-col flex-1 items-center justify-center p-24">
                 <Paper className="rounded-full p-48 md:p-64 shadow-xl">

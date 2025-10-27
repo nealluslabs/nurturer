@@ -12,6 +12,8 @@ import clsx from 'clsx';
 import format from 'date-fns/format';
 import StatusIcon from './StatusIcon';
 import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
+import { addNewsletterRecipient } from 'src/redux/actions/newsletter.action';
+import { useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {
@@ -34,9 +36,10 @@ function ContactListItem(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { user } = useSelector((state) => state.login);
+  const { newlsetterRecipients } = useSelector((state) => state.newsletter);
   const selectedContactId = props.user.uid;
 
-
+const [newsletterPeople,setNewsletterPeople] = useState(newlsetterRecipients)
 
 
   const accRejInvite = (users, status) => {
@@ -73,9 +76,18 @@ function ContactListItem(props) {
       size="small"
       style={{ marginRight: '12px' }}
       onChange={(e) => {
+    
+          console.log("WHAT IS E.TARGET VALUE ?-->",props.user)
+
+         if(newsletterPeople && newsletterPeople.map((item)=>(item.uid)).includes(props.user.uid)){
+           setNewsletterPeople(newsletterPeople.filter((item)=>(item.uid === props.user.uid)) )
+         }else{
+          setNewsletterPeople([...newsletterPeople,props.user])
+         }
+
+
         e.stopPropagation();
-        // Handle checkbox change here
-        //console.log('Checkbox changed for user:', props.user.uid);
+        //add the contact to the list of newsletter recipient , or remove it if its there
       }}
     />
     

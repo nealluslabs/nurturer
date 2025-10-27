@@ -57,7 +57,7 @@ function NavbarStyle1Content(props) {
       >
         <UserNavbarHeader />
 
-        <Navigation layout="vertical"  style={{backgroundColor:' #21C9CF',color:"#FFF"}}  />
+        <Navigation layout="vertical"  style={{backgroundColor:' #21C9CF',color:"#FFF",width:"300px"}}   />
       </FuseScrollbars>
     </div>
   );

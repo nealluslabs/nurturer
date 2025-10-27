@@ -613,7 +613,7 @@ function NewsletterSidebar(props) {
                 className="font-medium text-20 px-16 py-24"
                 style={{color:"#21C9CF"}}
               >
-                Recipients
+                Recipientsoo
               </Typography>
             </motion.div>
           )}
