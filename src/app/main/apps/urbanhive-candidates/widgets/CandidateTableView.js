@@ -47,7 +47,7 @@ function TablePaginationActions(props) {
   };
 
   return (
-    <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+    <div style={{ display: 'flex', gap: '4px', marginTop: "54px", alignItems: 'center' }}>
       <IconButton
         onClick={handleFirstPageButtonClick}
         disabled={page === 0}
@@ -171,7 +171,7 @@ function CandidateTableView() {
   return (
     <div style={{ width: '100%', height: '100vh', padding: '20px' }}>
       <div style={{ marginBottom: '20px' }}>
-        <h2 style={{ margin: 0, color: '#333', fontSize: '24px', fontWeight: 'bold' }}>
+        <h2 style={{ margin: 0, marginTop: "54px", color: '#333', fontSize: '24px', fontWeight: 'bold' }}>
           Contacts Directory
         </h2>
         <p style={{ margin: '5px 0 0 0', color: '#666', fontSize: '14px' }}>
