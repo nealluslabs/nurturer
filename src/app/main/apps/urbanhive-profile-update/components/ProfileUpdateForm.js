@@ -74,7 +74,7 @@ export default function ProfileUpdateForm() {
     const nodeRef = useRef(null);
     
     const dispatch = useDispatch();
-    const history = useHistory();
+    const history = useHistory();  
     const { user } = useSelector((state) => state.login);
     const { profileData, isLoading, error, message } = useSelector((state) => state.profile);
     const { candidateInFocus,filteredContacts } = useSelector((state) => state.user);
