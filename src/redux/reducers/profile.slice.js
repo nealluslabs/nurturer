@@ -50,9 +50,9 @@ const profileSlice = createSlice({
         state.profileData = action.payload.profileData;
     },
     fetchProfileFailed: (state, { payload }) => {
-      (state.isLoading = false);
-        (state.error = payload.errorMessage);
-        (state.message = payload.msg);
+      state.isLoading = false
+        state.error = payload.errorMessage
+        state.message = payload.msg
     },
     resetMsg: (state, action) => {
       state.isLoading = false;

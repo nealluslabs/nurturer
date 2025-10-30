@@ -104,6 +104,8 @@ export default function ProfileUpdateForm() {
 
 const [inputValue2, setInputValue2] = useState("");
 
+                  
+
 
 
 
@@ -148,6 +150,17 @@ const notifySkip = (message) => toast.error(message, {
   draggable: true,
   progress: undefined,
   });
+
+  useEffect(()=>{
+
+    skillSetService.getCities(newState)
+  
+    setNewState(candidateInFocus.state && candidateInFocus.state)
+  
+  
+  
+  },[/*candidateInFocus*/])
+
 
 useEffect(()=>{
 
@@ -713,7 +726,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                       <Controls.Select
                         name="frequency"
                         label="Frequency"
-                        value={values.frequency}
+                        value={values.frequency?.replace("month", "Month")}
                         onChange={handleInputChange}
                         options={skillSetService.getFrequency()}
                         error={errors.frequency}
@@ -765,7 +778,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                 label="Birthday"
                 name="birthday"
                 type="date"
-                value={values.birthday}
+              value={values.birthday ? new Date(values.birthday && values.birthday).toISOString().split('T')[0] : ''}
                 onChange={handleInputChange}
                 sx={{
                 width:{ xs:"80%",sm:'53%'},
@@ -800,7 +813,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                         label="Work Anniversary"
                         name="workAnniversary"
                         type="date"
-                        value={values.workAnniversary}
+                        value={values.workAnniversary ? new Date(values.workAnniversary && values.workAnniversary).toISOString().split('T')[0] : ''}
                         onChange={handleInputChange}
                         sx={{
                           width:{ xs:"80%",sm:'53%',md:"100%"},
