@@ -12,6 +12,7 @@ import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
 import { fetchAllUsers } from './user.action';
 import { S3 } from "aws-sdk";
+import { saveFilteredContacts } from 'redux/reducers/user.slice';
 
 const s3 = new S3({
   accessKeyId:process.env.REACT_APP_ACCESSKEYID_NURTURER,
@@ -81,7 +82,7 @@ export const uploadImage = (profile, user, file, resetForm) => async (dispatch) 
 
 
 
-export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInvite,notifySkip) => async (dispatch) => {
+export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInvite,notifySkip,history,filteredContacts) => async (dispatch) => {
   const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
   const uploadToS3 = async (file) => {
 
@@ -113,7 +114,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInv
   uploadToS3(file)
   .then( async(url) => {
           //console.log('Image URL: ', url);
-          dispatch(updateProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip));
+          dispatch(updateProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip,history,filteredContacts));
         });
     
  
@@ -288,6 +289,24 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
   
     return diffDays.toString();
   }
+
+
+  function transformDate(dateStr) {
+    // Split the input string into year, month, and day
+    const [year, month, day] = dateStr.split('-');
+    
+    // Convert month and day to numbers to remove any leading zeros
+    const m = Number(month);
+    const d = Number(day);
+    
+    // Format month and day to always have two digits (leading zero if needed)
+    const formattedMonth = m < 10 ? `0${m}` : m;
+    const formattedDay = d < 10 ? `0${d}` : d;
+    
+    // Return the formatted date
+    return `${formattedDay}/${formattedMonth}/${year}`;
+  
+  }
   
  
   const userRef = db.collection("contacts");
@@ -300,8 +319,8 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
    companyName: profile.companyName||" ",
    industry: profile.industry||" ",
     jobTitle: profile.jobTitle||" ",
-    birthday:profile.birthday||"1/1/1980",
-    workAnniversary:profile.workAnniversary||" ",
+    birthday:transformDate(profile.birthday)||"1/1/1980",
+    workAnniversary:transformDate(profile.workAnniversary)||"1/1/2020",
     city: profile.city||" ",
     triggers:profile.triggers||" ",
     state: profile.state||" ",
@@ -371,6 +390,32 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
   const userRef = db.collection("users").doc(user.uid);
   const contactsRef = db.collection("contacts");
 
+
+
+  function transformDate(dateStr) {
+    // Create a new Date object from the input string
+    const date = new Date(dateStr);
+  
+    // Check if the date is valid
+    if (isNaN(date.getTime())) {
+      console.error("Invalid date format");
+      return null;
+    }
+  
+    // Extract day, month, and year
+    const day = date.getDate();
+    const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
+    const year = date.getFullYear();
+  
+    // Format day and month to always have two digits (leading zero if needed)
+    const formattedDay = day < 10 ? `0${day}` : day;
+    const formattedMonth = month < 10 ? `0${month}` : month;
+  
+    // Return the formatted date as dd/mm/yyyy
+    return `${formattedDay}/${formattedMonth}/${year}`;
+  }
+  
+
   const batch = db.batch();
   const newContactIds = [];
 
@@ -402,8 +447,8 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
       companyName: profile.companyName || "",
       industry: profile.industry || "",
       jobTitle: profile.jobTitle || "",
-      birthday: profile.birthday || "1/1/1980",
-      workAnniversary: profile.workAnniversary || "",
+      birthday: transformDate(profile.birthday) || "1/1/1980",
+      workAnniversary: transformDate(profile.workAnniversary) || "",
       city: profile.city || "",
       triggers: profile.triggers? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
       sendDate:changeFrequencyToDays(profile.frequency|| "0 month"),
@@ -612,7 +657,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
 }
 
 
-export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
+export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip,history,filteredContacts) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
 
@@ -626,8 +671,13 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
     const m = Number(month);
     const d = Number(day);
     
+    // Format month and day to always have two digits (leading zero if needed)
+    const formattedMonth = m < 10 ? `0${m}` : m;
+    const formattedDay = d < 10 ? `0${d}` : d;
+    
     // Return the formatted date
-    return `${m}/${d}/${year}`;
+    return `${formattedDay}/${formattedMonth}/${year}`;
+  
   }
  
   const userRef = db.collection("contacts").doc(profile.uid)
@@ -659,9 +709,26 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
      dispatch(createProfileSuccessOnly({ msg }));
     notifyInvite(msg)
      dispatch(fetchAllUsers(user.uid));
-    // dispatch(fetchProfile());
-    // dispatch(fetchUserData(fb.auth().currentUser.uid));
-    // resetForm();
+     
+     //preparing to push to candidates page
+     const replica = [...filteredContacts]
+   
+     const index = replica.findIndex(user => user.uid === profile.uid);
+   
+     if (index > -1) {
+       const [matchedUser] = replica.splice(index, 1);
+       replica.unshift(matchedUser);
+     }
+   
+     
+    dispatch(saveFilteredContacts(replica))
+   
+   setTimeout(()=>{
+     history.push('/candidates')
+      },300)
+
+  //preparing to push to candidates page end
+
   })
   .catch((error) => {
     var errorMessage = error.message;

@@ -72,11 +72,12 @@ const type = [
 
 export default function ProfileUpdateForm() {
     const nodeRef = useRef(null);
+    
     const dispatch = useDispatch();
     const history = useHistory();
     const { user } = useSelector((state) => state.login);
     const { profileData, isLoading, error, message } = useSelector((state) => state.profile);
-    const { candidateInFocus } = useSelector((state) => state.user);
+    const { candidateInFocus,filteredContacts } = useSelector((state) => state.user);
     const [showError, setshowError] = useState(false);
     const [showError2, setshowError2] = useState(false);
     const [file, setFile] = useState(null);
@@ -431,9 +432,9 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
       //console.log("profile ABOUT TO BE SENT IN -->",profile)
 
       if(!file){
-        dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL,notifyInvite,notifySkip));
+        dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL,notifyInvite,notifySkip,history,filteredContacts));
       }else{
-        dispatch(uploadNewImage({...profile,triggers,interests:interests2}, user, file, resetForm,notifyInvite,notifySkip));
+        dispatch(uploadNewImage({...profile,triggers,interests:interests2}, user, file, resetForm,notifyInvite,notifySkip,history,filteredContacts));
         //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
       } 
     }/*else if(interests.length === 0 ||triggers.length === 0 ){
