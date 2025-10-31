@@ -261,7 +261,7 @@ function NewsletterSidebar(props) {
                 <Icon color="action">search</Icon>
 
                 <Input
-                  placeholder="Search to remove newsletter recipients"
+                  placeholder="Search to add newsletter recipients"
                   className="flex flex-1 px-8"
                   disableUnderline
                   fullWidth
@@ -613,7 +613,7 @@ function NewsletterSidebar(props) {
                 className="font-medium text-20 px-16 py-24"
                 style={{color:"#21C9CF"}}
               >
-                Recipientsoo
+                Recipients
               </Typography>
             </motion.div>
           )}

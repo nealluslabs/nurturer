@@ -10,7 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import uploadFile from 'config/uploadFile';
 import { fetchUserData } from './auth.action';
-import { fetchAllUsers } from './user.action';
+import { fetchAllContactForOneUser, fetchAllUsers } from './user.action';
 import { S3 } from "aws-sdk";
 import { saveFilteredContacts } from 'redux/reducers/user.slice';
 
@@ -707,13 +707,16 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
     photoUrl: url,
   })
  
-  .then(() => {
+  .then(async() => {
     const msg = 'Profile successfully updated!';
     //console.log(msg);
      dispatch(createProfileSuccessOnly({ msg }));
     notifyInvite(msg)
      dispatch(fetchAllUsers(user.uid));
-     
+   await dispatch(fetchAllContactForOneUser(user.uid))
+     .then(()=>{
+
+        
      //preparing to push to candidates page
      const replica = [...filteredContacts]
    
@@ -721,7 +724,7 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
    
      if (index > -1) {
        const [matchedUser] = replica.splice(index, 1);
-       replica.unshift(matchedUser);
+       replica.unshift({...matchedUser,...profile});
      }
    
      
@@ -733,6 +736,8 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
 
   //preparing to push to candidates page end
 
+     })
+    
   })
   .catch((error) => {
     var errorMessage = error.message;
