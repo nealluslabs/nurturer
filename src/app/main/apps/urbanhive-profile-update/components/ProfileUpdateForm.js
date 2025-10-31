@@ -108,6 +108,33 @@ const [inputValue2, setInputValue2] = useState("");
 
 
 
+function transformDate(dateStr) {
+  // If the dateStr is null, empty string, or invalid, return a default date
+  if (!dateStr) {
+    return '01/01/1970';  // Default date (you can adjust this to any default date you prefer)
+  }
+
+  // Create a new Date object from the input string
+  const date = new Date(dateStr);
+
+  // Check if the date is valid
+  if (isNaN(date.getTime())) {
+    console.error("Invalid date format");
+    return '01/01/1970';  // Default date in case of invalid input
+  }
+
+  // Extract day, month, and year
+  const day = date.getDate();
+  const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
+  const year = date.getFullYear();
+
+  // Format day and month to always have two digits (leading zero if needed)
+  const formattedDay = day < 10 ? `0${day}` : day;
+  const formattedMonth = month < 10 ? `0${month}` : month;
+
+  // Return the formatted date as dd/mm/yyyy
+  return `${formattedDay}/${formattedMonth}/${year}`;
+}
 
 
 
@@ -778,7 +805,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                 label="Birthday"
                 name="birthday"
                 type="date"
-              value={values.birthday ? new Date(values.birthday && values.birthday).toISOString().split('T')[0] : ''}
+              value={values.birthday ?(values.birthday !=="" ||values.birthday !==null) &&  new Date( transformDate(values.birthday)).toISOString().split('T')[0] : ''} 
                 onChange={handleInputChange}
                 sx={{
                 width:{ xs:"80%",sm:'53%'},
@@ -813,7 +840,8 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                         label="Work Anniversary"
                         name="workAnniversary"
                         type="date"
-                        value={values.workAnniversary ? new Date(values.workAnniversary && values.workAnniversary).toISOString().split('T')[0] : ''}
+                        
+                        value={values.workAnniversary ?(values.workAnniversary !=="" ||values.workAnniversary !==null) && new Date(values.workAnniversary && transformDate(values.workAnniversary)).toISOString().split('T')[0] : ''}
                         onChange={handleInputChange}
                         sx={{
                           width:{ xs:"80%",sm:'53%',md:"100%"},
