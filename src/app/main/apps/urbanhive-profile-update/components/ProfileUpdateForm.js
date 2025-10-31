@@ -683,7 +683,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                 <Controls.Select
                         name="city"
                         label="City (Required)"
-                        value={values.city}
+                        value={values.city.trim()}
                         onChange={handleInputChange}
                         options={newCities/*skillSetService.getCities(values.state && values.state.id)*/}
                         error={errors.city}

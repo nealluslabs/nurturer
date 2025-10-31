@@ -1,3 +1,4 @@
+
 import FuseScrollbars from '@fuse/core/FuseScrollbars';
 import Avatar from '@material-ui/core/Avatar';
 import Icon from '@material-ui/core/Icon';
@@ -301,7 +302,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    // //console.log("CURRENT PARAGRAPHS IS--->",paragraphs)
    if(editedParagraphs && editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
 
-    setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
+    setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
     setBulletPointChoice(editedParagraphs.bulletPoints)
     //dispatch(saveEditedParagraphs(paraData))
    }
@@ -314,7 +315,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    
 
 
-    setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? {...selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1],bulletPoints:selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1].bulletPoints.slice(0,2) }
+    setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? {...selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1],bulletPoints:selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1].bulletPoints && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1].bulletPoints.slice(0,2) }
       :
       {
       firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
@@ -342,7 +343,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
   
     if(editedParagraphs && editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.length){
  
-     setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
+     setParagraphs({...editedParagraphs,bulletPoints:editedParagraphs.bulletPoints && editedParagraphs.bulletPoints.slice(0,2)}); //to reflect only setting 2 bullet points after chat gpt generates them
      setBulletPointChoice(editedParagraphs.bulletPoints)
     
     }
@@ -439,7 +440,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
       }));
 
   return (
-    <div className={clsx('flex flex-col relative', props.className)} >
+    <div className={clsx('flex flex-col relative', props.className)}>
         <ToastContainer
           position="bottom-right"
           autoClose={1000}
@@ -451,32 +452,20 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
           draggable
           pauseOnHover
           />
-      <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col"  >
+      <FuseScrollbars ref={chatRef} className="flex flex-1 flex-col overflow-y-auto">
         {chatMessages.length || 0 && chatMessages.length > 0 ? (
         <>
-          <div onClick={handleSave}
-           
-           className="
-           flex flex-col 
-           pt-16 px-16 
-           pb-40 
-           pl-0 -ml-10         
-           pr-0   
-           w-full mx-auto
-           sm:w-full 
-           xs:w-3/5          
-           sm:pl-56 sm:ml-0    
-           sm:pr-56   
-           h-[120vh]  // Default height
-           mb-[10rem]
-           [scrollbar-width:none]          /* Firefox */
-           [&::-webkit-scrollbar]:w-0     /* Chrome/Safari */
-           [&::-webkit-scrollbar]:h-0
-               
-         "
-        
-        
-         >
+          <div onClick={handleSave} className="
+  flex flex-col 
+  pt-16 px-16 
+  pb-40 
+  pl-0 -ml-10         
+  pr-0   
+  w-3/5 mx-auto
+  sm:w-full            
+  sm:pl-56 sm:ml-0    
+  sm:pr-56            
+" >
             {chatMessagesOutput.map((item, i) => {
               connectStatus = item.status;
               const contact =
@@ -503,7 +492,7 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
                     />
                   )}
                   <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">
-                    <div className="leading-tight whitespace-pre-wrap" >
+                    <div className="leading-tight whitespace-pre-wrap" style={{width:"50rem"}}>
                       {/*item.messageText*/}
                       
                       <div
@@ -995,7 +984,7 @@ We had some great conversations previously, and I really valued the opportunity 
 
 
            
-{<Box  sx={{display:selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:{xs:"10rem",sm:"0rem"},marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"60.5%"},padding:"1rem",paddingTop:"3rem"}}>
+{<Box sx={{display:selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
  {!(selectedChatUser.name === 'EmOly WhOte' || selectedChatUser.name === 'Bib Johnsonopia') ?
    
@@ -1599,7 +1588,7 @@ label={<Typography fontSize="14px">
       </FuseScrollbars>
        {/* <button onClick={testMe()}>Click Me</button> */}
       {chatMessages && (
-        <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8" >
+        <form onSubmit={onMessageSubmit} className="absolute bottom-0 right-0 left-0 py-16 px-8">
           <Paper className="flex items-center relative  shadow" style={{height:"6rem",width:"107%",position:"relative",top:"2rem",left:"-2rem"}}>
             <TextField
              style={{height:"6rem"}}
