@@ -337,130 +337,7 @@ function CandidateApp(props) {
 */}
 
 
-           {
-          //THIS IS THE TOGGLE BUTTON WHICH IS AT THE TOP OF THE SCREEN, DO NOT DELETE -BETWEEN CARD MODE AND TABLE MODE
-           <Box sx={{
-            display: "flex",
-            justifyContent:"space-between",
-            flexDirection:{xs:"column",md:"row"},
-            width:"95%",
-            
-            gap: "12px",
-            margin:"0px 0",
-            position:"absolute",
-            top:"20px",
-            right:"50px"
-           }}
-            >
-            
-
-            {/* Search Form */}
-            <Grid 
-              container 
-              spacing={0}
-              sx={{
-                display: "flex",
-                flexDirection: {xs:"column",sm:"row"},
-                alignItems: "center",
-                justifyContent:{sm:"flex-start",xs:"flex-start"},
-                width:{lg:"90%",md:"90%"},
-                flexWrap: "nowrap",
-                columnGap: "1rem",
-                marginBottom: {xs: "1rem", md: "0"}
-              }}
-            >
-              {/* Search Field */}
-              <Grid item sx={{ flex: "0 0 70%" }}>
-                <TextField
-                  placeholder="Search..."
-                  onChange={(e) => { handleSearchResults(e.target.value) }}
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">
-                        <SearchIcon
-                          style={{ cursor:"pointer" }} 
-                          onClick={(e)=>{handleSearchResults(e.target.value)}} 
-                        />
-                      </InputAdornment>
-                    ),
-                    sx: {
-                      height: "3.8rem",
-                      paddingLeft:"10px",
-                      "& input": {
-                        height: "3rem",
-                        paddingLeft:"10px",
-                        padding: 0,
-                        fontSize: "1rem",
-                      },
-                    },
-                  }}
-                />
-              </Grid>
-
-              {/* New Contact Button */}
-              <Grid item sx={{ flex: "0 0 25%",marginTop:{sm:"0rem",xs:"1rem"} }}>
-                <button 
-                  onClick={() => { history.push('/apps/profile') }}
-                  style={{ 
-                    backgroundColor: "#21C9CF",
-                    color: 'white',
-                    padding: '10px 20px',
-                    borderRadius: '8px',
-                    textTransform: 'none',
-                    
-                  }}
-                >
-                  <AddIcon sx={{ marginRight: '4px' }} />
-                  New Contact
-                </button>
-              </Grid>
-            </Grid>
-
-            <div style={{ 
-              display: 'flex', 
-              justifyContent: 'flex-end', 
-              marginBottom: '20px',
-              marginTop: '1rem'
-            }}>
-              <div style={{ 
-                display: 'flex', 
-                backgroundColor: '#f5f5f5', 
-                borderRadius: '8px', 
-                padding: '4px' 
-              }}>
-                <IconButton
-                  onClick={() => setViewMode('card')}
-                  sx={{
-                    backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
-                    color: viewMode === 'card' ? 'white' : '#666',
-                    '&:hover': {
-                      backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
-                    },
-                    marginRight: '4px'
-                  }}
-                >
-                  <ViewModuleIcon />
-                </IconButton>
-                <IconButton
-                  onClick={() => setViewMode('list')}
-                  sx={{
-                    backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
-                    color: viewMode === 'list' ? 'white' : '#666',
-                    '&:hover': {
-                      backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
-                    }
-                  }}
-                >
-                  <ViewListIcon />
-                </IconButton>
-              </div>
-            </div>
-            
            
-            
-            </Box>
-          }
 
 
 
@@ -836,6 +713,72 @@ function CandidateApp(props) {
             ) : (
               <CandidateTableView />
             )}
+
+
+
+
+
+          {
+          //THIS IS THE TOGGLE BUTTON WHICH IS AT THE TOP OF THE SCREEN, DO NOT DELETE -BETWEEN CARD MODE AND TABLE MODE
+           <Box sx={{
+            display: "none",
+            justifyContent:"flex-end",
+            flexDirection:{xs:"column",md:"row"},
+            width:"95%",
+            
+            gap: "12px",
+            margin:"0px 0",
+            position:"absolute",
+            top:"20px",
+            right:"50px"
+           }}
+            >
+            
+
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'flex-end', 
+              marginBottom: '20px',
+              marginTop: '1rem'
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                backgroundColor: '#f5f5f5', 
+                borderRadius: '8px', 
+                padding: '4px' 
+              }}>
+                <IconButton
+                  onClick={() => setViewMode('card')}
+                  sx={{
+                    backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
+                    color: viewMode === 'card' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
+                    },
+                    marginRight: '4px'
+                  }}
+                >
+                  <ViewModuleIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setViewMode('list')}
+                  sx={{
+                    backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
+                    color: viewMode === 'list' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
+                    }
+                  }}
+                >
+                  <ViewListIcon />
+                </IconButton>
+              </div>
+            </div>
+            
+           
+            
+            </Box>
+          }
 
 
         </div>
