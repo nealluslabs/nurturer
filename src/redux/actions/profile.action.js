@@ -209,12 +209,9 @@ export const createProfile = (profile, user, file, resetForm, url) => async (dis
   const profileData = userRef.update({
       uid: fb.auth().currentUser.uid,
       notes: profile.notes,
-      skillset: profile.skillset,
+      
       city: profile.city,
-      skills_needed: profile.skills_needed,
-      isTechnical: profile.isTechnical,
-      lookingFor: profile.lookingFor,
-      githubUrl: profile.githubUrl,
+      
       photoUrl: url,
   })
   .then(() => {
@@ -238,25 +235,22 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
   //console.log('All data: ',{profile, user, url});
   dispatch(createProfilePending());
 
+ 
+
+
   function changeFrequencyToDays(profileFrequency) {
     // If undefined, return "30" as default
-    if (!profileFrequency) return "30";
-
-
-  
-    if (profileFrequency === "None") return "None";
+    if (!profileFrequency||profileFrequency === "None"||profileFrequency === "none" ) return "0";
     // Use regex to extract the number from the string (e.g. "2 months")
     const match = profileFrequency.match(/\d+/);
-  
     if (match) {
-      const numberOfUnits = parseInt(match[0], 10);
-      const days = numberOfUnits * 30;
-      return days.toString();
+    const numberOfUnits = parseInt(match[0], 10);
+    const days = numberOfUnits * 30;
+    return days.toString();
     }
-  
     // If no number found, default to "30"
-    return "None";
-  }
+    return "0";
+    }
 
 
 
@@ -291,21 +285,28 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
   }
 
 
+
+
+
   function transformDate(dateStr) {
+    // If the string is empty, null, or doesn't contain '-', just return it as-is
+    if (!dateStr || !dateStr.includes('-')) {
+      return dateStr;
+    }
+  
     // Split the input string into year, month, and day
     const [year, month, day] = dateStr.split('-');
-    
+  
     // Convert month and day to numbers to remove any leading zeros
     const m = Number(month);
     const d = Number(day);
-    
+  
     // Format month and day to always have two digits (leading zero if needed)
     const formattedMonth = m < 10 ? `0${m}` : m;
     const formattedDay = d < 10 ? `0${d}` : d;
-    
+  
     // Return the formatted date
     return `${formattedDay}/${formattedMonth}/${year}`;
-  
   }
   
  
@@ -586,7 +587,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
 
   function changeFrequencyToDays(profileFrequency) {
     // If undefined, return "30" as default
-    if (!profileFrequency) return "30";
+    if (!profileFrequency||profileFrequency === "None"||profileFrequency === "none" ) return "0";
     // Use regex to extract the number from the string (e.g. "2 months")
     const match = profileFrequency.match(/\d+/);
     if (match) {
@@ -595,7 +596,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
     return days.toString();
     }
     // If no number found, default to "30"
-    return "30";
+    return "0";
     }
  
   const userRef = db.collection("contacts").doc(profile.uid);
@@ -620,7 +621,7 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
     frequency: profile.frequency,
     interests: profile.interests,
     password:'12345678',
-    usedConnection:0,
+   
     lastActive:1663862737170,
     contacterId:user.uid,
    
