@@ -664,22 +664,25 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
   console.log("PROFILE BEFORE UPDATING TO DB, WHAT IS BIRTHDAY --->",profile.birthday)
 
   function transformDate(dateStr) {
+    // If the string is empty, null, or doesn't contain '-', just return it as-is
+    if (!dateStr || !dateStr.includes('-')) {
+      return dateStr;
+    }
+  
     // Split the input string into year, month, and day
     const [year, month, day] = dateStr.split('-');
-    
+  
     // Convert month and day to numbers to remove any leading zeros
     const m = Number(month);
     const d = Number(day);
-    
+  
     // Format month and day to always have two digits (leading zero if needed)
     const formattedMonth = m < 10 ? `0${m}` : m;
     const formattedDay = d < 10 ? `0${d}` : d;
-    
+  
     // Return the formatted date
     return `${formattedDay}/${formattedMonth}/${year}`;
-  
   }
- 
   const userRef = db.collection("contacts").doc(profile.uid)
  
    userRef.update({

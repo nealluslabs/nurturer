@@ -364,12 +364,12 @@ export const getStates = () => ([
       "title": "Surprise"
     },
     {
-      "id": "Little_Rock",
+      "id": "Little Rock",
       "stateId": "Arkansas",
       "title": "Little Rock"
     },
     {
-      "id": "Fort_Smith",
+      "id": "Fort Smith",
       "stateId": "Arkansas",
       "title": "Fort Smith"
     },
@@ -389,7 +389,7 @@ export const getStates = () => ([
       "title": "Jonesboro"
     },
     {
-      "id": "North_Little_Rock",
+      "id": "North Little Rock",
       "stateId": "Arkansas",
       "title": "North Little Rock"
     },
@@ -409,27 +409,27 @@ export const getStates = () => ([
       "title": "Bentonville"
     },
     {
-      "id": "Pine_Bluff",
+      "id": "Pine Bluff",
       "stateId": "Arkansas",
       "title": "Pine Bluff"
     },
     {
-      "id": "Los_Angeles",
+      "id": "Los Angeles",
       "stateId": "California",
       "title": "Los Angeles"
     },
     {
-      "id": "San_Diego",
+      "id": "San Diego",
       "stateId": "California",
       "title": "San Diego"
     },
     {
-      "id": "San_Jose",
+      "id": "San Jose",
       "stateId": "California",
       "title": "San Jose"
     },
     {
-      "id": "San_Francisco",
+      "id": "San Francisco",
       "stateId": "California",
       "title": "San Francisco"
     },
@@ -444,7 +444,7 @@ export const getStates = () => ([
       "title": "Sacramento"
     },
     {
-      "id": "Long_Beach",
+      "id": "Long Beach",
       "stateId": "California",
       "title": "Long Beach"
     },
@@ -469,7 +469,7 @@ export const getStates = () => ([
       "title": "Denver"
     },
     {
-      "id": "Colorado_Springs",
+      "id": "Colorado Springs",
       "stateId": "Colorado",
       "title": "Colorado Springs"
     },
@@ -479,7 +479,7 @@ export const getStates = () => ([
       "title": "Aurora"
     },
     {
-      "id": "Fort_Collins",
+      "id": "Fort Collins",
       "stateId": "Colorado",
       "title": "Fort Collins"
     },
@@ -519,7 +519,7 @@ export const getStates = () => ([
       "title": "Bridgeport"
     },
     {
-      "id": "New_Haven",
+      "id": "New Haven",
       "stateId": "Connecticut",
       "title": "New Haven"
     },
@@ -549,7 +549,7 @@ export const getStates = () => ([
       "title": "Danbury"
     },
     {
-      "id": "New_Britain",
+      "id": "New Britain",
       "stateId": "Connecticut",
       "title": "New Britain"
     },
@@ -609,7 +609,7 @@ export const getStates = () => ([
       "title": "Elsmere"
     },
     {
-      "id": "New_Castle",
+      "id": "New Castle",
       "stateId": "Delaware",
       "title": "New Castle"
     },
@@ -634,7 +634,7 @@ export const getStates = () => ([
       "title": "Orlando"
     },
     {
-      "id": "St._Petersburg",
+      "id": "St. Petersburg",
       "stateId": "Florida",
       "title": "St. Petersburg"
     },
@@ -649,17 +649,17 @@ export const getStates = () => ([
       "title": "Tallahassee"
     },
     {
-      "id": "Fort_Lauderdale",
+      "id": "Fort Lauderdale",
       "stateId": "Florida",
       "title": "Fort Lauderdale"
     },
     {
-      "id": "Port_St._Lucie",
+      "id": "Port St. Lucie",
       "stateId": "Florida",
       "title": "Port St. Lucie"
     },
     {
-      "id": "Cape_Coral",
+      "id": "Cape Coral",
       "stateId": "Florida",
       "title": "Cape Coral"
     },
@@ -694,7 +694,7 @@ export const getStates = () => ([
       "title": "Athens"
     },
     {
-      "id": "Sandy_Springs",
+      "id": "Sandy Springs",
       "stateId": "Georgia",
       "title": "Sandy Springs"
     },
@@ -709,7 +709,7 @@ export const getStates = () => ([
       "title": "Albany"
     },
     {
-      "id": "Johns_Creek",
+      "id": "Johns Creek",
       "stateId": "Georgia",
       "title": "Johns Creek"
     },
@@ -719,12 +719,12 @@ export const getStates = () => ([
       "title": "Honolulu"
     },
     {
-      "id": "East_Honolulu",
+      "id": "East Honolulu",
       "stateId": "Hawaii",
       "title": "East Honolulu"
     },
     {
-      "id": "Pearl_City",
+      "id": "Pearl City",
       "stateId": "Hawaii",
       "title": "Pearl City"
     },
@@ -749,12 +749,12 @@ export const getStates = () => ([
       "title": "Kaneohe"
     },
     {
-      "id": "Mililani_Town",
+      "id": "Mililani Town",
       "stateId": "Hawaii",
       "title": "Mililani Town"
     },
     {
-      "id": "Ewa_Gentry",
+      "id": "Ewa Gentry",
       "stateId": "Hawaii",
       "title": "Ewa Gentry"
     },
@@ -779,7 +779,7 @@ export const getStates = () => ([
       "title": "Nampa"
     },
     {
-      "id": "Idaho_Falls",
+      "id": "Idaho Falls",
       "stateId": "Idaho",
       "title": "Idaho Falls"
     },
@@ -794,12 +794,12 @@ export const getStates = () => ([
       "title": "Caldwell"
     },
     {
-      "id": "Coeur_d'Alene",
+      "id": "Coeur d'Alene",
       "stateId": "Idaho",
       "title": "Coeur d'Alene"
     },
     {
-      "id": "Twin_Falls",
+      "id": "Twin Falls",
       "stateId": "Idaho",
       "title": "Twin Falls"
     },
@@ -809,7 +809,7 @@ export const getStates = () => ([
       "title": "Lewiston"
     },
     {
-      "id": "Post_Falls",
+      "id": "Post Falls",
       "stateId": "Idaho",
       "title": "Post Falls"
     },
@@ -869,7 +869,7 @@ export const getStates = () => ([
       "title": "Indianapolis"
     },
     {
-      "id": "Fort_Wayne",
+      "id": "Fort Wayne",
       "stateId": "Indiana",
       "title": "Fort Wayne"
     },
@@ -879,7 +879,7 @@ export const getStates = () => ([
       "title": "Evansville"
     },
     {
-      "id": "South_Bend",
+      "id": "South Bend",
       "stateId": "Indiana",
       "title": "South Bend"
     },
@@ -914,12 +914,12 @@ export const getStates = () => ([
       "title": "Muncie"
     },
     {
-      "id": "Des_Moines",
+      "id": "Des Moines",
       "stateId": "Iowa",
       "title": "Des Moines"
     },
     {
-      "id": "Cedar_Rapids",
+      "id": "Cedar Rapids",
       "stateId": "Iowa",
       "title": "Cedar Rapids"
     },
@@ -929,12 +929,12 @@ export const getStates = () => ([
       "title": "Davenport"
     },
     {
-      "id": "Sioux_City",
+      "id": "Sioux City",
       "stateId": "Iowa",
       "title": "Sioux City"
     },
     {
-      "id": "Iowa_City",
+      "id": "Iowa City",
       "stateId": "Iowa",
       "title": "Iowa City"
     },
@@ -949,12 +949,12 @@ export const getStates = () => ([
       "title": "Ames"
     },
     {
-      "id": "West_Des_Moines",
+      "id": "West Des Moines",
       "stateId": "Iowa",
       "title": "West Des Moines"
     },
     {
-      "id": "Council_Bluffs",
+      "id": "Council Bluffs",
       "stateId": "Iowa",
       "title": "Council Bluffs"
     },
@@ -969,12 +969,12 @@ export const getStates = () => ([
       "title": "Wichita"
     },
     {
-      "id": "Overland_Park",
+      "id": "Overland Park",
       "stateId": "Kansas",
       "title": "Overland Park"
     },
     {
-      "id": "Kansas_City",
+      "id": "Kansas City",
       "stateId": "Kansas",
       "title": "Kansas City"
     },
@@ -1024,7 +1024,7 @@ export const getStates = () => ([
       "title": "Lexington"
     },
     {
-      "id": "Bowling_Green",
+      "id": "Bowling Green",
       "stateId": "Kentucky",
       "title": "Bowling Green"
     },
@@ -1064,12 +1064,12 @@ export const getStates = () => ([
       "title": "Nicholasville"
     },
     {
-      "id": "New_Orleans",
+      "id": "New Orleans",
       "stateId": "Louisiana",
       "title": "New Orleans"
     },
     {
-      "id": "Baton_Rouge",
+      "id": "Baton Rouge",
       "stateId": "Louisiana",
       "title": "Baton Rouge"
     },
@@ -1084,7 +1084,7 @@ export const getStates = () => ([
       "title": "Lafayette"
     },
     {
-      "id": "Lake_Charles",
+      "id": "Lake Charles",
       "stateId": "Louisiana",
       "title": "Lake Charles"
     },
@@ -1094,7 +1094,7 @@ export const getStates = () => ([
       "title": "Kenner"
     },
     {
-      "id": "Bossier_City",
+      "id": "Bossier City",
       "stateId": "Louisiana",
       "title": "Bossier City"
     },
@@ -1129,7 +1129,7 @@ export const getStates = () => ([
       "title": "Bangor"
     },
     {
-      "id": "South_Portland",
+      "id": "South Portland",
       "stateId": "Maine",
       "title": "South Portland"
     },
@@ -1179,7 +1179,7 @@ export const getStates = () => ([
       "title": "Germantown"
     },
     {
-      "id": "Silver_Spring",
+      "id": "Silver Spring",
       "stateId": "Maryland",
       "title": "Silver Spring"
     },
@@ -1189,12 +1189,12 @@ export const getStates = () => ([
       "title": "Waldorf"
     },
     {
-      "id": "Glen_Burnie",
+      "id": "Glen Burnie",
       "stateId": "Maryland",
       "title": "Glen Burnie"
     },
     {
-      "id": "Ellicott_City",
+      "id": "Ellicott City",
       "stateId": "Maryland",
       "title": "Ellicott City"
     },
@@ -1254,12 +1254,12 @@ export const getStates = () => ([
       "title": "Lynn"
     },
     {
-      "id": "New_Bedford",
+      "id": "New Bedford",
       "stateId": "Massachusetts",
       "title": "New Bedford"
     },
     {
-      "id": "Fall_River",
+      "id": "Fall River",
       "stateId": "Massachusetts",
       "title": "Fall River"
     },
@@ -1269,7 +1269,7 @@ export const getStates = () => ([
       "title": "Detroit"
     },
     {
-      "id": "Grand_Rapids",
+      "id": "Grand Rapids",
       "stateId": "Michigan",
       "title": "Grand Rapids"
     },
@@ -1279,12 +1279,12 @@ export const getStates = () => ([
       "title": "Warren"
     },
     {
-      "id": "Sterling_Heights",
+      "id": "Sterling Heights",
       "stateId": "Michigan",
       "title": "Sterling Heights"
     },
     {
-      "id": "Ann_Arbor",
+      "id": "Ann Arbor",
       "stateId": "Michigan",
       "title": "Ann Arbor"
     },
@@ -1319,7 +1319,7 @@ export const getStates = () => ([
       "title": "Minneapolis"
     },
     {
-      "id": "St._Paul",
+      "id": "St. Paul",
       "stateId": "Minnesota",
       "title": "St. Paul"
     },
@@ -1339,7 +1339,7 @@ export const getStates = () => ([
       "title": "Bloomington"
     },
     {
-      "id": "Brooklyn_Park",
+      "id": "Brooklyn Park",
       "stateId": "Minnesota",
       "title": "Brooklyn Park"
     },
@@ -1349,7 +1349,7 @@ export const getStates = () => ([
       "title": "Plymouth"
     },
     {
-      "id": "Maple_Grove",
+      "id": "Maple Grove",
       "stateId": "Minnesota",
       "title": "Maple Grove"
     },
@@ -1399,7 +1399,7 @@ export const getStates = () => ([
       "title": "Tupelo"
     },
     {
-      "id": "Olive_Branch",
+      "id": "Olive Branch",
       "stateId": "Mississippi",
       "title": "Olive Branch"
     },
@@ -1409,17 +1409,17 @@ export const getStates = () => ([
       "title": "Greenville"
     },
     {
-      "id": "Horn_Lake",
+      "id": "Horn Lake",
       "stateId": "Mississippi",
       "title": "Horn Lake"
     },
     {
-      "id": "Kansas_City",
+      "id": "Kansas City",
       "stateId": "Missouri",
       "title": "Kansas City"
     },
     {
-      "id": "St._Louis",
+      "id": "St. Louis",
       "stateId": "Missouri",
       "title": "St. Louis"
     },
@@ -1439,7 +1439,7 @@ export const getStates = () => ([
       "title": "Independence"
     },
     {
-      "id": "Lee's_Summit",
+      "id": "Lee's Summit",
       "stateId": "Missouri",
       "title": "Lee's Summit"
     },
@@ -1449,17 +1449,17 @@ export const getStates = () => ([
       "title": "O'Fallon"
     },
     {
-      "id": "St._Joseph",
+      "id": "St. Joseph",
       "stateId": "Missouri",
       "title": "St. Joseph"
     },
     {
-      "id": "St._Charles",
+      "id": "St. Charles",
       "stateId": "Missouri",
       "title": "St. Charles"
     },
     {
-      "id": "Blue_Springs",
+      "id": "Blue Springs",
       "stateId": "Missouri",
       "title": "Blue Springs"
     },
@@ -1474,7 +1474,7 @@ export const getStates = () => ([
       "title": "Missoula"
     },
     {
-      "id": "Great_Falls",
+      "id": "Great Falls",
       "stateId": "Montana",
       "title": "Great Falls"
     },
@@ -1509,7 +1509,7 @@ export const getStates = () => ([
       "title": "Anaconda"
     },
     {
-      "id": "Miles_City",
+      "id": "Miles City",
       "stateId": "Montana",
       "title": "Miles City"
     },
@@ -1529,7 +1529,7 @@ export const getStates = () => ([
       "title": "Bellevue"
     },
     {
-      "id": "Grand_Island",
+      "id": "Grand Island",
       "stateId": "Nebraska",
       "title": "Grand Island"
     },
@@ -1549,7 +1549,7 @@ export const getStates = () => ([
       "title": "Hastings"
     },
     {
-      "id": "North_Platte",
+      "id": "North Platte",
       "stateId": "Nebraska",
       "title": "North Platte"
     },
@@ -1564,7 +1564,7 @@ export const getStates = () => ([
       "title": "Columbus"
     },
     {
-      "id": "Las_Vegas",
+      "id": "Las Vegas",
       "stateId": "Nevada",
       "title": "Las Vegas"
     },
@@ -1579,7 +1579,7 @@ export const getStates = () => ([
       "title": "Reno"
     },
     {
-      "id": "North_Las_Vegas",
+      "id": "North Las Vegas",
       "stateId": "Nevada",
       "title": "North Las Vegas"
     },
@@ -1589,7 +1589,7 @@ export const getStates = () => ([
       "title": "Sparks"
     },
     {
-      "id": "Carson_City",
+      "id": "Carson City",
       "stateId": "Nevada",
       "title": "Carson City"
     },
@@ -1604,7 +1604,7 @@ export const getStates = () => ([
       "title": "Mesquite"
     },
     {
-      "id": "Boulder_City",
+      "id": "Boulder City",
       "stateId": "Nevada",
       "title": "Boulder City"
     },
@@ -1669,7 +1669,7 @@ export const getStates = () => ([
       "title": "Newark"
     },
     {
-      "id": "Jersey_City",
+      "id": "Jersey City",
       "stateId": "New Jersey",
       "title": "Jersey City"
     },
@@ -1699,7 +1699,7 @@ export const getStates = () => ([
       "title": "Lakewood"
     },
     {
-      "id": "Toms_River",
+      "id": "Toms River",
       "stateId": "New Jersey",
       "title": "Toms River"
     },
@@ -1719,17 +1719,17 @@ export const getStates = () => ([
       "title": "Albuquerque"
     },
     {
-      "id": "Las_Cruces",
+      "id": "Las Cruces",
       "stateId": "New Mexico",
       "title": "Las Cruces"
     },
     {
-      "id": "Rio_Rancho",
+      "id": "Rio Rancho",
       "stateId": "New Mexico",
       "title": "Rio Rancho"
     },
     {
-      "id": "Santa_Fe",
+      "id": "Santa Fe",
       "stateId": "New Mexico",
       "title": "Santa Fe"
     },
@@ -1764,7 +1764,7 @@ export const getStates = () => ([
       "title": "Carlsbad"
     },
     {
-      "id": "New_York_City",
+      "id": "New York City",
       "stateId": "New York",
       "title": "New York City"
     },
@@ -1794,12 +1794,12 @@ export const getStates = () => ([
       "title": "Albany"
     },
     {
-      "id": "New_Rochelle",
+      "id": "New Rochelle",
       "stateId": "New York",
       "title": "New Rochelle"
     },
     {
-      "id": "Mount_Vernon",
+      "id": "Mount Vernon",
       "stateId": "New York",
       "title": "Mount Vernon"
     },
@@ -1854,7 +1854,7 @@ export const getStates = () => ([
       "title": "Wilmington"
     },
     {
-      "id": "High_Point",
+      "id": "High Point",
       "stateId": "North Carolina",
       "title": "High Point"
     },
@@ -1874,7 +1874,7 @@ export const getStates = () => ([
       "title": "Bismarck"
     },
     {
-      "id": "Grand_Forks",
+      "id": "Grand Forks",
       "stateId": "North Dakota",
       "title": "Grand Forks"
     },
@@ -1884,7 +1884,7 @@ export const getStates = () => ([
       "title": "Minot"
     },
     {
-      "id": "West_Fargo",
+      "id": "West Fargo",
       "stateId": "North Dakota",
       "title": "West Fargo"
     },
@@ -1964,7 +1964,7 @@ export const getStates = () => ([
       "title": "Lorain"
     },
     {
-      "id": "Oklahoma_City",
+      "id": "Oklahoma City",
       "stateId": "Oklahoma",
       "title": "Oklahoma City"
     },
@@ -1979,7 +1979,7 @@ export const getStates = () => ([
       "title": "Norman"
     },
     {
-      "id": "Broken_Arrow",
+      "id": "Broken Arrow",
       "stateId": "Oklahoma",
       "title": "Broken Arrow"
     },
@@ -1999,7 +1999,7 @@ export const getStates = () => ([
       "title": "Moore"
     },
     {
-      "id": "Midwest_City",
+      "id": "Midwest City",
       "stateId": "Oklahoma",
       "title": "Midwest City"
     },
@@ -2134,7 +2134,7 @@ export const getStates = () => ([
       "title": "Pawtucket"
     },
     {
-      "id": "East_Providence",
+      "id": "East Providence",
       "stateId": "Rhode Island",
       "title": "East Providence"
     },
@@ -2154,12 +2154,12 @@ export const getStates = () => ([
       "title": "Cumberland"
     },
     {
-      "id": "North_Providence",
+      "id": "North Providence",
       "stateId": "Rhode Island",
       "title": "North Providence"
     },
     {
-      "id": "South_Kingstown",
+      "id": "South Kingstown",
       "stateId": "Rhode Island",
       "title": "South Kingstown"
     },
@@ -2174,17 +2174,17 @@ export const getStates = () => ([
       "title": "Charleston"
     },
     {
-      "id": "North_Charleston",
+      "id": "North Charleston",
       "stateId": "South Carolina",
       "title": "North Charleston"
     },
     {
-      "id": "Mount_Pleasant",
+      "id": "Mount Pleasant",
       "stateId": "South Carolina",
       "title": "Mount Pleasant"
     },
     {
-      "id": "Rock_Hill",
+      "id": "Rock Hill",
       "stateId": "South Carolina",
       "title": "Rock Hill"
     },
@@ -2204,22 +2204,22 @@ export const getStates = () => ([
       "title": "Sumter"
     },
     {
-      "id": "Goose_Creek",
+      "id": "Goose Creek",
       "stateId": "South Carolina",
       "title": "Goose Creek"
     },
     {
-      "id": "Hilton_Head_Island",
+      "id": "Hilton Head Island",
       "stateId": "South Carolina",
       "title": "Hilton Head Island"
     },
     {
-      "id": "Sioux_Falls",
+      "id": "Sioux Falls",
       "stateId": "South Dakota",
       "title": "Sioux Falls"
     },
     {
-      "id": "Rapid_City",
+      "id": "Rapid City",
       "stateId": "South Dakota",
       "title": "Rapid City"
     },
@@ -2304,7 +2304,7 @@ export const getStates = () => ([
       "title": "Jackson"
     },
     {
-      "id": "Johnson_City",
+      "id": "Johnson City",
       "stateId": "Tennessee",
       "title": "Johnson City"
     },
@@ -2319,7 +2319,7 @@ export const getStates = () => ([
       "title": "Houston"
     },
     {
-      "id": "San_Antonio",
+      "id": "San Antonio",
       "stateId": "Texas",
       "title": "San Antonio"
     },
@@ -2334,12 +2334,12 @@ export const getStates = () => ([
       "title": "Austin"
     },
     {
-      "id": "Fort_Worth",
+      "id": "Fort Worth",
       "stateId": "Texas",
       "title": "Fort Worth"
     },
     {
-      "id": "El_Paso",
+      "id": "El Paso",
       "stateId": "Texas",
       "title": "El Paso"
     },
@@ -2349,7 +2349,7 @@ export const getStates = () => ([
       "title": "Arlington"
     },
     {
-      "id": "Corpus_Christi",
+      "id": "Corpus Christi",
       "stateId": "Texas",
       "title": "Corpus Christi"
     },
@@ -2364,12 +2364,12 @@ export const getStates = () => ([
       "title": "Laredo"
     },
     {
-      "id": "Salt_Lake_City",
+      "id": "Salt Lake City",
       "stateId": "Utah",
       "title": "Salt Lake City"
     },
     {
-      "id": "West_Valley_City",
+      "id": "West Valley City",
       "stateId": "Utah",
       "title": "West Valley City"
     },
@@ -2379,7 +2379,7 @@ export const getStates = () => ([
       "title": "Provo"
     },
     {
-      "id": "West_Jordan",
+      "id": "West Jordan",
       "stateId": "Utah",
       "title": "West Jordan"
     },
@@ -2394,7 +2394,7 @@ export const getStates = () => ([
       "title": "Sandy"
     },
     {
-      "id": "St._George",
+      "id": "St. George",
       "stateId": "Utah",
       "title": "St. George"
     },
@@ -2409,7 +2409,7 @@ export const getStates = () => ([
       "title": "Layton"
     },
     {
-      "id": "South_Jordan",
+      "id": "South Jordan",
       "stateId": "Utah",
       "title": "South Jordan"
     },
@@ -2419,7 +2419,7 @@ export const getStates = () => ([
       "title": "Burlington"
     },
     {
-      "id": "South_Burlington",
+      "id": "South Burlington",
       "stateId": "Vermont",
       "title": "South Burlington"
     },
@@ -2439,12 +2439,12 @@ export const getStates = () => ([
       "title": "Montpelier"
     },
     {
-      "id": "Essex_Junction",
+      "id": "Essex Junction",
       "stateId": "Vermont",
       "title": "Essex Junction"
     },
     {
-      "id": "St._Albans",
+      "id": "St. Albans",
       "stateId": "Vermont",
       "title": "St. Albans"
     },
@@ -2464,7 +2464,7 @@ export const getStates = () => ([
       "title": "Brattleboro"
     },
     {
-      "id": "Virginia_Beach",
+      "id": "Virginia Beach",
       "stateId": "Virginia",
       "title": "Virginia Beach"
     },
@@ -2484,7 +2484,7 @@ export const getStates = () => ([
       "title": "Richmond"
     },
     {
-      "id": "Newport_News",
+      "id": "Newport News",
       "stateId": "Virginia",
       "title": "Newport News"
     },
@@ -2554,12 +2554,12 @@ export const getStates = () => ([
       "title": "Renton"
     },
     {
-      "id": "Spokane_Valley",
+      "id": "Spokane Valley",
       "stateId": "Washington",
       "title": "Spokane Valley"
     },
     {
-      "id": "Federal_Way",
+      "id": "Federal Way",
       "stateId": "Washington",
       "title": "Federal Way"
     },
@@ -2624,7 +2624,7 @@ export const getStates = () => ([
       "title": "Madison"
     },
     {
-      "id": "Green_Bay",
+      "id": "Green Bay",
       "stateId": "Wisconsin",
       "title": "Green Bay"
     },
@@ -2649,7 +2649,7 @@ export const getStates = () => ([
       "title": "Waukesha"
     },
     {
-      "id": "Eau_Claire",
+      "id": "Eau Claire",
       "stateId": "Wisconsin",
       "title": "Eau Claire"
     },
@@ -2684,7 +2684,7 @@ export const getStates = () => ([
       "title": "Gillette"
     },
     {
-      "id": "Rock_Springs",
+      "id": "Rock Springs",
       "stateId": "Wyoming",
       "title": "Rock Springs"
     },
@@ -2694,7 +2694,7 @@ export const getStates = () => ([
       "title": "Sheridan"
     },
     {
-      "id": "Green_River",
+      "id": "Green River",
       "stateId": "Wyoming",
       "title": "Green River"
     },
@@ -2726,6 +2726,7 @@ export const getStates = () => ([
   
 
 export const getFrequency = ()=>([
+  { id: 'None', title: 'None' },
     { id: '1 Month', title: '1 Month' },
     { id: '2 Months', title: '2 Months' },
     { id: '3 Months', title: '3 Months' },
