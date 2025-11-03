@@ -163,7 +163,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInv
 
 
 
-  export const updateProfileWithImage = (profile, user, file, resetForm,notifyInvite,notifySkip) => async (dispatch) => {
+  export const updateProfileWithImage = (profile, user, file, resetForm,notifyInvite,notifySkip,history,filteredContacts) => async (dispatch) => {
     const imageName = uuidv4() + '.' + file?.name?.split('.')?.pop();
     const uploadToS3 = async (file) => {
 
@@ -195,7 +195,7 @@ export const uploadNewImageforUpdate = (profile, user, file, resetForm,notifyInv
     uploadToS3(file)
     .then( async(url) => {
             //console.log('Image URL: ', url);
-            dispatch(updateProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip));
+            dispatch(updateProfile(profile, user, file, resetForm, url,notifyInvite,notifySkip,history,filteredContacts));
           });
       
    

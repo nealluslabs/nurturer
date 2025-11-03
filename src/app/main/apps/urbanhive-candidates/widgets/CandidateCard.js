@@ -442,14 +442,15 @@ function CandidateCard() {
           }}
         >
           <Box
-            sx={{
+            style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              mb: "3rem",
+              marginBottom: "3rem",
+             
             }}
           >
-            <Button
+           {/* <Button
               onClick={() =>{}
                
               }
@@ -468,7 +469,28 @@ function CandidateCard() {
             >
               <AddIcon sx={{ mr: 1 }} />
               Add Interaction
-            </Button>
+            </Button> */}
+
+            {/* 2 */}
+            
+              <button 
+                
+                style={{ 
+                  backgroundColor: "#21C9CF",
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  textTransform: 'none',
+                  width:"max-content",
+                 
+                  
+                  
+                }}
+              >
+                <AddIcon sx={{ marginRight: '4px' }} />
+                Add Interaction
+              </button>
+          
           </Box>
 
           <Divider sx={{ border: "1px dotted grey", mb: 3 }} />

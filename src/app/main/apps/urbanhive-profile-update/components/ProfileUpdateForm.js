@@ -474,7 +474,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
       if(!file){
         dispatch(updateProfile({...profile,triggers,interests:interests2}, user, file, resetForm, photoURL,notifyInvite,notifySkip,history,filteredContacts));
       }else{
-        dispatch(uploadNewImage({...profile,triggers,interests:interests2}, user, file, resetForm,notifyInvite,notifySkip,history,filteredContacts));
+        dispatch(updateProfileWithImage({...profile,triggers,interests:interests2}, user, file, resetForm,notifyInvite,notifySkip,history,filteredContacts));
         //dispatch(createNewProfile(profile, user, file, resetForm, photoURL));
       } 
     }/*else if(interests.length === 0 ||triggers.length === 0 ){
