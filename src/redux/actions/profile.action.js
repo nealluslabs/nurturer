@@ -724,7 +724,7 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
    
      if (index > -1) {
        const [matchedUser] = replica.splice(index, 1);
-       replica.unshift({...matchedUser,...profile});
+       replica.unshift({...matchedUser,...profile,photoUrl:url});
      }
    
      
