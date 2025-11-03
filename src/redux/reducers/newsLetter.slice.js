@@ -26,6 +26,12 @@ const initialState = {
     "Third Image": "",
     "Fourth Image": "",
   },
+  imageBlobs: {
+    "First Image": "",
+    "Second Image": "",
+    "Third Image": "",
+    "Fourth Image": "",
+  },
   fonts: {
     Poppins: "Poppins",
     Serif: "Noto Serif",
@@ -80,6 +86,14 @@ const newsletterSlice = createSlice({
       state.images[image] = text;
     },
 
+    updateImageBlob: (state, action) => {
+      const { image, blob } = action.payload;
+     // if (!state.imageBlobs) {
+     //   state.imageBlobs = {};
+     // }
+      state.imageBlobs[image] = blob;
+    },
+
     updateFontText: (state, action) => {
       state.selectedFont = action.payload.font;
     },
@@ -89,7 +103,7 @@ const newsletterSlice = createSlice({
     },
     
     saveNewsletterRecipients: (state, action) => {
-      state.newsletterRecipients = action.payload.color;
+      state.newsletterRecipients = action.payload;
     },
   },
 });
@@ -99,6 +113,7 @@ const { actions, reducer } = newsletterSlice;
 export const {
   updateHeaderText,
   updateImageText,
+  updateImageBlob,
   updateLinkText,
   updateParagraphText,
   updateFontText,

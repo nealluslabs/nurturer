@@ -206,6 +206,7 @@ function CandidateCard() {
 
   useEffect(() => {
     dispatch(updateLastActive(user.uid));
+    
   }, []);
 
   const [currentIndex,setCurrentIndex] = useState(0)
@@ -449,14 +450,8 @@ function CandidateCard() {
             }}
           >
             <Button
-              onClick={() =>
-                history.push({
-                  pathname: "/events",
-                  state: {
-                    name: users.name,
-                    email: users.email,
-                  },
-                })
+              onClick={() =>{}
+               
               }
               style={{
                 backgroundColor: "#21C9CF",
@@ -466,12 +461,13 @@ function CandidateCard() {
                 borderRadius: "8px",
                 textTransform: "none",
                 display: "flex",
+                height:"4rem",
                 alignItems: "center",
                 "&:hover": { backgroundColor: "#1db8be" },
               }}
             >
               <AddIcon sx={{ mr: 1 }} />
-              Add Events
+              Add Interaction
             </Button>
           </Box>
 
@@ -695,14 +691,14 @@ function CandidateCard() {
   <Grid item sx={{ flex: "0 0 84%" }}>
     <TextField
       placeholder="Search..."
-      onChange={(e) => { /*handleSearchResults(e.target.value)*/ }}
+      onChange={(e) => { handleSearchResults(e.target.value) }}
       fullWidth
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
             <SearchIcon
               style={{ cursor:"pointer" }} 
-              onClick={(e)=>{/*handleSearchResults(e.target.value)*/}} 
+              onClick={(e)=>{handleSearchResults(e.target.value)}} 
             />
           </InputAdornment>
         ),

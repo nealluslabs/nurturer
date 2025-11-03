@@ -12,8 +12,9 @@ import clsx from 'clsx';
 import format from 'date-fns/format';
 import StatusIcon from './StatusIcon';
 import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
-import { addNewsletterRecipient } from 'src/redux/actions/newsletter.action';
-import { useState } from 'react';
+import { updateNewsletterRecipient } from 'src/redux/actions/newsletter.action';
+import { useEffect, useState } from 'react';
+import { saveNewsletterRecipients } from 'redux/reducers/newsLetter.slice';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {
@@ -36,11 +37,18 @@ function ContactListItem(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { user } = useSelector((state) => state.login);
-  const { newlsetterRecipients } = useSelector((state) => state.newsletter);
+  const { newsletterRecipients } = useSelector((state) => state.newsletter);
   const selectedContactId = props.user.uid;
 
-const [newsletterPeople,setNewsletterPeople] = useState(newlsetterRecipients)
 
+  const [newsletterPeople,setNewsletterPeople] = useState(newsletterRecipients?[...newsletterRecipients]:[])
+
+  useEffect(()=>{
+  
+    dispatch(saveNewsletterRecipients(newsletterPeople))
+  
+  
+  },[newsletterPeople])
 
   const accRejInvite = (users, status) => {
 
@@ -76,6 +84,8 @@ const [newsletterPeople,setNewsletterPeople] = useState(newlsetterRecipients)
       size="small"
       style={{ marginRight: '12px' }}
       onChange={(e) => {
+        e.stopPropagation();
+        //add the contact to the list of newsletter recipient , or remove it if its there-
     
           console.log("WHAT IS E.TARGET VALUE ?-->",props.user)
 
@@ -86,8 +96,7 @@ const [newsletterPeople,setNewsletterPeople] = useState(newlsetterRecipients)
          }
 
 
-        e.stopPropagation();
-        //add the contact to the list of newsletter recipient , or remove it if its there
+      
       }}
     />
     

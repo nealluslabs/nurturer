@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectContacts } from "./store/contactsSlice";
 import { sendMessage } from "./store/chatSlice";
 import { sendChat } from "src/redux/actions/chat.action";
+import { sendNewsletterToRecipients } from "src/redux/actions/newsletter.action";
+
+
 import {
   Checkbox,
   FormControl,
@@ -30,6 +33,7 @@ import ImageTwo from "../../../../images/2.png";
 import avatar from "../../../../images/128895.jpg";
 import avatar2 from "../../../../images/17841.jpg";
 import avatar3 from "../../../../images/2149128382.jpg";
+import { toast, ToastContainer } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -136,11 +140,14 @@ function Newsletter(props) {
   const [newsletter2Active, setNewsletter2Active] = useState(false); // Individual toggle for newsletter 2
   const [activeNewsletter, setActiveNewsletter] = useState("newsletter1");
 
+ 
+
   //New Hooks
 
   //  const [connectStatus, setconnectStatus] = useState('');
   const { isAuth, user } = useSelector((state) => state.login);
   const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
+  const { newsletterRecipients } = useSelector((state) => state.newsletter);
   const { connects } = useSelector((state) => state.user);
   let connectStatus;
 
@@ -237,6 +244,7 @@ function Newsletter(props) {
     link = {},
     paragraph = {},
     images = {},
+    imageBlobs = {},
     selectedFont = "Poppins",
     selectedBackgroundColor = "#5C62AD",
   } = useSelector((state) => state.newsletter || {});
@@ -259,8 +267,57 @@ function Newsletter(props) {
       setImgSrc3(images["Third Image"]);
     }
   }, [images?.["Third Image"]]);
+
+  const newsletterItself ={
+    firstParagraph:paragraph["First Paragraph"] ,
+    secondParagraph:paragraph["Second Paragraph"] ,
+    thirdParagraph:paragraph["Third Paragraph"] ,
+    fourthParagraph:paragraph["Fourth Paragraph"] ,
+    firstLink:link["First Link"],
+    secondLink:link["Second Link"],
+    firstHeader:header["First Header"],
+    secondHeader: header["Second Header"],
+    firstImage:imageBlobs["First Image"] ,
+    secondImage:imageBlobs["Second Image"] ,
+    thirdImage:imageBlobs["Third Image"] 
+  }
+
+  console.log("NEWS LETTER ITSELF-->",newsletterItself)
+
+  const notifyInvite = (msg) => toast.success(msg, {
+    position: "bottom-left",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+    
+    const notifySkip = (msg) => toast.error(msg, {
+    position: "bottom-left",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+
+
   return (
     <>
+     <ToastContainer
+          position="bottom-left"
+          autoClose={1000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          />
       <div className={clsx("flex flex-col relative", props.className)}
         
       >
@@ -912,7 +969,10 @@ function Newsletter(props) {
              />
              {
              <IconButton className="absolute ltr:right-44 rtl:left-0 top-8" type="submit">
-               <Icon className="text-24" color="action" onClick={(ev)=>{/*sendUpdate(ev)*/}}>
+               <Icon className="text-24" color="action" 
+               onClick={(ev)=>{
+                dispatch(sendNewsletterToRecipients(newsletterRecipients, newsletterItself,notifyInvite,notifySkip))
+                }}>
                  send
                </Icon>
              </IconButton>

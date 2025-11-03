@@ -31,6 +31,8 @@ import { Box, TextField, Select } from "@mui/material";
 import {
   setHeaderText,
   setImageText,
+  
+  setImageBlob,
   setFontText,
   setLinkText,
   setParagraphText,
@@ -540,9 +542,11 @@ function NewsletterSidebar(props) {
                     accept="image/*"
                     onChange={(e) => {
                       const file = e.target.files[0];
+                      console.log("WHAT IS THE FILE BEING UPLOADED TO NEWSLETTER ?--->",file)
                       if (file) {
                         const previewUrl = URL.createObjectURL(file);
                         dispatch(setImageText(selectedImage, previewUrl));
+                        dispatch(setImageBlob(selectedImage, file));
                       }
                     }}
                   />
