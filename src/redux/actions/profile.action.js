@@ -356,7 +356,7 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
 
     return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
   })
-  .then(() => {
+  .then(async() => {
     const msg = 'Profile successfully created!';
    
      dispatch(createProfileSuccessOnly({ msg }));
@@ -370,6 +370,8 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
       "id": " ",
       "title": " "
     },)
+
+    await dispatch(fetchAllContactForOneUser(user.uid))
      
     // dispatch(fetchProfile());
     // dispatch(fetchUserData(fb.auth().currentUser.uid));

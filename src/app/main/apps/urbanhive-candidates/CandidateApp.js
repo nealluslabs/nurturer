@@ -505,7 +505,7 @@ function CandidateApp(props) {
             }}
           />
           <Button
-          onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite) )}}
+          onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite,user.uid) )}}
             variant="contained"
             sx={{
               backgroundColor: "#21C9CF",

@@ -73,7 +73,7 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
 };
 
 
-export const updateCandidateNotes = (contactId,notes,notifyInvite) => async (dispatch) => {
+export const updateCandidateNotes = (contactId,notes,notifyInvite,userId) => async (dispatch) => {
   
        
     const contactDoc = db.collection('contacts').doc(contactId && contactId)
@@ -91,9 +91,11 @@ export const updateCandidateNotes = (contactId,notes,notifyInvite) => async (dis
           notes:notes,
           
         }).then(() => contactDoc.get())
-        .then((doc) => {
+        .then(async(doc) => {
           if (doc.exists) {
             notifyInvite(`Notes have been updated for this contact`)
+            saveCandidateInFocus(doc.data())
+            await dispatch(fetchAllContactForOneUser(userId))
           }
         })
 
