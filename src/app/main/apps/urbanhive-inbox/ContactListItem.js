@@ -40,6 +40,7 @@ function ContactListItem(props) {
 
  //("WHAT IS USER?--->",props.user)
 
+ const onlyPendingMessages = props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
 
  const resortFilteredUsersAndPush = (userId)=>{
     
@@ -114,7 +115,7 @@ setTimeout(()=>{
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={`${props.user.messageQueue && props.user.messageQueue[props.user.messageQueue.length-1 && props.user.messageQueue.length-1] && props.user.messageQueue[props.user.messageQueue.length-1].subject ? props.user.messageQueue[props.user.messageQueue.length-1].subject:""}`  }
+      secondary={`${onlyPendingMessages && onlyPendingMessages[onlyPendingMessages.length-1 && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1].subject ? onlyPendingMessages[onlyPendingMessages.length-1].subject:""}`  }
       // secondary={props.contact.mood}
     />
 
@@ -127,7 +128,7 @@ setTimeout(()=>{
         >
           {/* {format(new Date(props.contact.lastMessageTime), 'PP')} */}
           {/*format(new Date('2022-8-20'), 'PP')*/}
-          {props.user.sendDate?props.user.sendDate + (props.user.sendDate !== "None" ?" Days":""):"7 Days" /*props.user.daysTo?props.user.daysTo:"7 Days"*/ }
+          {props.user.sendDate?props.user.sendDate + (props.user.sendDate !== "0" ?" Days":""):"7 Days" /*props.user.daysTo?props.user.daysTo:"7 Days"*/ }
         </Typography>
       {/* )} */}
  

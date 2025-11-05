@@ -255,18 +255,18 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
   dispatch(saveEditedParagraphs({...paragraphs,bulletPoints:updatedBulletPoints}))
 
 }
-
-const [paragraphs, setParagraphs] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]
+const onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
+const [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messsageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
   :
   {
-  firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
-  secondParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].secondParagraph: " ",
-  thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" "
+ /* firstParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].firstParagraph : " ",
+  secondParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]? onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].secondParagraph: " ",
+  thirdParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].thirdParagraph :" "*/
 });
 
-//console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", selectedChatUser.messageQueue )
+//console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", onlyPendingMessages )
 
-const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints
+const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]? onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].bulletPoints
   :
  []
 );
@@ -315,19 +315,19 @@ const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && s
    
 
 
-    setParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] ? {...selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1],bulletPoints:selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1].bulletPoints && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1].bulletPoints.slice(0,2) }
+    setParagraphs(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] ? {...onlyPendingMessages[onlyPendingMessages.length-1],bulletPoints:onlyPendingMessages[onlyPendingMessages.length-1].bulletPoints && onlyPendingMessages[onlyPendingMessages.length-1].bulletPoints.slice(0,2) }
       :
       {
-      firstParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].firstParagraph : " ",
-      secondParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]? selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].secondParagraph: " ",
-      thirdParagraph:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].thirdParagraph :" ",
-      messageType:selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1]?selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].messageType :" "
+      firstParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].firstParagraph : " ",
+      secondParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]? onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].secondParagraph: " ",
+      thirdParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].thirdParagraph :" ",
+      messageType:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageType :" "
     });
 
 
-    setBulletPointChoice(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] &&  selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1].bulletPoints)
+    setBulletPointChoice(selectedChatUser && onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] &&  onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].bulletPoints)
 
-   dispatch(saveEditedParagraphs(selectedChatUser.messageQueue  && selectedChatUser.messageQueue[selectedChatUser.messageQueue && selectedChatUser.messageQueue.length-1] && selectedChatUser.messageQueue[selectedChatUser.messageQueue.length-1]))
+   dispatch(saveEditedParagraphs(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1]))
 
    }
     
@@ -984,12 +984,12 @@ We had some great conversations previously, and I really valued the opportunity 
 
 
            
-{<Box sx={{display:selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
+{<Box sx={{display:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
  {!(selectedChatUser.name === 'EmOly WhOte' || selectedChatUser.name === 'Bib Johnsonopia') ?
    
 
-    selectedChatUser.name === 'Carol Garcia' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
+    selectedChatUser.name === 'Carol Garcia' && onlyPendingMessages && onlyPendingMessages.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1054,7 +1054,7 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
     :
-    selectedChatUser.name === 'Alice Chen' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
+    selectedChatUser.name === 'Alice Chen' && onlyPendingMessages && onlyPendingMessages.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1125,7 +1125,7 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
     :
-    selectedChatUser.name === 'David Lee' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
+    selectedChatUser.name === 'David Lee' && onlyPendingMessages && onlyPendingMessages.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1191,7 +1191,7 @@ We had some great conversations previously, and I really valued the opportunity 
   </FormControl>
  </>
     :
-    selectedChatUser.name === 'Alice Chen' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
+    selectedChatUser.name === 'Alice Chen' && onlyPendingMessages && onlyPendingMessages.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1260,7 +1260,7 @@ We had some great conversations previously, and I really valued the opportunity 
  </>
     :
 
-    selectedChatUser.name === 'David Lee' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
+    selectedChatUser.name === 'David Lee' && onlyPendingMessages && onlyPendingMessages.length?
     <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1342,7 +1342,7 @@ We had some great conversations previously, and I really valued the opportunity 
  </>
        :
 
-       selectedChatUser.name === 'John Smith' && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length?
+       selectedChatUser.name === 'John Smith' && onlyPendingMessages && onlyPendingMessages.length?
        <>
                        <Typography
                         style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1425,7 +1425,7 @@ We had some great conversations previously, and I really valued the opportunity 
      </FormControl>
     </>
 
-     : selectedChatUser.messageQueue && selectedChatUser.messageQueue.length > 0 && 
+     : onlyPendingMessages && onlyPendingMessages.length > 0 && 
    <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
@@ -1625,7 +1625,7 @@ label={<Typography fontSize="14px">
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
            <RiAiGenerate2 onClick={()=>{
 
-            if(selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length && selectedChatUser.messageQueue.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && selectedChatUser.messageQueue && selectedChatUser.messageQueue.length === 0)
+            if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
           {
             dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))
             }
