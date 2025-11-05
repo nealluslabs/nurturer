@@ -422,19 +422,21 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
   const batch = db.batch();
   const newContactIds = [];
 
-  function changeFrequencyToDays(profileFrequency) {
-    // If undefined, return "30" as default
-    if (!profileFrequency) return "30";
-    // Use regex to extract the number from the string (e.g. "2 months")
-    const match = profileFrequency.match(/\d+/);
-    if (match) {
-    const numberOfUnits = parseInt(match[0], 10);
-    const days = numberOfUnits * 30;
-    return days.toString();
-    }
-    // If no number found, default to "30"
-    return "30";
-    }
+
+
+    function changeFrequencyToDays(profileFrequency) {
+      // If undefined, return "30" as default
+      if (!profileFrequency||profileFrequency === "None"||profileFrequency === "none" ) return "0";
+      // Use regex to extract the number from the string (e.g. "2 months")
+      const match = profileFrequency.match(/\d+/);
+      if (match) {
+      const numberOfUnits = parseInt(match[0], 10);
+      const days = numberOfUnits * 30;
+      return days.toString();
+      }
+      // If no number found, default to "30"
+      return "0";
+      }
 
   contactsArray.forEach((profile) => {
     // Generate a new doc ref with an ID
@@ -582,10 +584,90 @@ async function duplicateCollection(sourceCollection, targetCollection) {
 duplicateCollection("users","contacts")
 
 }
+//WE DONT USE THIS ANYMORE
+//export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
+//  //console.log('All data: ',{profile, user, url});
+//  //dispatch(createProfilePending());
+//
+//  function changeFrequencyToDays(profileFrequency) {
+//    // If undefined, return "30" as default
+//    if (!profileFrequency||profileFrequency === "None"||profileFrequency === "none" ) return "0";
+//    // Use regex to extract the number from the string (e.g. "2 months")
+//    const match = profileFrequency.match(/\d+/);
+//    if (match) {
+//    const numberOfUnits = parseInt(match[0], 10);
+//    const days = numberOfUnits * 30;
+//    return days.toString();
+//    }
+//    // If no number found, default to "30"
+//    return "0";
+//    }
+// 
+//  const userRef = db.collection("contacts").doc(profile.uid);
+// 
+//   userRef.update({
+//   name: profile.name,
+//   email: profile.email,
+//   phone: profile.phone,
+//    intro: profile.notes,
+//    notes: profile.notes,
+//   companyName: profile.companyName,
+//   industry: profile.industry,
+//    jobTitle: profile.jobTitle,
+//    birthday:profile.birthday||"1/1/1980",
+//    workAnniversary:profile.workAnniversary,
+//    city: profile.city,
+//    triggers:profile.triggers,
+//    sendDate:changeFrequencyToDays(profile.frequency),
+//   frequencyInDays:changeFrequencyToDays(profile.frequency),
+//     
+//    state: profile.state,
+//    frequency: profile.frequency,
+//    interests: profile.interests,
+//    password:'12345678',
+//   
+//    lastActive:1663862737170,
+//    contacterId:user.uid,
+//   
+//  
+//    photoUrl: url,
+//  })
+//  .then((docRef) => {
+//    // Update the newly created document with its own ID
+//
+//  
+//    db.collection("users").doc(user.uid).update({
+//      contacts: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+//    });
+//
+//    return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
+//  })
+//  .then(() => {
+//    const msg = 'Profile successfully updated!';
+//    //console.log(msg);
+//     dispatch(createProfileSuccessOnly({ msg }));
+//     dispatch(fetchAllUsers(user.uid));
+//     notifyInvite('Profile Updated Successfully!')
+//    // dispatch(fetchProfile());
+//    // dispatch(fetchUserData(fb.auth().currentUser.uid));
+//    // resetForm();
+//  })
+//  .catch((error) => {
+//    var errorMessage = error.message;
+//    notifySkip('Problem Updating Profile, please try again!')
+//    console.log('Error creating profile', errorMessage);
+//    dispatch(createProfileFailed({ errorMessage }));
+//  });
+//
+//}
 
-export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip) => async (dispatch) => {
+
+export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip,history,filteredContacts) => async (dispatch) => {
   //console.log('All data: ',{profile, user, url});
-  //dispatch(createProfilePending());
+  dispatch(createProfilePending());
+
+  console.log("PROFILE BEFORE UPDATING TO DB, WHAT IS BIRTHDAY --->",profile.birthday)
+
 
   function changeFrequencyToDays(profileFrequency) {
     // If undefined, return "30" as default
@@ -600,71 +682,8 @@ export const updateNewProfile = (profile, user, file, resetForm, url,notifyInvit
     // If no number found, default to "30"
     return "0";
     }
- 
-  const userRef = db.collection("contacts").doc(profile.uid);
- 
-   userRef.update({
-   name: profile.name,
-   email: profile.email,
-   phone: profile.phone,
-    intro: profile.notes,
-    notes: profile.notes,
-   companyName: profile.companyName,
-   industry: profile.industry,
-    jobTitle: profile.jobTitle,
-    birthday:profile.birthday||"1/1/1980",
-    workAnniversary:profile.workAnniversary,
-    city: profile.city,
-    triggers:profile.triggers,
-    sendDate:changeFrequencyToDays(profile.frequency),
-   frequencyInDays:changeFrequencyToDays(profile.frequency),
-     
-    state: profile.state,
-    frequency: profile.frequency,
-    interests: profile.interests,
-    password:'12345678',
-   
-    lastActive:1663862737170,
-    contacterId:user.uid,
-   
-  
-    photoUrl: url,
-  })
-  .then((docRef) => {
-    // Update the newly created document with its own ID
-
-  
-    db.collection("users").doc(user.uid).update({
-      contacts: firebase.firestore.FieldValue.arrayUnion(docRef.id)
-    });
-
-    return userRef.doc(docRef.id).update({ uid: docRef.id,contacteeId:docRef.id });
-  })
-  .then(() => {
-    const msg = 'Profile successfully updated!';
-    //console.log(msg);
-     dispatch(createProfileSuccessOnly({ msg }));
-     dispatch(fetchAllUsers(user.uid));
-     notifyInvite('Profile Updated Successfully!')
-    // dispatch(fetchProfile());
-    // dispatch(fetchUserData(fb.auth().currentUser.uid));
-    // resetForm();
-  })
-  .catch((error) => {
-    var errorMessage = error.message;
-    notifySkip('Problem Updating Profile, please try again!')
-    console.log('Error creating profile', errorMessage);
-    dispatch(createProfileFailed({ errorMessage }));
-  });
-
-}
 
 
-export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,notifySkip,history,filteredContacts) => async (dispatch) => {
-  //console.log('All data: ',{profile, user, url});
-  dispatch(createProfilePending());
-
-  console.log("PROFILE BEFORE UPDATING TO DB, WHAT IS BIRTHDAY --->",profile.birthday)
 
   function transformDate(dateStr) {
     // If the string is empty, null, or doesn't contain '-', just return it as-is
@@ -688,26 +707,33 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
   }
   const userRef = db.collection("contacts").doc(profile.uid)
  
-   userRef.update({
-   name: profile.name,
-   email: profile.email,
-   phone: profile.phone,
-    notes: profile.notes,
-    
-   companyName: profile.companyName,
-   industry: profile.industry,
-    jobTitle: profile.jobTitle,
-    birthday:profile.birthday?transformDate(profile.birthday): '1/1/1980',
+  userRef.update({
+    name: profile.name||" ",
+    email: profile.email||" ",
+    phone: profile.phone||" ",
+     intro: profile.notes||" ",
+     notes: profile.notes||" ",
+    companyName: profile.companyName||" ",
+    industry: profile.industry||" ",
+     jobTitle: profile.jobTitle||" ",
+     birthday:profile.birthday?transformDate(profile.birthday): '1/1/1980',
     workAnniversary:profile.workAnniversary?  transformDate(profile.workAnniversary) :'1/1/2007',
-    city: profile.city,
-    state: profile.state,
-    frequency: profile.frequency,
-    interests: profile.interests,
-  
-    lastActive:1663862737170,
-  
-    photoUrl: url,
-  })
+     city: profile.city||" ",
+     triggers:profile.triggers||[],
+     sendDate:changeFrequencyToDays(profile.frequency)||0,
+    frequencyInDays:changeFrequencyToDays(profile.frequency)||0,
+      
+     state: profile.state||" ",
+     frequency: profile.frequency||"None",
+     interests: profile.interests||[],
+     password:'12345678',
+    
+     lastActive:1663862737170,
+     contacterId:user.uid,
+    
+   
+     photoUrl: url,
+   })
  
   .then(async() => {
     const msg = 'Profile successfully updated!';

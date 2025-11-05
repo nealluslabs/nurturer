@@ -109,9 +109,9 @@ const [inputValue2, setInputValue2] = useState("");
 
 
 function transformDate(dateStr) {
-  // If the dateStr is null, empty string, or invalid, return a default date
+  // If the dateStr is null, empty string, or invalid, return a default date with a time
   if (!dateStr) {
-    return '01/01/1970';  // Default date (you can adjust this to any default date you prefer)
+    return '1970-01-01T00:00:00.000Z';  // Default date with time (you can adjust this as needed)
   }
 
   // Create a new Date object from the input string
@@ -120,20 +120,12 @@ function transformDate(dateStr) {
   // Check if the date is valid
   if (isNaN(date.getTime())) {
     console.error("Invalid date format");
-    return '01/01/1970';  // Default date in case of invalid input
+    return '1970-01-01T00:00:00.000Z';  // Default date with time in case of invalid input
   }
 
-  // Extract day, month, and year
-  const day = date.getDate();
-  const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
-  const year = date.getFullYear();
-
-  // Format day and month to always have two digits (leading zero if needed)
-  const formattedDay = day < 10 ? `0${day}` : day;
-  const formattedMonth = month < 10 ? `0${month}` : month;
-
-  // Return the formatted date as dd/mm/yyyy
-  return `${formattedDay}/${formattedMonth}/${year}`;
+  // Return the date in ISO format with time (you can append any specific time here)
+  // The 'toISOString()' method automatically formats the date in the ISO 8601 format (YYYY-MM-DDTHH:mm:ss.sssZ)
+  return date.toISOString(); // This includes time, e.g., "2023-10-19T00:00:00.000Z"
 }
 
 

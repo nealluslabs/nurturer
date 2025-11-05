@@ -154,7 +154,7 @@ function InboxSidebar(props) {
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
     }));
 
-  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].filter((item)=>(item.frequency !== "None")).sort((a, b) => {
+  const [connUsers,setConnUsers] = useState([...connectedUsersOutput].filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).sort((a, b) => {
     const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
     const bDate = b.sendDate === "None" ? Infinity : Number(b.sendDate) || 1000;
     return aDate - bDate;
