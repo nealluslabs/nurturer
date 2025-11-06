@@ -84,6 +84,7 @@ newsletter.thirdImage === " "
 
  if(!recipientArray || recipientArray.length === 0){
   notifySkip("No recipients selected, make sure you have selected at least one recipients before sending newsletter!")
+  return
  }
  else{
 

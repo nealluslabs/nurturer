@@ -769,8 +769,10 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                label="Add Interest (press 'Enter' to add)"
                variant="outlined"
               // sx={{width:{xs:"70%",sm:"53%"}}}
-               sx={{width:{sm:"80%",xs:"53%"}}}
-               style={{maxWidth:"27rem"}} //dont delete
+              // sx={{width:{sm:"80%",xs:"53%"}}}
+               sx={{ width: '100% !important', minWidth: '800px !important' }}
+              // style={{maxWidth:"27rem"}} //dont delete
+              style={{ width: '100% !important', minWidth: '800px !important'}}
                value={inputValue2}
                onChange={handleInterestChange}
                onKeyDown={handleKeyDown2}
