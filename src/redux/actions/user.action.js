@@ -470,7 +470,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
       dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date()},user,selectedChatUser))
+      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"},user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}
@@ -506,7 +506,7 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser,noti
       if (doc.exists) {
 
         //console.log("RAW MESSAGE IS -->", updatedParagraphs)
-        let updatedMessage =  {...doc.data().message}
+        let updatedMessage =  {...doc.data().message} //- DO YOU REALLY NEED THIS ? SINCE YOU'RE OVERWRITING EVERYTHING? - NOV 6 2025 DAGOGO
 
         
 
@@ -515,6 +515,8 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser,noti
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
           updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
           updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
+          updatedMessage.createdAt =  updatedParagraphs && updatedParagraphs.createdAt
+          updatedMessage.messageStatus =  updatedParagraphs && updatedParagraphs.messageStatus
           updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Email"
 
          //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
