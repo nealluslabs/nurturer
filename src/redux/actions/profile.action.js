@@ -314,7 +314,7 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
  
   const userRef = db.collection("contacts");
 
-  const emailQuery = userRef.where("email", "==", profile.email);
+  const emailQuery = userRef.where("email", "==", profile.email).where("contacterId", "==", user.uid);
 
 emailQuery.get().then(snapshot => {
   if (!snapshot.empty) {
@@ -430,7 +430,7 @@ export const batchUploadContacts = (contactsArray, user, url, setOpen, notifyInv
 
   for (const profile of contactsArray) {
     // Check if email already exists in the contacts collection
-    const emailQuery = contactsRef.where("email", "==", profile.email);
+    const emailQuery = contactsRef.where("email", "==", profile.email).where("contacterId", "==", user.uid);
     const snapshot = await emailQuery.get();
 
     // Skip the current contact if the email already exists
