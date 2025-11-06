@@ -768,7 +768,8 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
                <TextField
                label="Add Interest (press 'Enter' to add)"
                variant="outlined"
-               sx={{width:{xs:"70%",sm:"53%"}}}
+              // sx={{width:{xs:"70%",sm:"53%"}}}
+               sx={{width:{sm:"80%",xs:"53%"}}}
                style={{maxWidth:"27rem"}} //dont delete
                value={inputValue2}
                onChange={handleInterestChange}
