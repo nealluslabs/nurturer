@@ -10,6 +10,8 @@ import { Link, useHistory, Redirect } from 'react-router-dom';
 function ProfileUpdateApp() {
   const { isAuth } = useSelector((state) => state.login);
 
+
+
   if (!isAuth) return <Redirect to={'/login'}/>
   return (
     <FusePageSimple

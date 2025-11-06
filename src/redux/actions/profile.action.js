@@ -308,9 +308,20 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
     // Return the formatted date
     return `${formattedDay}/${formattedMonth}/${year}`;
   }
+
+  
   
  
   const userRef = db.collection("contacts");
+
+  const emailQuery = userRef.where("email", "==", profile.email);
+
+emailQuery.get().then(snapshot => {
+  if (!snapshot.empty) {
+    // If the snapshot is not empty, that means an entry with this email already exists
+   
+    notifySkip("This user already Exists, please make sure email addresses are unique!")
+  } else {
  
    userRef.add({
    name: profile.name||" ",
@@ -338,12 +349,7 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
     lastActive:1663862737170,
     contacterId:user.uid,
     message:user.message?user.message:'',
-    skillset: '',
-  
-    skills_needed: '',
-    isTechnical: 'no',
-    lookingFor:'',
-    githubUrl: '',
+    
     photoUrl: url?url:'https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png',
   })
   .then((docRef) => {
@@ -385,61 +391,55 @@ export const createNewProfile = (profile, user, file, resetForm, url,notifyInvit
   });
 
 }
+})
+
+}
 
 
 
-export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvite) => async(dispatch)=> {
+export const batchUploadContacts = (contactsArray, user, url, setOpen, notifyInvite) => async (dispatch) => {
   const db = firebase.firestore();
   const userRef = db.collection("users").doc(user.uid);
   const contactsRef = db.collection("contacts");
 
-
-
   function transformDate(dateStr) {
-    // Create a new Date object from the input string
     const date = new Date(dateStr);
-  
-    // Check if the date is valid
     if (isNaN(date.getTime())) {
       console.error("Invalid date format");
       return null;
     }
-  
-    // Extract day, month, and year
     const day = date.getDate();
-    const month = date.getMonth() + 1; // Month is zero-indexed, so add 1
+    const month = date.getMonth() + 1;
     const year = date.getFullYear();
-  
-    // Format day and month to always have two digits (leading zero if needed)
-    const formattedDay = day < 10 ? `0${day}` : day;
-    const formattedMonth = month < 10 ? `0${month}` : month;
-  
-    // Return the formatted date as dd/mm/yyyy
-    return `${formattedDay}/${formattedMonth}/${year}`;
+    return `${day < 10 ? `0${day}` : day}/${month < 10 ? `0${month}` : month}/${year}`;
   }
-  
+
+  function changeFrequencyToDays(profileFrequency) {
+    if (!profileFrequency || profileFrequency === "None" || profileFrequency === "none") return "0";
+    const match = profileFrequency.match(/\d+/);
+    if (match) {
+      const numberOfUnits = parseInt(match[0], 10);
+      const days = numberOfUnits * 30;
+      return days.toString();
+    }
+    return "0";
+  }
 
   const batch = db.batch();
   const newContactIds = [];
 
+  for (const profile of contactsArray) {
+    // Check if email already exists in the contacts collection
+    const emailQuery = contactsRef.where("email", "==", profile.email);
+    const snapshot = await emailQuery.get();
 
+    // Skip the current contact if the email already exists
+    if (!snapshot.empty) {
+      console.log(`Skipping contact with email: ${profile.email} (Already exists)`);
+      continue;
+    }
 
-    function changeFrequencyToDays(profileFrequency) {
-      // If undefined, return "30" as default
-      if (!profileFrequency||profileFrequency === "None"||profileFrequency === "none" ) return "0";
-      // Use regex to extract the number from the string (e.g. "2 months")
-      const match = profileFrequency.match(/\d+/);
-      if (match) {
-      const numberOfUnits = parseInt(match[0], 10);
-      const days = numberOfUnits * 30;
-      return days.toString();
-      }
-      // If no number found, default to "30"
-      return "0";
-      }
-
-  contactsArray.forEach((profile) => {
-    // Generate a new doc ref with an ID
+    // Generate a new doc ref with an ID for the new contact
     const newDocRef = contactsRef.doc();
     const newId = newDocRef.id;
     newContactIds.push(newId);
@@ -455,22 +455,17 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
       birthday: transformDate(profile.birthday) || "1/1/1980",
       workAnniversary: transformDate(profile.workAnniversary) || "",
       city: profile.city || "",
-      triggers: profile.triggers? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
-      sendDate:changeFrequencyToDays(profile.frequency|| "0 month"),
-      frequencyInDays:changeFrequencyToDays(profile.frequency || "0"),
-      messageQueue:[],
+      triggers: profile.triggers ? profile.triggers.split(',').map(trigger => trigger.trim()) : [],
+      sendDate: changeFrequencyToDays(profile.frequency || "0 month"),
+      frequencyInDays: changeFrequencyToDays(profile.frequency || "0"),
+      messageQueue: [],
       state: profile.state || "",
       frequency: profile.frequency || "None",
-      interests: profile.interests?profile.interests.split(',').map(interest => interest.trim()) : [],
-      // extra fields
+      interests: profile.interests ? profile.interests.split(',').map(interest => interest.trim()) : [],
       password: "12345678",
-      
       lastActive: Date.now(),
       contacterId: user.uid,
-     
       photoUrl: url || "https://nurturer-2.s3.eu-west-3.amazonaws.com/no-pic.png",
-
-      // Add IDs
       uid: newId,
       id: newId,
       contacteeId: newId,
@@ -478,25 +473,24 @@ export const batchUploadContacts = (contactsArray, user, url,setOpen,notifyInvit
     };
 
     batch.set(newDocRef, contactData);
-  });
+  }
 
   try {
     // Commit all writes at once
     await batch.commit();
 
-    // ✅ After batch, update user's contacts array
+    // After batch, update user's contacts array
     await userRef.update({
       contacts: firebase.firestore.FieldValue.arrayUnion(...newContactIds),
     });
 
-    //console.log("Batch upload successful!");
-    setOpen(false)
-    //alert("All contacts uploaded Successfully!")
-    notifyInvite("All contacts uploaded successfully!")
+    setOpen(false);
+    notifyInvite("All contacts uploaded successfully!");
   } catch (error) {
     console.error("Error batch uploading contacts:", error);
   }
 };
+
 
 
 
