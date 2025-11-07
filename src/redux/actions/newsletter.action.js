@@ -120,9 +120,9 @@ newsletter.thirdImage === " "
 
     console.log("WHAT IS THE IMAGE TYPE IN NEWSLETTER-->",newsletter)
   //NOv 2 - YOU GOTTA MAKE SURE THAT NEWSLETTER IMAGES BELOW ARE BLOBS, AND NOT SOMeTHING ELSE LIKE OBJECT URLS
-    const imageLink1 = await uploadToS3(newsletter.firstImage)
-    const imageLink2 = await uploadToS3(newsletter.secondImage)
-    const imageLink3 = await uploadToS3(newsletter.thirdImage)
+    const imageLink1 =newsletter.firstImage ? await uploadToS3(newsletter.firstImage):''
+    const imageLink2 = newsletter.secondImage ? await uploadToS3(newsletter.secondImage):''
+    const imageLink3 = newsletter.thirdImage ?await uploadToS3(newsletter.thirdImage):''
 
   recipientArray.forEach(async(recipient)=>{  
 
@@ -140,7 +140,8 @@ newsletter.thirdImage === " "
             Data: `${newsletter.firstHeader}.`,
           },
           Html: {
-            Data: `
+            Data: newsletter.newsletterType ==='1'?
+            `
             <div style="max-width:600px;margin:0 auto;background-color:#ffffff;font-family:Arial, sans-serif;border-radius:8px;overflow:hidden;border:1px solid #eee;">
               
               <!-- Header section -->
@@ -172,7 +173,7 @@ newsletter.thirdImage === " "
                 </a>
           
                 <div style="margin:20px 0;">
-                  <img src="https://via.placeholder.com/400x40/6A1B9A/ffffff?text=~~~~" alt="Decorative line" style="width:100%;max-width:200px;"/>
+                  <img src="https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/decorative-line.png" alt="Decorative line" style="width:100%;max-width:200px;"/>
                 </div>
           
                 <p style="margin:10px 0;font-size:15px;line-height:1.6;">
@@ -193,6 +194,85 @@ newsletter.thirdImage === " "
               </div>
             </div>
             `
+
+            :
+
+            `
+            <div style="max-width:600px;margin:0 auto;position:relative;background-color:#ffffff;font-family:Arial, sans-serif;border-radius:12px;overflow:hidden;border:1px solid #eee;">
+  
+            <!-- Profile Image -->
+            <div style="text-align:center;padding:30px 20px 10px 20px;">
+              <img src="${imageLink1 || ''}" alt="Profile" width="120" height="120"
+                   style="border-radius:50%;display:block;margin:0 auto 15px auto;"/>
+              <h2 style="margin:0;font-size:22px;color:#333;font-weight:bold;">${newsletter.firstHeader || ''}</h2>
+            </div>
+          
+            
+
+
+
+             <!-- Purple Decorative Bar Banner -->
+             <div style="width:80px;height:10px;background-color:#6A1B9A;margin:20px auto 10px auto;border-radius:4px;"></div>
+
+          
+            <!-- Main Content -->
+            <div style="padding:20px 30px;text-align:center;color:#333;">
+          
+              <h3 style="margin:0 0 15px 0;font-size:18px;font-weight:bold;">${newsletter.secondHeader || ''}</h3>
+          
+              <p style="margin:0 0 15px 0;font-size:15px;line-height:1.6;">
+                ${newsletter.firstParagraph || ''}
+              </p>
+          
+              <p style="margin:0 0 15px 0;font-size:15px;line-height:1.6;">
+                ${newsletter.secondParagraph || ''}
+              </p>
+          
+             
+          
+              <!-- Hardcoded CTA Link -->
+              <a href="${newsletter.firstLink || '#'}"
+                 style="display:inline-block;margin:20px 0;color:#6A1B9A;font-weight:bold;text-decoration:none;">
+                CHECK OUR DEMO VIDEO
+              </a>
+          
+              <p style="margin:0 0 20px 0;font-size:15px;line-height:1.6;">
+                ${newsletter.thirdParagraph || ''}
+              </p>
+
+              <h3 style="margin:0 0 15px 0;font-size:18px;font-weight:bold;">${newsletter.thirdHeader || ''}</h3>
+
+          
+              <p style="margin:15px 0;font-size:15px;line-height:1.6;">
+                ${newsletter.fourthParagraph || ''}
+              </p>
+          
+              <!-- Two-Column Section -->
+              <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;flex-wrap:wrap;gap:10px;margin-top:20px;text-align:left;">
+                <div style="flex:1;font-size:15px;line-height:1.6;">
+                ${newsletter.fifthParagraph || ''}:
+                </div>
+                <div style="flex:1;text-align:center;">
+                  <a href="${newsletter.secondLink || '#'}"
+                     style="display:inline-block;margin:5px 0;color:#6A1B9A;font-weight:bold;text-decoration:none;">
+                    COOL FAN PURCHASE LINK
+                  </a>
+                </div>
+              </div>
+          
+           
+          
+              <!-- Footer -->
+              <div style="margin-top:10px;text-align:center;">
+                <p style="font-size:14px;margin:0;color:#555;">${newsletter.footerNote || 'STAY COOL & CONNECTED,'}</p>
+                <p style="font-weight:bold;color:#6A1B9A;margin-top:5px;">${newsletter.footerName || 'Jane'}</p>
+              </div>
+          
+            </div>
+          </div>
+          
+
+` /**CLOSING  QUOTATOION TAG IS HERE (TO THE LEFT,BE CAREFUL NOT TO DELETE )*/
           }
         },
         Subject: {

@@ -16,6 +16,7 @@ import { sendChat } from "src/redux/actions/chat.action";
 import { sendNewsletterToRecipients } from "src/redux/actions/newsletter.action";
 
 
+
 import {
   Checkbox,
   FormControl,
@@ -34,6 +35,7 @@ import avatar from "../../../../images/128895.jpg";
 import avatar2 from "../../../../images/17841.jpg";
 import avatar3 from "../../../../images/2149128382.jpg";
 import { toast, ToastContainer } from "react-toastify";
+import { saveNewsletterType } from "redux/reducers/newsLetter.slice";
 
 const useStyles = makeStyles((theme) => ({
   messageRow: {
@@ -147,7 +149,7 @@ function Newsletter(props) {
   //  const [connectStatus, setconnectStatus] = useState('');
   const { isAuth, user } = useSelector((state) => state.login);
   const { selectedChatUser, chatMessages } = useSelector((state) => state.chat);
-  const { newsletterRecipients } = useSelector((state) => state.newsletter);
+  const { newsletterRecipients,newsletterType } = useSelector((state) => state.newsletter);
   const { connects } = useSelector((state) => state.user);
   let connectStatus;
 
@@ -273,13 +275,15 @@ function Newsletter(props) {
     secondParagraph:paragraph["Second Paragraph"] ,
     thirdParagraph:paragraph["Third Paragraph"] ,
     fourthParagraph:paragraph["Fourth Paragraph"] ,
+    fourthParagraph:paragraph["Fifth Paragraph"] ,
     firstLink:link["First Link"],
     secondLink:link["Second Link"],
     firstHeader:header["First Header"],
     secondHeader: header["Second Header"],
     firstImage:imageBlobs["First Image"] ,
     secondImage:imageBlobs["Second Image"] ,
-    thirdImage:imageBlobs["Third Image"] 
+    thirdImage:imageBlobs["Third Image"] ,
+    newsletterType:newsletterType
   }
 
   console.log("NEWS LETTER ITSELF-->",newsletterItself)
@@ -897,12 +901,14 @@ function Newsletter(props) {
                     control={
                       <Radio
                         checked={activeNewsletter === "newsletter1"}
-                        onClick={() =>
+                        onClick={() =>{
+                          dispatch(saveNewsletterType('1'))
                           setActiveNewsletter(
                             activeNewsletter === "newsletter1"
                               ? null
                               : "newsletter1"
                           )
+                        }
                         }
                       />
                     }
@@ -914,12 +920,14 @@ function Newsletter(props) {
                     control={
                       <Radio
                         checked={activeNewsletter === "newsletter2"}
-                        onClick={() =>
+                        onClick={() =>{
+                          dispatch(saveNewsletterType('2'))
                           setActiveNewsletter(
                             activeNewsletter === "newsletter2"
                               ? null
                               : "newsletter2"
                           )
+                        }
                         }
                       />
                     }

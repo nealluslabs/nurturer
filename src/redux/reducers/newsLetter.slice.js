@@ -47,6 +47,7 @@ const initialState = {
     black: "#000000",
   },
   newsletterRecipients:[],
+  newsletterType:'1',
   selectedBackgroundColor: "#5C62AD", // default background
 };
 
@@ -105,6 +106,9 @@ const newsletterSlice = createSlice({
     saveNewsletterRecipients: (state, action) => {
       state.newsletterRecipients = action.payload;
     },
+    saveNewsletterType: (state, action) => {
+      state.newsletterType = action.payload;
+    },
   },
 });
 
@@ -118,6 +122,7 @@ export const {
   updateParagraphText,
   updateFontText,
   saveNewsletterRecipients,
+  saveNewsletterType,
   updateColor,
 } = actions;
 
