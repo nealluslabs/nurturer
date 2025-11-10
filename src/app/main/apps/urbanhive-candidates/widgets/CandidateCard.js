@@ -356,7 +356,7 @@ function CandidateCard() {
       // allUsers.map(users => {
       output.map((users,index) => {
         return (
-          <Grid container sx={{ marginTop: "2rem",width:"100%",display:"flex",justifyContent:"flex-start",gap:"0rem" }}>
+          <Grid container sx={{ width:"100%",display:"flex",justifyContent:"flex-start",padding:"1rem 0",overflow:"hidden", marginTop: "42px" }}>
             <ToastContainer
               position="top-right"
               autoClose={1000}
@@ -371,36 +371,31 @@ function CandidateCard() {
              <Grid
       container
       sx={{
-        marginTop: "2rem",
         display: "flex",
         flexDirection: { xs: "column", sm: "row" },
         alignItems: "flex-start",
-        justifyContent: "space-between", // ensures fixed-width box is at end
-        
-        width: "97.5%",
-        gap: { xs: "1rem", sm: "0" },
+        justifyContent: "space-between",
+        width: "100%",
+        gap: { xs: "1rem", sm: "1rem" },
       }}
     >
       {/* 1️⃣ LEFT SECTION - Avatar */}
       <Grid
         item
         sx={{
-          flex: 1,
-          mx: "0.3rem",
-          marginTop: "1rem",
-         
+          flex: "0 0 auto",
           display: "flex",
-          justifyContent: "flex-start",
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "0.5rem"
         }}
       >
         <Avatar
           alt={users.name}
           src={users.photoUrl}
           sx={{
-            width: 180,
-            height: 180,
-            position: "relative",
-            left: "0.8rem",
+            width: { xs: 120, sm: 150 },
+            height: { xs: 120, sm: 150 }
           }}
         />
       </Grid>
@@ -410,33 +405,32 @@ function CandidateCard() {
         item
         sx={{
           flex: 1,
-          mx: "0rem",
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
-          
-          padding: "1rem",
+          padding: "0.5rem",
+          minWidth: 0
         }}
       >
         <Typography
           gutterBottom
           variant="subtitle5"
           component="div"
-          sx={{ fontSize: "23px", fontWeight: "bold" }}
+          sx={{ fontSize: { xs: "18px", sm: "20px" }, fontWeight: "bold", overflow: "hidden", textOverflow: "ellipsis" }}
         >
           {users.name}
         </Typography>
 
-        <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
+        <Typography variant="body2" gutterBottom sx={{ fontSize: "12px" }}>
           Follow Up Date • {users.sendDate ? getFutureDate(users.sendDate) : "-"}
         </Typography>
 
-        <Box mt={1} />
+        <Box mt={0.5} />
 
         <Typography
           variant="body2"
           gutterBottom
-          sx={{ fontSize: "15px", maxWidth: "15rem", fontWeight: "bold" }}
+          sx={{ fontSize: "13px", fontWeight: "bold", overflow: "hidden", textOverflow: "ellipsis" }}
         >
           {users?.companyName && users?.jobTitle
             ? `${users.companyName} - ${users.jobTitle}`
@@ -444,13 +438,13 @@ function CandidateCard() {
         </Typography>
 
         {users.email && (
-          <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
+          <Typography variant="body2" gutterBottom sx={{ fontSize: "12px", overflow: "hidden", textOverflow: "ellipsis" }}>
             {users.email}
           </Typography>
         )}
 
         {users.phone && (
-          <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
+          <Typography variant="body2" gutterBottom sx={{ fontSize: "12px" }}>
             {users.phone}
           </Typography>
         )}
@@ -789,7 +783,6 @@ function CandidateCard() {
   </Grid>
 </Grid>
 
-
       { userList && !userList.length && !loadedBefore?(
         <center style={{position:"relative",top:"5rem",zIndex:"1000",height:"100vh"}}> {
         <div style={{marginTop:"15rem"}}>
@@ -810,7 +803,7 @@ function CandidateCard() {
       :
       ( 
         userList.length > 0 && (
-          <Box sx={{ height: {xs:"120vh",sm:"100%",display:{xs:"flex",sm:"block"},justifyContent:"center",alignItems:"center"}, width: "97%" }}>
+          <Box sx={{ width: "97%", overflow: "hidden" }}>
             <ReactSwipe
               key={`${userList.length}-${startIndex}`}
               className="carousel"

@@ -24,7 +24,10 @@ import { saveCandidateInFocus } from 'redux/reducers/user.slice';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   fontSize: '14px',
   fontWeight: 'bold',
-  padding: '12px 16px',
+  padding: '12px 8px',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  wordBreak: 'break-word'
 }));
 
 function TablePaginationActions(props) {
@@ -169,7 +172,7 @@ function CandidateTableView() {
   };
 
   return (
-    <div style={{ width: '100%', height: '100vh', padding: '20px' }}>
+    <div style={{ width: '100%', padding: '20px' }}>
       <div style={{ marginBottom: '20px' }}>
         <h2 style={{ margin: 0, marginTop: "54px", color: '#333', fontSize: '24px', fontWeight: 'bold' }}>
           Contacts Directory
@@ -178,18 +181,15 @@ function CandidateTableView() {
           Total Contacts: {contactsData.length}
         </p>
       </div>
-      <TableContainer component={Paper} sx={{ height: 'calc(100vh - 150px)', overflow: 'auto' }}>
-        <Table sx={{ minWidth: 1000 }} stickyHeader aria-label="candidates table">
+      <TableContainer component={Paper} sx={{ width: '100%', overflow: 'hidden' }}>
+        <Table sx={{ width: '100%', tableLayout: 'fixed' }} aria-label="candidates table">
           <TableHead sx={{ 
-            position: 'sticky', 
-            top: 0, 
-            zIndex: 100,
             '& th': {
               backgroundColor: '#21C9CF !important',
               color: 'white !important',
               fontWeight: 'bold !important',
-              fontSize: '16px !important',
-              padding: '16px !important'
+              fontSize: '14px !important',
+              padding: '12px 8px !important'
             }
           }}>
             <TableRow sx={{ 
@@ -203,7 +203,8 @@ function CandidateTableView() {
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
-                fontSize: '16px !important'
+                fontSize: '14px !important',
+                width: '18%'
               }}>
                 Name
               </StyledTableCell>
@@ -211,7 +212,8 @@ function CandidateTableView() {
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
-                fontSize: '16px !important'
+                fontSize: '14px !important',
+                width: '20%'
               }}>
                 Email
               </StyledTableCell>
@@ -219,7 +221,8 @@ function CandidateTableView() {
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
-                fontSize: '16px !important'
+                fontSize: '14px !important',
+                width: '18%'
               }}>
                 Company
               </StyledTableCell>
@@ -227,7 +230,8 @@ function CandidateTableView() {
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
-                fontSize: '16px !important'
+                fontSize: '14px !important',
+                width: '16%'
               }}>
                 Role
               </StyledTableCell>
@@ -235,7 +239,8 @@ function CandidateTableView() {
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
-                fontSize: '16px !important'
+                fontSize: '14px !important',
+                width: '12%'
               }}>
                 Frequency
               </StyledTableCell>
@@ -243,7 +248,8 @@ function CandidateTableView() {
                 color: 'white !important', 
                 backgroundColor: '#21C9CF !important',
                 fontWeight: 'bold !important',
-                fontSize: '16px !important'
+                fontSize: '14px !important',
+                width: '16%'
               }}>
                 View
               </StyledTableCell>
@@ -284,15 +290,17 @@ function CandidateTableView() {
                   {contact.frequency || getFrequency(contact)}
                 </StyledTableCell>
 
-                <StyledTableCell align="left">
+                <StyledTableCell align="center">
                   <Button
                     variant="contained"
-                    size="large"
+                    size="small"
                     style={{
                       background: "#21C9CF",
                       color: "white",
-                      fontSize: "14px",
-                      width:"15rem",
+                      fontSize: "12px",
+                      padding: "6px 12px",
+                      minWidth: "80px",
+                      whiteSpace: "nowrap"
                     }}
                     onClick={() => viewContactFxn(contact)}
                   >
