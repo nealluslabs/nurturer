@@ -979,7 +979,7 @@ function Newsletter(props) {
              <IconButton className="absolute ltr:right-44 rtl:left-0 top-8" type="submit">
                <Icon className="text-24" color="action" 
                onClick={(ev)=>{
-                dispatch(sendNewsletterToRecipients(newsletterRecipients, newsletterItself,notifyInvite,notifySkip))
+                //dispatch(sendNewsletterToRecipients(newsletterRecipients, newsletterItself,notifyInvite,notifySkip))
                 }}>
                  send
                </Icon>
