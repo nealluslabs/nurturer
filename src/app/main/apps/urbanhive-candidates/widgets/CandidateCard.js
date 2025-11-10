@@ -783,9 +783,8 @@ function CandidateCard() {
   </Grid>
 </Grid>
 
-
-      { userList && !userList.length?(
-        <center style={{position:"relative",top:"5rem",zIndex:"1000"}}> {
+      { userList && !userList.length && !loadedBefore?(
+        <center style={{position:"relative",top:"5rem",zIndex:"1000",height:"100vh"}}> {
         <div style={{marginTop:"15rem"}}>
         <FuseLoading />
         </div>
