@@ -11,7 +11,6 @@ import reducer from './store';
 import CandidateCard from './widgets/CandidateCard';
 import CandidateCardView from './widgets/CandidateCardView';
 import CandidateTableView from './widgets/CandidateTableView';
-import CandidateHeader from './CandidateHeader';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
@@ -262,14 +261,7 @@ function CandidateApp(props) {
         //rightSidebar: 'w-288 border-0 py-12',
         content: classes.content,
       }}
-      header={
-        <CandidateHeader
-          handleSearchResults={handleSearchResults}
-          history={history}
-          viewMode={viewMode}
-          setViewMode={setViewMode}
-        />
-      }
+      // header={<CandidateAppHeader pageLayout={pageLayout} />}
       content={
 
         /*loading ? (
@@ -735,6 +727,69 @@ function CandidateApp(props) {
 
 
 
+
+
+          {
+          //THIS IS THE TOGGLE BUTTON WHICH IS AT THE TOP OF THE SCREEN, DO NOT DELETE -BETWEEN CARD MODE AND TABLE MODE
+           <Box sx={{
+            display: "flex",
+            justifyContent:"flex-end",
+            flexDirection:{xs:"column",md:"row"},
+            width:"95%",
+            
+            gap: "12px",
+            margin:"0px 0",
+            position:"absolute",
+            top:"20px",
+            right:"50px"
+           }}
+            >
+            
+
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'flex-end', 
+              marginBottom: '20px',
+              marginTop: '1rem'
+            }}>
+              <div style={{ 
+                display: 'flex', 
+                backgroundColor: '#f5f5f5', 
+                borderRadius: '8px', 
+                padding: '4px' 
+              }}>
+                <IconButton
+                  onClick={() => setViewMode('card')}
+                  sx={{
+                    backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
+                    color: viewMode === 'card' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'card' ? '#18c8d0' : '#e0e0e0',
+                    },
+                    marginRight: '4px'
+                  }}
+                >
+                  <ViewModuleIcon />
+                </IconButton>
+                <IconButton
+                  onClick={() => setViewMode('list')}
+                  sx={{
+                    backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
+                    color: viewMode === 'list' ? 'white' : '#666',
+                    '&:hover': {
+                      backgroundColor: viewMode === 'list' ? '#18c8d0' : '#e0e0e0',
+                    }
+                  }}
+                >
+                  <ViewListIcon />
+                </IconButton>
+              </div>
+            </div>
+            
+           
+            
+            </Box>
+          }
 
 
         </div>
