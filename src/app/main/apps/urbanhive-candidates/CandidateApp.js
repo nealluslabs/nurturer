@@ -732,7 +732,7 @@ function CandidateApp(props) {
           {
           //THIS IS THE TOGGLE BUTTON WHICH IS AT THE TOP OF THE SCREEN, DO NOT DELETE -BETWEEN CARD MODE AND TABLE MODE
            <Box sx={{
-            display: "flex",
+            display: "none",
             justifyContent:"flex-end",
             flexDirection:{xs:"column",md:"row"},
             width:"95%",
