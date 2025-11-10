@@ -691,7 +691,7 @@ useEffect(() => {
                 backgroundColor: "#333"
               }
             }}
-            onClick={()=>{dispatch(batchUploadContacts(parsedData && parsedData,user,"https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png",setOpen,notifyInvite))  }}
+            onClick={()=>{dispatch(batchUploadContacts(parsedData && parsedData,user,"https://firebasestorage.googleapis.com/v0/b/bridgetech-advance-project.appspot.com/o/profile_images%2Fprofile.jpg?alt=media&token=b3c94ada-1b08-4834-bbd1-647882c7195a",setOpen,notifyInvite))  }}
             >
               UPLOAD
             </Button>

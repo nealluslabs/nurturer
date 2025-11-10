@@ -350,7 +350,7 @@ emailQuery.get().then(snapshot => {
     contacterId:user.uid,
     message:user.message?user.message:'',
     
-    photoUrl: url?url:'https://nurturer.s3.eu-west-3.amazonaws.com/no-pic.png',
+    photoUrl: url?url:'https://firebasestorage.googleapis.com/v0/b/bridgetech-advance-project.appspot.com/o/profile_images%2Fprofile.jpg?alt=media&token=b3c94ada-1b08-4834-bbd1-647882c7195a',
   })
   .then((docRef) => {
     // Update the newly created document with its own ID
@@ -710,6 +710,8 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
     companyName: profile.companyName||" ",
     industry: profile.industry||" ",
      jobTitle: profile.jobTitle||" ",
+     eventsAlert:profile && profile.frequency === "None"?false :(profile.eventsAlert?profile.eventsAlert:true),
+     touchesAlert:profile && profile.frequency === "None"?false :(profile.touchesAlert?profile.touchesAlert:true),
      birthday:profile.birthday?transformDate(profile.birthday): '1/1/1980',
     workAnniversary:profile.workAnniversary?  transformDate(profile.workAnniversary) :'1/1/2007',
      city: profile.city||" ",

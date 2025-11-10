@@ -36,7 +36,7 @@ import {
 import UserSidebar from './UserSidebar';
 import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
-import { saveFilteredContacts } from 'redux/reducers/user.slice';
+import { saveCandidateInFocus, saveFilteredContacts } from 'redux/reducers/user.slice';
 
 const drawerWidth = 400;
 const headerHeight = 200;
@@ -153,6 +153,7 @@ function InboxApp(props) {
 
   if (index > -1) {
     const [matchedUser] = replica.splice(index, 1);
+    dispatch(saveCandidateInFocus(matchedUser))
     replica.unshift(matchedUser);
   }
 

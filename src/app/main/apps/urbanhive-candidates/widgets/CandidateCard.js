@@ -533,7 +533,7 @@ function CandidateCard() {
               variant="contained"
               color="primary"
               aria-label="large contained primary button group"
-              sx={{
+              style={{
                 display: "flex",
                 justifyContent: "center",
                 backgroundColor: "transparent",

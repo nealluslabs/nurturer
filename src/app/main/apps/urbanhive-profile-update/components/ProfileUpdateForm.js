@@ -296,6 +296,8 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
       jobTitle:candidateInFocus && candidateInFocus.jobTitle && candidateInFocus.jobTitle == '' ? '' : candidateInFocus.jobTitle,
       //interests: candidateInFocus.interests == '' ? '' : candidateInFocus.interests,
       industry: candidateInFocus.industry == '' ? '' : candidateInFocus.industry,
+      eventsData: candidateInFocus.eventsData == '' ? '' : candidateInFocus.eventsData,
+      touchesData: candidateInFocus.touchesData == '' ? '' : candidateInFocus.touchesData,
       companyName: candidateInFocus.companyName == '' ? '' : candidateInFocus.companyName,
       name: candidateInFocus.name == '' ? '' : candidateInFocus.name,
       email: candidateInFocus.email == '' ? '' : candidateInFocus.email,
@@ -459,7 +461,7 @@ console.log("WHAT IS THE CANDIDATE IN FOCUS UID---->",candidateInFocus)
        const birthday = values.birthday;
        const workAnniversary = values.workAnniversary;
        
-      const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary,uid:candidateInFocus && candidateInFocus.uid};
+      const profile = { notes, frequency, city, jobTitle,state,triggers, /*interests,*/ companyName,industry,name,email,phone,birthday,workAnniversary,uid:candidateInFocus && candidateInFocus.uid,eventsData:true,touchesData:true};
       ////console.log('Logged User: ', fb.auth().currentUser.uid);
       //console.log("profile ABOUT TO BE SENT IN -->",profile)
 

@@ -70,6 +70,17 @@ function CandidateApp(props) {
   const [candidateEventsAlert, setCandidateEventsAlert] = useState(candidateInFocus && candidateInFocus.eventsAlert && candidateInFocus.eventsAlert)
 
 
+
+  useEffect(() => {
+   
+    setCandidateNotes(candidateInFocus && candidateInFocus.notes && candidateInFocus.notes)
+    setCandidateTriggersAlert(candidateInFocus && candidateInFocus.triggersAlert && candidateInFocus.triggersAlert)
+    setCandidateEventsAlert(candidateInFocus && candidateInFocus.eventsAlert && candidateInFocus.eventsAlert)
+    setCandidateTouchesAlert(candidateInFocus && candidateInFocus.touchesAlert && candidateInFocus.touchesAlert)
+
+
+  }, [candidateInFocus]);
+
    useEffect(() => {
     setTimeout(()=>{
     setTestWork(true)
