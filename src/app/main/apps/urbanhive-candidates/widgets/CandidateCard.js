@@ -22,7 +22,7 @@ import {
 } from "src/redux/actions/user.action";
 import { updateLastActive } from "src/redux/actions/auth.action";
 import { useHistory } from "react-router";
-import { saveCandidateInFocus } from "redux/reducers/user.slice";
+import { saveCandidateInFocus, saveFilteredContacts } from "redux/reducers/user.slice";
 import AddIcon from "@mui/icons-material/Add";
 import { FaPencilAlt } from "react-icons/fa";
 import { InputAdornment, TextField } from "@mui/material";
@@ -61,6 +61,8 @@ function CandidateCard() {
   const { user } = useSelector((state) => state.login);
   const history = useHistory();
   const [startIndex, setStartIndex] = useState(0);
+
+  const [loadedBefore, setLoadedBefore] = useState(false);
 
   let unsubscribe;
   const notifyInvite = () =>
@@ -264,6 +266,17 @@ function CandidateCard() {
   }, []);
 
 
+  useEffect(()=>{
+   
+    return () => {
+     
+     dispatch(saveFilteredContacts(allContacts))
+    };
+
+
+  },[])
+
+
   function getFutureDate(sendDate) {
     const daysToAdd = parseInt(sendDate, 10);
     const today = new Date();
@@ -304,6 +317,8 @@ function CandidateCard() {
   console.log("OUTPUT IS --->",output)
 
   const handleSearchResults = (searchTerm) => {
+
+    setLoadedBefore(true)
     setOutput(
       filteredContacts.filter((item) => {
         if (!searchTerm) return true; // Show all items if searchTerm is empty
@@ -316,6 +331,23 @@ function CandidateCard() {
         }
       })
     );
+
+   dispatch(
+    saveFilteredContacts(
+      allContacts.filter((item) => {
+        if (!searchTerm) return true; // Show all items if searchTerm is empty
+
+        try {
+          const regex = new RegExp(searchTerm, "i"); // 'i' for case-insensitive matching
+          return item.name && regex.test(item.name);
+        } catch (e) {
+          return false; // If invalid regex, don't match anything
+        }
+      })
+    )
+  )
+
+
   };
 
   // const userList = allUsers.length ? (
@@ -758,14 +790,25 @@ function CandidateCard() {
 </Grid>
 
 
-      { userList && !userList.length?(
+      { userList && !userList.length && !loadedBefore?(
         <center style={{position:"relative",top:"5rem",zIndex:"1000",height:"100vh"}}> {
         <div style={{marginTop:"15rem"}}>
         <FuseLoading />
         </div>
         
         }</center>
-      ) : ( 
+      ) :
+      userList && !userList.length && loadedBefore?
+      <center style={{position:"relative",top:"5rem",zIndex:"1000",height:"100vh"}}> {
+        <div style={{marginTop:"15rem"}}>
+        No Contacts with the name requested
+        </div>
+        
+        }</center>
+      
+      
+      :
+      ( 
         userList.length > 0 && (
           <Box sx={{ height: {xs:"120vh",sm:"100%",display:{xs:"flex",sm:"block"},justifyContent:"center",alignItems:"center"}, width: "97%" }}>
             <ReactSwipe
