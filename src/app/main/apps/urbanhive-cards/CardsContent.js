@@ -9,6 +9,9 @@ import BirthdayOne from "../../../../images/Birthday_1.png";
 import BirthdayTwo from "../../../../images/Birthday_2.png";
 import Holiday from "../../../../images/Holiday_1.png";
 
+import thanksgiving1 from "../../../../images/thanksgiving1.png";
+import thanksgiving2 from "../../../../images/thanksgiving2.png";
+
 function CardsContent() {
   return (
     <div style={{ padding: '24px',backgroundColor:"white"}}>
@@ -205,7 +208,7 @@ function CardsContent() {
 
         <Box
           sx={{ 
-            width: {xs:"100%",sm:"45%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px",  
+            width: {xs:"100%",sm:"50%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px",  
             marginTop: "24px"
           }}
         >
@@ -236,9 +239,42 @@ function CardsContent() {
 
             <div style={{ width: "47%", }}>
               <img 
-                src={Holiday}
+                src={thanksgiving1}
                 alt="No image"
-                style={{ borderRadius: "4px" }} 
+                style={{ borderRadius: "4px",height:"32rem",width:"45rem"  }} 
+              />
+              <p style={{ fontSize: "18px", marginTop: "12px" }}>
+                
+              </p>
+
+              <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
+                <div
+                  style={{ 
+                    display: "flex", alignItems: "center", cursor: "pointer", 
+                    border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
+                  }}
+                >
+                  <StarIcon sx={{ mr: 1.5, color: "blue" }} />
+                  <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                </div>
+
+                <div
+                  style={{ 
+                    display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
+                    border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem",
+                  }}
+                >
+                  <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
+                </div>
+              </div>
+            </div>
+
+
+            <div style={{ width: "47%", }}>
+              <img 
+                src={thanksgiving2}
+                alt="No image"
+                style={{ borderRadius: "4px",height:"32rem",width:"45rem" }} 
               />
               <p style={{ fontSize: "18px", marginTop: "12px" }}>
                 
