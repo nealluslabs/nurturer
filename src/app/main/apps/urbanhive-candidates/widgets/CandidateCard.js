@@ -29,6 +29,41 @@ import { InputAdornment, TextField } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import SendIcon from '@mui/icons-material/Send';
 import FuseLoading from "@fuse/core/FuseLoading";
+import {IconButton} from '@mui/material';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableFooter,
+  TablePagination,
+  Paper,
+ 
+  styled
+} from '@mui/material';
+
+
+
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ViewListIcon from '@mui/icons-material/ViewList';
+
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  fontSize: '14px',
+ 
+  padding: '12px 8px',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  wordBreak: 'break-word'
+}));
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,6 +83,100 @@ const useStyles = makeStyles((theme) => ({
 function CandidateCard() {
   let reactSwipeEl;
   const dispatch = useDispatch();
+
+  function TablePaginationActions(props) {
+    const { count, page, rowsPerPage, onPageChange } = props;
+    const handleFirstPageButtonClick = (event) => {
+      onPageChange(event, 0);
+    };
+    const handleBackButtonClick = (event) => {
+      onPageChange(event, page - 1);
+    };
+    const handleNextButtonClick = (event) => {
+      onPageChange(event, page + 1);
+    };
+    const handleLastPageButtonClick = (event) => {
+      onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
+    };
+    return (
+      <div style={{ display: 'flex', gap: '4px', marginTop: "54px", alignItems: 'center' }}>
+        <IconButton
+          onClick={handleFirstPageButtonClick}
+          disabled={page === 0}
+          size="small"
+          sx={{
+            backgroundColor: page === 0 ? '#F5F5F5' : '#21C9CF',
+            color: page === 0 ? '#ccc' : 'white',
+            '&:hover': {
+              backgroundColor: page === 0 ? '#F5F5F5' : '#18C8D0',
+            },
+            '&:disabled': {
+              backgroundColor: '#F5F5F5',
+              color: '#ccc',
+            }
+          }}
+        >
+          <SkipPreviousIcon />
+        </IconButton>
+        <IconButton
+          onClick={handleBackButtonClick}
+          disabled={page === 0}
+          size="small"
+          sx={{
+            backgroundColor: page === 0 ? '#F5F5F5' : '#21C9CF',
+            color: page === 0 ? '#ccc' : 'white',
+            '&:hover': {
+              backgroundColor: page === 0 ? '#F5F5F5' : '#18C8D0',
+            },
+            '&:disabled': {
+              backgroundColor: '#F5F5F5',
+              color: '#ccc',
+            }
+          }}
+        >
+          <ArrowBackIcon />
+        </IconButton>
+        <IconButton
+          onClick={handleNextButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          size="small"
+          sx={{
+            backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#F5F5F5' : '#21C9CF',
+            color: page >= Math.ceil(count / rowsPerPage) - 1 ? '#ccc' : 'white',
+            '&:hover': {
+              backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#F5F5F5' : '#18C8D0',
+            },
+            '&:disabled': {
+              backgroundColor: '#F5F5F5',
+              color: '#ccc',
+            }
+          }}
+        >
+          <ArrowForwardIcon />
+        </IconButton>
+        <IconButton
+          onClick={handleLastPageButtonClick}
+          disabled={page >= Math.ceil(count / rowsPerPage) - 1}
+          size="small"
+          sx={{
+            backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#F5F5F5' : '#21C9CF',
+            color: page >= Math.ceil(count / rowsPerPage) - 1 ? '#ccc' : 'white',
+            '&:hover': {
+              backgroundColor: page >= Math.ceil(count / rowsPerPage) - 1 ? '#F5F5F5' : '#18C8D0',
+            },
+            '&:disabled': {
+              backgroundColor: '#F5F5F5',
+              color: '#ccc',
+            }
+          }}
+        >
+          <SkipNextIcon />
+        </IconButton>
+      </div>
+    );
+  }
+
+
   const {
     allUsers,
     filteredUsers,
@@ -58,11 +187,46 @@ function CandidateCard() {
     candidateInFocus,
   } = useSelector((state) => state.user);
 
+  const contactsData = filteredContacts || allContacts || [];
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+  const viewContactFxn = (contact) => {
+    const contactIndex = contactsData.findIndex(c =>
+      (c.id && c.id === contact.id) ||
+      (c.uid && c.uid === contact.uid) ||
+      (c.email && c.email === contact.email)
+    );
+    dispatch(saveCandidateInFocus(contactsData));
+    localStorage.setItem('selectedContactIndex', contactIndex.toString());
+    localStorage.setItem('selectedContact', JSON.stringify(contact));
+    window.dispatchEvent(new CustomEvent('switchToCardView', {
+      detail: {
+        contact,
+        contactIndex,
+        contactsData
+      }
+    }));
+  };
+  const getFrequency = (contact) => {
+    const frequencies = ['Daily', 'Weekly', 'Monthly', 'Quarterly'];
+    return frequencies[Math.floor(Math.random() * frequencies.length)];
+  };
+
   const { user } = useSelector((state) => state.login);
   const history = useHistory();
   const [startIndex, setStartIndex] = useState(0);
 
   const [loadedBefore, setLoadedBefore] = useState(false);
+  const [viewMode, setViewMode] = useState("card");
 
   let unsubscribe;
   const notifyInvite = () =>
@@ -130,6 +294,8 @@ function CandidateCard() {
       ? console.log("Yes, Today is first day of month:- " + isFirstDayOfMonth)
       : console.log("No, Today date is:- " + isFirstDayOfMonth);
   };
+
+  
 
   useEffect(() => {
     // Use candidateInFocus if available (from table view), otherwise use filteredContacts
@@ -742,7 +908,7 @@ function CandidateCard() {
   }}
 >
   {/* 1 */}
-  <Grid item sx={{ flex: "0 0 84%" }}>
+  <Grid item sx={{ flex: "0 0 74%" }}>
     <TextField
       placeholder="Search..."
       onChange={(e) => { handleSearchResults(e.target.value) }}
@@ -787,6 +953,42 @@ function CandidateCard() {
       New Contact
     </button>
   </Grid>
+   
+  <Grid item sx={{position:"relative",left:"-2rem" ,flex: "0 0 8%",marginTop:{sm:"0rem",xs:"1rem"} }}>
+  <Box sx={{
+        display: 'flex',
+        backgroundColor: '#F5F5F5',
+        borderRadius: '8px',
+        padding: '4px'
+      }}>
+        <IconButton
+          onClick={() => setViewMode('card')}
+          sx={{
+            backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
+            color: viewMode === 'card' ? 'white' : '#666',
+            '&:hover': {
+              backgroundColor: viewMode === 'card' ? '#18C8D0' : '#E0E0E0',
+            },
+            marginRight: '4px'
+          }}
+        >
+          <ViewModuleIcon />
+        </IconButton>
+        <IconButton
+          onClick={() => setViewMode('list')}
+          sx={{
+            backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
+            color: viewMode === 'list' ? 'white' : '#666',
+            '&:hover': {
+              backgroundColor: viewMode === 'list' ? '#18C8D0' : '#E0E0E0',
+            }
+          }}
+        >
+          <ViewListIcon />
+        </IconButton>
+      </Box>
+      </Grid>
+
 </Grid>
 
 
@@ -809,7 +1011,7 @@ function CandidateCard() {
       
       :
       ( 
-        userList.length > 0 && (
+        userList.length > 0 &&  viewMode==='card'?
           <Box sx={{ height: {xs:"120vh",sm:"100%",display:{xs:"flex",sm:"block"},justifyContent:"center",alignItems:"center"}, width: "97%" }}>
             <ReactSwipe
               key={`${userList.length}-${startIndex}`}
@@ -823,7 +1025,168 @@ function CandidateCard() {
               {userList}
             </ReactSwipe>
           </Box>
-        )
+
+          :
+
+    
+        <div style={{ width: '100%', padding: '20px' }}>
+      <div style={{ marginBottom: '20px' }}>
+        <h2 style={{ margin: 0, marginTop: "54px", color: '#333', fontSize: '24px', fontWeight: 'bold' }}>
+          Contacts Directory
+        </h2>
+        <p style={{ margin: '5px 0 0 0', color: '#666', fontSize: '14px' }}>
+          Total Contacts: {contactsData.length}
+        </p>
+      </div>
+      <TableContainer component={Paper} sx={{ width: '96%', overflow: 'hidden' }}>
+        <Table sx={{ width: '100%', tableLayout: 'fixed' }} aria-label="candidates table">
+          <TableHead sx={{
+            '& th': {
+              backgroundColor: '#21C9CF !important',
+              color: 'white !important',
+              
+              fontSize: '14px !important',
+              padding: '12px 8px !important'
+            }
+          }}>
+            <TableRow sx={{
+              backgroundColor: "#21C9CF !important",
+              '& th': {
+                backgroundColor: '#21C9CF !important',
+                color: 'white !important'
+              }
+            }}>
+              <StyledTableCell sx={{
+                color: 'white !important',
+                backgroundColor: '#21C9CF !important',
+               
+                fontSize: '14px !important',
+                width: '18%'
+              }}>
+                Name
+              </StyledTableCell>
+              <StyledTableCell align="left" sx={{
+                color: 'white !important',
+                backgroundColor: '#21C9CF !important',
+               
+                fontSize: '14px !important',
+                width: '20%'
+              }}>
+                Email
+              </StyledTableCell>
+              <StyledTableCell align="left" sx={{
+                color: 'white !important',
+                backgroundColor: '#21C9CF !important',
+                
+                fontSize: '14px !important',
+                width: '18%'
+              }}>
+                Company
+              </StyledTableCell>
+              <StyledTableCell align="left" sx={{
+                color: 'white !important',
+                backgroundColor: '#21C9CF !important',
+               
+                fontSize: '14px !important',
+                width: '16%'
+              }}>
+                Role
+              </StyledTableCell>
+              <StyledTableCell align="left" sx={{
+                color: 'white !important',
+                backgroundColor: '#21C9CF !important',
+               
+                fontSize: '14px !important',
+                width: '12%'
+              }}>
+                Frequency
+              </StyledTableCell>
+              <StyledTableCell align="left" sx={{
+                color: 'white !important',
+                backgroundColor: '#21C9CF !important',
+                
+                fontSize: '14px !important',
+                width: '16%'
+              }}>
+                View
+              </StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {(rowsPerPage > 0
+              ? contactsData.slice(
+                  page * rowsPerPage,
+                  page * rowsPerPage + rowsPerPage
+                )
+              : contactsData
+            ).map((contact, index) => (
+              <TableRow key={contact.id || index}>
+                <StyledTableCell component="th" scope="row">
+                  {contact.name
+                    || (contact.firstName && contact.lastName && `${contact.firstName} ${contact.lastName}`)
+                    || contact.fullName
+                    || contact.displayName
+                    || contact.email
+                    || "-"}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {contact.email || contact.contactEmail || "-"}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {contact.company || contact.companyName || contact.organization || "-"}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {contact.role || contact.position || contact.title || contact.jobTitle || "-"}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                  {contact.frequency || getFrequency(contact)}
+                </StyledTableCell>
+                <StyledTableCell align="left">
+                <button 
+                 onClick={() => { history.push('/apps/profile') }}
+                 style={{ 
+                   backgroundColor: "#21C9CF",
+                   color: 'white',
+                   padding: '5px 20px',
+                   fontFamily:"Arial !important",
+                   borderRadius: '8px',
+                   height:"3rem",
+                   width:"13rem",
+                   textTransform: 'none',
+                   
+                 }}
+               >
+                
+                 View
+                </button>
+                </StyledTableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TablePagination
+                rowsPerPageOptions={[5, 10, 25, { label: "All", value: -1 }]}
+                colSpan={6}
+                count={contactsData.length}
+                rowsPerPage={rowsPerPage}
+                page={page}
+                SelectProps={{
+                  inputProps: { "aria-label": "rows per page" },
+                  native: true,
+                }}
+                onPageChange={handleChangePage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
+                ActionsComponent={TablePaginationActions}
+              />
+            </TableRow>
+          </TableFooter>
+        </Table>
+      </TableContainer>
+    </div>
+          
+
+        
       )}
     </Grid>
   );
