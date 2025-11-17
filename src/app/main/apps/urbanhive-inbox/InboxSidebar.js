@@ -145,9 +145,9 @@ function InboxSidebar(props) {
       return aDate - bDate;
   })
   
-    .map(({ uid, name, email, city, intro, skillset, skills_needed, 
+    .map(({ uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
       lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,frequencyInDays,messageQueue,sendDate},index) => ({
-        uid, name, email, city, intro, skillset, skills_needed, 
+        uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
         lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
         companyName, jobTitle, interests, frequency,frequencyInDays,
         daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,

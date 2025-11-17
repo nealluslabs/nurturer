@@ -11,6 +11,18 @@ import axios from 'axios';
 
 import firebase from "firebase/app";
 import "firebase/firestore";
+
+
+
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+
+const sesClient = new SESClient({
+  region: "eu-north-1", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
+credentials: {
+  accessKeyId:process.env.REACT_APP_ACCESSKEYID_NURTURER,
+  secretAccessKey:process.env.REACT_APP_SECRETACCESSKEY_NURTURER,
+},
+});
   
 
 export const fetchAllUsers = (uid) => async (dispatch) => {
@@ -297,6 +309,120 @@ export const stopMessageSending = (notifyInvite,selectedChatUser) => async (disp
   }
 }
 
+export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispatch) => {
+  console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA",data)
+
+  if(data && data.touchesAlert !==null && data.touchesAlert ===true  ){
+
+    console.log("AND TOUCHES IS REGISTERED")
+ try {
+      const params = {
+        Destination: {
+        ToAddresses: [data.email],
+        },
+        Message: {
+          Body: {
+            Html: {
+              Data: `
+                
+                <p>Dear <strong>${data.name || ''}</strong>,</p>
+                <br/>
+      
+                <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].firstParagraph || ''}</p>
+                <br/>
+      
+                <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].secondParagraph || ''}</p>
+                <br/>
+      
+                <ul>
+                  ${
+                    (data.messageQueue &&
+                     data.messageQueue[data.messageQueue.length - 1] &&
+                     data.messageQueue[data.messageQueue.length - 1].bulletPoints)
+                      ? data.messageQueue[data.messageQueue.length - 1].bulletPoints.map(
+                          bp => `
+                            <li>
+                              <strong>${bp.bulletPointBold || ''}</strong> — ${bp.bulletPointRest || ''} 
+                              <a href="${bp.link || '#'}" target="_blank">${bp.link || ''}</a>
+                            </li>`
+                        ).join('')
+                      : ''
+                  }
+                </ul>
+                <br/>
+      
+                <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].thirdParagraph || ''}</p>
+                <br/>
+      
+                <p>Warm Regards,</p>
+                <p>– The Nurturer Team</p>
+              `,
+            },
+            Text: {
+              Data: data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].subject || '',
+            },
+          },
+          Subject: {
+            Data: data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].subject || '',
+          },
+        },
+        Source: 'info@nurturer.ai', // must be verified in SES
+      };
+      
+  
+      const command = new SendEmailCommand(params);
+       await sesClient.send(command);
+
+
+      //UPDATING STATUS OF A PARTICULAR CONTACT
+    const updatedMessageQueue = [...data.messageQueue];
+
+    // Find the index of the most recent email (assuming array is in chronological order)
+    // If not, we’ll sort it before finding
+    const emailMessages = updatedMessageQueue
+      .map((msg, index) => ({ ...msg, index }))
+      .filter(msg => msg.messageType === "Email");
+  
+    if (emailMessages.length > 0) {
+      // Get the last (most recent) email
+      const mostRecentEmail = emailMessages[emailMessages.length - 1];
+      const msgIndex = mostRecentEmail.index;
+  
+      // Update the messageStatus
+      updatedMessageQueue[msgIndex] = {
+        ...updatedMessageQueue[msgIndex],
+        messageStatus: "Sent",
+      };
+
+      const contactDoc = await db.collection("contacts").doc(data && data.uid).get();
+
+      if(contactDoc.exists){
+        await db.collection("contacts").doc(data && data.uid).update({
+          messageQueue: updatedMessageQueue,
+        });
+
+        //UPDATING STATUS OF A PARTICULAR CONTACT - END
+         notifyInvite("Email has been sent out!")
+
+      }
+      //TRY BLOCK END
+    }
+  } 
+    catch (error) {
+      console.error("❌ Error sending email:", error);
+      notifyInvite("Error Sending Email, please try again!")
+      throw error;
+    }
+
+    //SEND EMAIL END
+
+    
+
+   
+  }
+
+
+}
 
 
 
@@ -316,111 +442,7 @@ export const generateAiMessage = (Frequency,Name,JobTitle,Company,Industry,Inter
 
 //console.log("USER BEING PASSED INTO GENERATE AI MESSAGE--->",user)
   const prompt = 
-    selectedChatUser && selectedChatUser.name === "Emily Whiterr"?
 
-     
-
-
-  ` Generate an email subject of 5 words maximum,wishing the user a Happy Fourth of July, and 3 really short paragraphs of text, and fill in this object and return it as your answer(keep the object in valid JSON). Make sure the property messageStatus is in the JSON object, and it has a value of Pending. For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
-  {"subject":"Happy Fourth ofJuly",
-  messageType:"Event",
-  "messageStatus":"Pending"
-   "firstParagraph":" ",
-   "secondParagraph":" ",
-   "thirdParagraph":" ",
-   "bulletPoints":[
-     {
-      "bulletPointBold":" ",
-      "bulletPointRest":" ",
-      "link":" ",
-      "id":"0",
-     },{
-       "bulletPointBold":" ",
-       "bulletPointRest":" ",
-       "link":" ",
-       "id":"1",
-     },{
-       "bulletPointBold":" ",
-       "bulletPointRest":" ",
-       "link":" ",
-       "id":"2",
-     },{
-       "bulletPointBold":" ",
-       "bulletPointRest":" ",
-       "link":" ",
-       "id":"3",
-     },{
-       "bulletPointBold":" ",
-       "bulletPointRest":" ",
-       "link":" ",
-       "id":"4",
-     },
-   ]
-  } .The first paragraph should be about how you wish the receiver and everyone at their company,:${Company} a happy fourth of July.
-      Don't start the paragraph with Dear ${Name}, just jump into the writing.
-     second parargaph should be about how you are grateful for all the work they do in their industry: ${Industry}. Add a sentimental touch at this point.
-     Also mention how you hope they can get a well deserved break today, and maybe even dabble in their interests: ${Interests}.
-     The third Paragraph should be thanking them once again for the difference they make and wishing them  happy holidays.
-     The Subject should be composed from the content of the paragraphs above and should have some sort of "Happy Fourth of July" phrase in it.
-    in the JSON object you generate, there is no need to fill out the bulletPoints array, return the bulletPoints array as it is in the text above.
-
- Please go through the javascript object ${JSON.stringify(previousMessage)}, and try to adapt to my writing style,so you can sound like me,when providing your answer`
-
-
-
-
-    :
-    selectedChatUser && selectedChatUser.name === "Bob Johnsonopia"?
-
-
-      
-    ` Generate an email subject of 5 words maximum, wishing the user a Happy Birthday, and 3 really short paragraphs of text, and fill in this object and return it as your answer(keep the object in valid JSON).Articles should be not be older than ${Frequency},and links for the articles should from these sites only - PWC, Deloitte, McKinsey, Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes.Make sure the property messageStatus is in the JSON object, and it has a value of Pending. For the id in each object of the bulletPoints array, please keep the id in the object below,do not delete them when generating your own object.Finally for the subject, make sure to put an emoji at the end of the generated subject:
-    {"subject":"Happy Fourth ofJuly",
-    messageType:"Event",
-    "messageStatus":"Pending"
-     "firstParagraph":" ",
-     "secondParagraph":" ",
-     "thirdParagraph":" ",
-     "bulletPoints":[
-       {
-        "bulletPointBold":" ",
-        "bulletPointRest":" ",
-        "link":" ",
-        "id":"0",
-       },{
-         "bulletPointBold":" ",
-         "bulletPointRest":" ",
-         "link":" ",
-         "id":"1",
-       },{
-         "bulletPointBold":" ",
-         "bulletPointRest":" ",
-         "link":" ",
-         "id":"2",
-       },{
-         "bulletPointBold":" ",
-         "bulletPointRest":" ",
-         "link":" ",
-         "id":"3",
-       },{
-         "bulletPointBold":" ",
-         "bulletPointRest":" ",
-         "link":" ",
-         "id":"4",
-       },
-     ]
-    } .The first paragraph should be about how you wish the receiver a happy birthday and a year ahead filled with great moments,not just in relation to their job:${JobTitle},but in life as well.
-        Don't start the paragraph with Dear ${Name}, just jump into the writing.
-       second parargaph should be about how you are grateful for all the work they do in their industry: ${Industry}. Add a sentimental touch at this point.
-       Also mention how you hope they can get a well deserved break today, and maybe even dabble in their interests: ${Interests}.
-       The Subject should be composed from the content of the paragraphs above and should have some sort of "Happy Birthday" phrase in it.
-       The third Paragraph should be wishing them future success at their company:${Company},and then say something witty about their hobby:${Interests},before finally wishing them success at it.
-      in the JSON object you generate, there is no need to fill out the bulletPoints array, return the bulletPoints array as it is in the text above.
-  
-   Please go through the javascript object ${JSON.stringify(previousMessage)}, and try to adapt to my writing style,so you can sound like me,when providing your answer`
-
-    :
-  
   `I want to send five articles to a business contact. Search the internet for five legitimate,real articles that were written in 2025
    along with a url to that article that can be publicly accessed from these websites - PWC, Deloitte, McKinsey,
     Visitage, Gallup, Josh Bersin, Harvard Business Review and Forbes.

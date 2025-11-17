@@ -15,9 +15,10 @@ import { selectContacts } from './store/contactsSlice';
 import { sendMessage } from './store/chatSlice';
 import { sendChat } from 'src/redux/actions/chat.action';
 import { Checkbox, CircularProgress, FormControl, FormControlLabel, Radio, RadioGroup, Stack } from '@mui/material';
-import { generateAiMessage,stopMessageSending, updateUserBroadcast, updateUserBroadcastWithNotif, updateUserChat } from 'redux/actions/user.action';
+import { generateAiMessage,sendEmailToContact,stopMessageSending, updateUserBroadcast, updateUserBroadcastWithNotif, updateUserChat } from 'redux/actions/user.action';
 import { RiAiGenerate2 } from "react-icons/ri";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { IoIosSend } from "react-icons/io";
 
 
 import { Modal, Box } from '@mui/material';
@@ -1619,10 +1620,36 @@ label={<Typography fontSize="14px">
             </IconButton>
             */}
 
+
+
+           { 
+  
+           <IoIosSend  onClick={()=>{
+
+            if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus === "Sent" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
+          {
+            //the if condition above, only pending messages are showing, so theres no way any message status can have sent, consider using a better condition
+            notifySkipCustom("You can't resend a message that has already been sent!")
+           
+            }
+            else{
+              dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom))
+            }
+          }} 
+            
+            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+           }
+
             
 
            { !loading && 
            //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
+           
+           
+          
+          
+          
+          
            <RiAiGenerate2 onClick={()=>{
 
             if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
@@ -1634,7 +1661,7 @@ label={<Typography fontSize="14px">
             }
           }} 
             
-            style={{position:"absolute",top:"2rem",right:"16rem",fontSize:"2.4rem",color:"grey"}} />
+            style={{position:"absolute",top:"2rem",right:"16rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
      
 
@@ -1644,7 +1671,7 @@ label={<Typography fontSize="14px">
            <FaRegEdit onClick={(ev)=>{sendUpdate(ev) }}
            
             
-            style={{position:"absolute",top:"1.9rem",right:"12rem",fontSize:"2.4rem",color:"grey"}} />
+            style={{position:"absolute",top:"1.9rem",right:"12rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
 
 
@@ -1652,11 +1679,11 @@ label={<Typography fontSize="14px">
            
            <FaStopCircle onClick={()=>{ dispatch(stopMessageSending(notifyInviteCustom,selectedChatUser))}}
             
-            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey"}} />
+            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
 
           { loading && 
-            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"16rem",color:"grey"}} />
+            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"16rem",color:"grey",cursor:"pointer"}} />
             }
            
           </Paper>
