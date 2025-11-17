@@ -391,7 +391,8 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
       // Update the messageStatus
       updatedMessageQueue[msgIndex] = {
         ...updatedMessageQueue[msgIndex],
-        messageStatus: "Sent",
+        messageStatus: "Sent"
+        
       };
 
       const contactDoc = await db.collection("contacts").doc(data && data.uid).get();
@@ -399,7 +400,16 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
       if(contactDoc.exists){
         await db.collection("contacts").doc(data && data.uid).update({
           messageQueue: updatedMessageQueue,
+          sendDate:contactDoc.data().frequencyInDays
         });
+
+
+    await db.collection("contacts").doc(data && data.uid).get().then(async(doc)=>{
+      dispatch(setCurrentChat(doc.data()))
+
+    }) 
+      
+
 
         //UPDATING STATUS OF A PARTICULAR CONTACT - END
          notifyInvite("Email has been sent out!")
@@ -410,7 +420,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
   } 
     catch (error) {
       console.error("❌ Error sending email:", error);
-      notifyInvite("Error Sending Email, please try again!")
+      notifySkip("Error Sending Email, please try again!")
       throw error;
     }
 

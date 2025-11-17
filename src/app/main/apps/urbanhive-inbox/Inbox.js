@@ -256,8 +256,13 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
   dispatch(saveEditedParagraphs({...paragraphs,bulletPoints:updatedBulletPoints}))
 
 }
-const onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
-const [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messsageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
+//const [onlyPendingMessages,setOnlyPendingMessages] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) )
+
+
+let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) 
+
+
+let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messsageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
   :
   {
  /* firstParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].firstParagraph : " ",
@@ -267,10 +272,12 @@ const [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPending
 
 //console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", onlyPendingMessages )
 
-const [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]? onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].bulletPoints
+let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]? onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].bulletPoints
   :
  []
 );
+
+
 
 
  const { connects,chatGptAnswer } = useSelector((state) => state.user);
