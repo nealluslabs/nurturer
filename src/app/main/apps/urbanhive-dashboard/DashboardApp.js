@@ -603,7 +603,7 @@ if (allContacts.length > 0) {
 
 
 {onlyEventsMessagesData.length > 0  &&
-   <div style={{background:"red"}}>
+   <div >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <CalendarMonthIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />

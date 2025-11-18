@@ -1644,7 +1644,7 @@ label={<Typography fontSize="14px">
             }
           }} 
             
-            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer",display:"none"}} />
            }
 
             

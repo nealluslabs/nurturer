@@ -962,7 +962,7 @@ function CandidateCard() {
         padding: '4px'
       }}>
         <IconButton
-          onClick={() => setViewMode('card')}
+         // onClick={() => setViewMode('card')}
           sx={{
             backgroundColor: viewMode === 'card' ? '#21C9CF' : 'transparent',
             color: viewMode === 'card' ? 'white' : '#666',
@@ -975,7 +975,7 @@ function CandidateCard() {
           <ViewModuleIcon />
         </IconButton>
         <IconButton
-          onClick={() => setViewMode('list')}
+         // onClick={() => setViewMode('list')}
           sx={{
             backgroundColor: viewMode === 'list' ? '#21C9CF' : 'transparent',
             color: viewMode === 'list' ? 'white' : '#666',
