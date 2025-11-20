@@ -139,7 +139,7 @@ function Inbox(props) {
 
   const [birthdayMessage1,setBirthdayMessage1] = useState(false)
   const [birthdayMessage2,setBirthdayMessage2] = useState(false)
-  const [holidayMessage1,setHolidayMessage1] = useState(false)
+  const [holidayMessage1,setHolidayMessage1] = useState(true)
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -262,7 +262,7 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
 let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) 
 
 
-let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messsageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
+let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
   :
   {
  /* firstParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].firstParagraph : " ",
@@ -270,7 +270,7 @@ let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMe
   thirdParagraph:onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]?onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].thirdParagraph :" "*/
 });
 
-//console.log("WHAT IS PARAGRAPHS FOR JOHN SMITH?? --->", onlyPendingMessages )
+console.log("OKAY SO WHAT IS PARAGRAPHS --->", paragraphs )
 
 let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onlyPendingMessages && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1]? onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].bulletPoints
   :
@@ -803,11 +803,10 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
          :
          selectedChatUser && selectedChatUser.name  === "Emily White"?
          <span >
-         {/*"We’re grateful for all the work you do in healthcare—especially during times that remind us of the value of service, community, and care. Hope you're able to take a well-deserved break, maybe even spend some time with your four-legged friends at the shelter this weekend."*/}
-         {/*selectedChatUser && selectedChatUser.message && selectedChatUser.message.secondParagraph*/}
+        
          {paragraphs && paragraphs.secondParagraph}
 
-         {holidayMessage1 && 
+         { paragraphs && (paragraphs.messageStatus === "Holiday" || paragraphs.messageStatus === "Event") &&
          <>
          <br/>
          {/*<b> Happy Holidays 1 </b>*/}
@@ -847,8 +846,8 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
         {
 
         <>
-         {!(selectedChatUser.name === 'Emily Whiterr' || selectedChatUser.name === 'Bob Johnsonopia') &&<> <br /><br /> </>}
-         {!(selectedChatUser.name === 'Emily Whiterr' || selectedChatUser.name === 'Bob Johnsonopia') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+         {<> <br /><br /> </>}
+         {paragraphs && (paragraphs.messageType !== 'Holiday' && paragraphs.messageType !== 'Birthday' &&  paragraphs.messageType !== 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
           <>
         • <b>{point.bulletPointBold}</b>
         <br />
@@ -859,7 +858,7 @@ selectedChatUser && selectedChatUser.name  === "Alice Chen"?
        {!(selectedChatUser.name === 'Emily Whiter' || selectedChatUser.name === 'Bob Johnsons') &&<> <br /><br /> </>}
         </>
       ))
-         }
+       }
 
        {/*
         • <b>{selectedChatUser && selectedChatUser.message && selectedChatUser.message.bulletPointTwoBold}</b>
@@ -994,7 +993,7 @@ We had some great conversations previously, and I really valued the opportunity 
            
 {<Box sx={{display:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"-10rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
- {!(selectedChatUser.name === 'EmOly WhOte' || selectedChatUser.name === 'Bib Johnsonopia') ?
+ {paragraphs && (paragraphs.messageType !== "Event"  && paragraphs.messageType !== "Birthday" && paragraphs.messageType !== "Holiday")?
    
 
     selectedChatUser.name === 'Carol Garcia' && onlyPendingMessages && onlyPendingMessages.length?
@@ -1035,7 +1034,7 @@ We had some great conversations previously, and I really valued the opportunity 
           label={<Typography fontSize="14px"><a href="https://martech.org/5-essential-priorities-for-marketers-in-2025/" target="_blank" rel="noopener noreferrer">Redefining Brand Value: Marketing Priorities for the 2025 Economy</a></Typography>}
         />*/}
 
- {paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
+    {paragraphs && paragraphs.bulletPoints && bulletPointChoice && bulletPointChoice.map((point,index)=>( 
           <>
         <FormControlLabel
         style={{display:"flex",gap:"2rem"}}
