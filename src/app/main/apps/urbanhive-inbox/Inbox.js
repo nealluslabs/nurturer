@@ -26,6 +26,7 @@ import { Modal, Box } from '@mui/material';
 
 //import holiday1 from 'src/app/main/urbanhive-assets/holiday.png'
 import holiday1 from 'src/images/thanksgiving1.png'
+import holiday2 from 'src/images/thanksgiving2.png'
 import birthday1 from 'src/app/main/urbanhive-assets/birthday1.png'
 import birthday2 from 'src/images/Birthday_2.png'
 import { saveEditedParagraphs } from 'redux/reducers/user.slice';
@@ -141,6 +142,7 @@ function Inbox(props) {
   const [birthdayMessage1,setBirthdayMessage1] = useState(false)
   const [birthdayMessage2,setBirthdayMessage2] = useState(false)
   const [holidayMessage1,setHolidayMessage1] = useState(true)
+  const [holidayMessage2,setHolidayMessage2] = useState(false)
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -651,7 +653,7 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
          
          {/*<b> Happy Holidays 1 </b>*/}
 
-
+        {holidayMessage1 && 
          <div
               style={{
                 width: '65%',
@@ -667,6 +669,26 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
             >
               <img src={holiday1} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
+        }
+
+
+           { holidayMessage2 && 
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={holiday2} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
 
          </>
           }
@@ -834,12 +856,23 @@ label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={han
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Radio checked={holidayMessage1} onClick={()=>{setHolidayMessage1(!holidayMessage1)}}
+control={<Radio checked={holidayMessage1} onClick={()=>{ setHolidayMessage1(true);setHolidayMessage2(false)   }}
 />}
 label={<Typography fontSize="14px">
   <div  style={{cursor:"pointer"}}  onClick={handleOpen3} >Happy Holiday 1</div>
   </Typography>}
 />
+
+<FormControlLabel
+style={{display:"flex",gap:"2rem"}}
+value="article1"
+control={<Radio checked={holidayMessage2} onClick={()=>{ setHolidayMessage1(false);setHolidayMessage2(true)}}
+/>}
+label={<Typography fontSize="14px">
+  <div  style={{cursor:"pointer"}}  onClick={handleOpen3} >Happy Holiday 2</div>
+  </Typography>}
+/>
+
 
 
 </Stack>
