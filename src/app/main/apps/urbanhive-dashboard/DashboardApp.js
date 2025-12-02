@@ -95,7 +95,7 @@ if (allContacts.length > 0) {
     return 0;
   });
 
-onlyTouchpointMessagesData = allMessages.filter((item)=>(item/*.messageType === 'Email'||item.messageType === 'Event'*/ )).map((msg, idx) => ({
+onlyTouchpointMessagesData = allMessages.filter((item)=>(item.messageStatus === 'Pending' )).map((msg, idx) => ({
   id: msg.id || idx,
   title: msg.title || msg.subject || 'No Title',
   subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),

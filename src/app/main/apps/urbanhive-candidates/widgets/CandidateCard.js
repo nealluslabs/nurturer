@@ -594,7 +594,7 @@ function CandidateCard() {
         </Typography>
 
         <Typography variant="body2" gutterBottom sx={{ fontSize: "13px" }}>
-          Follow Up Date • {users.sendDate ? getFutureDate(users.sendDate) : "-"}
+          Follow Up Date • {users.frequency && users.frequency.toLowerCase() ==="none"?"None":(users.sendDate ? getFutureDate(users.sendDate) : "-")}
         </Typography>
 
         <Box mt={1} />
