@@ -9,6 +9,12 @@ import BirthdayOne from "../../../../images/Birthday_1.png";
 import BirthdayTwo from "../../../../images/Birthday_2.png";
 import Holiday from "../../../../images/Holiday_1.png";
 
+import AnniversaryOne from "../../../../images/Anniversary_1.png";
+import AnniversaryTwo from "../../../../images/Anniversary_2.png";
+
+import thankYouOne from "../../../../images/thankyou_1.png";
+import thankYouTwo from "../../../../images/thankyou_2.png";
+
 import thanksgiving1 from "../../../../images/thanksgiving1.png";
 import thanksgiving2 from "../../../../images/thanksgiving2.png";
 
@@ -60,7 +66,7 @@ function CardsContent() {
 
 
         
-        <Box sx={{ width: {xs:"100%",sm:"50%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
+        <Box sx={{ width: {xs:"100%",sm:"48%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
 
           <div 
             style={{ 
@@ -88,7 +94,7 @@ function CardsContent() {
               <img 
                 src={BirthdayOne}
                 alt="No image"
-                style={{ borderRadius: "4px" }} 
+                style={{ borderRadius: "4px",height:"31.5rem" }} 
               />
               <p style={{ fontSize: "18px", marginTop: "12px" }}>
                 Candles and Confetti
@@ -120,7 +126,7 @@ function CardsContent() {
               <img 
                 src={ BirthdayTwo }
                 alt="No image"
-                style={{ borderRadius: "4px" }} 
+                style={{ borderRadius: "4px" ,height:"31.5rem" }} 
               />
               <p style={{ fontSize: "18px", marginTop: "12px" }}>
                 Candles and Confetti
@@ -152,8 +158,9 @@ function CardsContent() {
 
         </Box>
 
-        <Box sx={{width: {xs:"100%",sm:"45%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
+        <Box sx={{width: {xs:"100%",sm:"48%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px",marginTop:"-0.7rem" }}>
 
+       
           <div 
             style={{ 
               display: "flex", justifyContent: "space-between", alignItems: "center", 
@@ -173,11 +180,13 @@ function CardsContent() {
               2 templates
             </p>
           </div>
+          
 
-          <div style={{ padding: "21px 12px", paddingBottom: "24px", textAlign: "center" }}>
+          <div style={{ padding: "21px 12px", paddingBottom: "24px", textAlign: "center",display: "flex", justifyContent: "center"}}>
             
-            <CollectionsIcon sx={{ fontSize: "64px", mt: 2 }} />
-            
+            {/*<CollectionsIcon sx={{ fontSize: "64px", mt: 2 }} />*/}
+             
+            {/* <div>
             <p style={{ fontSize: "18px", marginBottom: "12px", marginTop: "2%" }}>
               No anniversary templates yet
             </p>
@@ -201,6 +210,79 @@ function CardsContent() {
               <AddIcon sx={{ marginRight: '4px' }} />
               Add template
             </button>
+            </div>
+             */}
+
+
+             <div style={{width:'150%', display: "flex", justifyContent: "space-between", padding: "21px 12px", paddingBottom: "24px",marginTop:"-1.9rem" }}>
+             
+             <div style={{ width: "47%" }}>
+               <img 
+                 src={AnniversaryOne}
+                 alt="No image"
+                 style={{ borderRadius: "4px",height:"31.5rem",width:"48rem"  }} 
+               />
+                
+              <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
+                Work Template 1
+              </p>
+             
+               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", 
+                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
+                   }}
+                 >
+                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
+                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                 </div>
+             
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
+                     border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem",
+                   }}
+                 >
+                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
+                 </div>
+               </div>
+             </div>
+             
+             
+             <div style={{ width: "47%", }}>
+               <img 
+                 src={AnniversaryTwo}
+                 alt="No image"
+                  style={{ borderRadius: "4px",height:"31.5rem",width:"48rem" }} 
+               />
+              <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
+                Work Template 2
+              </p>
+             
+               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", 
+                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
+                   }}
+                 >
+                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
+                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                 </div>
+             
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
+                     border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem",
+                   }}
+                 >
+                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
+                 </div>
+               </div>
+             </div>
+             
+             </div>
 
           </div>
 
@@ -324,13 +406,13 @@ function CardsContent() {
                 borderRadius: "8px",
               }}
             >
-              0 templates
+              2 templates
             </p>
           </div>
 
-          <div style={{ padding: "21px 12px", paddingBottom: "24px", textAlign: "center" }}>
+          <div style={{ padding: "21px 12px", paddingBottom: "24px", textAlign: "center",display: "flex", justifyContent: "center" }}>
 
-            <CollectionsIcon sx={{ fontSize: "64px", mt: 2 }} />
+           {/* <CollectionsIcon sx={{ fontSize: "64px", mt: 2 }} />
             
             <p style={{ fontSize: "18px", marginBottom: "12px", marginTop: "2%" }}>
               No anniversary templates yet
@@ -356,7 +438,80 @@ function CardsContent() {
               Add template
             </button>
 
-          </div>
+            */}
+
+
+<div style={{width:'120%', display: "flex", justifyContent: "space-between", padding: "21px 12px", paddingBottom: "24px",marginTop:"-1.9rem" }}>
+             
+             <div style={{ width: "47%" }}>
+               <img 
+                 src={thankYouOne}
+                 alt="No image"
+                 style={{ borderRadius: "4px",height:"31.5rem",width:"48rem"  }} 
+               />
+                
+              <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
+               Template 1
+              </p>
+             
+               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", 
+                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
+                   }}
+                 >
+                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
+                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                 </div>
+             
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
+                     border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem",
+                   }}
+                 >
+                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
+                 </div>
+               </div>
+             </div>
+             
+             
+             <div style={{ width: "47%", }}>
+               <img 
+                 src={thankYouTwo}
+                 alt="No image"
+                  style={{ borderRadius: "4px",height:"31.5rem",width:"48rem" }} 
+               />
+              <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
+                Template 2
+              </p>
+             
+               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", 
+                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
+                   }}
+                 >
+                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
+                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                 </div>
+             
+                 <div
+                   style={{ 
+                     display: "flex", alignItems: "center", cursor: "pointer", marginLeft: "8px",
+                     border: "1px solid red", padding: "8px", borderRadius: "4px",  height:"3.5rem",
+                   }}
+                 >
+                   <DeleteIcon sx={{ mr: 1.5, color: "red" }} />
+                 </div>
+               </div>
+             </div>
+
+             </div>
+             
+             </div>
 
         </Box>
 
