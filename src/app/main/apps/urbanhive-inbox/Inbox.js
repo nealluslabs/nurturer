@@ -672,7 +672,7 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
         }
 
 
-           { holidayMessage2 && 
+           { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
                 width: '65%',
