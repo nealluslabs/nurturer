@@ -648,7 +648,7 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
          
         {paragraphs && paragraphs.secondParagraph}
 
-        { paragraphs && paragraphs.messageType && (paragraphs.messageType === "Holiday" || paragraphs.messageType === "Event"||paragraphs.messageType === "Email" ) &&
+        { paragraphs && paragraphs.messageType && (paragraphs.messageType === "Holiday"  ) &&
          <>
          
          {/*<b> Happy Holidays 1 </b>*/}
@@ -699,8 +699,9 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
 
         <>
          {<> <br /> </>}
-         {paragraphs && !(paragraphs.messageType !== 'Holiday' || paragraphs.messageType !== 'Birthday' ||  paragraphs.messageType !== 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+         {paragraphs && !(paragraphs.messageType === 'Holiday' || paragraphs.messageType === 'Birthday' ||  paragraphs.messageType === 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
           <>
+          <br /> 
         • <b>{point.bulletPointBold}</b>
         <br />
         <span>
