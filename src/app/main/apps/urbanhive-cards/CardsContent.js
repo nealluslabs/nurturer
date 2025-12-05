@@ -97,7 +97,7 @@ function CardsContent() {
                 style={{ borderRadius: "4px",height:"31.5rem" }} 
               />
               <p style={{ fontSize: "18px", marginTop: "12px" }}>
-                Candles and Confetti
+                Birthday Coffee
               </p>
 
               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
@@ -223,8 +223,8 @@ function CardsContent() {
                  style={{ borderRadius: "4px",height:"31.5rem",width:"48rem"  }} 
                />
                 
-              <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
-                Work Template 1
+              <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left",width:"max-content" }}>
+                Countless Celebrations
               </p>
              
                <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
@@ -257,7 +257,7 @@ function CardsContent() {
                   style={{ borderRadius: "4px",height:"31.5rem",width:"48rem" }} 
                />
               <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
-                Work Template 2
+                Make Work Work
               </p>
              
                <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
@@ -326,7 +326,7 @@ function CardsContent() {
                 style={{ borderRadius: "4px",height:"32rem",width:"45rem"  }} 
               />
               <p style={{ fontSize: "18px", marginTop: "12px" }}>
-                
+                Gobble Gobble
               </p>
 
               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
@@ -359,7 +359,7 @@ function CardsContent() {
                 style={{ borderRadius: "4px",height:"32rem",width:"45rem" }} 
               />
               <p style={{ fontSize: "18px", marginTop: "12px" }}>
-                
+                Butternuts About it
               </p>
 
               <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
@@ -451,7 +451,7 @@ function CardsContent() {
                />
                 
               <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
-               Template 1
+               We Appreciate You
               </p>
              
                <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
@@ -484,7 +484,7 @@ function CardsContent() {
                   style={{ borderRadius: "4px",height:"31.5rem",width:"48rem" }} 
                />
               <p style={{ fontSize: "18px", marginTop: "12px",textAlign:"left" }}>
-                Template 2
+                Thank You
               </p>
              
                <div style={{ display: "flex", alignItems: "center", marginTop: "12px" }}>
