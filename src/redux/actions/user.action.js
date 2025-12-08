@@ -163,6 +163,42 @@ export const updateCandidateEventsAlert = (contactId) => async (dispatch) => {
 
 }
 
+export const updateAllContactsDefaultCard = (userId, cardType, link,notifyInvite,notifySkip) => async (dispatch) => {
+  try {
+    // Query contacts that have the userId (fixed the "contacterId" issue)
+    const snapshot = await db.collection("contacts").where("contacterId", "==", userId).get();
+
+    if (snapshot.empty) {
+      console.log("No contacts with this  user id,hence this user does not have any contacts associated with it");
+      return;
+    }
+
+    const batch = db.batch();
+
+    snapshot.docs.forEach((doc) => {
+      const docRef = db.collection("contacts").doc(doc.id);
+      
+      // Prepare the updated card data by copying the existing cards and updating the specific card type
+      const updatedCards = {
+        ...doc.data().cards, // Spread the existing cards object
+        [cardType]: link // Dynamically update the specific cardType with the new link
+      };
+
+      // Add the update operation to the batch
+      batch.update(docRef, { cards: updatedCards });
+    });
+
+    // Commit the batch update
+    await batch.commit();
+    console.log("All contacts updated successfully.");
+    notifyInvite("Default Card Updated for contacts");
+  } catch (error) {
+    console.error("Error updating contacts: ", error);
+    notifySkip("Error updating default Card, please try again");
+  }
+};
+
+
 
 export const updateCandidateTouchesAlert = (contactId) => async (dispatch) => {
   

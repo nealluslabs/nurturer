@@ -18,9 +18,58 @@ import thankYouTwo from "../../../../images/thankyou_2.png";
 import thanksgiving1 from "../../../../images/thanksgiving1.png";
 import thanksgiving2 from "../../../../images/thanksgiving2.png";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { updateAllContactsDefaultCard } from 'redux/actions/user.action';
+import { useDispatch, useSelector } from 'react-redux';
+
+
+
 function CardsContent() {
+
+  const dispatch = useDispatch()
+
+
+   const {user} =useSelector((state)=>state.login)
+
+  const notifyInvite = (msg) =>
+    toast.success(msg, {
+    position: "bottom-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+    
+    const notifySkip = (msg) =>
+    toast.error(msg, {
+    position: "bottom-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    });
+
+    
+
+
   return (
     <div style={{ padding: '24px',backgroundColor:"white"}}>
+      <ToastContainer
+       position="bottom-right"
+       autoClose={1000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       />
       <Box
         sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "24px" }}
       >
@@ -106,6 +155,7 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"birthdayCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_1.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -138,6 +188,7 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"birthdayCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_2.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -233,6 +284,7 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"workAnniversaryCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_1.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                    <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -266,6 +318,7 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"workAnniversaryCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_2.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                    <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -335,6 +388,7 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thanksgivingCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving1.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -368,6 +422,7 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thanksgivingCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving2.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -460,6 +515,7 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thankYouCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_1.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                    <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
@@ -493,6 +549,7 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thankYouCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_2.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
                    <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
