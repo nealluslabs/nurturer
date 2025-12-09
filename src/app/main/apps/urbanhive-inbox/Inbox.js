@@ -270,7 +270,7 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
  []
 );
 
-let [defaultCards,setDefaultCards] = useState(selectedChatUser.cards  && selectedChatUser.cards)
+let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
 
 
  const { connects,chatGptAnswer } = useSelector((state) => state.user);

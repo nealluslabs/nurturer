@@ -15,6 +15,8 @@ import "firebase/firestore";
 
 
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
+import { fetchProfileSuccess } from 'redux/reducers/profile.slice';
+import { loginSuccess } from 'redux/reducers/auth.slice';
 
 const sesClient = new SESClient({
   region: "eu-north-1", // e.g. "us-east-1" - come and remove these environemt variables before pushing o !
@@ -166,17 +168,17 @@ export const updateCandidateEventsAlert = (contactId) => async (dispatch) => {
 export const updateAllContactsDefaultCard = (userId, cardType,cardType2, link,link2,notifyInvite,notifySkip) => async (dispatch) => {
   try {
     // Query contacts that have the userId (fixed the "contacterId" issue)
-    const snapshot = await db.collection("contacts").where("contacterId", "==", userId).get();
+    const snapshot = await db.collection("users").where("uid", "==", userId).get();
 
     if (snapshot.empty) {
-      console.log("No contacts with this  user id,hence this user does not have any contacts associated with it");
+      console.log("No users with this  user id,hence this user does not exist");
       return;
     }
 
     const batch = db.batch();
 
     snapshot.docs.forEach((doc) => {
-      const docRef = db.collection("contacts").doc(doc.id);
+      const docRef = db.collection("users").doc(doc.id);
       
       // Prepare the updated card data by copying the existing cards and updating the specific card type
       const updatedCards = {
@@ -191,8 +193,30 @@ export const updateAllContactsDefaultCard = (userId, cardType,cardType2, link,li
 
     // Commit the batch update
     await batch.commit();
-    console.log("All contacts updated successfully.");
-    notifyInvite("Default Card Updated for contacts");
+    console.log("All users updated successfully.");
+    notifyInvite("Default Card Updated for this user");
+
+
+//refetch the user, so we can see which one is default and which is not
+    var docRef = db.collection("users").doc(userId);
+    // dispatch(fetchProfilePending());
+    docRef.get().then((doc) => {
+        if (doc.exists) {
+            
+            const profileData = doc.data();
+           
+            dispatch(loginSuccess({ user:profileData, uid:userId }));
+            
+        } else {
+            // doc.data() will be undefined in this case
+            //console.log("No such document!");
+        }
+    }).catch((error) => {
+      var errorMessage = error.message;
+      
+    });
+
+
   } catch (error) {
     console.error("Error updating contacts: ", error);
     notifySkip("Error updating default Card, please try again");
