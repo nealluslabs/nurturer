@@ -155,10 +155,10 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
-                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"birthdayCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_1.png",notifyInvite,notifySkip)) }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"birthdayCard","birthdayCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_1.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_2.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                  <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                  <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.birthdayCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_1.png" ?"Default":"Set Default"}</p>
                 </div>
 
                 <div
@@ -188,10 +188,10 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
-                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"birthdayCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_2.png",notifyInvite,notifySkip)) }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"birthdayCard","birthdayCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_2.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_1.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                  <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                  <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.birthdayCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Birthday_2.png" ?"Default":"Set Default"}</p>
                 </div>
 
                 <div
@@ -284,10 +284,10 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
-                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"workAnniversaryCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_1.png",notifyInvite,notifySkip)) }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"workAnniversaryCard","workAnniversaryCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_1.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_2.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                   <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.workAnniversaryCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_1.png" ?"Default":"Set Default"}</p>
                  </div>
              
                  <div
@@ -318,10 +318,10 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
-                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"workAnniversaryCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_2.png",notifyInvite,notifySkip)) }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"workAnniversaryCard","workAnniversaryCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_2.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_1.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                   <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.workAnniversaryCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/Anniversary_2.png" ?"Default":"Set Default"}</p>
                  </div>
              
                  <div
@@ -388,10 +388,10 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
-                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thanksgivingCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving1.png",notifyInvite,notifySkip)) }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thanksgivingCard","thanksgivingCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving1.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving2.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                  <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                  <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.thanksgivingCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving1.png" ?"Default":"Set Default"}</p>
                 </div>
 
                 <div
@@ -422,10 +422,10 @@ function CardsContent() {
                     display: "flex", alignItems: "center", cursor: "pointer", 
                     border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                   }}
-                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thanksgivingCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving2.png",notifyInvite,notifySkip)) }}
+                  onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thanksgivingCard","thanksgivingCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving2.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving1.png",notifyInvite,notifySkip)) }}
                 >
                   <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                  <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                  <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.thanksgivingCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thanksgiving2.png" ?"Default":"Set Default"}</p>
                 </div>
 
                 <div
@@ -515,10 +515,10 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
-                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thankYouCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_1.png",notifyInvite,notifySkip)) }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thankYouCard","thankYouCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_1.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_2.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                   <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.thankYouCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_1.png" ?"Default":"Set Default"}</p>
                  </div>
              
                  <div
@@ -549,10 +549,10 @@ function CardsContent() {
                      display: "flex", alignItems: "center", cursor: "pointer", 
                      border: "1px solid blue", padding: "8px", borderRadius: "4px", height:"3.5rem"
                    }}
-                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thankYouCard","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_2.png",notifyInvite,notifySkip)) }}
+                   onClick={()=>{dispatch(updateAllContactsDefaultCard(user && user.uid,"thankYouCard","thankYouCard2","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_2.png","https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_1.png",notifyInvite,notifySkip)) }}
                  >
                    <StarIcon sx={{ mr: 1.5, color: "blue" }} />
-                   <p style={{ color: "blue", paddingRight: "2px" }}>Set Default</p>
+                   <p style={{ color: "blue", paddingRight: "2px" }}>{user && user.cards && user.cards.thankYouCard === "https://nurturer-newsletter.s3.eu-west-3.amazonaws.com/thankyou_2.png" ?"Default":"Set Default"}</p>
                  </div>
              
                  <div

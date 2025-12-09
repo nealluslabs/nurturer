@@ -163,7 +163,7 @@ export const updateCandidateEventsAlert = (contactId) => async (dispatch) => {
 
 }
 
-export const updateAllContactsDefaultCard = (userId, cardType, link,notifyInvite,notifySkip) => async (dispatch) => {
+export const updateAllContactsDefaultCard = (userId, cardType,cardType2, link,link2,notifyInvite,notifySkip) => async (dispatch) => {
   try {
     // Query contacts that have the userId (fixed the "contacterId" issue)
     const snapshot = await db.collection("contacts").where("contacterId", "==", userId).get();
@@ -181,7 +181,8 @@ export const updateAllContactsDefaultCard = (userId, cardType, link,notifyInvite
       // Prepare the updated card data by copying the existing cards and updating the specific card type
       const updatedCards = {
         ...doc.data().cards, // Spread the existing cards object
-        [cardType]: link // Dynamically update the specific cardType with the new link
+        [cardType]: link, // Dynamically update the specific cardType with the new link
+        [cardType2]: link2 // card type 2 and link 2 are essentially me putting the old link into the non default cards space
       };
 
       // Add the update operation to the batch

@@ -270,7 +270,7 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
  []
 );
 
-
+let [defaultCards,setDefaultCards] = useState(selectedChatUser.cards  && selectedChatUser.cards)
 
 
  const { connects,chatGptAnswer } = useSelector((state) => state.user);
@@ -648,10 +648,12 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
          
         {paragraphs && paragraphs.secondParagraph}
 
+        {/*MASSIVE PICTURE LOGIC INCOMING*/}
+
         { paragraphs && paragraphs.messageType && (paragraphs.messageType === "Holiday"  ) &&
          <>
-         
-         {/*<b> Happy Holidays 1 </b>*/}
+         {/*HOLIDAY MESSAGE */}
+         {/*DEFAULT 1ST*/}
 
         {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
@@ -667,11 +669,11 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
                 alignItems: 'center',
               }}
             >
-              <img src={holiday1} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={ defaultCards && defaultCards.thanksgivingCard} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
-
+             {/*NON-DEFAULT 2ND*/}
            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
@@ -686,12 +688,208 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
                 alignItems: 'center',
               }}
             >
-              <img src={holiday2} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={ defaultCards && defaultCards.thanksgivingCard} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
          </>
           }
+
+
+
+{ paragraphs && paragraphs.messageType && (paragraphs.messageType === "Birthday"  ) &&
+         <>
+         {/*BIRTHDAY MESSAGE */}
+         {/*DEFAULT 1ST*/}
+
+        {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.birthdayCard} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+             {/*NON-DEFAULT 2ND*/}
+           { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.birthdayCard} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+         </>
+          }
+
+
+
+
+    { paragraphs && paragraphs.messageType && (paragraphs.messageType === "ThankYou"  ) &&
+         <>
+         {/*THANK YOU MESSAGE */}
+         {/*DEFAULT 1ST*/}
+
+        {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.thankYouCard} alt="Thank you Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+             {/*NON-DEFAULT 2ND*/}
+           { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.thankYouCard} alt="Thank You Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+         </>
+          }
+
+
+
+
+{ paragraphs && paragraphs.messageType && (paragraphs.messageType === "workAnniversay" ) &&
+         <>
+         {/*WORK ANNIVERSARY MESSAGE */}
+         {/*DEFAULT 1ST*/}
+
+        {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.workAnniversaryCard} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+             {/*NON-DEFAULT 2ND*/}
+           { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.workAnniversaryCard} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+         </>
+          }
+
+
+
+{ paragraphs && paragraphs.messageType && (paragraphs.messageType === "workAnniversary"  ) &&
+         <>
+         {/*THANK YOU MESSAGE */}
+         {/*DEFAULT 1ST*/}
+
+        {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+         <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.workAnniversaryCard} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+             {/*NON-DEFAULT 2ND*/}
+           { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+            <div
+              style={{
+                width: '65%',
+                height: '65%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={holiday2} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+         </>
+          }
+
+
+
+          {/*MASSIVE PICTURE LOGIC INCOMING - END*/}
+
+
         </span>
         }
        
