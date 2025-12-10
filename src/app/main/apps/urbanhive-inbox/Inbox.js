@@ -523,8 +523,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
           >
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -563,8 +563,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
           >
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -602,8 +602,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
           >
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -658,8 +658,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -677,8 +677,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -688,7 +688,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
                 alignItems: 'center',
               }}
             >
-              <img src={ defaultCards && defaultCards.thanksgivingCard} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={ defaultCards && defaultCards.thanksgivingCard2} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
@@ -705,8 +705,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -724,8 +724,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -735,7 +735,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
                 alignItems: 'center',
               }}
             >
-              <img src={defaultCards && defaultCards.birthdayCard} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={defaultCards && defaultCards.birthdayCard2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
@@ -753,8 +753,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -772,8 +772,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -783,7 +783,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
                 alignItems: 'center',
               }}
             >
-              <img src={defaultCards && defaultCards.thankYouCard} alt="Thank You Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={defaultCards && defaultCards.thankYouCard2} alt="Thank You Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
@@ -801,8 +801,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -820,8 +820,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -831,7 +831,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
                 alignItems: 'center',
               }}
             >
-              <img src={defaultCards && defaultCards.workAnniversaryCard} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={defaultCards && defaultCards.workAnniversaryCard2} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
@@ -848,8 +848,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -867,8 +867,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
-                width: '65%',
-                height: '65%',
+                width: '45%',
+                height: '45%',
                 background: 'white',
                 borderRadius: '4px',
                 marginTop: '18px',
@@ -878,7 +878,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
                 alignItems: 'center',
               }}
             >
-              <img src={holiday2} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+              <img src={defaultCards && defaultCards.workAnniversaryCard2} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
             </div>
         }
 
