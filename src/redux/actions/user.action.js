@@ -373,117 +373,180 @@ export const stopMessageSending = (notifyInvite,selectedChatUser) => async (disp
 export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispatch) => {
   console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA",data)
 
+
+
+
+
+
   if(data && data.touchesAlert !==null && data.touchesAlert ===true  ){
 
-    console.log("AND TOUCHES IS REGISTERED")
- try {
-      const params = {
-        Destination: {
-        ToAddresses: [data.email],
-        },
-        Message: {
-          Body: {
-            Html: {
-              Data: `
-                
-                <p>Dear <strong>${data.name || ''}</strong>,</p>
-                <br/>
-      
-                <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].firstParagraph || ''}</p>
-                <br/>
-      
-                <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].secondParagraph || ''}</p>
-                <br/>
-      
-                <ul>
-                  ${
-                    (data.messageQueue &&
-                     data.messageQueue[data.messageQueue.length - 1] &&
-                     data.messageQueue[data.messageQueue.length - 1].bulletPoints)
-                      ? data.messageQueue[data.messageQueue.length - 1].bulletPoints.map(
-                          bp => `
-                            <li>
-                              <strong>${bp.bulletPointBold || ''}</strong> — ${bp.bulletPointRest || ''} 
-                              <a href="${bp.link || '#'}" target="_blank">${bp.link || ''}</a>
-                            </li>`
-                        ).join('')
-                      : ''
-                  }
-                </ul>
-                <br/>
-      
-                <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].thirdParagraph || ''}</p>
-                <br/>
-      
-                <p>Warm Regards,</p>
-                <p>– The Nurturer Team</p>
-              `,
-            },
-            Text: {
-              Data: data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].subject || '',
-            },
-          },
-          Subject: {
-            Data: data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].subject || '',
-          },
-        },
-        Source: 'info@nurturer.ai', // must be verified in SES
-      };
-      
-  
-      const command = new SendEmailCommand(params);
-       await sesClient.send(command);
 
+    
+    const latest = data.messageQueue[data.messageQueue.length - 1];
 
-      //UPDATING STATUS OF A PARTICULAR CONTACT
-    const updatedMessageQueue = [...data.messageQueue];
-
-    // Find the index of the most recent email (assuming array is in chronological order)
-    // If not, we’ll sort it before finding
-    const emailMessages = updatedMessageQueue
-      .map((msg, index) => ({ ...msg, index }))
-      .filter(msg => msg.messageType === "Email");
-  
-    if (emailMessages.length > 0) {
-      // Get the last (most recent) email
-      const mostRecentEmail = emailMessages[emailMessages.length - 1];
-      const msgIndex = mostRecentEmail.index;
-  
-      // Update the messageStatus
-      updatedMessageQueue[msgIndex] = {
-        ...updatedMessageQueue[msgIndex],
-        messageStatus: "Sent"
-        
-      };
-
-      const contactDoc = await db.collection("contacts").doc(data && data.uid).get();
-
-      if(contactDoc.exists){
-        await db.collection("contacts").doc(data && data.uid).update({
-          messageQueue: updatedMessageQueue,
-          sendDate:contactDoc.data().frequencyInDays
-        });
-
-
-    await db.collection("contacts").doc(data && data.uid).get().then(async(doc)=>{
-      dispatch(setCurrentChat(doc.data()))
-
-    }) 
-      
-
-
-        //UPDATING STATUS OF A PARTICULAR CONTACT - END
-         notifyInvite("Email has been sent out!")
-
+    const emailHTML = `
+      <p>Dear <strong>${data.name || ''}</strong>,</p><br/>
+    
+      <p>${latest?.firstParagraph || ''}</p><br/>
+    
+      <p>${latest?.secondParagraph || ''}</p><br/>
+    
+      <ul>
+        ${
+          latest?.bulletPoints
+            ? latest.bulletPoints
+                .map(bp => `
+                  <li>
+                    <strong>${bp.bulletPointBold || ''}</strong> — ${bp.bulletPointRest || ''}
+                    <a href="${bp.link || '#'}" target="_blank">${bp.link || ''}</a>
+                  </li>
+                `)
+                .join('')
+            : ''
+        }
+      </ul><br/>
+    
+      <p>${latest?.thirdParagraph || ''}</p><br/>
+    
+      <p>Warm Regards,</p>
+      <p>– The Nurturer Team</p>
+    `;
+    
+    try {
+      const response = await fetch("https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          to: data.email,
+          subject: latest.subject ? latest.subject : '',
+          htmlMessage: emailHTML
+        })
+      });
+    
+      const result = await response.json(); // <-- parse backend JSON
+    
+      if (result.success) {
+        notifyInvite("Email sent out successfully");
+      } else {
+        notifySkip("Error sending email, please try again");
       }
-      //TRY BLOCK END
+    
+    } catch (error) {
+      console.error("Fetch error:", error);
+      notifySkip("Network error. Please try again.");
     }
-  } 
-    catch (error) {
-      console.error("❌ Error sending email:", error);
-      notifySkip("Error Sending Email, please try again!")
-      throw error;
-    }
+
+
+
+    console.log("BELOW IS AWS SES EMAIL SENDING CODE - U CAN DELETE IT ONCE U CONFIRM THAT SENDGRID IS WORKING")
+ //try {
+ //     const params = {
+ //       Destination: {
+ //       ToAddresses: [data.email],
+ //       },
+ //       Message: {
+ //         Body: {
+ //           Html: {
+ //             Data: `
+ //               
+ //               <p>Dear <strong>${data.name || ''}</strong>,</p>
+ //               <br/>
+ //     
+ //               <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].firstParagraph || ''}</p>
+ //               <br/>
+ //     
+ //               <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].secondParagraph || ''}</p>
+ //               <br/>
+ //     
+ //               <ul>
+ //                 ${
+ //                   (data.messageQueue &&
+ //                    data.messageQueue[data.messageQueue.length - 1] &&
+ //                    data.messageQueue[data.messageQueue.length - 1].bulletPoints)
+ //                     ? data.messageQueue[data.messageQueue.length - 1].bulletPoints.map(
+ //                         bp => `
+ //                           <li>
+ //                             <strong>${bp.bulletPointBold || ''}</strong> — ${bp.bulletPointRest || ''} 
+ //                             <a href="${bp.link || '#'}" target="_blank">${bp.link || ''}</a>
+ //                           </li>`
+ //                       ).join('')
+ //                     : ''
+ //                 }
+ //               </ul>
+ //               <br/>
+ //     
+ //               <p>${data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].thirdParagraph || ''}</p>
+ //               <br/>
+ //     
+ //               <p>Warm Regards,</p>
+ //               <p>– The Nurturer Team</p>
+ //             `,
+ //           },
+ //           Text: {
+ //             Data: data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].subject || '',
+ //           },
+ //         },
+ //         Subject: {
+ //           Data: data.messageQueue && data.messageQueue[data.messageQueue.length - 1] && data.messageQueue[data.messageQueue.length - 1].subject || '',
+ //         },
+ //       },
+ //       Source: 'info@nurturer.ai', // must be verified in SES
+ //     };
+ //     
+ // 
+ //     const command = new SendEmailCommand(params);
+ //      await sesClient.send(command);
+//
+//
+ //     //UPDATING STATUS OF A PARTICULAR CONTACT
+ //   const updatedMessageQueue = [...data.messageQueue];
+//
+ //   // Find the index of the most recent email (assuming array is in chronological order)
+ //   // If not, we’ll sort it before finding
+ //   const emailMessages = updatedMessageQueue
+ //     .map((msg, index) => ({ ...msg, index }))
+ //     .filter(msg => msg.messageType === "Email");
+ // 
+ //   if (emailMessages.length > 0) {
+ //     // Get the last (most recent) email
+ //     const mostRecentEmail = emailMessages[emailMessages.length - 1];
+ //     const msgIndex = mostRecentEmail.index;
+ // 
+ //     // Update the messageStatus
+ //     updatedMessageQueue[msgIndex] = {
+ //       ...updatedMessageQueue[msgIndex],
+ //       messageStatus: "Sent"
+ //       
+ //     };
+//
+ //     const contactDoc = await db.collection("contacts").doc(data && data.uid).get();
+//
+ //     if(contactDoc.exists){
+ //       await db.collection("contacts").doc(data && data.uid).update({
+ //         messageQueue: updatedMessageQueue,
+ //         sendDate:contactDoc.data().frequencyInDays
+ //       });
+//
+//
+ //   await db.collection("contacts").doc(data && data.uid).get().then(async(doc)=>{
+ //     dispatch(setCurrentChat(doc.data()))
+//
+ //   }) 
+ //     
+//
+//
+ //       //UPDATING STATUS OF A PARTICULAR CONTACT - END
+ //        notifyInvite("Email has been sent out!")
+//
+ //     }
+ //     //TRY BLOCK END
+ //   }
+ // } 
+ //   catch (error) {
+ //     console.error("❌ Error sending email:", error);
+ //     notifySkip("Error Sending Email, please try again!")
+ //     throw error;
+ //   }
 
     //SEND EMAIL END
 

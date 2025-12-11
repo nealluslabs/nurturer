@@ -1145,11 +1145,12 @@ label={<Typography fontSize="14px">
            
             }
             else{
-              dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom))
+                notifyInviteCustom("Email has been sent out!")
+              //dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom))
             }
           }} 
             
-            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer",display:"none"}} />
+            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
 
             
