@@ -1134,24 +1134,7 @@ label={<Typography fontSize="14px">
 
 
 
-           { 
-  
-           <IoIosSend  onClick={()=>{
-
-            if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus === "Sent" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
-          {
-            //the if condition above, only pending messages are showing, so theres no way any message status can have sent, consider using a better condition
-            notifySkipCustom("You can't resend a message that has already been sent!")
            
-            }
-            else{
-                notifyInviteCustom("Email has been sent out!")
-              //dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom))
-            }
-          }} 
-            
-            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
-           }
 
             
 
@@ -1174,7 +1157,7 @@ label={<Typography fontSize="14px">
             }
           }} 
             
-            style={{position:"absolute",top:"2rem",right:"16rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
      
 
@@ -1184,7 +1167,7 @@ label={<Typography fontSize="14px">
            <FaRegEdit onClick={(ev)=>{sendUpdate(ev) }}
            
             
-            style={{position:"absolute",top:"1.9rem",right:"12rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+            style={{position:"absolute",top:"1.9rem",right:"16rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
 
 
@@ -1192,8 +1175,28 @@ label={<Typography fontSize="14px">
            
            <FaStopCircle onClick={()=>{ dispatch(stopMessageSending(notifyInviteCustom,selectedChatUser))}}
             
-            style={{position:"absolute",top:"1.9rem",right:"8rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+            style={{position:"absolute",top:"1.9rem",right:"12rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
            }
+
+
+           { 
+             
+             <IoIosSend  onClick={()=>{
+           
+              if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus === "Sent" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
+            {
+              //the if condition above, only pending messages are showing, so theres no way any message status can have sent, consider using a better condition
+              notifySkipCustom("You can't resend a message that has already been sent!")
+             
+              }
+              else{
+                  notifyInviteCustom("Email has been sent out!")
+                //dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom))
+              }
+            }} 
+              
+              style={{position:"absolute",top:"2rem",right:"8rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+             }
 
           { loading && 
             <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"16rem",color:"grey",cursor:"pointer"}} />
