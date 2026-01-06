@@ -444,7 +444,7 @@ function CandidateApp(props) {
                     justifyContent: "space-between", 
                     flexDirection:"column",
                     position:"relative",
-                      top:"-2.5rem"
+                      top:"-3.5rem"
                     
                   }}>
                   <div 
@@ -569,9 +569,10 @@ function CandidateApp(props) {
               background: "white",
               borderRadius: "4px",
               marginTop: "18px",
-              padding: "42px 12px",
+              padding: "42px 0px",
               boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
               height: "20.6rem",
+              
               display: "flex",
               flexDirection: "column",
             }}
@@ -581,8 +582,11 @@ function CandidateApp(props) {
                 No Interactions.
               </div>
             ) : (
-              <div style={{}}>
-                {<div style={{width:"110%",margin:"0 auto",marginLeft:"-1.15rem", flex: 1 ,border:"1px solid #F9F9F9",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column", position:"relative",top:"-2.6rem"}}>
+              <div style={{ display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection:"column"}}>
+                {<div style={{width:"100%",margin:"0 auto",marginLeft:"0rem", flex: 1 ,border:"1px solid #F9F9F9",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column", position:"relative",top:"-2.6rem"}}>
                   {switchItems.map((item,index) => (
                    <>
                    <div
@@ -786,7 +790,7 @@ function CandidateApp(props) {
                }
 
                     </div>
-                   <Divider sx={{width:"100%",marginTop:"-1.5rem",overflow:"hidden"}}/>
+                   <Divider sx={{width:"100%",maxWidth:"100%",marginTop:"-1.5rem",overflow:"hidden"}}/>
               </>
                   ))}
                 </div> }
@@ -990,7 +994,7 @@ function CandidateApp(props) {
               textTransform: "none",
               fontWeight: "bold",
               position:"relative",
-              top:"-6rem",
+              top:"-5.7rem",
               "&:hover": { backgroundColor: "#18c8d0" },
             }}
           >
