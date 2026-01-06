@@ -434,7 +434,52 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         user1, user2, messageText, time, isViewed, unread,
         ...(connectsById[user2] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
       }));
+      const [showAiMenu, setShowAiMenu] = useState(false);
 
+      const handleAiOptionClick = (type) => {
+        console.log('AI Option Selected=========>>>>>>>>>>>', type);
+        setShowAiMenu(false); // Close menu after selection
+
+        const canGenerate = selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0;
+
+        if (!canGenerate) {
+          notifySkipCustom("You can't generate a new message until your previous message has been sent!");
+          return;
+        }
+
+        // Dispatch based on type
+        if (type === 'touches') {
+
+          dispatch(generateAiMessage(
+            selectedChatUser.frequency,
+            selectedChatUser.name,
+            selectedChatUser.jobTitle,
+            selectedChatUser.companyName,
+            selectedChatUser.industry,
+            selectedChatUser.interests,
+            setLoading,
+            "touches",
+            thisUser,
+            notifyInvite,
+            selectedChatUser
+          ));
+
+        } else if (type === 'birthday') {
+          dispatch(generateAiMessage(
+            "birthday", // type
+            selectedChatUser.name,
+            selectedChatUser.jobTitle,
+            selectedChatUser.companyName,
+            selectedChatUser.industry,
+            selectedChatUser.interests,
+            setLoading,
+            "birthday",
+            thisUser,
+            notifyInvite,
+            selectedChatUser
+          ));
+        }
+};
   return (
     <div className={clsx('flex flex-col relative', props.className)}>
         <ToastContainer
@@ -1157,25 +1202,64 @@ label={<Typography fontSize="14px">
             
 
            { !loading && 
-           //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
+           <>
+         
+           {/* //GENERATE AI MESSAGE BELOW HAS TO HAVE AN EXTRA INPUT WHICH DEPENDS ON THE USER THE AI IS GENERATING FOR, - 28TH AUG 2025 - DAGOGO,
            
            
           
-          
-          
-          
-           <RiAiGenerate2 onClick={()=>{
+          //  <RiAiGenerate2 onClick={()=>{
 
-            if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
-          {
-            dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))
-            }
-            else{
-              notifySkipCustom("You can't generate a new message until your previous message has been sent!")
-            }
-          }} 
+          //   if(selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0)
+          // {
+          //   dispatch(generateAiMessage(selectedChatUser.frequency,selectedChatUser.name,selectedChatUser.jobTitle,selectedChatUser.companyName,selectedChatUser.industry,selectedChatUser.interests,setLoading,aiMessageToModel,thisUser,notifyInvite,selectedChatUser))
+          //   }
+          //   else{
+          //     notifySkipCustom("You can't generate a new message until your previous message has been sent!")
+          //   }
+          // }} 
             
-            style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
+          //   style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} /> */}
+
+          <RiAiGenerate2 
+            onClick={() => {setShowAiMenu(true), console.log('ai button clicked============>>>>>>>>>>')}} 
+            style={{ position: "absolute", top: "2rem", right: "20rem", fontSize: "2.4rem", color: "grey", cursor: "pointer" }} 
+          />
+
+          {showAiMenu && (
+            <div style={{
+              position: "absolute",
+              top: "-14rem",
+              right: "15rem",
+              backgroundColor: "white",
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
+              borderRadius: "8px",
+              zIndex: 100,
+              width: "180px",
+              border: "1px solid #ddd",
+              padding: "10px"
+            }}>
+              <div 
+                onClick={() => handleAiOptionClick('touches')}
+                style={{ padding: "10px", cursor: "pointer", borderBottom: "1px solid #eee" }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
+                onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
+              >
+                <strong>Touches</strong>
+                <div style={{ fontSize: "10px", color: "grey" }}>Message & Articles</div>
+              </div>
+              <div 
+                onClick={() => handleAiOptionClick('birthday')}
+                style={{ padding: "10px", cursor: "pointer" }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
+                onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
+              >
+                <strong>Birthday</strong>
+                <div style={{ fontSize: "10px", color: "grey" }}>Message & Cards</div>
+              </div>
+            </div>
+          )}
+            </>
            }
      
 
