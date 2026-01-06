@@ -1,5 +1,5 @@
 import FusePageSimple from '@fuse/core/FusePageSimple';
-import Divider from '@material-ui/core/Divider';
+//import Divider from '@material-ui/core/Divider';
 import { makeStyles } from '@material-ui/core/styles';
 import Stack from '@mui/material/Stack';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -14,7 +14,7 @@ import CandidateTableView from './widgets/CandidateTableView';
 import { Link, useHistory, Redirect } from 'react-router-dom';
 import { logout } from 'src/redux/actions/auth.action';
 import { fb, db, auth } from 'config/firebase';
-import { Box, Button, Grid, InputAdornment, TextField, Switch, IconButton } from '@mui/material';
+import { Box, Button, Grid, InputAdornment, TextField, Switch, IconButton, Typography,Divider } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
 import { saveFilteredUsers, saveFilteredContacts, saveCandidateInFocus } from 'redux/reducers/user.slice';
@@ -30,6 +30,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { deleteCandidate } from 'redux/actions/user.action';
+import { MdEvent, MdBolt, MdTouchApp } from "react-icons/md";
 
 
 
@@ -153,9 +154,9 @@ function CandidateApp(props) {
 
 
   const switchItems = [
-    { id: 1, title: 'Events', enabled: false },
-    { id: 2, title: 'Triggers', enabled: false },
-    { id: 3, title: 'Touches', enabled: false },
+    { id: 1, title: 'Events', enabled: false, description:"switch  notifications on or off.",icon:<MdEvent/> },
+    { id: 2, title: 'Triggers', enabled: false, description:"switch notifications on or off." ,icon:<MdBolt/> },
+    { id: 3, title: 'Touches', enabled: false, description:"switch notifications on or off.",icon:<MdTouchApp/> },
     
   ]
 
@@ -437,13 +438,32 @@ function CandidateApp(props) {
               candidateInFocus && touchpointData &&  touchpointData.map((item) => {
                 //const IconComponent = item.icon;
                 return (
+                  <div style ={{ 
+                    display: "flex", 
+                    alignItems: "center", 
+                    justifyContent: "space-between", 
+                    flexDirection:"column",
+                    position:"relative",
+                      top:"-2.5rem"
+                    
+                  }}>
                   <div 
                     key={item.id} 
                     style={{ 
                       display: "flex", 
                       alignItems: "center", 
                       justifyContent: "space-between", 
-                      marginBottom: "16px" 
+
+                      //marginBottom: "8px" ,
+                     
+                    width:"100%",
+                    margin:"0 auto",
+                    //marginLeft:"-1.09rem",
+                    paddingBottom:"6px",
+                    paddingTop:"10px",
+                   // borderBottom:"0.5px solid #F0F0F0",
+                     
+                     
                     }}
                   >
                     <div style={{ display: "flex", alignItems: "center" }}>
@@ -471,6 +491,8 @@ function CandidateApp(props) {
                       {item.messageStatus?item.messageStatus:"Pending"}
                     </p>
                   </div>
+                  <Divider sx={{width:"100%",overflowX:"hidden !important",margin:"0 auto"}}/>
+                </div>
                 );
               })
             )}
@@ -520,7 +542,7 @@ function CandidateApp(props) {
             variant="contained"
             sx={{
               backgroundColor: "#21C9CF",
-              marginTop: "20px",
+              marginTop: "26px",
               fontSize: "12px",
               color: "white",
               padding: "7px 30px",
@@ -559,26 +581,282 @@ function CandidateApp(props) {
                 No Interactions.
               </div>
             ) : (
-              <>
-                <div style={{ flex: 1 ,border:"1px solid #F9F9F9",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"}}>
-                  {switchItems.map((item) => (
-                    <div
+              <div style={{}}>
+                {<div style={{width:"110%",margin:"0 auto",marginLeft:"-1.15rem", flex: 1 ,border:"1px solid #F9F9F9",display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column", position:"relative",top:"-2.6rem"}}>
+                  {switchItems.map((item,index) => (
+                   <>
+                   <div
                       key={item.id}
                       style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "space-between",
                         marginBottom: "20px",
-                        padding: "7px 0",
-                        height:"1.5rem",
-                    
-                        width:"80%"
+                        padding: "0px 0",
+                        //height:"1.5rem",
+                        maxHeight:"4rem",
+                        width:"100%"
 
             
                       }}
                     >
-                      <span style={{ fontSize: "16px", fontWeight: "500" }}>{item.title}</span>
+                      {/*<span style={{ fontSize: "16px", fontWeight: "500" }}>{item.title}</span>*/}
+
+                      <Stack direction="row" spacing={2} alignItems="center" flex={1}>
+                         {/* ICON */}
+                         <Box
+                           sx={{
+                             width: 20,
+                             height: 20,
+                            
+                             borderRadius: "50%",
+                             display: "flex",
+                             alignItems: "center",
+                             justifyContent: "center",
+                             color: "#444",
+                           }}
+                         >
+                           {item.title ==="Events"?<MdEvent sx={{fontSize:"2rem !important"}}/>: item.title ==="Triggers"?<MdBolt sx={{fontSize:"2rem !important"}}/>:<MdTouchApp sx={{fontSize:"2rem !important"}}/>}
+                         </Box>
+               
+                         {/* TEXT */}
+                         <Box>
+                           <Typography
+                             sx={{
+                               fontSize: "12px",
+                               fontWeight: 600,
+                               color: "#111",
+                               marginTop:"0.5rem",
+                               marginBottom:"-0.5rem"
+                             }}
+                           >
+                             {item.title}
+                           </Typography>
+               
+                           <Typography
+                             sx={{
+                               fontSize: "11px",
+                               color: "#666",
+                               width:"100%",
+                               mt: 0.2,
+                               mb: 0.1,
+                             }}
+                           >
+                             {item.description}
+                           </Typography>
+                         </Box>
+                       </Stack>
+               
+                   
+                   
+                   
                     {item.title === "Events" && 
+                      <Switch
+                        checked={candidateEventsAlert !==null  && candidateEventsAlert}
+                        onClick={()=>{
+                          if(item.title === "Events"){
+                          dispatch(updateCandidateEventsAlert(candidateInFocus.uid) )
+                        }
+                        
+                 
+                      }}
+                        sx={{
+                           scale:"1.5",
+                          "& .MuiSwitch-switchBase": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                            backgroundColor: "#1DDDE4",
+                          },
+                          "& .MuiSwitch-track": {
+                            backgroundColor: "rgba(29, 221, 228, 0.3)",
+                             width:"80%"
+                            
+                          },
+                          "& .MuiSwitch-thumb": {
+                            width: 12,   // ← circle width
+                            height: 12,  // ← circle height
+                            position:"relative",
+                            top:"0.35rem"
+                          },
+                      
+                        }}
+                      />
+                      }
+
+
+                   {item.title === "Triggers" && 
+                      <Switch
+                        checked={candidateTriggersAlert !==null  && candidateTriggersAlert}
+                        onClick={()=>{
+                        
+                            if(item.title === "Triggers"){
+                              dispatch(updateCandidateTriggerAlert(candidateInFocus.uid) )
+                            }
+                              
+
+
+                        
+                      }}
+                        sx={{
+                          scale:"1.5",
+                          "& .MuiSwitch-switchBase": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                            backgroundColor: "#1DDDE4",
+                          },
+                          "& .MuiSwitch-track": {
+                            backgroundColor: "rgba(29, 221, 228, 0.3)",
+                             width:"80%"
+                            
+                          },
+                          "& .MuiSwitch-thumb": {
+                            width: 12,   // ← circle width
+                            height: 12,  // ← circle height
+                            position:"relative",
+                            top:"0.35rem"
+                          },
+                      
+                        }}
+                      />
+      }
+
+
+                    {item.title === "Touches" && 
+                       <Switch
+                        checked={candidateTouchesAlert  && candidateTouchesAlert}
+                        onClick={()=>{
+                          if(item.title === "Touches"){
+                          dispatch(updateCandidateTouchesAlert(candidateInFocus.uid) )
+                        }
+                     
+                      }}
+                        sx={{
+                          scale:"1.5",
+                          "& .MuiSwitch-switchBase": {
+                            color: "#1DDDE4",
+                            
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked": {
+                            color: "#1DDDE4",
+                            "&:hover": {
+                              backgroundColor: "rgba(29, 221, 228, 0.08)",
+                            },
+                          },
+                          "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
+                            backgroundColor: "#1DDDE4",
+                           
+                          },
+                          "& .MuiSwitch-track": {
+                            backgroundColor: "rgba(29, 221, 228, 0.3)",
+                             width:"80%"
+                            
+                          },
+                          "& .MuiSwitch-thumb": {
+                            width: 12,   // ← circle width
+                            height: 12,  // ← circle height
+                            position:"relative",
+                            top:"0.35rem"
+                          },
+                      
+                        }}
+                      />
+               }
+
+                    </div>
+                   <Divider sx={{width:"100%",marginTop:"-1.5rem",overflow:"hidden"}}/>
+              </>
+                  ))}
+                </div> }
+
+
+               
+             {/*  <Box
+                 sx={{
+                   width: "100%",
+                   
+                   mx: "auto",
+                 
+                   overflow: "hidden",
+                   backgroundColor: "#fff",
+                 }}
+               >
+                 {switchItems.map((item, index) => (
+                   <Box key={item.id}>
+                     <Stack
+                       direction="row"
+                       alignItems="center"
+                       justifyContent="space-between"
+                       sx={{
+                         px: 3,
+                         py: 2.2,
+                       }}
+                     >
+                       
+                       <Stack direction="row" spacing={2} alignItems="center" flex={1}>
+                        
+                         <Box
+                           sx={{
+                             width: 40,
+                             height: 40,
+                             borderRadius: "50%",
+                             display: "flex",
+                             alignItems: "center",
+                             justifyContent: "center",
+                             color: "#444",
+                           }}
+                         >
+                           {item.title ==="Events"?<MdEvent/>: item.title ==="Triggers"?<MdBolt/>:<MdTouchApp/>}
+                         </Box>
+               
+                        
+                         <Box>
+                           <Typography
+                             sx={{
+                               fontSize: "16px",
+                               fontWeight: 600,
+                               color: "#111",
+                             }}
+                           >
+                             {item.title}
+                           </Typography>
+               
+                           <Typography
+                             sx={{
+                               fontSize: "14px",
+                               color: "#666",
+                               mt: 0.3,
+                             }}
+                           >
+                             {item.description}
+                           </Typography>
+                         </Box>
+                       </Stack>
+               
+                      
+                       {item.title === "Events" && 
                       <Switch
                         checked={candidateEventsAlert !==null  && candidateEventsAlert}
                         onClick={()=>{
@@ -680,9 +958,19 @@ function CandidateApp(props) {
                         }}
                       />
                }
-                    </div>
-                  ))}
-                </div>
+                     </Stack>
+               
+                    
+                   </Box>
+                 ))}
+               </Box>*/}
+
+
+
+
+
+
+
                 <div style={{ display: "flex", justifyContent: "center", paddingTop: "20px" }}>
                 <Button
             variant="contained"
@@ -702,14 +990,14 @@ function CandidateApp(props) {
               textTransform: "none",
               fontWeight: "bold",
               position:"relative",
-              top:"-3rem",
+              top:"-6rem",
               "&:hover": { backgroundColor: "#18c8d0" },
             }}
           >
             Delete Contact
           </Button>
                 </div>
-              </>
+              </div>
             )}
           </div>
       </div>
