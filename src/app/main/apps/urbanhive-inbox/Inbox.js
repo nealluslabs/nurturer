@@ -128,7 +128,7 @@ function Inbox(props) {
 
 
   const editableRef = useRef(null);
-  
+  const menuRef = useRef(null);
   const handleSave = () => {
     const updatedContent = editableRef.current.innerHTML;
     ////console.log('Saved content:', updatedContent);
@@ -436,6 +436,20 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
       }));
       const [showAiMenu, setShowAiMenu] = useState(false);
 
+        useEffect(() => {
+          const handleClickOutside = (event) => {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+              setShowAiMenu(false);
+            }
+          };
+
+          document.addEventListener("mousedown", handleClickOutside);
+          
+          return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [showAiMenu]);
+
       const handleAiOptionClick = (type) => {
         console.log('AI Option Selected=========>>>>>>>>>>>', type);
         setShowAiMenu(false); // Close menu after selection
@@ -474,6 +488,20 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
             selectedChatUser.interests,
             setLoading,
             "birthday",
+            thisUser,
+            notifyInvite,
+            selectedChatUser
+          ));
+        }else if (type === 'events') {
+          dispatch(generateAiMessage(
+            "events", // type
+            selectedChatUser.name,
+            selectedChatUser.jobTitle,
+            selectedChatUser.companyName,
+            selectedChatUser.industry,
+            selectedChatUser.interests,
+            setLoading,
+            "events",
             thisUser,
             notifyInvite,
             selectedChatUser
@@ -1222,14 +1250,19 @@ label={<Typography fontSize="14px">
           //   style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} /> */}
 
           <RiAiGenerate2 
-            onClick={() => {setShowAiMenu(true), console.log('ai button clicked============>>>>>>>>>>')}} 
+            onClick={(e) => {setShowAiMenu(true)
+               console.log('ai button clicked============>>>>>>>>>>');
+              e.stopPropagation();
+            }} 
             style={{ position: "absolute", top: "2rem", right: "20rem", fontSize: "2.4rem", color: "grey", cursor: "pointer" }} 
           />
 
           {showAiMenu && (
-            <div style={{
+            <div 
+            ref={menuRef}
+            style={{
               position: "absolute",
-              top: "-14rem",
+              top: "-18rem",
               right: "15rem",
               backgroundColor: "white",
               boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
@@ -1237,7 +1270,7 @@ label={<Typography fontSize="14px">
               zIndex: 100,
               width: "180px",
               border: "1px solid #ddd",
-              padding: "10px"
+              padding: "15px"
             }}>
               <div 
                 onClick={() => handleAiOptionClick('touches')}
@@ -1248,14 +1281,25 @@ label={<Typography fontSize="14px">
                 <strong>Touches</strong>
                 <div style={{ fontSize: "10px", color: "grey" }}>Message & Articles</div>
               </div>
+
               <div 
                 onClick={() => handleAiOptionClick('birthday')}
-                style={{ padding: "10px", cursor: "pointer" }}
+                style={{ padding: "10px", cursor: "pointer", borderBottom: "1px solid #eee" }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
                 onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
               >
                 <strong>Birthday</strong>
                 <div style={{ fontSize: "10px", color: "grey" }}>Message & Cards</div>
+              </div>
+
+              <div 
+                onClick={() => handleAiOptionClick('events')}
+                style={{ padding: "10px", cursor: "pointer" }}
+                onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
+                onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
+              >
+                <strong>Events</strong>
+                <div style={{ fontSize: "10px", color: "grey" }}>Events & Cards</div>
               </div>
             </div>
           )}
