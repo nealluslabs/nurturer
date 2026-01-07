@@ -450,8 +450,8 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
           };
         }, [showAiMenu]);
 
-      const handleAiOptionClick = (type) => {
-        console.log('AI Option Selected=========>>>>>>>>>>>', type);
+      const handleAiOptionClick = (messageType) => {
+        console.log('AI Option Selected=========>>>>>>>>>>>', messageType);
         setShowAiMenu(false); // Close menu after selection
 
         const canGenerate = selectedChatUser && onlyPendingMessages && onlyPendingMessages.length && onlyPendingMessages.every((msg) => msg.messageStatus !== "Pending" ) ||selectedChatUser && onlyPendingMessages && onlyPendingMessages.length === 0;
@@ -462,9 +462,10 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
         }
 
         // Dispatch based on type
-        if (type === 'touches') {
+        if (messageType === 'Touch') {
 
           dispatch(generateAiMessage(
+            "Touch",
             selectedChatUser.frequency,
             selectedChatUser.name,
             selectedChatUser.jobTitle,
@@ -472,36 +473,35 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
             selectedChatUser.industry,
             selectedChatUser.interests,
             setLoading,
-            "touches",
             thisUser,
             notifyInvite,
             selectedChatUser
           ));
 
-        } else if (type === 'birthday') {
+        } else if (messageType === 'Birthday') {
           dispatch(generateAiMessage(
             "birthday", // type
+            selectedChatUser.frequency,
             selectedChatUser.name,
             selectedChatUser.jobTitle,
             selectedChatUser.companyName,
             selectedChatUser.industry,
             selectedChatUser.interests,
-            setLoading,
-            "birthday",
+            setLoading, 
             thisUser,
             notifyInvite,
             selectedChatUser
           ));
-        }else if (type === 'events') {
+        }else if (messageType === 'Event') {
           dispatch(generateAiMessage(
-            "events", // type
+            "Event", // type
+            selectedChatUser.frequency,
             selectedChatUser.name,
             selectedChatUser.jobTitle,
             selectedChatUser.companyName,
             selectedChatUser.industry,
             selectedChatUser.interests,
             setLoading,
-            "events",
             thisUser,
             notifyInvite,
             selectedChatUser
@@ -1273,7 +1273,7 @@ label={<Typography fontSize="14px">
               padding: "15px"
             }}>
               <div 
-                onClick={() => handleAiOptionClick('touches')}
+                onClick={() => handleAiOptionClick('Touch')}
                 style={{ padding: "10px", cursor: "pointer", borderBottom: "1px solid #eee" }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
                 onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
@@ -1283,7 +1283,7 @@ label={<Typography fontSize="14px">
               </div>
 
               <div 
-                onClick={() => handleAiOptionClick('birthday')}
+                onClick={() => handleAiOptionClick('Birthday')}
                 style={{ padding: "10px", cursor: "pointer", borderBottom: "1px solid #eee" }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
                 onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
@@ -1293,7 +1293,7 @@ label={<Typography fontSize="14px">
               </div>
 
               <div 
-                onClick={() => handleAiOptionClick('events')}
+                onClick={() => handleAiOptionClick('Event')}
                 style={{ padding: "10px", cursor: "pointer" }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
                 onMouseLeave={(e) => e.target.style.backgroundColor = "transparent"}
@@ -1327,7 +1327,7 @@ label={<Typography fontSize="14px">
 
 
           { loading && 
-            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"16rem",color:"grey",cursor:"pointer"}} />
+            <CircularProgress size={20} style={{position:"absolute",top:"2rem",right:"20rem",color:"grey",cursor:"pointer"}} />
             }
            
           </Paper>
