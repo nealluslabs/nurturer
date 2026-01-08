@@ -1038,8 +1038,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
            
 {<Box sx={{display:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"2rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
- {paragraphs && paragraphs.messageType && !["Event", "Birthday", "Holiday", "birthday", "event"].includes(paragraphs.messageType) && paragraphs.bulletPoints?.bulletPointBold && paragraphs.bulletPoints && paragraphs.bulletPoints.bulletPointBold !== ' ' ?
-//  {paragraphs && paragraphs.messageType && !(paragraphs.messageType === "Event"  || paragraphs.messageType === "Birthday" || paragraphs.messageType === "Holiday") && paragraphs.bulletPoints  && paragraphs.bulletPoints[0]  && paragraphs.bulletPoints[0].bulletPointBold && (paragraphs.bulletPoints[0].bulletPointBold !==' ')?
+ {paragraphs && paragraphs.messageType && !(paragraphs.messageType === "Event"  || paragraphs.messageType === "Birthday" || paragraphs.messageType === "Holiday") && paragraphs.bulletPoints  && paragraphs.bulletPoints[0]  && paragraphs.bulletPoints[0].bulletPointBold && (paragraphs.bulletPoints[0].bulletPointBold !==' ')?
    
  onlyPendingMessages && onlyPendingMessages.length > 0 && 
    <>
