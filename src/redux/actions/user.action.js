@@ -581,7 +581,7 @@ let adminSettings
                                        //later I will remove this hardcoding
 const doc = await db.collection("adminSettings").doc("KjE2Xz7avxs3Y5w4eXXF").get();
   if (doc.exists) {
-  adminSettings = doc.data();
+  adminSettings = doc.data(); 
 } else {
   console.error("Admin settings document not found!");
   return; // prevent continuing if it’s missing
