@@ -587,7 +587,7 @@ const doc = await db.collection("adminSettings").doc("KjE2Xz7avxs3Y5w4eXXF").get
   return; // prevent continuing if it’s missing
 }
 
-  // const prompt = 
+  // const prompt = WE HAVE A VARIETY OF PROMPTS NOW, NOT JUST ONE
 
   // `I want to send five articles to a business contact. Search the internet for five legitimate,real articles that were written in 2025
   //  along with a url to that article that can be publicly accessed from these websites - PWC, Deloitte, McKinsey,
@@ -667,7 +667,7 @@ const prompt =
 
       dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"},user,selectedChatUser))
+      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending",messageType},user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}
@@ -744,8 +744,8 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser,noti
     
   } catch (error) {
       const errorMessage = error.message;
-      //console.log('Error updating user message:', errorMessage);
-      //console.log("MESSAGE HAS FAILED IN CATCH:", user.uid);
+      console.log('FAILED TO UPDATE EMILY WHITE AFTER AI GENERATED HER MESSAGE:', errorMessage);
+      console.log("FAILED TO UPDATE EMILY WHITE AFTER AI GENERATED HER MESSAGE:", user.uid);
      
   }
 };

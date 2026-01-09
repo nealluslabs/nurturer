@@ -273,7 +273,7 @@ let [bulletPointChoice, setBulletPointChoice] = useState(selectedChatUser && onl
 let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
 
 
- const { connects,chatGptAnswer } = useSelector((state) => state.user);
+ const { connects,chatGptAnswer,aiTrigger } = useSelector((state) => state.user);
  let connectStatus;
 
  //console.log("SELECTED CHAT USER IS--->",selectedChatUser)
@@ -331,7 +331,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
   }, [selectedChatUser]);
 
 
-
+console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 
   useEffect(() => {
 
@@ -346,7 +346,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
   
       //THIS USE EFFECT IS FOR WHEN CHAT GPT DELIVERS A NEW MESSAGE ONLY --END
     
-   }, [chatGptAnswer]);
+   }, [chatGptAnswer,aiTrigger]);
 
 
   //useEffect(() => {
@@ -973,10 +973,10 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
          {paragraphs && !(paragraphs.messageType === 'Holiday' || paragraphs.messageType === 'Birthday' ||  paragraphs.messageType === 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
           <>
           <br /> 
-        {/* • <b>{point.bulletPointBold}</b> */}
+        • <b>{point.bulletPointBold}</b> 
         <br />
         <span>
-          {/* – {point.bulletPointRest}{" "} */}
+           – {point.bulletPointRest}{" "} 
           
         </span>
        {!(selectedChatUser.name === 'Emily Whiter' || selectedChatUser.name === 'Bob Johnsons') &&<> <br /><br /> </>}
