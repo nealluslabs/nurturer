@@ -252,7 +252,7 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
 //const [onlyPendingMessages,setOnlyPendingMessages] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) )
 
 
-let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"||item.messageStatus === "Sent" )) //come change this back to ONLY PENDING ONCE EMAIL SENDING IS BACK UP
+let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) //come change this back to ONLY PENDING ONCE EMAIL SENDING IS BACK UP
 
 
 let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
