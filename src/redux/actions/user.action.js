@@ -663,11 +663,11 @@ const prompt =
  
 
      if(fullJobDetailsResponse){
-      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Sent"}))
+      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
-      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Sent"}))
+      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Sent",messageType},user,selectedChatUser))
+      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending",messageType},user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}

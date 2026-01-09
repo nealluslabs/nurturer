@@ -252,7 +252,7 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
 //const [onlyPendingMessages,setOnlyPendingMessages] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) )
 
 
-let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) //come change this back to ONLY PENDING ONCE EMAIL SENDING IS BACK UP
+let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) 
 
 
 let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
@@ -1023,11 +1023,11 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 
 
            
-{<Box sx={{display:"flex"/*:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none"*/,flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"2rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
+{<Box sx={{display:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"2rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
  {paragraphs && paragraphs.messageType && !(paragraphs.messageType === "Event")  && !(paragraphs.messageType === "Birthday")  && !(paragraphs.messageType === "Holiday") && paragraphs.bulletPoints  && paragraphs.bulletPoints[0]  && paragraphs.bulletPoints[0].bulletPointBold && (paragraphs.bulletPoints[0].bulletPointBold !==' ')?
    
- /*onlyPendingMessages && onlyPendingMessages.length > 0 && */
+ onlyPendingMessages && onlyPendingMessages.length > 0 &&    //<--- this condition makes the box NOT appear when messages are yet to be sent
    <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
