@@ -915,8 +915,8 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
           }
 
 
-
-{ paragraphs && paragraphs.messageType && (paragraphs.messageType === "workAnniversary"  ) &&
+ 
+{ paragraphs && paragraphs.messageType && (paragraphs.messageType === "workAnniversary"  ) && //a repition of work anniversary here
          <>
          {/*THANK YOU MESSAGE */}
          {/*DEFAULT 1ST*/}
@@ -973,7 +973,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 
         <>
          {<> <br /> </>}
-         {paragraphs && !(paragraphs.messageType === 'Holiday' || paragraphs.messageType === 'Birthday' ||  paragraphs.messageType === 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
+         {paragraphs && !(paragraphs.messageType === 'Holiday') && !(paragraphs.messageType === 'Birthday') &&  !(paragraphs.messageType === 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>( 
           <>
           <br /> 
         • <b>{point.bulletPointBold}</b> 
@@ -1039,11 +1039,11 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 
 
            
-{<Box sx={{display:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none",flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"2rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
+{<Box sx={{display:"flex"/*:onlyPendingMessages && onlyPendingMessages.length > 0?"flex":"none"*/,flexDirection:"column",justifyContent:"flex-start",alignItems:"flex-start",marginLeft:{xs:"-0rem", sm:"7.5rem"},marginTop:"2rem",marginBottom:"10rem",backgroundColor:"#fff",borderRadius:"2rem",width:{xs:"55%",sm:"73%",md:"53rem"},maxWidth:{xs:"60%",sm:"78.5%"},padding:"1rem",paddingTop:"3rem"}}>
   
- {paragraphs && paragraphs.messageType && !(paragraphs.messageType === "Event"  || paragraphs.messageType === "Birthday" || paragraphs.messageType === "Holiday") && paragraphs.bulletPoints  && paragraphs.bulletPoints[0]  && paragraphs.bulletPoints[0].bulletPointBold && (paragraphs.bulletPoints[0].bulletPointBold !==' ')?
+ {paragraphs && paragraphs.messageType && !(paragraphs.messageType === "Event")  && !(paragraphs.messageType === "Birthday")  && !(paragraphs.messageType === "Holiday") && paragraphs.bulletPoints  && paragraphs.bulletPoints[0]  && paragraphs.bulletPoints[0].bulletPointBold && (paragraphs.bulletPoints[0].bulletPointBold !==' ')?
    
- onlyPendingMessages && onlyPendingMessages.length > 0 && 
+ /*onlyPendingMessages && onlyPendingMessages.length > 0 && */
    <>
                     <Typography
                      style={{fontWeight:700,fontSize:"1.2rem",marginBottom:"1rem"}}
