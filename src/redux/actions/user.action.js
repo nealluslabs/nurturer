@@ -663,11 +663,11 @@ const prompt =
  
 
      if(fullJobDetailsResponse){
-      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
+      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Sent"}))
 
-      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
+      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Sent"}))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending",messageType},user,selectedChatUser))
+      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Sent",messageType},user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}
@@ -683,7 +683,7 @@ const prompt =
 
 
 
-export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser,notifyInvite) => async (dispatch) => {
+export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => async (dispatch) => {
   //console.log("MESSAGE IS IN PHASE 2:", user.uid);
   
   try {

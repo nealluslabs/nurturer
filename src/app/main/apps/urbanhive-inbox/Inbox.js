@@ -473,6 +473,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
             selectedChatUser.industry,
             selectedChatUser.interests,
             setLoading,
+            aiMessageToModel,
             thisUser,
             notifyInvite,
             selectedChatUser
@@ -488,6 +489,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
             selectedChatUser.industry,
             selectedChatUser.interests,
             setLoading, 
+            aiMessageToModel,
             thisUser,
             notifyInvite,
             selectedChatUser
@@ -502,6 +504,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
             selectedChatUser.industry,
             selectedChatUser.interests,
             setLoading,
+            aiMessageToModel,
             thisUser,
             notifyInvite,
             selectedChatUser
