@@ -219,8 +219,8 @@ const handleInput = () => {
     secondParagraph: editableRef.current.querySelector(".secondParagraph")?.innerText || "",
     thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || "",
     //PERHAPS CONSIDER SETTING BULLET POINTS --AS THEY MAY DISAPPEAR WHEN YOU START TYPING.. OR NOT, WE MAY NOT NEED TO TYPE  DAGOGO -SEP 12 2025
-    messageType:'Email',
-    messageStatus:"Pending"
+   // messageType:'Email',
+   // messageStatus:"Pending"
   };
   //console.log("HANDLE INPUTS IS WORKING",paragraphs)
   setParagraphs({...paragraphs,...paraData});
@@ -252,7 +252,7 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
 //const [onlyPendingMessages,setOnlyPendingMessages] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) )
 
 
-let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) 
+let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"||item.messageStatus === "Sent" )) //come change this back to ONLY PENDING ONCE EMAIL SENDING IS BACK UP
 
 
 let [paragraphs, setParagraphs] = useState(onlyPendingMessages  && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus && onlyPendingMessages[onlyPendingMessages && onlyPendingMessages.length-1].messageStatus !== "Sent" ? onlyPendingMessages[onlyPendingMessages.length-1]
@@ -285,13 +285,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
     }
   }, [chatMessages]);
 
- // useEffect(() => {
- //   if(chatGptAnswer && chatGptAnswer.bulletPoints && chatGptAnswer.bulletPoints.length){
- //   dispatch(saveEditedParagraphs(chatGptAnswer))
- //   }
- // },
- // [chatGptAnswer])
-
+ 
 
   useEffect(() => {
 
@@ -348,16 +342,6 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
     
    }, [chatGptAnswer,aiTrigger]);
 
-
-  //useEffect(() => {
-  //  if (selectedChatUser && selectedChatUser.name === "Bob Johnson" ||selectedChatUser && selectedChatUser.name === "Emily White"  ) {
-  //    
-  //   setBirthdayMessage1(false)
-  //   setBirthdayMessage2(false)
-  //   setHolidayMessage1(false)
-//
-  //  }
-  //}, [selectedChatUser]);
 
 
 
