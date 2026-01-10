@@ -35,8 +35,8 @@ const reducers = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  //whitelist: [], // No reducers will be persisted
-  //blacklist: [], // No reducers are blacklisted, as we are not persisting anything
+  whitelist: [], // No reducers will be persisted
+  blacklist: [], // No reducers are blacklisted, as we are not persisting anything
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
