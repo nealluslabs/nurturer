@@ -80,7 +80,28 @@ const sesClient = new SESClient({
         password: user.password,
         photoUrl: static_img,
         lastActive: new Date().getTime(),
-       queryMsg:[],
+       queryMsg:[
+         {
+          firstParagraph:"I hope you're doing well and navigating this season with clarity. It’s been about three months since we last connected, and I’ve been thinking about your role at Code Forge Labs—especially given how fast backend technologies and infrastructure tools are evolving. With performance optimization and scalable architecture top of mind for so many teams, your work is likely more impactful than ever.",
+           secondParagraph:"While reading through some recent industry updates, I came across a couple of articles that I thought you might enjoy. They touch on themes related to backend efficiency, database design, and evolving best practices in engineering teams",
+          thirdParagraph:"We had some great conversations previously, and I really appreciated hearing how you approach clean architecture and performance at scale. Let me know if you’re up for a quick catch-up sometime soon—I’d love to hear what you’ve been building (and maybe even what your latest keyboard mod looks like). Wishing you continued momentum",
+          bulletPoints:[
+            {          
+          bulletPointBold:"Deloitte Global's 2025 Airline CEO Survey",
+          bulletPointRest:"Deloitte, May 30, 2025 Deloitte Link",
+          id:"7",
+          link:" "
+            },
+            {
+              bulletPointBold:"A breath of fresh air for the national aviation industry",
+              bulletPointRest:"PwC, June 3, 2025 PwC Link",
+               id:"8",
+               link:""
+            }
+          ]
+         }
+
+       ],
         registeredOn:new Date()
       })
       
