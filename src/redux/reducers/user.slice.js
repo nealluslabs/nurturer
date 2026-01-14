@@ -65,6 +65,10 @@ saveAiTrigger: (state, action) => {
     state.candidateInFocus = action.payload;
    
 },
+clearCandidateInFocus: (state, action) => { 
+  state.candidateInFocus = {};
+ 
+},
     fetchRealTimeUsersSuccess: (state, action) => {
       state.isLoading = false;
       state.liveUsers = action.payload;
@@ -128,6 +132,7 @@ export const {
  saveAiTrigger,
  saveFilteredContacts,
  saveCandidateInFocus,
+ clearCandidateInFocus,
  fetchRealTimeUsersSuccess,
  fetchConnectedUserSuccess,
  fetchUsersFailed,

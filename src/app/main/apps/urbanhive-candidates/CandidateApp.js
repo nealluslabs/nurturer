@@ -17,7 +17,7 @@ import { fb, db, auth } from 'config/firebase';
 import { Box, Button, Grid, InputAdornment, TextField, Switch, IconButton, Typography,Divider } from '@mui/material';
 
 import SearchIcon from '@mui/icons-material/Search';
-import { saveFilteredUsers, saveFilteredContacts, saveCandidateInFocus } from 'redux/reducers/user.slice';
+import { saveFilteredUsers, saveFilteredContacts, saveCandidateInFocus,clearCandidateInFocus } from 'redux/reducers/user.slice';
 import { fetchAllContactForOneUser,updateCandidateNotes,updateCandidateEventsAlert,updateCandidateTouchesAlert,updateCandidateTriggerAlert } from 'src/redux/actions/user.action';
 import AddIcon from '@mui/icons-material/Add';
 import MailIcon from '@mui/icons-material/Mail';
@@ -31,16 +31,31 @@ import "react-toastify/dist/ReactToastify.css";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { deleteCandidate } from 'redux/actions/user.action';
 import { MdEvent, MdBolt, MdTouchApp } from "react-icons/md";
+import { setCurrentChat } from 'redux/reducers/chat.slice';
 
 
 
 const useStyles = makeStyles((theme) => ({
   content: {
-    backgroundColor:"white",
-    width:"100%",
-    
-    '& canvas': {
-      maxHeight: '100%',
+    backgroundColor: "white",
+    width: "100%",
+    overflowX: "scroll",
+    overflowY: "scroll",
+
+    /* Hide scrollbar — Chrome, Safari, Edge */
+    "&::-webkit-scrollbar": {
+      width: 0,
+      height: 0,
+    },
+
+    /* Hide scrollbar — Firefox */
+    scrollbarWidth: "none",
+
+    /* Hide scrollbar — IE 10+ */
+    "-ms-overflow-style": "none",
+
+    "& canvas": {
+      maxHeight: "100%",
     },
   },
 }));
@@ -70,6 +85,17 @@ function CandidateApp(props) {
 
   const [candidateEventsAlert, setCandidateEventsAlert] = useState(candidateInFocus && candidateInFocus.eventsAlert && candidateInFocus.eventsAlert)
 
+
+  // clearing the candidate when the page is left
+  useEffect(() => {
+   
+    return () => {
+
+      dispatch(clearCandidateInFocus())
+    
+    
+    }
+  }, []);
 
 
   useEffect(() => {
@@ -154,9 +180,9 @@ function CandidateApp(props) {
 
 
   const switchItems = [
-    { id: 1, title: 'Events', enabled: false, description:"switch  notifications on or off.",icon:<MdEvent/> },
-    { id: 2, title: 'Triggers', enabled: false, description:"switch notifications on or off." ,icon:<MdBolt/> },
-    { id: 3, title: 'Touches', enabled: false, description:"switch notifications on or off.",icon:<MdTouchApp/> },
+    { id: 1, title: 'Events', enabled: false, description:"Birthday and Holiday emails will not go out to contact.",icon:<MdEvent/> },
+    { id: 2, title: 'Triggers', enabled: false, description:"Triggers emails set up for contact will not go out." ,icon:<MdBolt/> },
+    { id: 3, title: 'Touches', enabled: false, description:"Touches will not be generated for the contact.",icon:<MdTouchApp/> },
     
   ]
 
@@ -406,7 +432,7 @@ function CandidateApp(props) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: 'flex', alignItems: "center" }}>
               <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-              <h5>Recent Interactions</h5>
+              <h5>Recent Interactions !</h5>
             </div>
             <button 
               style={{ 
@@ -416,7 +442,14 @@ function CandidateApp(props) {
                 color: "grey",
                 fontSize:"0.8rem"
               }}
-              onClick={() => history.push('/apps/inbox')}
+              onClick={() => {
+                //need to set selectedChatUser first, before sending them to apps/inbox
+                dispatch(setCurrentChat(candidateInFocus  ));
+                setTimeout(()=>{ 
+                history.push('/apps/inbox')
+              },300)
+
+              }}
             >
               View All
             </button>
