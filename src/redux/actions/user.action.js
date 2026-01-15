@@ -12,6 +12,9 @@ import axios from 'axios';
 import firebase from "firebase/app";
 import "firebase/firestore";
 
+import FormData from "form-data"; // form-data v4.0.1  
+import Mailgun from "mailgun.js"; // mailgun.js v11.1.0  
+
 
 
 import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
@@ -374,14 +377,8 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
   console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA",data)
 
 
-
-
-
-
   if(data && data.touchesAlert !==null && data.touchesAlert ===true  ){
 
-
-    
     const latest = data.messageQueue[data.messageQueue.length - 1];
 
     const emailHTML = `
@@ -392,7 +389,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
       <p>${latest?.secondParagraph || ''}</p><br/>
     
       <ul>
-        ${
+        ${ (latest.messageType !== "Holiday" && latest.messageType !== "Birthday") && 
           latest?.bulletPoints
             ? latest.bulletPoints
                 .map(bp => `
@@ -412,12 +409,14 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
       <p>– The Nurturer Team</p>
     `;
     
-    try {
-      const response = await fetch("https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
+ 
+ 
+   try {
+      const response = await fetch(/*"http://localhost:5008/api/send-email"*/ "https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          to: data.email,
+          to: /*'devs@nurturer.ai'*/ data.email,
           subject: latest.subject ? latest.subject : '',
           htmlMessage: emailHTML
         })
@@ -427,9 +426,56 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
     
       if (result.success) {
         notifyInvite("Email sent out successfully");
+
+
+
+
+        //     //UPDATING STATUS OF A PARTICULAR CONTACT
+    const updatedMessageQueue = [...data.messageQueue];
+
+    // Find the index of the most recent email (assuming array is in chronological order)
+    // If not, we’ll sort it before finding
+    const emailMessages = updatedMessageQueue
+      .map((msg, index) => ({ ...msg, index }))
+     // .filter(msg => msg.messageType === "Email"); //it doesnt only have to be emails, but it has to be the most recent one
+  
+    if (emailMessages.length > 0) {
+      // Get the last (most recent) email
+      const mostRecentEmail = emailMessages[emailMessages.length - 1];
+      const msgIndex = mostRecentEmail.index;
+  
+      // Update the messageStatus
+      updatedMessageQueue[msgIndex] = {
+        ...updatedMessageQueue[msgIndex],
+        messageStatus: "Sent"
+        
+      };
+
+      const contactDoc = await db.collection("contacts").doc(data && data.uid).get();
+
+      if(contactDoc.exists){
+        await db.collection("contacts").doc(data && data.uid).update({
+          messageQueue: updatedMessageQueue,
+          sendDate:contactDoc.data().frequencyInDays
+        });
+
+
+    await db.collection("contacts").doc(data && data.uid).get().then(async(doc)=>{
+      dispatch(setCurrentChat(doc.data()))
+
+    }) 
+      
+
+
+        //UPDATING STATUS OF A PARTICULAR CONTACT - END
       } else {
         notifySkip("Error sending email, please try again");
       }
+    }
+  
+  
+  
+  }
     
     } catch (error) {
       console.error("Fetch error:", error);
@@ -438,7 +484,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
 
 
 
-    console.log("BELOW IS AWS SES EMAIL SENDING CODE - U CAN DELETE IT ONCE U CONFIRM THAT SENDGRID IS WORKING")
+    console.log("BELOW IS AWS SES EMAIL SENDING CODE - U CAN DELETE IT ONCE MR DEA CONFIRMS THAT API IS NOT WORKING")
  //try {
  //     const params = {
  //       Destination: {
