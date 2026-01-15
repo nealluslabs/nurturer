@@ -814,7 +814,14 @@ export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChat
                  // Update Firestore
                  await contactsSnapshot.update({
                    queryMsg: updatedUserQueryMsgArray,
-});
+               }).then(() => contactDoc.get())
+        .then((doc) => {
+          if (doc.exists) {
+            //updating the user to have the latest query msg
+            dispatch(loginSuccess({ user:document.data(), uid:document.data().uid }))
+          }
+        })
+          
 
 
 
