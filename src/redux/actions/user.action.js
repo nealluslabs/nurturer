@@ -772,20 +772,58 @@ export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChat
 
       if (doc.exists) {
 
-        //console.log("RAW MESSAGE IS -->", updatedParagraphs)
-        let updatedMessage =  {...doc.data().message}
+      // Build updatedMessage safely
+                 let updatedMessage = {
+                   firstParagraph: updatedParagraphs?.firstParagraph ?? " ",
+                   secondParagraph: updatedParagraphs?.secondParagraph ?? " ",
+                   thirdParagraph: updatedParagraphs?.thirdParagraph ?? " ",
+                   bulletPoints: updatedParagraphs?.bulletPoints ?? [],
+                   subject: updatedParagraphs?.subject ?? " ",
+                   messageType: updatedParagraphs?.messageType ?? "Email",
+                 };
+                 
+                 // Get existing data
+                 const data = doc.data();
+                 const userQueryMsgArray = data.queryMsg || [];
+                 
+                 // Find index of message with same messageType
+                 const messageTypeToMatch = updatedMessage.messageType;
+                 
+                 const existingIndex = userQueryMsgArray.findIndex(
+                   (msg) => msg.messageType === messageTypeToMatch
+                 );
+                 
+                 // Create updated array
+                 let updatedUserQueryMsgArray;
+                 
+                 if (existingIndex !== -1) {
+                   // ✅ Replace the matching message
+                   updatedUserQueryMsgArray = [...userQueryMsgArray];
+                   updatedUserQueryMsgArray[existingIndex] = {
+                     ...userQueryMsgArray[existingIndex],
+                     ...updatedMessage,
+                   };
+                 } else {
+                   // ✅ No matching messageType → append new message
+                   updatedUserQueryMsgArray = [
+                     ...userQueryMsgArray,
+                     updatedMessage,
+                   ];
+                 }
+                 
+                 // Update Firestore
+                 await contactsSnapshot.update({
+                   queryMsg: updatedUserQueryMsgArray,
+});
 
-        
 
-          updatedMessage.firstParagraph = updatedParagraphs && updatedParagraphs.firstParagraph
-         updatedMessage.secondParagraph = updatedParagraphs &&  updatedParagraphs.secondParagraph
-          updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
-          updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
-          updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
-          updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Email"
 
-         //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
 
+         //UPDATING THE USER'S queryMsg array - END
+
+
+
+         //NOW, UPDATING THE CONTACTS LAST MESSAGE
           contactDoc.get()
          .then((doc)=>{
           if (doc.exists) {
@@ -815,10 +853,11 @@ export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChat
           }
 
          })
+        // NOW, UPDATING THE CONTACTS LAST MESSAGE -END
         
 
         contactsSnapshot.update({
-          message:updatedMessage
+          message:updatedMessage //OH i SEE THAT I USED TO UPDATE THE MESSAGE FIELD, WELL I AM NOT USING IT, IT JUST EAVE IT CUZ OF THE .THEN BELOW
         })
         .then(() => {
           //console.log("Message Updated Successfully in ut1@nurturer")

@@ -180,9 +180,9 @@ function CandidateApp(props) {
 
 
   const switchItems = [
-    { id: 1, title: 'Events', enabled: false, description:"Birthday and Holiday emails will not go out to contact.",icon:<MdEvent/> },
-    { id: 2, title: 'Triggers', enabled: false, description:"Triggers emails set up for contact will not go out." ,icon:<MdBolt/> },
-    { id: 3, title: 'Touches', enabled: false, description:"Touches will not be generated for the contact.",icon:<MdTouchApp/> },
+    { id: 1, title: 'Events', enabled: false, description:"Birthday/Holiday emails won't go out to contact.",icon:<MdEvent/> },
+    { id: 2, title: 'Triggers', enabled: false, description:"Triggers emails set up for contact won't go out." ,icon:<MdBolt/> },
+    { id: 3, title: 'Touches', enabled: false, description:"Touches won't be generated for the contact.",icon:<MdTouchApp/> },
     
   ]
 
