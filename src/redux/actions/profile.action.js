@@ -700,7 +700,8 @@ export const updateProfile = (profile, user, file, resetForm, url,notifyInvite,n
     return `${formattedDay}/${formattedMonth}/${year}`;
   }
   const userRef = db.collection("contacts").doc(profile.uid)
- 
+ console.log('THIS IS THE PROFILE UID BEING UPDATED ===>',profile)
+
   userRef.update({
     name: profile.name||" ",
     email: profile.email||" ",

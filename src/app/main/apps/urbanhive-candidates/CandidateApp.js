@@ -86,12 +86,15 @@ function CandidateApp(props) {
   const [candidateEventsAlert, setCandidateEventsAlert] = useState(candidateInFocus && candidateInFocus.eventsAlert && candidateInFocus.eventsAlert)
 
 
-  // clearing the candidate when the page is left
+  
+ 
   useEffect(() => {
-   
-    return () => {
+    //instead - clear candidate in focus when the page is loaded - at least for the first time
+    dispatch(clearCandidateInFocus())
 
-      dispatch(clearCandidateInFocus())
+    return () => {
+       // clearing the candidate when the page is left - so dont do this - it will affect other pages
+      //dispatch(clearCandidateInFocus())
     
     
     }

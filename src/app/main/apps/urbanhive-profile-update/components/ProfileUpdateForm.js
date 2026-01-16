@@ -98,7 +98,7 @@ export default function ProfileUpdateForm() {
     const [justSubmitted2, setJustSubmitted2] = useState(false);
     const [hasTypedSinceSubmit2, setHasTypedSinceSubmit2] = useState(false);
 
-    //console.log("WHAT ARE JOHN SMITHS TRIGGERS-->",candidateInFocus.interests)
+    console.log("WHAT ARE OUR CANDIDATE IN FOUCUS-->",candidateInFocus)
 
     
 
