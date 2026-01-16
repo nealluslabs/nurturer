@@ -412,7 +412,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
  
  
    try {
-      const response = await fetch(/*"http://localhost:5008/api/send-email"*/ "https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
+      const response = await fetch( "https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
