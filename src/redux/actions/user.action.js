@@ -412,17 +412,33 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
  
  
    try {
-      const response = await fetch( "https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          to: /*'devs@nurturer.ai'*/ data.email,
-          subject: latest.subject ? latest.subject : '',
-          htmlMessage: emailHTML
-        })
-      });
+     // const response = await fetch( "https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
+     //   method: "POST",
+     //   headers: { "Content-Type": "application/json" },
+     //   body: JSON.stringify({
+     //     to: /*'devs@nurturer.ai'*/ data.email,
+     //     subject: latest.subject ? latest.subject : '',
+     //     htmlMessage: emailHTML
+     //   })
+     // });
+
+
+          const response = await axios.post(
+            /*"http://localhost:5008/api/send-email"*/
+       "https://nurturer-sendgrid-backend.vercel.app/api/send-email",
+       {
+         to: data.email, // or 'devs@nurturer.ai'
+         subject: latest.subject ? latest.subject : "",
+         htmlMessage: emailHTML,
+       },
+       {
+         headers: {
+           "Content-Type": "application/json",
+         },
+       }
+      );
     
-      const result = await response.json(); // <-- parse backend JSON
+      const result = await response.data; // <-- parse backend JSON
     
       if (result.success) {
         notifyInvite("Email sent out successfully");
