@@ -413,27 +413,27 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
  
    try {
     
-    //      const response = await axios.post(
-    //        /*"http://localhost:5008/send-email",*/
-    //     "https://nurturer-sendgrid-backend.vercel.app/send-email",
-    //   {
-    //     to: data.email, // or 'devs@nurturer.ai'
-    //     subject: latest.subject ? latest.subject : "",
-    //     htmlMessage: emailHTML,
-    //   },
-    //   {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   }
-    //  );
-    //  console.log("RESPONSE IS=====>",response)
-    //
-    //  const result = await response.data; // <-- parse backend JSON
+          const response = await axios.post(
+            /*"http://localhost:5008/send-email",*/
+         "https://nurturer-sendgrid-backend.vercel.app/send-email",
+       {
+         to: data.email, // or 'devs@nurturer.ai'
+         subject: latest.subject ? latest.subject : "",
+         htmlMessage: emailHTML,
+       },
+       {
+         headers: {
+           "Content-Type": "application/json",
+         },
+       }
+      );
+      console.log("RESPONSE IS=====>",response)
+    
+      const result = await response.data; // <-- parse backend JSON
     
 
         console.log("RESULT IS=====>",result)
-     /* if (result.success) {*/
+      if (result.success) {
         notifyInvite("Email sent out successfully");
 
 
@@ -486,7 +486,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
   
   
   
-/*  }*/
+  }
     
     } catch (error) {
       console.error("Fetch error:=====>", error);
