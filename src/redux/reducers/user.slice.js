@@ -13,6 +13,7 @@ const initialState = {
   editedParagraphs:{},
   chatGptAnswer:{},
   aiTrigger:'',
+  subjectChangeTriggerAfterEmailIsSent:'',
   candidateInFocus:{},
   info: '',
   error: '',
@@ -56,6 +57,10 @@ saveChatGptAnswer: (state, action) => {
 },
 saveAiTrigger: (state, action) => { 
   state.aiTrigger = action.payload;
+ 
+},
+saveSubjectChangeTriggerAfterEmailIsSent: (state, action) => { 
+  state.subjectChangeTriggerAfterEmailIsSent = action.payload;
  
 },
   saveFilteredContacts: (state, action) => { 
@@ -130,6 +135,7 @@ export const {
  saveEditedParagraphs,
  saveChatGptAnswer,
  saveAiTrigger,
+ saveSubjectChangeTriggerAfterEmailIsSent,
  saveFilteredContacts,
  saveCandidateInFocus,
  clearCandidateInFocus,

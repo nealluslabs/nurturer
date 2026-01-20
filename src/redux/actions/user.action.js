@@ -6,7 +6,7 @@ import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from 'src/redux/reducers/chat.slice';
 import { setCurrentChat } from 'redux/reducers/chat.slice';
-import { saveChatGptAnswer, saveEditedParagraphs,saveAiTrigger, saveCandidateInFocus } from 'redux/reducers/user.slice';
+import { saveChatGptAnswer, saveEditedParagraphs,saveAiTrigger, saveCandidateInFocus,subjectChangeTriggerAfterEmailSent, saveSubjectChangeTriggerAfterEmailIsSent } from 'redux/reducers/user.slice';
 import axios from 'axios';
 
 import firebase from "firebase/app";
@@ -391,7 +391,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
       <ul>
         ${ (latest.messageType !== "Holiday" && latest.messageType !== "Birthday") && 
           latest?.bulletPoints
-            ? latest.bulletPoints
+            ? latest.bulletPoints.slice(0,2)
                 .map(bp => `
                   <li>
                     <strong>${bp.bulletPointBold || ''}</strong> — ${bp.bulletPointRest || ''}
@@ -412,38 +412,28 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
  
  
    try {
-     // const response = await fetch( "https://nurturer-sendgrid-backend.vercel.app/api/send-email", {
-     //   method: "POST",
-     //   headers: { "Content-Type": "application/json" },
-     //   body: JSON.stringify({
-     //     to: /*'devs@nurturer.ai'*/ data.email,
-     //     subject: latest.subject ? latest.subject : '',
-     //     htmlMessage: emailHTML
-     //   })
-     // });
-
-
-          const response = await axios.post(
-            /*"http://localhost:5008/api/send-email"*/
-       "https://nurturer-sendgrid-backend.vercel.app/send-email",
-       {
-         to: data.email, // or 'devs@nurturer.ai'
-         subject: latest.subject ? latest.subject : "",
-         htmlMessage: emailHTML,
-       },
-       {
-         headers: {
-           "Content-Type": "application/json",
-         },
-       }
-      );
-      console.log("RESPONSE IS=====>",response)
-
-      const result = await response.data; // <-- parse backend JSON
+    
+    //      const response = await axios.post(
+    //        /*"http://localhost:5008/send-email",*/
+    //     "https://nurturer-sendgrid-backend.vercel.app/send-email",
+    //   {
+    //     to: data.email, // or 'devs@nurturer.ai'
+    //     subject: latest.subject ? latest.subject : "",
+    //     htmlMessage: emailHTML,
+    //   },
+    //   {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    //  );
+    //  console.log("RESPONSE IS=====>",response)
+    //
+    //  const result = await response.data; // <-- parse backend JSON
     
 
         console.log("RESULT IS=====>",result)
-      if (result.success) {
+     /* if (result.success) {*/
         notifyInvite("Email sent out successfully");
 
 
@@ -481,6 +471,8 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
 
     await db.collection("contacts").doc(data && data.uid).get().then(async(doc)=>{
       dispatch(setCurrentChat(doc.data()))
+      dispatch(saveSubjectChangeTriggerAfterEmailIsSent(new Date().toISOString()))
+     
 
     }) 
       
@@ -494,7 +486,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
   
   
   
-  }
+/*  }*/
     
     } catch (error) {
       console.error("Fetch error:=====>", error);

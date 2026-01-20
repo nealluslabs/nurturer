@@ -249,9 +249,10 @@ setParagraphs({...paragraphs,bulletPoints:updatedBulletPoints});
   dispatch(saveEditedParagraphs({...paragraphs,bulletPoints:updatedBulletPoints}))
 
 }
-//const [onlyPendingMessages,setOnlyPendingMessages] = useState(selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) )
 
 
+
+//DO NOT DELETE, IT IS USED TO DISPLAY MESSAGES THAT HAVE NOT BEEN DISPLAYED...IN A TIMELY FASHION, THE PAGE UPDATES PROMPTLY WITH THIS CONDITION
 let onlyPendingMessages = selectedChatUser.messageQueue  && selectedChatUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")) 
 
 
@@ -322,7 +323,7 @@ let [defaultCards,setDefaultCards] = useState(user.cards  && user.cards)
    }
     
    
-  }, [selectedChatUser]);
+  }, [selectedChatUser,selectedChatUser.messageQueue]);
 
 
 console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
@@ -556,7 +557,8 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
                         contentEditable={true}
                         suppressContentEditableWarning={true}
                         onBlur={handleInput}
-                        onMouseLeave={handleInput}
+                        //onMouseLeave={handleInput}
+                       
                        >     
 
 
@@ -681,7 +683,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
         
 
 
-       {(selectedChatUser && (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph)) &&
+       {
         <span>
           Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName  }
         </span>
@@ -691,7 +693,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
     
         <br /><br /><br /><br />
 
-       {
+       {onlyPendingMessages && onlyPendingMessages.length > 0 &&
 
         <span className="firstParagraph" sx={{color:"black"}}>
       
@@ -700,7 +702,8 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
         </span>
         }
         <br /><br /><br /><br />
-        {
+       
+        {onlyPendingMessages && onlyPendingMessages.length > 0 &&
 
 
 
@@ -953,7 +956,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
         </span>
         }
        
-        {
+        {onlyPendingMessages && onlyPendingMessages.length > 0 &&
 
         <>
          {<> <br /> </>}
@@ -981,7 +984,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 
 
        
-       {
+       {onlyPendingMessages && onlyPendingMessages.length > 0 &&
         <span className="thirdParagraph">
       
       
@@ -993,7 +996,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
         <br /><br /><br /><br />
 
       
-       { (editedParagraphs && editedParagraphs.firstParagraph && editedParagraphs.firstParagraph.length||editedParagraphs && editedParagraphs.secondParagraph &&  editedParagraphs.secondParagraph.length||editedParagraphs && editedParagraphs.thirdParagraph && paragraphs.editedParagraphs.length) &&
+       { 
          <>
         <span>
           Regards,

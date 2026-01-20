@@ -13,6 +13,8 @@ import StatusIcon from './StatusIcon';
 import { unMatchConnect, updateConnection } from 'src/redux/actions/user.action';
 import { saveFilteredContacts, saveFilteredUsers } from 'redux/reducers/user.slice';
 import { FaEnvelope } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { fetchAllContactForOneUser } from 'redux/actions/user.action';
 
 const useStyles = makeStyles((theme) => ({
   contactListItem: {
@@ -35,12 +37,31 @@ function ContactListItem(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { user } = useSelector((state) => state.login);
-  const { allUsers,filteredUsers, connects, isLoading } = useSelector((state) => state.user);
+  const { allUsers,filteredUsers, connects, isLoading,selectedChatUser,subjectChangeTriggerAfterEmailIsSent } = useSelector((state) => state.user);
   const selectedContactId = props.user.uid;
 
  //("WHAT IS USER?--->",props.user)
 
+
+
  const onlyPendingMessages = props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
+
+ //const [onlyPendingMessages,setOnlyPendingMessages] = useState(props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")))
+//
+//
+ useEffect(()=>{
+//
+//setOnlyPendingMessages(props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")))
+//
+//
+
+
+dispatch(fetchAllContactForOneUser(user && user.uid))
+
+ },[selectedChatUser,subjectChangeTriggerAfterEmailIsSent])
+
+ 
+
 
  const resortFilteredUsersAndPush = (userId)=>{
     
@@ -115,7 +136,7 @@ setTimeout(()=>{
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={`${onlyPendingMessages && onlyPendingMessages[onlyPendingMessages.length-1 && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1].subject ? onlyPendingMessages[onlyPendingMessages.length-1].subject:""}`  }
+      secondary={`${onlyPendingMessages && onlyPendingMessages[onlyPendingMessages.length-1 && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1].subject ? onlyPendingMessages[onlyPendingMessages.length-1].subject:" "}`  }
       // secondary={props.contact.mood}
     />
 

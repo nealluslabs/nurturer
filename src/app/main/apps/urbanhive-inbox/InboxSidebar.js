@@ -22,7 +22,7 @@ import { fetchChats,clearChats } from 'src/redux/actions/chat.action';
 import { fetchConnectedUsers, fetchConnectedUsers2, fetchRealTimeUsers, fetchAllContactForOneUser } from 'src/redux/actions/user.action';
 import ContactListItem from './ContactListItem';
 import { closeMobileChatsSidebar } from './store/sidebarsSlice';
-import { saveEditedParagraphs } from 'redux/reducers/user.slice';
+import { saveEditedParagraphs, saveSubjectChangeTriggerAfterEmailIsSent } from 'redux/reducers/user.slice';
 
 const statusArr = [
   {
@@ -56,7 +56,7 @@ function InboxSidebar(props) {
   const [message, setMessage] = useState('');
   const [userUid, setUserUid] = useState(null);
   const { user } = useSelector((state) => state.login);
-  const { allUsers, connectedUsers, filteredContacts,aiTrigger, connects, connects2, isLoading } = useSelector((state) => state.user);
+  const { allUsers, connectedUsers, filteredContacts,aiTrigger, connects, connects2, isLoading,selectedChatUser,subjectChangeTriggerAfterEmailIsSent } = useSelector((state) => state.user);
 
 
   const container = {
@@ -77,7 +77,7 @@ function InboxSidebar(props) {
       // Fetch contacts from Firebase for inbox
       dispatch(fetchAllContactForOneUser(user.uid));
     }
-  }, [user,aiTrigger, dispatch])
+  }, [user,aiTrigger, dispatch,subjectChangeTriggerAfterEmailIsSent]) //subjectChangeTriggerAfterEmailIsSent should trigger the latest subject on the sidebar as I update that when i send am email with the email icon
  
   // Remove old connected users fetching - now using filteredContacts from Firebase
   // useEffect(() => {
@@ -166,7 +166,17 @@ function InboxSidebar(props) {
 
         setConnUsers(connectedUsersOutput)
 
-      },[])
+      //  dispatch(fetchAllContactForOneUser(user.uid));
+                // Use filteredContacts from Firebase instead of connectedUsers
+  // setConnUsers(filteredContacts && filteredContacts.filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).filter((item) => (item.uid !== user.uid))
+  //  .sort((a, b) => {
+  //    const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
+  //    const bDate = b.sendDate === "None" ? Infinity : Number(b.sendDate) || 1000;
+  //    return aDate - bDate;
+  //   })
+  //  )
+
+      },[selectedChatUser,subjectChangeTriggerAfterEmailIsSent])
 
   
 

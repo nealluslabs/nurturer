@@ -98,15 +98,46 @@ function CandidateApp(props) {
     
     
     }
+
+
+    //WE CLEAR CANDIDATE IN FOCUS UPON ENTERING THE PAGE, THEN WE SET THE FIRST CONTACT..BELOW
   }, []);
+
+
+  useEffect(()=>{
+
+
+    
+    //WE DONT NEED CANDIDATE IN FOCUS HERE...WE NEED THE FIRST CANDIDATE
+    let firstContact= filteredContacts &&  filteredContacts.length >0  && filteredContacts[0]
+    console.log("WHAT IS THE FIRST CONTACT ?===>",firstContact)
+    console.log("WHAT IS CANDIDATE IN FOCUS ON INITIAL LOAD ?===>",candidateInFocus)
+
+  setTouchpointData(firstContact && firstContact.messageQueue && firstContact.messageQueue.length > 0  && firstContact.messageQueue.slice(0,4))
+
+  setCandidateTriggersAlert(firstContact && firstContact.triggersAlert)
+  setCandidateTouchesAlert(firstContact && firstContact.touchesAlert)
+  setCandidateEventsAlert(firstContact && firstContact.eventsAlert)
+
+  setCandidateNotes(firstContact && firstContact.notes)
+
+  
+   
+
+
+},[/**INITIAL SETTING OF CANDIDATE IN FOCUS, SO NO DEPENDENCIES */])
+
 
 
   useEffect(() => {
    
+    if(candidateInFocus && candidateInFocus.name){  //if its not an empty object
     setCandidateNotes(candidateInFocus && candidateInFocus.notes && candidateInFocus.notes)
     setCandidateTriggersAlert(candidateInFocus && candidateInFocus.triggersAlert && candidateInFocus.triggersAlert)
     setCandidateEventsAlert(candidateInFocus && candidateInFocus.eventsAlert && candidateInFocus.eventsAlert)
     setCandidateTouchesAlert(candidateInFocus && candidateInFocus.touchesAlert && candidateInFocus.touchesAlert)
+
+  }
 
 
   }, [candidateInFocus]);
@@ -189,13 +220,15 @@ function CandidateApp(props) {
     
   ]
 
-
+ 
   useEffect(()=>{
+
+   if(candidateInFocus && candidateInFocus.name){
 
     setTouchpointData(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0  && candidateInFocus.messageQueue.slice(0,4))
 
     setCandidateNotes(candidateInFocus && candidateInFocus.notes)
-
+    }
   
 
   },[candidateInFocus])
@@ -203,15 +236,16 @@ function CandidateApp(props) {
   useEffect(()=>{
 
   
-
+    if(candidateInFocus && candidateInFocus.name){
     setCandidateTriggersAlert(candidateInFocus && candidateInFocus.triggersAlert)
     setCandidateTouchesAlert(candidateInFocus && candidateInFocus.touchesAlert)
     setCandidateEventsAlert(candidateInFocus && candidateInFocus.eventsAlert)
+    }
 
   },[candidateInFocus])
 
 
-  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue?candidateInFocus.messageQueue.slice(0,4):[
+  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0?candidateInFocus.messageQueue.slice(0,4):[
     {
       id: 1,
       subject: 'Catch Up Email',
@@ -435,7 +469,7 @@ function CandidateApp(props) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: 'flex', alignItems: "center" }}>
               <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-              <h5>Recent Interactions</h5>
+              <h5>Recent Interactions!</h5>
             </div>
             <button 
               style={{ 
