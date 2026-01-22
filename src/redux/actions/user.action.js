@@ -710,12 +710,12 @@ const prompt =
 
   const jobResponse = await axios.post(apiEndpoint,{prompt:prompt})
 
-     console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT-->",jobResponse.data)
+     console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT, IN THIS CASE OUR PROMPT-->",user.queryMsg[0])
 
    
 
 
-     const fullJobDetailsResponse = jobResponse.data  /* JSON.parse(jobResponse.data)*/
+     const fullJobDetailsResponse = jobResponse.data?jobResponse.data: user.queryMsg && user.queryMsg.filter((msg)=>(msg.messageType === messageType)) ?user.queryMsg.filter((msg)=>(msg.messageType === messageType))[0]   :user.queryMsg && user.queryMsg[0] /* JSON.parse(jobResponse.data)*/
 
  
 
@@ -724,7 +724,7 @@ const prompt =
 
       dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending",messageType},user,selectedChatUser))
+      //dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending",messageType},user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}
