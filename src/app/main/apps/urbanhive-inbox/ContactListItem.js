@@ -37,26 +37,32 @@ function ContactListItem(props) {
   const dispatch = useDispatch();
   const history = useHistory();
   const { user } = useSelector((state) => state.login);
-  const { allUsers,filteredUsers, connects, isLoading,selectedChatUser,subjectChangeTriggerAfterEmailIsSent } = useSelector((state) => state.user);
+  const { allUsers,filteredUsers,filteredContacts, connects, isLoading,selectedChatUser,subjectChangeTriggerAfterEmailIsSent } = useSelector((state) => state.user);
   const selectedContactId = props.user.uid;
 
  //("WHAT IS USER?--->",props.user)
 
 
+ let matchedUser = filteredContacts.filter((item)=>(item.uid === props.user.uid)) && filteredContacts.filter((item)=>(item.uid === props.user.uid))[0]
+console.log("WHAT IS MATCHED USER ---->", matchedUser)
 
- const onlyPendingMessages = props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
 
- //const [onlyPendingMessages,setOnlyPendingMessages] = useState(props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")))
+//I had to use a variable called matched user, because props is not updating the subject at all, seeing as its not changing
+ let onlyPendingMessages = matchedUser.messageQueue  && matchedUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
+
+ //const [onlyPendingMessages,setOnlyPendingMessages] = useState(matchedUser.messageQueue  && matchedUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")))
 //
 //
  useEffect(()=>{
 //
-//setOnlyPendingMessages(props.user.messageQueue  && props.user.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")))
+//setOnlyPendingMessages(matchedUser.messageQueue  && matchedUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending")))
 //
 //
 
 
 dispatch(fetchAllContactForOneUser(user && user.uid))
+
+onlyPendingMessages = matchedUser.messageQueue  && matchedUser.messageQueue.filter((item)=>(item.messageStatus && item.messageStatus === "Pending"))
 
  },[selectedChatUser,subjectChangeTriggerAfterEmailIsSent])
 
