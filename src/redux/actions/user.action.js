@@ -416,7 +416,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
           const response = await axios.post(
             /*"http://localhost:5008/send-email",*/
          /*"https://nurturer-sendgrid-backend.vercel.app/send-email",*/
-         "nurturer-sendgrid-backend-production.up.railway.appsend-email",
+         "nurturer-sendgrid-backend-production.up.railway.app/send-email",
        {
          to: data.email, // or 'devs@nurturer.ai'
          subject: latest.subject ? latest.subject : "",
