@@ -90,28 +90,22 @@ function CandidateApp(props) {
  
   useEffect(() => {
     //instead - clear candidate in focus when the page is loaded - at least for the first time
-    dispatch(clearCandidateInFocus())
+    //dispatch(clearCandidateInFocus())
 
-    return () => {
-       // clearing the candidate when the page is left - so dont do this - it will affect other pages
-      //dispatch(clearCandidateInFocus())
-    
-    
-    }
-
-
-    //WE CLEAR CANDIDATE IN FOCUS UPON ENTERING THE PAGE, THEN WE SET THE FIRST CONTACT..BELOW
+  //instead of clearing candidate in focus, why dont we just set it to the first contact always ? this is the best of both worlds
+  //I may need to clear candidate in focus later, so I did not delete this use effect which I am currently in - dagogo - jan 26 2026
   }, []);
 
 
   useEffect(()=>{
-
 
     
     //WE DONT NEED CANDIDATE IN FOCUS HERE...WE NEED THE FIRST CANDIDATE
     let firstContact= filteredContacts &&  filteredContacts.length >0  && filteredContacts[0]
     console.log("WHAT IS THE FIRST CONTACT ?===>",firstContact)
     console.log("WHAT IS CANDIDATE IN FOCUS ON INITIAL LOAD ?===>",candidateInFocus)
+
+    dispatch(saveCandidateInFocus(firstContact && firstContact))
 
   setTouchpointData(firstContact && firstContact.messageQueue && firstContact.messageQueue.length > 0  && firstContact.messageQueue.slice(0,4))
 
@@ -163,6 +157,18 @@ function CandidateApp(props) {
     });
     
 
+
+    const notifySkip = (message) =>
+      toast.error(message, {
+      position: "bottom-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+      
 
 
   // Fetch contacts when component mounts
@@ -469,7 +475,7 @@ function CandidateApp(props) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <div style={{ display: 'flex', alignItems: "center" }}>
               <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-              <h5>Recent Interactions!</h5>
+              <h5>Recent Interactions</h5>
             </div>
             <button 
               style={{ 
@@ -608,7 +614,14 @@ function CandidateApp(props) {
             }}
           />
           <Button
-          onClick={()=>{dispatch(updateCandidateNotes(candidateInFocus.uid,candidateNotes,notifyInvite,user.uid) )}}
+          onClick={()=>{
+
+            if(!candidateInFocus.uid){
+                notifySkip("Please make sure a contact is selected, before attempting to update their notes")
+              return
+            }
+            dispatch(updateCandidateNotes(candidateInFocus.uid && candidateInFocus.uid,candidateNotes,notifyInvite,user.uid))
+          }}
             variant="contained"
             sx={{
               backgroundColor: "#21C9CF",
