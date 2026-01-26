@@ -1210,7 +1210,7 @@ label={<Typography fontSize="14px">
               }
               else{
                   //notifyInviteCustom("Email has been sent out!")
-                dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom))
+                dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom,user))
               }
             }} 
               

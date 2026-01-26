@@ -373,7 +373,7 @@ export const stopMessageSending = (notifyInvite,selectedChatUser) => async (disp
   }
 }
 
-export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispatch) => {
+export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (dispatch) => {
   console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA",data)
 
 
@@ -406,7 +406,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
       <p>${latest?.thirdParagraph || ''}</p><br/>
     
       <p>Warm Regards,</p>
-      <p>– The Nurturer Team</p>
+      <p>– ${user.name && user.name}</p>
     `;
     
  
@@ -415,12 +415,13 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip) => async (dispa
     
           const response = await axios.post(
             /*"http://localhost:5008/send-email",*/
-         /*"https://nurturer-sendgrid-backend.vercel.app/send-email",*/
+        /* "https://nurturer-sendgrid-backend.vercel.app/send-email",*/
          "https://nurturer-sendgrid-backend-production.up.railway.app/send-email",
        {
          to: data.email, // or 'devs@nurturer.ai'
          subject: latest.subject ? latest.subject : "",
          htmlMessage: emailHTML,
+         name:user.name && user.name,
        },
        {
          headers: {
