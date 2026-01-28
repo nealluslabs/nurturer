@@ -740,7 +740,10 @@ const prompt =
     //you can put anything into ai trigger
    
      dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
+     dispatch(fetchAllContactForOneUser())
 
+     //I NEED THIS TO TRIGGER THE SUBJECT TO CHANGE ON THE TOUCHES INBOX - SO DONT DELETE
+     dispatch(saveSubjectChangeTriggerAfterEmailIsSent( fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()} ))
 }
 
 
