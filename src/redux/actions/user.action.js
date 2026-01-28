@@ -92,6 +92,8 @@ export const fetchAllContactForOneUser = (uid) => async (dispatch) => {
 
 export const updateCandidateNotes = (contactId,notes,notifyInvite,userId) => async (dispatch) => {
   
+
+   
        
     const contactDoc = db.collection('contacts').doc(contactId && contactId)
 
@@ -412,7 +414,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (
  
  
    try {
-    
+     
           const response = await axios.post(
             /*"http://localhost:5008/send-email",*/
         "https://nurturer-sendgrid-backend.vercel.app/send-email",
