@@ -424,6 +424,7 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (
          subject: latest.subject ? latest.subject : "",
          htmlMessage: emailHTML,
          name:user.name && user.name,
+         userEmail:user.email && user.email
        },
        {
          headers: {
