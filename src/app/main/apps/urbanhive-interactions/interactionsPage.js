@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Table,
   TableBody,
@@ -14,14 +14,34 @@ import {
 } from "@mui/material";
 import VisibilityOutlinedIcon from "@mui/icons-material/VisibilityOutlined";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 
 const InteractionsPage = () => {
   const getStatusColor = (status) => {
     return status === "Sent" ? "success" : "error";
   };
+
+  const history = useHistory()
+
   const { allContacts = [], candidateInFocus } = useSelector(
     (state) => state.user,
   );
+
+
+//  const { user } = useSelector(
+//    (state) => state.auth
+//  );
+//
+//useEffect(()=>{
+//
+//  if(user && !user.name){
+//    history.push('/login')
+//  }
+//
+//
+//},[])
+
+
   let touchpointData = [];
 
   let onlyTouchpointMessagesData = [];

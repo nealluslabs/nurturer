@@ -69,13 +69,13 @@ const navigationConfig = [
     icon: 'group_add',
     url: '/candidates',
   },
-  {
+  /*{
     id: 'interaction',
     title: 'Interactions',
     type: 'item',
     icon: 'web',
     url: '/interactions',
-  },
+  },*/
   {
     id: 'cards',
     title: 'Cards',
