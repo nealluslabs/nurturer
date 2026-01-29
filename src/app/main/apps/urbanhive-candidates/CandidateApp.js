@@ -74,7 +74,6 @@ function CandidateApp(props) {
   const [testWork, setTestWork] = useState(false);
   const [viewMode, setViewMode] = useState('card'); 
 
-  console.log("candidateInFocus in the contacts page--->",candidateInFocus)
 
   const [candidateNotes, setCandidateNotes] = useState(candidateInFocus && candidateInFocus.notes && candidateInFocus.notes)
 
@@ -489,7 +488,7 @@ function CandidateApp(props) {
                 //need to set selectedChatUser first, before sending them to apps/inbox
                 dispatch(setCurrentChat(candidateInFocus  ));
                 setTimeout(()=>{ 
-                history.push('/apps/inbox')
+                history.push('/candidates/interactions')
               },300)
 
               }}

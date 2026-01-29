@@ -1,5 +1,4 @@
-import { lazy } from 'react';
-
+import { lazy } from "react";
 
 const CandidateAppConfig = {
   settings: {
@@ -9,8 +8,12 @@ const CandidateAppConfig = {
   },
   routes: [
     {
-      path: '/candidates',
-      component: lazy(() => import('./CandidateApp')),
+      path: "/candidates/interactions",
+      component: lazy(() => import("./candidateInteractionsPage")),
+    },
+    {
+      path: "/candidates",
+      component: lazy(() => import("./CandidateApp")),
     },
   ],
 };
