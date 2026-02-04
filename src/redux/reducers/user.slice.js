@@ -15,6 +15,7 @@ const initialState = {
   aiTrigger:'',
   subjectChangeTriggerAfterEmailIsSent:'',
   candidateInFocus:{},
+  selectedInteraction: null,
   info: '',
   error: '',
   message: '',
@@ -70,6 +71,9 @@ saveSubjectChangeTriggerAfterEmailIsSent: (state, action) => {
     state.candidateInFocus = action.payload;
    
 },
+setSelectedInteraction: (state, action) => {
+      state.selectedInteraction = action.payload;
+    },
 clearCandidateInFocus: (state, action) => { 
   state.candidateInFocus = {};
  
@@ -138,6 +142,7 @@ export const {
  saveSubjectChangeTriggerAfterEmailIsSent,
  saveFilteredContacts,
  saveCandidateInFocus,
+ setSelectedInteraction,
  clearCandidateInFocus,
  fetchRealTimeUsersSuccess,
  fetchConnectedUserSuccess,

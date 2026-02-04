@@ -10,7 +10,7 @@ const InteractionPageConfig = {
   routes: [
     {
       path: '/interactions',
-      component: lazy(() => import('./interactionsPage')),
+      component: lazy(() => import('./InboxApp')),
     },
   ],
 }; 

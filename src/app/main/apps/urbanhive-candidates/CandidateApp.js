@@ -488,7 +488,8 @@ function CandidateApp(props) {
                 //need to set selectedChatUser first, before sending them to apps/inbox
                 dispatch(setCurrentChat(candidateInFocus  ));
                 setTimeout(()=>{ 
-                history.push('/candidates/interactions')
+                // history.push('/apps/inbox')
+                history.push('/interactions')
               },300)
 
               }}
