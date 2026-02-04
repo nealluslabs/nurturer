@@ -15,6 +15,17 @@ const useStyles = makeStyles((theme) => ({
     '#fuse-main': {
       height: (props) => props.innerScroll && '100vh',
     },
+    // Target EVERYTHING in Chrome
+    '*::-webkit-scrollbar': {
+      display: 'none !important',
+      width: '0 !important',
+      height: '0 !important',
+    },
+    // Target EVERYTHING in Firefox/Edge
+    '*': {
+      scrollbarWidth: 'none !important',
+      msOverflowStyle: 'none !important',
+    }
   },
   root: {
     display: 'flex',
@@ -25,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 1 auto',
     height: 'auto',
     backgroundColor: theme.palette.background.default,
+    scrollbarColor: 'transparent',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
   },
   innerScroll: {
     height: '100%',
@@ -83,6 +98,15 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     '-webkit-overflow-scrolling': 'touch',
     zIndex: 9999,
+        scrollbarColor: 'transparent',
+    '&::-webkit-scrollbar': {
+      display: 'none',
+    },
+    '& .ps__rail-y, & .ps__rail-x': {
+    display: 'none !important',
+    opacity: '0 !important',
+    visibility: 'hidden !important',
+  },
   },
   toolbar: {
     height: toolbarHeight,
