@@ -54,6 +54,8 @@ import {
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import ViewListIcon from '@mui/icons-material/ViewList';
 
+import { setCurrentChat } from 'redux/reducers/chat.slice';
+
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -684,9 +686,18 @@ function CandidateCard() {
                   
                   
                 }}
+                              onClick={() => {
+                                //need to set selectedChatUser first, before sending them to apps/inbox
+                                dispatch(setCurrentChat(candidateInFocus  ));
+                                setTimeout(()=>{ 
+                                // history.push('/apps/inbox')
+                                history.push('/interactions')
+                              },300)
+                
+                              }}
               >
-                <AddIcon sx={{ marginRight: '4px' }} />
-                Add Interaction
+                {/* <AddIcon sx={{ marginRight: '4px' }} /> */}
+                View Interaction
               </button>
           
           </Box>
