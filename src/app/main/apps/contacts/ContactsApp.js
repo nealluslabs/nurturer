@@ -27,11 +27,11 @@ function ContactsApp(props) {
     <>
       <FusePageSimple
         classes={{
-          contentWrapper: 'p-0 sm:p-24 h-full',
-          content: 'flex flex-col h-full',
+          contentWrapper: 'p-0 sm:p-24 h-full overflow-hidden',
+          content: 'flex flex-col h-full overflow-hidden',
           leftSidebar: 'w-256 border-0',
           header: 'min-h-72 h-72 sm:h-136 sm:min-h-136',
-          wrapper: 'min-h-0',
+          wrapper: 'min-h-0 overflow-hidden',
         }}
         header={<ContactsHeader pageLayout={pageLayout} />}
         content={<ContactsList />}
