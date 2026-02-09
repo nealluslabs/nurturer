@@ -33,71 +33,86 @@ if (!selectedInteraction) {
         height: "100%", 
         width: "100%", 
         display: "flex",        
-        alignItems: "center", 
-        justifyContent: "center", 
+        alignItems: "left", 
+        // justifyContent: "center", 
         overflowY: "auto", 
-        p: 4 
+        p: 2
       }}
     >
       <Paper
         elevation={0}
         sx={{ 
-          p: 6, 
+          p: 3, 
           border: "1px solid #e0e0e0", 
           borderRadius: 8, 
           backgroundColor: "#ffffff", 
-          width: "80%",
+          width: "60%",
           maxWidth: "800px",   
           boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-          margin: "auto"     
+          height: "fit-content",
+          // margin: "auto"     
+          marginLeft: 6
         }}
       >
-        <Typography
-          variant="h4"
-          sx={{ fontWeight: 700, mb: 3, color: "#111827" }}
-        >
-          {selectedInteraction.subject}
-        </Typography>
-
-        <Typography variant="h5" sx={{color: "#374151" }}>
-          Hello {candidateInFocus?.name || "User"},
-        </Typography>
-
         <Box
           sx={{
             "& .MuiTypography-root": {
-              fontSize: "1.4rem", 
+              fontSize: "1.4rem",
               lineHeight: 1.8,
               color: "#374151",
             },
+            "& a": {
+              wordBreak: "break-word",
+              overflowWrap: "anywhere",
+            },
+            wordBreak: "break-word",
+            overflowWrap: "anywhere",
           }}
         >
-          <Typography paragraph>
-            {selectedInteraction.firstParagraph}
-          </Typography>
-
-          {selectedInteraction.bulletPoints && (
-            <ul style={{ paddingLeft: "24px", marginBottom: "24px" }}>
-              {selectedInteraction.bulletPoints.map((bp, i) => (
-                <li key={bp.id || i} style={{ marginBottom: "12px" }}>
-                  <Typography>
-                    <strong style={{ color: "#111827" }}>
-                      {bp.bulletPointBold}
-                    </strong>{" "}
-                    {bp.bulletPointRest}
-                  </Typography>
-                </li>
-              ))}
-            </ul>
+          {selectedInteraction.subject && (
+            <Typography
+              variant="h2"
+              sx={{ fontWeight: 700, mb: 3, color: "#111827",fontSize: "1.6rem", }}
+            >
+              {selectedInteraction.subject}
+            </Typography>
           )}
 
-          <Typography paragraph>
-            {selectedInteraction.secondParagraph}
+          <Typography variant="h4" sx={{ color: "#374151" }}>
+            Hello {candidateInFocus?.name || "User"},
           </Typography>
 
-          <Typography paragraph sx={{ fontWeight: 500 }}>
-            {selectedInteraction.thirdParagraph}
-          </Typography>
+          <br /><br />
+
+          {selectedInteraction.firstParagraph && (
+            <Typography>{selectedInteraction.firstParagraph}</Typography>
+          )}
+
+          <br /> <br />
+
+          {selectedInteraction.secondParagraph && (
+            <Typography>{selectedInteraction.secondParagraph}</Typography>
+          )}
+
+          {selectedInteraction.bulletPoints &&
+            selectedInteraction.bulletPoints.map((bp, i) => (
+              <Box key={bp.id || i}>
+                <br />
+                •{" "}
+                <strong style={{ color: "#111827" }}>
+                  {bp.bulletPointBold}
+                </strong>
+                <br />
+                <span>– {bp.bulletPointRest}</span>
+                <br /><br />
+              </Box>
+            ))}
+
+          {selectedInteraction.thirdParagraph && (
+            <Typography sx={{ fontWeight: 500 }}>
+              {selectedInteraction.thirdParagraph}
+            </Typography>
+          )}
         </Box>
       </Paper>
     </Box>
