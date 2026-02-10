@@ -15,17 +15,6 @@ const useStyles = makeStyles((theme) => ({
     '#fuse-main': {
       height: (props) => props.innerScroll && '100vh',
     },
-    // Target EVERYTHING in Chrome
-    '*::-webkit-scrollbar': {
-      display: 'none !important',
-      width: '0 !important',
-      height: '0 !important',
-    },
-    // Target EVERYTHING in Firefox/Edge
-    '*': {
-      scrollbarWidth: 'none !important',
-      msOverflowStyle: 'none !important',
-    }
   },
   root: {
     display: 'flex',
@@ -98,15 +87,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
     '-webkit-overflow-scrolling': 'touch',
     zIndex: 9999,
-        scrollbarColor: 'transparent',
-    '&::-webkit-scrollbar': {
-      display: 'none',
-    },
-    '& .ps__rail-y, & .ps__rail-x': {
-    display: 'none !important',
-    opacity: '0 !important',
-    visibility: 'hidden !important',
-  },
   },
   toolbar: {
     height: toolbarHeight,
@@ -214,10 +194,10 @@ const FusePageSimple = forwardRef((props, ref) => {
           {/*    className={clsx(classes.contentCardWrapper, props.sidebarInner && classes.contentCardWrapperInnerSidebar)} */}
           {/*    enable={props.innerScroll && props.sidebarInner} */}
           {/* > */}
-          <FuseScrollbars
+          {/* <FuseScrollbars
             className={classes.contentWrapper}
             enable={props.innerScroll && !props.sidebarInner}
-          >
+          > */}
             {props.header && !props.sidebarInner && (
               <FusePageSimpleHeader header={props.header} classes={classes} />
             )}
@@ -225,7 +205,7 @@ const FusePageSimple = forwardRef((props, ref) => {
             {props.contentToolbar && <div className={classes.toolbar}>{props.contentToolbar}</div>}
 
             {props.content && <div className={classes.content}>{props.content}</div>}
-          </FuseScrollbars>
+          {/* </FuseScrollbars> */}
           {/* </FuseScrollbars> */}
 
           {(props.rightSidebarHeader || props.rightSidebarContent) && (
