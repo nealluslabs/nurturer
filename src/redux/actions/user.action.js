@@ -681,7 +681,7 @@ const doc = await db.collection("adminSettings").doc("KjE2Xz7avxs3Y5w4eXXF").get
   //     For each article, put it's title into "bulletPointBold", it's source into "bulletPointRest" and a link to the article into "link".
   //      Make each paragraph relevant to the user's job: ${JobTitle}, company:${Company}, industry:${Industry} and interests:${Interests}.
   //       Please go through the javascript object ${JSON.stringify(previousMessage)}, and try to adapt to my writing style,so you can sound like me,when providing your answer`
-
+ 
 
 const prompt =
    messageType === "Independence"?
