@@ -384,12 +384,12 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (
     const latest = data.messageQueue[data.messageQueue.length - 1];
 
     const emailHTML = `
-      <p>Dear <strong>${data.name || ''}</strong>,</p><br/>
+      <p>Dear <strong>${data.name || ''}</strong>,</p>
     
-      <p>${latest?.firstParagraph || ''}</p><br/>
+      <p>${latest?.firstParagraph || ''}</p>
     
-      <p>${latest?.secondParagraph || ''}</p><br/>
-    
+      <p>${latest?.secondParagraph || ''}</p>
+
       <ul>
         ${ (latest.messageType !== "Holiday" && latest.messageType !== "Birthday") && 
           latest?.bulletPoints
@@ -403,9 +403,9 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (
                 .join('')
             : ''
         }
-      </ul><br/>
+      </ul>
     
-      <p>${latest?.thirdParagraph || ''}</p><br/>
+      <p>${latest?.thirdParagraph || ''}</p>
     
       <p>Warm Regards,</p>
       <p>– ${user.name && user.name}</p>

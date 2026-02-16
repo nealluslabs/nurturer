@@ -765,7 +765,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
          {/*BIRTHDAY MESSAGE */}
          {/*DEFAULT 1ST*/}
 
-        {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+        {birthdayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
          <div
               style={{
                 width: '45%',
@@ -784,7 +784,7 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
         }
 
              {/*NON-DEFAULT 2ND*/}
-           { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+           { birthdayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
             <div
               style={{
                 width: '45%',
@@ -1081,7 +1081,8 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 </Typography>
 
 <FormControl component="fieldset">
-{selectedChatUser.name === 'Bob JohnsonOPIA' ?
+{paragraphs.messageType === "Birthday"  && !(paragraphs.messageType === "Holiday")?
+   
 <Stack spacing={2}>
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
