@@ -28,7 +28,7 @@ function ProfileApp() {
               </Typography>
             </div>
             <Typography variant="h6" className="text-18 sm:text-24 font-semibold">
-              New Contact
+              New Contact!
             </Typography>
           </div>
         </div>

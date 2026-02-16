@@ -115,7 +115,7 @@ function CardsContent() {
 
 
         
-        <Box sx={{ width: {xs:"100%",sm:"48%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
+        <Box sx={{ width: {xs:"48%",sm:"48%"}, backgroundColor: "white", paddin: "6px", borderRadius: "8px" }}>
 
           <div 
             style={{ 
@@ -209,7 +209,7 @@ function CardsContent() {
 
         </Box>
 
-        <Box sx={{width: {xs:"100%",sm:"48%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px",marginTop:"-0.7rem" }}>
+        <Box sx={{width: {xs:"48%",sm:"48%"}, backgroundColor: "white", padding: "6px", borderRadius: "8px",marginTop:"-0.7rem" }}>
 
        
           <div 
