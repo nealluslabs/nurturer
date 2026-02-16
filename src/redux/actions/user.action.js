@@ -375,8 +375,28 @@ export const stopMessageSending = (notifyInvite,selectedChatUser) => async (disp
   }
 }
 
-export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (dispatch) => {
-  console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA",data)
+export const sendEmailToContact = (data,notifyInvite,notifySkip,user,cardType) => async (dispatch) => {
+  console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA, WHAT IS CARD TYPE?",user,cardType)
+   
+  let cardImage = "";
+
+switch (cardType) {
+  case "birthdayCard":
+    cardImage = user?.cards?.birthdayCard;
+    break;
+  case "birthdayCard2":
+    cardImage = user?.cards?.birthdayCard2;
+    break;
+  case "thankYouCard":
+    cardImage = user?.cards?.thankYouCard;
+    break;
+  case "thankYouCard2":
+    cardImage = user?.cards?.thankYouCard2;
+    break;
+  default:
+    cardImage = user?.cards?.birthdayCard; // fallback
+}
+
 
 
   if(data && data.touchesAlert !==null && data.touchesAlert ===true  ){
@@ -391,19 +411,34 @@ export const sendEmailToContact = (data,notifyInvite,notifySkip,user) => async (
       <p>${latest?.secondParagraph || ''}</p>
 
       <ul>
-        ${ (latest.messageType !== "Holiday" && latest.messageType !== "Birthday") && 
-          latest?.bulletPoints
-            ? latest.bulletPoints.slice(0,2)
-                .map(bp => `
+      ${
+        (latest.messageType !== "Holiday" && latest.messageType !== "Birthday") &&
+        latest?.bulletPoints
+          ? latest.bulletPoints
+              .slice(0, 2)
+              .map(
+                (bp) => `
                   <li>
-                    <strong>${bp.bulletPointBold || ''}</strong> — ${bp.bulletPointRest || ''}
-                    <a href="${bp.link || '#'}" target="_blank">${bp.link || ''}</a>
+                    <strong>${bp.bulletPointBold || ""}</strong> — ${bp.bulletPointRest || ""}
+                    <a href="${bp.link || "#"}" target="_blank">${bp.link || ""}</a>
                   </li>
-                `)
-                .join('')
-            : ''
-        }
-      </ul>
+                `
+              )
+              .join("")
+          : `
+            <li style="list-style: none;">
+              <img 
+                src="${cardImage || ""}" 
+                alt="greeting card"
+                width="300"
+                height="300"
+                style="display:block; width:300px; height:300px; object-fit:cover;"
+              />
+            </li>
+          `
+      }
+    </ul>
+    
     
       <p>${latest?.thirdParagraph || ''}</p>
     

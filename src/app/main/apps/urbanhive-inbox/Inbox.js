@@ -139,10 +139,12 @@ function Inbox(props) {
   const chatRef = useRef(null);
   const [messageText, setMessageText] = useState('');
 
-  const [birthdayMessage1,setBirthdayMessage1] = useState(false)
+  const [birthdayMessage1,setBirthdayMessage1] = useState(true)
   const [birthdayMessage2,setBirthdayMessage2] = useState(false)
   const [holidayMessage1,setHolidayMessage1] = useState(true)
   const [holidayMessage2,setHolidayMessage2] = useState(false)
+
+  const [cardType,setCardType] = useState("birthdayCard")
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
@@ -197,6 +199,7 @@ function Inbox(props) {
  
  const thisUser =user && user
  console.log("IN INBOX DAGOGO, WHO IS SELECTED CHAT USER--->",selectedChatUser)
+ console.log("OKAY NOW OUR USER, DOES HE HAVE CARDS?--->",user)
 
 //HOW WE DECIDE WHICH MESSAGE THE AI WILL MODEL - START 
 
@@ -1089,7 +1092,7 @@ style={{display:"flex",gap:"2rem"}}
 value="article1"
 control={<Radio checked={birthdayMessage1} onClick={()=>{ 
                                                   
-                                              
+                                                 setCardType("birthdayCard")
                                                     setBirthdayMessage1(true);setBirthdayMessage2(false)
                                                  
                                                   }}   /> }
@@ -1105,6 +1108,7 @@ value="article2"
 control={<Radio checked={birthdayMessage2} onClick={()=>{
 
   setBirthdayMessage2(true);setBirthdayMessage1(false)  
+  setCardType("birthdayCard2")
 
 }}
 />}
@@ -1119,7 +1123,10 @@ label={<Typography fontSize="14px"><div style={{cursor:"pointer"}}  onClick={han
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Radio checked={holidayMessage1} onClick={()=>{ setHolidayMessage1(true);setHolidayMessage2(false)   }}
+control={<Radio checked={holidayMessage1} onClick={()=>{
+   setHolidayMessage1(true);setHolidayMessage2(false)  
+   setCardType("thankYouCard")
+   }}
 />}
 label={<Typography fontSize="14px">
   <div  style={{cursor:"pointer"}}  onClick={handleOpen3} >Happy Holiday 1</div>
@@ -1129,7 +1136,10 @@ label={<Typography fontSize="14px">
 <FormControlLabel
 style={{display:"flex",gap:"2rem"}}
 value="article1"
-control={<Radio checked={holidayMessage2} onClick={()=>{ setHolidayMessage1(false);setHolidayMessage2(true)}}
+control={<Radio checked={holidayMessage2} onClick={()=>{
+   setHolidayMessage1(false);setHolidayMessage2(true)
+   setCardType("thankYouCard2")
+   }}
 />}
 label={<Typography fontSize="14px">
   <div  style={{cursor:"pointer"}}  onClick={handleOpen3} >Happy Holiday 2</div>
@@ -1211,7 +1221,7 @@ label={<Typography fontSize="14px">
               }
               else{
                   //notifyInviteCustom("Email has been sent out!")
-                dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom,user))
+                dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom,user,cardType))
               }
             }} 
               
