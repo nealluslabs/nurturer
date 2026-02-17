@@ -425,17 +425,8 @@ switch (cardType) {
                 `
               )
               .join("")
-          : `
-            <li style="list-style: none;">
-              <img 
-                src="${cardImage || ""}" 
-                alt="greeting card"
-                width="300"
-                height="300"
-                style="display:block; width:300px; height:300px; object-fit:cover;"
-              />
-            </li>
-          `
+          :
+           ``
       }
     </ul>
     
@@ -444,6 +435,27 @@ switch (cardType) {
     
       <p>Warm Regards,</p>
       <p>– ${user.name && user.name}</p>
+
+
+
+
+      <ul>
+      ${
+        (latest.messageType === "Holiday" || latest.messageType === "Birthday") &&
+         `
+            <li style="list-style: none;">
+              <img 
+                src="${cardImage || ""}" 
+                alt="greeting card"
+                width="220"
+                height="220"
+                style="display:block; width:220px; height:220px; object-fit:cover;"
+              />
+            </li>
+          `
+      }
+    </ul>
+    
     `;
     
  
