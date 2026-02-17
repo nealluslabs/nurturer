@@ -671,7 +671,7 @@ switch (cardType) {
 
 
 
-export const generateAiMessage = (messageType,Frequency,Name,JobTitle,Company,Industry,Interests,setLoading,previousMessage,user,notifyInvite,selectedChatUser) => async (dispatch) => {
+export const generateAiMessage = (messageType="Holiday",Frequency,Name,JobTitle,Company,Industry,Interests,setLoading,previousMessage,user,notifyInvite,selectedChatUser) => async (dispatch) => {
             
   
    if(setLoading){setLoading(true)}
@@ -697,7 +697,7 @@ const doc = await db.collection("adminSettings").doc("KjE2Xz7avxs3Y5w4eXXF").get
   return; // prevent continuing if it’s missing
 }
 
-  // const prompt = WE HAVE A VARIETY OF PROMPTS NOW, NOT JUST ONE
+  // const prompt = WE HAVE A VARIETY OF PROMPTS NOW, NOT JUST ONE - THIS WAS THE OLD PROMPT- WHEN THERE WAS ONLY ONE PROMPT
 
   // `I want to send five articles to a business contact. Search the internet for five legitimate,real articles that were written in 2025
   //  along with a url to that article that can be publicly accessed from these websites - PWC, Deloitte, McKinsey,
