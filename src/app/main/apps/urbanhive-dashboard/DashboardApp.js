@@ -604,7 +604,7 @@ if (allContacts.length > 0) {
 
 
 
-{onlyEventsMessagesData.length > 0  &&
+{/*onlyEventsMessagesData.length > 0  &&
    <div >
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
@@ -696,7 +696,7 @@ if (allContacts.length > 0) {
 
             </div>
           </div>
-          }
+          */}
 
         
      
@@ -905,7 +905,20 @@ if (allContacts.length > 0) {
                       </div>
                     </div>
 
-                    <div style={{width:"13rem",display:"flex",justifyContent:"space-between",alignItems:'center',position:"relative",left:"-2rem"}}>
+                    <div style={{width:"max-content",display:"flex",justifyContent:"space-between",alignItems:'center',position:"relative",left:"-2rem"}}>
+                   
+                    <p
+                      style={{
+                        color:"black",
+                        paddingRight:"1rem",
+                        width:"7rem",
+                        
+                      }}
+                    >
+                      {item.sendDate?item.sendDate + " " + "Days":"0 Days"}
+                    </p>
+                   
+                   
                     <p
                       style={{
                         padding: "4px 12px",
@@ -918,13 +931,7 @@ if (allContacts.length > 0) {
 
                     </p>
 
-                    <p
-                      style={{
-                        color:"black",
-                      }}
-                    >
-                      {item.sendDate?item.sendDate + " " + "Days":"0 Days"}
-                    </p>
+                   
                   </div>
                    
                   </div>
