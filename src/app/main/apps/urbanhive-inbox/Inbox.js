@@ -1294,7 +1294,7 @@ label={<Typography fontSize="14px">
                 <div style={{ fontSize: "10px", color: "grey" }}>Message & Cards</div>
               </div>
 
-              <div 
+             {/*<div 
                 onClick={() => handleAiOptionClick('Event')}
                 style={{ padding: "10px", cursor: "pointer" }}
                 onMouseEnter={(e) => e.target.style.backgroundColor = "#f5f5f5"}
@@ -1302,7 +1302,8 @@ label={<Typography fontSize="14px">
               >
                 <strong>Events</strong>
                 <div style={{ fontSize: "10px", color: "grey" }}>Events & Cards</div>
-              </div>
+          </div>*/}
+          
             </div>
           )}
             </>
