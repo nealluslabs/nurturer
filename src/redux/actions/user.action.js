@@ -432,7 +432,8 @@ switch (cardType) {
     
     
       <p>${latest?.thirdParagraph || ''}</p>
-    
+     
+      <br/><br/>
       <p>Warm Regards,</p>
       <p>– ${user.name && user.name}</p>
 

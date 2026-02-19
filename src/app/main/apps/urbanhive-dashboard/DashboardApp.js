@@ -83,7 +83,8 @@ if (allContacts.length > 0) {
           ...msg,
           contactName: contact.name,
           contactId: contact.id||contact.uid,
-          uid:contact.uid
+          uid:contact.uid,
+          sendDate:contact.sendDate? contact.sendDate:90
         }))
       );
     }
@@ -101,6 +102,7 @@ onlyTouchpointMessagesData = allMessages.filter((item)=>(item.messageStatus === 
   subtitle: msg.contactName ? `${msg.contactName}${msg.to ? ' - ' + msg.to : ''}` : (msg.to || ''),
   status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
   messageType:msg.messageType,
+  sendDate:msg.sendDate? msg.sendDate:90,
   statusColor: 'grey',
   statusBackground: 'yellow',
   icon: Mail,
@@ -848,7 +850,7 @@ if (allContacts.length > 0) {
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
               <div style={{ display: 'flex', alignItems: "center" }}>
                 <SendIcon sx={{ width: 25, height: 25, marginRight: "4px" }} />
-                <h3>Recent Touchpoints</h3>
+                <h3>Upcoming Touchpoints</h3>
               </div>
               <button 
                 style={{ 
@@ -897,11 +899,13 @@ if (allContacts.length > 0) {
                           color: item.iconColor
                         }}
                       />
-                      <div>
+                      <div  style={{display:"flex",flexDirection:"column"}}>
                         <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
                         {<p style={{ fontSize: "12px" }}>{item.subtitle}</p>}
                       </div>
                     </div>
+
+                    <div style={{width:"13rem",display:"flex",justifyContent:"space-between",alignItems:'center',position:"relative",left:"-2rem"}}>
                     <p
                       style={{
                         padding: "4px 12px",
@@ -911,7 +915,18 @@ if (allContacts.length > 0) {
                       }}
                     >
                       {item.status?item.status:"Pending"}
+
                     </p>
+
+                    <p
+                      style={{
+                        color:"black",
+                      }}
+                    >
+                      {item.sendDate?item.sendDate + " " + "Days":"0 Days"}
+                    </p>
+                  </div>
+                   
                   </div>
                 );
               })

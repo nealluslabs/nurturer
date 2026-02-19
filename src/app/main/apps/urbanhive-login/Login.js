@@ -157,9 +157,9 @@ function Login() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
             >
-              <Typography variant="h3" color="inherit" className="font-semibold leading-tight">
+              <Typography variant="h3" color="inherit" className="font-semibold leading-tight" style={{textAlign:"center"}}>
                 Welcome <br />
-                to <br /> NURTURER!
+                To <br /> NURTURER!
               </Typography>
             </motion.div>
 
