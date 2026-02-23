@@ -90,8 +90,8 @@ if (allContacts.length > 0) {
     }
   });
   allMessages.sort((a, b) => {
-    if (a.createdAt && b.createdAt) {
-      return b.createdAt - a.createdAt;
+    if (a.sendDate && b.sendDate) {
+      return a.sendDate - b.sendDate;
     }
     return 0;
   });
@@ -900,7 +900,7 @@ if (allContacts.length > 0) {
                         }}
                       />
                       <div  style={{display:"flex",flexDirection:"column"}}>
-                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title}</p>
+                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>{item.title && item.title.length <24 ? item.title: item.title && item.title.slice(0,17)+"..."}</p>
                         {<p style={{ fontSize: "12px" }}>{item.subtitle}</p>}
                       </div>
                     </div>

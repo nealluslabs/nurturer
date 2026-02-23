@@ -17,13 +17,13 @@ const useStyles = makeStyles((theme) => ({
     },
     // Target EVERYTHING in Chrome
     '*::-webkit-scrollbar': {
-      display: 'none !important',
-      width: '0 !important',
-      height: '0 !important',
+      //display: 'none !important',
+      width: '10px !important',
+      height: '10px !important',
     },
     // Target EVERYTHING in Firefox/Edge
     '*': {
-      scrollbarWidth: 'none !important',
+      scrollbarWidth: '10px !important',
       msOverflowStyle: 'none !important',
     }
   },
@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.default,
     scrollbarColor: 'transparent',
     '&::-webkit-scrollbar': {
-      display: 'none',
+      //display: 'none',
     },
   },
   innerScroll: {

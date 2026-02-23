@@ -1264,7 +1264,7 @@ label={<Typography fontSize="14px">
             ref={menuRef}
             style={{
               position: "absolute",
-              top: "-18rem",
+              top: "-15rem",
               right: "15rem",
               backgroundColor: "white",
               boxShadow: "0px 4px 12px rgba(0,0,0,0.1)",
