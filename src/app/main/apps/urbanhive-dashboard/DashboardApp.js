@@ -900,12 +900,21 @@ if (allContacts.length > 0) {
                         }}
                       />
                       <div  style={{display:"flex",flexDirection:"column"}}>
-                        <p style={{ fontSize: "14px", fontWeight: "bold" }}>
-                          {item.title &&
-                           (item.title.length < 24
-                             ? item.title
-                             : item.title.split(" ").slice(0, 2).join(" "))}
-                             </p>
+                      <p style={{ fontSize: "14px", fontWeight: "bold" }}>
+                      {item.title &&
+                        (item.title.length < 24
+                          ? item.title
+                          : (() => {
+                              const words = item.title.split(" ");
+                              let result = "";
+                              for (let word of words) {
+                                if ((result + (result ? " " : "") + word).length > 24) break;
+                                result += (result ? " " : "") + word;
+                              }
+                              return result;
+                            })()
+                        )}
+                     </p>
                         {<p style={{ fontSize: "12px" }}>{item.subtitle}</p>}
                       </div>
                     </div>
