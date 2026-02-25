@@ -484,6 +484,22 @@ function CandidateCard() {
   const [output, setOutput] = useState([]);
   console.log("OUTPUT IS --->",output)
 
+  const openBirthdayHolidayInbox = (contact) => {
+    const selectedContact =
+      contact && contact.uid ? contact : candidateInFocus && candidateInFocus.uid ? candidateInFocus : null;
+
+    if (!selectedContact || !selectedContact.uid) {
+      return;
+    }
+
+    dispatch(saveCandidateInFocus(selectedContact));
+    dispatch(setCurrentChat(null));
+    history.push({
+      pathname: "/apps/inbox-events",
+      state: { candidateUid: selectedContact.uid },
+    });
+  };
+
   const handleSearchResults = (searchTerm) => {
 
     setLoadedBefore(true)
@@ -641,15 +657,17 @@ function CandidateCard() {
             px: 2,
           }}
         >
-          <Box
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              marginBottom: "3rem",
-             
-            }}
-          >
+	          <Box
+	            style={{
+	              display: "flex",
+	              flexDirection: "row",
+	              justifyContent: "center",
+	              alignItems: "center",
+	              gap: "1.75rem",
+	              marginBottom: "3rem",
+	             
+	            }}
+	          >
            {/* <Button
               onClick={() =>{}
                
@@ -697,10 +715,29 @@ function CandidateCard() {
                               }}
               >
                 {/* <AddIcon sx={{ marginRight: '4px' }} /> */}
-                View Interaction
+	                View Interaction
+	              </button>
+
+              <button
+                style={{ 
+                  backgroundColor: "#21C9CF",
+                  color: 'white',
+                  padding: '10px 20px',
+                  borderRadius: '8px',
+                  textTransform: 'none',
+                  width:"max-content",
+                 
+                  
+                  
+                }}
+                onClick={() => {
+                  openBirthdayHolidayInbox(users);
+                }}
+              >
+                Birthday/Holiday
               </button>
-          
-          </Box>
+	          
+	          </Box>
 
           <Divider sx={{ border: "1px dotted grey", mb: 3 }} />
 

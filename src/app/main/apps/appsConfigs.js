@@ -17,6 +17,7 @@ import Error404PageConfig from './urbanhive-errors/404/Error404PageConfig';
 import Error500PageConfig from './urbanhive-errors/500/Error500PageConfig';
 // import InboxAppConfig from './urbanhive-inbox2/InboxAppConfig';
 import InboxAppConfig from './urbanhive-inbox/InboxAppConfig';
+import InboxEventsAppConfig from './urbanhive-inbox-events/InboxEventsAppConfig';
 import ProfileConfig from './urbanhive-profile/ProfileConfig';
 import LoginConfig from './urbanhive-login/LoginConfig';
 import RegisterConfig from './urbanhive-register/RegisterConfig';
@@ -46,6 +47,7 @@ const appsConfigs = [
   RegisterConfig,
   CandidateAppConfig,
   InboxAppConfig,
+  InboxEventsAppConfig,
   ProfileConfig,
   ProfileUpdateConfig,
   DashboardAppConfig,
