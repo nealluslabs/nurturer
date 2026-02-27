@@ -158,7 +158,7 @@ function getLatestPendingEvent(queue, typeOrTypes) {
         return false;
       }
 
-      const status = String(item.messageStatus || 'Pending').trim().toLowerCase();
+      const status = String(item.messageStatus || '').trim().toLowerCase();
       const type = String(item.messageType).trim().toLowerCase();
 
       return status === 'pending' && messageTypes.includes(type);
@@ -203,13 +203,13 @@ function buildContactEvents(contact) {
   );
   const events = [];
 
-  if (birthdayDays !== null) {
+  if (pendingBirthday) {
     events.push({
       id: `${contact.uid}-birthday`,
       type: 'Birthday',
       subject:
         (pendingBirthday && pendingBirthday.subject) || `${contactName}'s birthday celebration`,
-      daysUntil: birthdayDays,
+      daysUntil: birthdayDays !== null ? birthdayDays : getNumericDays(contact && contact.sendDate) || 0,
       sourceMessage: pendingBirthday || null,
       contact,
     });
@@ -228,15 +228,14 @@ function buildContactEvents(contact) {
     });
   }
 
-  if (pendingAnniversary || anniversaryDays !== null) {
+  if (pendingAnniversary) {
     events.push({
       id: `${contact.uid}-anniversary`,
       type: 'Anniversary',
       subject:
         (pendingAnniversary && pendingAnniversary.subject) ||
         `${contactName}'s work anniversary`,
-      daysUntil:
-        anniversaryDays !== null ? anniversaryDays : getNumericDays(contact && contact.sendDate) || 0,
+      daysUntil: anniversaryDays !== null ? anniversaryDays : getNumericDays(contact && contact.sendDate) || 0,
       sourceMessage: pendingAnniversary || null,
       contact,
     });
@@ -332,6 +331,10 @@ function InboxEventsSidebar() {
     });
   }, [searchText, upcomingEvents]);
 
+  useEffect(() => {
+    console.log('INBOX EVENTS SIDEBAR - FILTERED EVENTS:', filteredEvents);
+  }, [filteredEvents]);
+
   function handleSearchText(event) {
     setSearchText(event.target.value);
   }
@@ -354,7 +357,10 @@ function InboxEventsSidebar() {
         return false;
       }
 
-      return allowedTypes.includes(String(item.messageType).trim().toLowerCase());
+      const status = String(item.messageStatus || '').trim().toLowerCase();
+      const type = String(item.messageType).trim().toLowerCase();
+
+      return status === 'pending' && allowedTypes.includes(type);
     });
 
     if (eventData.sourceMessage) {
