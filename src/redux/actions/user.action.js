@@ -368,7 +368,7 @@ export const stopMessageSending = (notifyInvite, selectedChatUser) => async (dis
 
       if (doc.exists) {
 
-        const data = doc.data();
+        const data = doc.data(); 
         const messageQueue = data.messageQueue || [];
 
         // ✅ Update the pending message
