@@ -308,7 +308,7 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                       ) : (
                         <div className="container">
                           <center>
-                            <p className="center">No Touches/Events available yet</p>
+                            <p className="center">No Sent or Cancelled Touches/Events available</p>
                           </center>
                         </div>
                       )
