@@ -28,6 +28,26 @@ credentials: {
   secretAccessKey:process.env.REACT_APP_SECRETACCESSKEY_NURTURER,
 },
 });
+
+const toDateString = (value) => {
+  if (typeof value === "string" && value.trim()) {
+    return value;
+  }
+
+  if (value instanceof Date) {
+    return value.toISOString();
+  }
+
+  if (value && typeof value.toDate === "function") {
+    return value.toDate().toISOString();
+  }
+
+  if (value && typeof value.seconds === "number") {
+    return new Date(value.seconds * 1000).toISOString();
+  }
+
+  return new Date().toISOString();
+};
   
 
 export const fetchAllUsers = (uid) => async (dispatch) => {
@@ -774,11 +794,19 @@ const prompt =
      console.log("OUR RESPONSE FROM OUR BACKEND, WHICH CALLS CHAT GPT, IN THIS CASE OUR PROMPT-->",fullJobDetailsResponse)
 
      if(fullJobDetailsResponse){
-      dispatch(saveChatGptAnswer(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
+      const createdAt = new Date();
+      const generatedMessage = {
+        ...fullJobDetailsResponse,
+        createdAt,
+        messageStatus:"Pending",
+        messageType,
+      };
+      console.log("PENDING MESSAGE THAT WE ARE ABOUT TO DISPATCH TO THE REDUX STORE-->",generatedMessage)
+      dispatch(saveChatGptAnswer(generatedMessage))
 
-      dispatch(saveEditedParagraphs(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending"}))
+      dispatch(saveEditedParagraphs(generatedMessage))
 
-      dispatch(updateUserBroadcast({...fullJobDetailsResponse,createdAt:new Date(),messageStatus:"Pending",messageType},user,selectedChatUser))
+      dispatch(updateUserBroadcast(generatedMessage,user,selectedChatUser))
      }
 
      if(setLoading){setLoading(false)}
@@ -788,11 +816,11 @@ const prompt =
    //subjects are up to date in the touches sidebar (formerly contacts sidebar
     //you can put anything into ai trigger
    
-     dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()}))
+     dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),dateString:toDateString(new Date())}))
      dispatch(fetchAllContactForOneUser())
 
      //I NEED THIS TO TRIGGER THE SUBJECT TO CHANGE ON THE TOUCHES INBOX - SO DONT DELETE
-     dispatch(saveSubjectChangeTriggerAfterEmailIsSent( fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date()} ))
+     dispatch(saveSubjectChangeTriggerAfterEmailIsSent( fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),dateString:toDateString(new Date())} ))
 }
 
 
@@ -820,6 +848,7 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => 
         //console.log("RAW MESSAGE IS -->", updatedParagraphs)
         let updatedMessage =  {...doc.data().message} //- DO YOU REALLY NEED THIS ? SINCE YOU'RE OVERWRITING EVERYTHING? - NOV 6 2025 DAGOGO
 
+       const createdAtValue = updatedParagraphs?.createdAt ?? new Date(); 
         
 
           updatedMessage.firstParagraph = updatedParagraphs && updatedParagraphs.firstParagraph
@@ -827,7 +856,7 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => 
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
           updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
           updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
-          updatedMessage.createdAt =  updatedParagraphs && updatedParagraphs.createdAt
+          updatedMessage.createdAt =  createdAtValue
           updatedMessage.messageStatus =  updatedParagraphs && updatedParagraphs.messageStatus
           updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Email"
 
@@ -887,6 +916,7 @@ export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChat
       if (doc.exists) {
 
       // Build updatedMessage safely
+                 const updatedCreatedAt = updatedParagraphs?.createdAt ?? new Date();
                  let updatedMessage = {
                    firstParagraph: updatedParagraphs?.firstParagraph ?? " ",
                    secondParagraph: updatedParagraphs?.secondParagraph ?? " ",
@@ -894,6 +924,8 @@ export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChat
                    bulletPoints: updatedParagraphs?.bulletPoints ?? [],
                    subject: updatedParagraphs?.subject ?? " ",
                    messageType: updatedParagraphs?.messageType ?? "Email",
+                   createdAt: updatedCreatedAt,
+                   dateString: updatedParagraphs?.dateString ?? toDateString(updatedCreatedAt),
                  };
                  
                  // Get existing data
@@ -1468,4 +1500,3 @@ export const fetchRealTimeConnections2 = (uid) => async (dispatch) => {
         
         //     return unsubscribe;
         //     };
-        

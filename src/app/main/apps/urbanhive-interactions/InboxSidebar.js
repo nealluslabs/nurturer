@@ -61,6 +61,28 @@ function InboxSidebar(props) {
   const { user } = useSelector((state) => state.login);
   const { allUsers, connectedUsers, filteredContacts,aiTrigger, connects, connects2, isLoading,selectedChatUser,subjectChangeTriggerAfterEmailIsSent, candidateInFocus } = useSelector((state) => state.user);
 
+  const formatSentDate = (createdAt) => {
+    if (!createdAt) {
+      return "N/A";
+    }
+
+    let parsedDate;
+
+    if (typeof createdAt?.toDate === "function") {
+      parsedDate = createdAt.toDate();
+    } else if (typeof createdAt?.seconds === "number") {
+      parsedDate = new Date(createdAt.seconds * 1000);
+    } else {
+      parsedDate = new Date(createdAt);
+    }
+
+    if (Number.isNaN(parsedDate.getTime())) {
+      return "N/A";
+    }
+
+    return `${parsedDate.getMonth() + 1}.${parsedDate.getDate()}.${parsedDate.getFullYear()}`;
+  };
+
 
   const container = {
     show: {
@@ -274,9 +296,7 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
 
                               <div className="flex flex-col justify-center items-end">
                                   <Typography className="whitespace-nowrap mb-8 font-medium text-12" color="textSecondary">
-                                    {interaction.createdAt && interaction.createdAt.seconds
-                                    ? new Date(interaction.createdAt.seconds * 1000).toLocaleString()
-                                    : "N/A"}
+                                    {formatSentDate(interaction.createdAt)}
                                   </Typography>
                               </div>
                             </ListItem>
