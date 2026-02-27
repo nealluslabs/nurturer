@@ -541,11 +541,7 @@ if (allContacts.length > 0) {
           const isPendingTouchpoints = item.label === 'Pending Touchpoints';
           const isUpcomingEvents = item.label === 'Upcoming Events';
           const handleClick = () => {
-            if (isTotalContacts) {
-              history.push('/candidates');
-            } else if (isPendingTouchpoints || isUpcomingEvents) {
-              history.push('/apps/inbox');
-            }
+              history.push('/apps/inbox-events');
           };
           const clickable = isTotalContacts || isPendingTouchpoints || isUpcomingEvents;
           return (

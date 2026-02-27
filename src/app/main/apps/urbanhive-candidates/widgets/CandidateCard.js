@@ -718,24 +718,6 @@ function CandidateCard() {
 	                View Interaction
 	              </button>
 
-              <button
-                style={{ 
-                  backgroundColor: "#21C9CF",
-                  color: 'white',
-                  padding: '10px 20px',
-                  borderRadius: '8px',
-                  textTransform: 'none',
-                  width:"max-content",
-                 
-                  
-                  
-                }}
-                onClick={() => {
-                  openBirthdayHolidayInbox(users);
-                }}
-              >
-                Birthday/Holiday
-              </button>
 	          
 	          </Box>
 

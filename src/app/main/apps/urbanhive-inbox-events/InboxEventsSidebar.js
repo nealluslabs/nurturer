@@ -432,7 +432,7 @@ function InboxEventsSidebar() {
                   <Typography className="whitespace-nowrap mb-8 font-medium text-12" color="textSecondary">
                     {formatDaysLabel(eventData.daysUntil)}
                   </Typography>
-                  <Typography className={classes.eventTypeLabel}>{eventData.type}</Typography>
+                  {/* <Typography className={classes.eventTypeLabel}>{eventData.type}</Typography> */}
                 </div>
               </ListItem>
             ))
