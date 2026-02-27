@@ -294,9 +294,12 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                                 secondary={interaction.subject}
                               />
 
-                              <div className="flex flex-col justify-center items-end">
-                                  <Typography className="whitespace-nowrap mb-8 font-medium text-12" color="textSecondary">
+                              <div className="flex items-center justify-end whitespace-nowrap">
+                                  <Typography className="font-medium text-12 mr-14" color="textSecondary">
                                     {formatSentDate(interaction.createdAt)}
+                                  </Typography>
+                                  <Typography className="font-medium text-14" color="textSecondary">
+                                    {interaction.messageStatus || 'N/A'}
                                   </Typography>
                               </div>
                             </ListItem>

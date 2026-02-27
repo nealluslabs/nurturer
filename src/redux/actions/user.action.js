@@ -795,9 +795,10 @@ const prompt =
 
      if(fullJobDetailsResponse){
       const createdAt = new Date();
+      const dateString = toDateString(createdAt)
       const generatedMessage = {
         ...fullJobDetailsResponse,
-        createdAt,
+        dateString,
         messageStatus:"Pending",
         messageType,
       };
@@ -816,11 +817,11 @@ const prompt =
    //subjects are up to date in the touches sidebar (formerly contacts sidebar
     //you can put anything into ai trigger
    
-     dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),dateString:toDateString(new Date())}))
+     dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,dateString:toDateString(new Date())}))
      dispatch(fetchAllContactForOneUser())
 
      //I NEED THIS TO TRIGGER THE SUBJECT TO CHANGE ON THE TOUCHES INBOX - SO DONT DELETE
-     dispatch(saveSubjectChangeTriggerAfterEmailIsSent( fullJobDetailsResponse && {...fullJobDetailsResponse,createdAt:new Date(),dateString:toDateString(new Date())} ))
+     dispatch(saveSubjectChangeTriggerAfterEmailIsSent( fullJobDetailsResponse && {...fullJobDetailsResponse,dateString:toDateString(new Date())} ))
 }
 
 
@@ -850,13 +851,14 @@ export const updateUserBroadcast = (updatedParagraphs,user,selectedChatUser) => 
 
        const createdAtValue = updatedParagraphs?.createdAt ?? new Date(); 
         
+       const dateStringValue = toDateString(createdAtValue)
 
           updatedMessage.firstParagraph = updatedParagraphs && updatedParagraphs.firstParagraph
          updatedMessage.secondParagraph = updatedParagraphs &&  updatedParagraphs.secondParagraph
           updatedMessage.thirdParagraph =  updatedParagraphs && updatedParagraphs.thirdParagraph
           updatedMessage.bulletPoints =  updatedParagraphs && updatedParagraphs.bulletPoints
           updatedMessage.subject =  updatedParagraphs && updatedParagraphs.subject
-          updatedMessage.createdAt =  createdAtValue
+          updatedMessage.createdAt =  dateStringValue
           updatedMessage.messageStatus =  updatedParagraphs && updatedParagraphs.messageStatus
           updatedMessage.messageType =  updatedParagraphs && updatedParagraphs.messageType?updatedParagraphs.messageType:"Email"
 
@@ -924,7 +926,7 @@ export const updateUserBroadcastWithNotif = (updatedParagraphs,user,selectedChat
                    bulletPoints: updatedParagraphs?.bulletPoints ?? [],
                    subject: updatedParagraphs?.subject ?? " ",
                    messageType: updatedParagraphs?.messageType ?? "Email",
-                   createdAt: updatedCreatedAt,
+                  //  createdAt: updatedCreatedAt,
                    dateString: updatedParagraphs?.dateString ?? toDateString(updatedCreatedAt),
                  };
                  
