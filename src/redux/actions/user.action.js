@@ -357,43 +357,50 @@ export const deleteCandidate = (contactId, notifyInvite, notifyError) => async (
 
 
 
-export const stopMessageSending = (notifyInvite,selectedChatUser) => async (dispatch) => {
-  if(window.confirm('Are you sure you want to turn off message sending for this user?')){
-       
+export const stopMessageSending = (notifyInvite, selectedChatUser) => async (dispatch) => {
+  if (window.confirm('Are you sure you want to cancel the sending of this message?')) {
 
-    const contactDoc = db.collection('contacts').doc(selectedChatUser && selectedChatUser.uid)
+    const contactDoc = db.collection('contacts').doc(
+      selectedChatUser && selectedChatUser.uid
+    );
 
-     contactDoc.get().then(async(doc)=>{ 
+    contactDoc.get().then(async (doc) => {
 
       if (doc.exists) {
 
-        //console.log("RAW MESSAGE IS -->", updatedParagraphs)
-        let updatedMessage =  {...doc.data().message}
+        const data = doc.data();
+        const messageQueue = data.messageQueue || [];
 
-
-         //console.log("UPDATED UPDATED MESSAGE IS -->", updatedMessage)
-
-         contactDoc.update({
-          frequency:"None",
-          sendDate:doc.data().frequencyInDays && doc.data().frequencyInDays.toString()
-        }).then(() => contactDoc.get())
-        .then((doc) => {
-          if (doc.exists) {
-            notifyInvite(`Message sending has been paused for${selectedChatUser.name}!`)
+        // ✅ Update the pending message
+        const updatedQueue = messageQueue.map((message) => {
+          if (message.messageStatus === "Pending") {
+            return {
+              ...message,
+              messageStatus: "Cancelled",
+              cancelledAt: new Date().toISOString(),
+            };
           }
-        })
+          return message;
+        });
 
-        
+        await contactDoc.update({
+          messageQueue: updatedQueue,
+          sendDate: data.frequencyInDays
+            ? data.frequencyInDays.toString()
+            : null,
+        });
 
+        const updatedDoc = await contactDoc.get();
 
-         
+        if (updatedDoc.exists) {
+          notifyInvite(`Message sending has been cancelled and will not be sent out`);
+        }
       }
-     
-    }) 
 
+    });
 
   }
-}
+};
 
 export const sendEmailToContact = (data,notifyInvite,notifySkip,user,cardType) => async (dispatch) => {
   console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA, WHAT IS CARD TYPE?",user,cardType)
@@ -530,7 +537,8 @@ switch (cardType) {
       // Update the messageStatus
       updatedMessageQueue[msgIndex] = {
         ...updatedMessageQueue[msgIndex],
-        messageStatus: "Sent"
+        messageStatus: "Sent",
+        sentAt: new Date().toISOString(),
         
       };
 
