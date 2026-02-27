@@ -543,8 +543,11 @@ if (allContacts.length > 0) {
           const handleClick = () => {
             if (isTotalContacts) {
               history.push('/candidates');
-            } else if (isPendingTouchpoints || isUpcomingEvents) {
+            } else if (isPendingTouchpoints ) {
               history.push('/apps/inbox');
+            }
+            else if(isUpcomingEvents){
+              history.push('/apps/inbox-events');
             }
           };
           const clickable = isTotalContacts || isPendingTouchpoints || isUpcomingEvents;
