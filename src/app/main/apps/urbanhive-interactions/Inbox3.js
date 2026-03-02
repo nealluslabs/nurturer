@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Box, Typography, Paper, Divider, Chip } from "@mui/material";
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal } from "@material-ui/core";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import clsx from 'clsx';
 
 
@@ -101,13 +101,21 @@ function Inbox3(props) {
   );
 
   const { isAuth, user } = useSelector((state) => state.login);
-
-
-  
+  const selectedChatUser = candidateInFocus || {};
 
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
   const [open3, setOpen3] = useState(false);
+
+  const [holidayMessage1, setHolidayMessage1] = useState(true);
+  const [holidayMessage2, setHolidayMessage2] = useState(false);
+  const [birthdayMessage1, setBirthdayMessage1] = useState(true);
+  const [birthdayMessage2, setBirthdayMessage2] = useState(false);
+
+  const [defaultCards, setDefaultCards] = useState(user && user.cards ? user.cards : {});
+  const [paragraphs, setParagraphs] = useState(selectedInteraction || {});
+
+  const editableRef = useRef(null);
 
   const handleOpen = () => setOpen(true);
   const handleOpen2 = () => setOpen2(true);
@@ -117,16 +125,70 @@ function Inbox3(props) {
   const handleClose2 = () => setOpen2(false);
   const handleClose3 = () => setOpen3(false);
 
+  const chatMessages = selectedInteraction ? [selectedInteraction] : [];
+  const chatMessagesOutput = chatMessages;
+  const contacts = [];
+  let connectStatus;
 
+  let onlyPendingMessages = selectedInteraction ? [selectedInteraction] : [];
 
-if (!selectedInteraction) {
+  useEffect(() => {
+    setParagraphs(selectedInteraction || {});
+  }, [selectedInteraction]);
+
+  useEffect(() => {
+    setDefaultCards(user && user.cards ? user.cards : {});
+  }, [user]);
+
+  const handleSave = () => {
+    if (!editableRef.current) {
+      return;
+    }
+  };
+
+  const handleInput = () => {
+    if (!editableRef.current) {
+      return;
+    }
+
+    const paraData = {
+      firstParagraph: editableRef.current.querySelector(".firstParagraph")?.innerText || "",
+      secondParagraph: editableRef.current.querySelector(".secondParagraph")?.innerText || "",
+      thirdParagraph: editableRef.current.querySelector(".thirdParagraph")?.innerText || "",
+    };
+
+    setParagraphs((prev) => ({ ...prev, ...paraData }));
+  };
+
+  function shouldShowContactAvatar(item, i) {
+    if (!selectedChatUser || !selectedChatUser.uid) {
+      return false;
+    }
+
+    return (
+      item.user1 === selectedChatUser.uid
+      && ((chatMessages[i + 1] && chatMessages[i + 1].user1 !== selectedChatUser.uid) || !chatMessages[i + 1])
+    );
+  }
+
+  function isFirstMessageOfGroup(item, i) {
+    return i === 0 || (chatMessages[i - 1] && chatMessages[i - 1].user1 !== item.user1);
+  }
+
+  function isLastMessageOfGroup(item, i) {
+    return (
+      i === chatMessages.length - 1 || (chatMessages[i + 1] && chatMessages[i + 1].user1 !== item.user1)
+    );
+  }
+
+  if (!selectedInteraction) {
     return (
       <Box
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          height: "100%", // Ensures it takes full parent height
+          height: "100%",
           width: "100%",
           p: 4,
         }}
@@ -139,22 +201,17 @@ if (!selectedInteraction) {
   }
 
   return (
- <Box 
-      sx={{ 
-        height: "100%", 
-        width: "100%", 
-        display: "flex",        
-        alignItems: "left", 
-        // justifyContent: "center", 
-        overflowY: "auto", 
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+        alignItems: "left",
+        overflowY: "auto",
         p: 2
       }}
     >
-     
-
-
-
-<div /*onClick={handleSave}*/ className="
+      <div onClick={handleSave} className="
   flex flex-col 
   pt-16 px-16 
   pb-40 
@@ -165,99 +222,415 @@ if (!selectedInteraction) {
   sm:pl-56 sm:ml-0    
   sm:pr-56            
 " >
-
-
-       {<Paper
-        elevation={0}
-        sx={{ 
-          p: 3, 
-          border: "1px solid #e0e0e0", 
-          borderRadius: 8, 
-          backgroundColor: "#ffffff", 
-          width: "70%",
-          maxWidth: "850px",   
-          boxShadow: '0 4px 12px rgba(0,0,0,0.05)',
-          height: "fit-content",
-         
-          // margin: "auto"     
-          marginLeft: 6
-        }}
-      >
-        <Box
-          sx={{
-            "& .MuiTypography-root": {
-              //fontSize: "1.4rem",
-              lineHeight: 1,
-              color: "#374151",
-            },
-            "& a": {
-              wordBreak: "break-word",
-              overflowWrap: "anywhere",
-            },
-            wordBreak: "break-word",
-            overflowWrap: "anywhere",
-          }}
-        >
-          {selectedInteraction.subject && (
-            <Typography
-              variant="h2"
-              sx={{ fontWeight: 700, mb: 3, color: "#111827",fontSize: "1.6rem", }}
+        {chatMessagesOutput && chatMessagesOutput.map((item, i) => {
+          connectStatus = item.status;
+          const contact =
+            item.user1 === user.uid ? user : contacts.find((_contact) => _contact.user1 === item.user1);
+          return (
+            <div
+              key={item.time || item.id || i}
+              className={clsx(
+                classes.messageRow,
+                'flex flex-col flex-grow-0 flex-shrink-0 items-start justify-end relative px-16 pb-4',
+                { me: item.user1 === user.uid },
+                { contact: item.user1 !== user.uid },
+                { 'first-of-group': isFirstMessageOfGroup(item, i) },
+                { 'last-of-group': isLastMessageOfGroup(item, i) },
+                i + 1 === chatMessages && chatMessages.length && 'pb-96'
+              )}
             >
-              {selectedInteraction.subject}
-            </Typography>
-          )}
+              {shouldShowContactAvatar(item, i) && (
+                <Avatar
+                  className="avatar absolute ltr:left-0 rtl:right-0 m-0 -mx-32"
+                  src={selectedChatUser.photoUrl}
+                />
+              )}
+              <div className="bubble flex relative items-center justify-center p-12 max-w-full shadow">
+                <div className="leading-tight whitespace-pre-wrap" style={{width:"50rem"}}>
+                  <div
+                    ref={editableRef}
+                    contentEditable={true}
+                    suppressContentEditableWarning={true}
+                    onBlur={handleInput}
+                  >
 
-          <Typography   sx={{ color: "#374151",fontSize: "1.4rem" }}>
-            Hello {candidateInFocus?.name || "User"},
-          </Typography>
+                    <Modal open={open} onClose={handleClose}>
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          outline: 'none',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: '45%',
+                              height: '45%',
+                              background: 'white',
+                              borderRadius: '4px',
+                              marginTop: '18px',
+                              padding: '42px 12px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <img src={birthday1} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                          </div>
+                        </div>
+                      </Box>
+                    </Modal>
 
-          <br /><br />
+                    <Modal open={open2} onClose={handleClose2}>
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          outline: 'none',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: '45%',
+                              height: '45%',
+                              background: 'white',
+                              borderRadius: '4px',
+                              marginTop: '18px',
+                              padding: '42px 12px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <img src={birthday2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                          </div>
+                        </div>
+                      </Box>
+                    </Modal>
 
-          {selectedInteraction.firstParagraph && (
-            <span style={{fontSize: "1.4rem" }}>{selectedInteraction.firstParagraph}</span>
-          )}
+                    <Modal open={open3} onClose={handleClose3}>
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          top: '50%',
+                          left: '50%',
+                          transform: 'translate(-50%, -50%)',
+                          outline: 'none',
+                        }}
+                      >
+                        <div
+                          style={{
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                          }}
+                        >
+                          <div
+                            style={{
+                              width: '45%',
+                              height: '45%',
+                              background: 'white',
+                              borderRadius: '4px',
+                              marginTop: '18px',
+                              padding: '42px 12px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <img src={holiday1} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                          </div>
+                        </div>
+                      </Box>
+                    </Modal>
 
-          <br />
-          <br />
-         
+                    {
+                      <span>
+                        Hello, {selectedChatUser && selectedChatUser.name ? selectedChatUser.name:selectedChatUser && selectedChatUser.firstName}
+                      </span>
+                    }
 
-          {selectedInteraction.secondParagraph && (
-            <span style={{fontSize: "1.4rem" }}>{selectedInteraction.secondParagraph}
-             <br />
-             <br />
-            </span>
-          )}
+                    <br /><br /><br /><br />
 
-          {selectedInteraction.bulletPoints &&
-            selectedInteraction.bulletPoints.map((bp, i) => (
-              <Box key={bp.id || i}>
-                <br />
-                •{" "}
-                <strong style={{ color: "#111827" }}>
-                  {bp.bulletPointBold}
-                </strong>
-                <br />
-                <span>– {bp.bulletPointRest}</span>
-                <br />
-              </Box>
-            ))}
-               <br />
-              <br />
-          {selectedInteraction.thirdParagraph && (
-            <span style={{ fontSize: "1.4rem" }}>
-              {selectedInteraction.thirdParagraph}
-              <br />
-              <br />
-              <br />
-              <br />
-            </span>
+                    {onlyPendingMessages && onlyPendingMessages.length > 0 &&
+                      <span className="firstParagraph" sx={{color:"black"}}>
+                        {paragraphs && paragraphs.firstParagraph}
+                      </span>
+                    }
+                    <br /><br /><br /><br />
 
-            
-          )}
-        </Box>
-      </Paper>}
-         
-          </div>
+                    {onlyPendingMessages && onlyPendingMessages.length > 0 &&
+                      <span className="secondParagraph">
+                        {paragraphs && paragraphs.secondParagraph}
+
+                        { paragraphs && paragraphs.messageType && (paragraphs.messageType === "Holiday"  ) &&
+                          <>
+                            {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={ defaultCards && defaultCards.thanksgivingCard} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+
+                            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={ defaultCards && defaultCards.thanksgivingCard2} alt="Holiday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+                          </>
+                        }
+
+                        { paragraphs && paragraphs.messageType && (paragraphs.messageType === "ThankYou"  ) &&
+                          <>
+                            {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={defaultCards && defaultCards.thankYouCard} alt="Thank you Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+
+                            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={defaultCards && defaultCards.thankYouCard2} alt="Thank You Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+                          </>
+                        }
+
+                        { paragraphs && paragraphs.messageType && (paragraphs.messageType === "workAnniversay" ) &&
+                          <>
+                            {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={defaultCards && defaultCards.workAnniversaryCard} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+
+                            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={defaultCards && defaultCards.workAnniversaryCard2} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+                          </>
+                        }
+
+                        { paragraphs && paragraphs.messageType && (paragraphs.messageType === "workAnniversary"  ) &&
+                          <>
+                            {holidayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={defaultCards && defaultCards.workAnniversaryCard} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+
+                            { holidayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                              <div
+                                style={{
+                                  width: '45%',
+                                  height: '45%',
+                                  background: 'white',
+                                  borderRadius: '4px',
+                                  marginTop: '18px',
+                                  padding: '42px 12px',
+                                  display: 'flex',
+                                  justifyContent: 'center',
+                                  alignItems: 'center',
+                                }}
+                              >
+                                <img src={defaultCards && defaultCards.workAnniversaryCard2} alt="Work Anniversary Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                              </div>
+                            }
+                          </>
+                        }
+                      </span>
+                    }
+
+                    {onlyPendingMessages && onlyPendingMessages.length > 0 &&
+                      <>
+                        <><br /></>
+                        {paragraphs && !(paragraphs.messageType === 'Holiday') && !(paragraphs.messageType === 'Birthday') && !(paragraphs.messageType === 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>(
+                          <div key={point.id || index}>
+                            <br />
+                            • <b>{point.bulletPointBold}</b>
+                            <br />
+                            <span>
+                              – {point.bulletPointRest}{" "}
+                            </span>
+                            {!(selectedChatUser.name === 'Emily Whiter' || selectedChatUser.name === 'Bob Johnsons') &&<><br /><br /></>}
+                          </div>
+                        ))}
+                      </>
+                    }
+
+                    {onlyPendingMessages && onlyPendingMessages.length > 0 &&
+                      <span className="thirdParagraph">
+                        {paragraphs && paragraphs.thirdParagraph}
+                      </span>
+                    }
+
+                    <br /><br /><br /><br />
+
+                    {
+                      <>
+                        <span>
+                          Regards,
+                        </span>
+
+                        <br /><br />
+
+                        <span>
+                          {user && user.firstName && user.lastName? user.firstName + " " + user.lastName:user && user.name && user.name !== "test user"?user.name :"Tim"}
+                        </span>
+                      </>
+                    }
+
+                    { paragraphs && paragraphs.messageType && (paragraphs.messageType === "Birthday"  ) &&
+                      <>
+                        {birthdayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                          <div
+                            style={{
+                              width: '45%',
+                              height: '45%',
+                              background: 'white',
+                              borderRadius: '4px',
+                              marginTop: '18px',
+                              padding: '42px 12px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <img src={defaultCards && defaultCards.birthdayCard} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                          </div>
+                        }
+
+                        { birthdayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+                          <div
+                            style={{
+                              width: '45%',
+                              height: '45%',
+                              background: 'white',
+                              borderRadius: '4px',
+                              marginTop: '18px',
+                              padding: '42px 12px',
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
+                          >
+                            <img src={defaultCards && defaultCards.birthdayCard2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+                          </div>
+                        }
+                      </>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </Box>
   );
 }
