@@ -763,54 +763,6 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
 
 
 
-{ paragraphs && paragraphs.messageType && (paragraphs.messageType === "Birthday"  ) &&
-         <>
-         {/*BIRTHDAY MESSAGE */}
-         {/*DEFAULT 1ST*/}
-
-        {birthdayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
-         <div
-              style={{
-                width: '45%',
-                height: '45%',
-                background: 'white',
-                borderRadius: '4px',
-                marginTop: '18px',
-                padding: '42px 12px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <img src={defaultCards && defaultCards.birthdayCard} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
-            </div>
-        }
-
-             {/*NON-DEFAULT 2ND*/}
-           { birthdayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
-            <div
-              style={{
-                width: '45%',
-                height: '45%',
-                background: 'white',
-                borderRadius: '4px',
-                marginTop: '18px',
-                padding: '42px 12px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <img src={defaultCards && defaultCards.birthdayCard2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
-            </div>
-        }
-
-         </>
-          }
-
-
-
-
     { paragraphs && paragraphs.messageType && (paragraphs.messageType === "ThankYou"  ) &&
          <>
          {/*THANK YOU MESSAGE */}
@@ -1013,6 +965,51 @@ console.log("WE SET PARAGRAPHS TO ---->",editedParagraphs)
         </>
 
             }
+
+            { paragraphs && paragraphs.messageType && (paragraphs.messageType === "Birthday"  ) &&
+         <>
+         {/*BIRTHDAY MESSAGE */}
+         {/*DEFAULT 1ST*/}
+
+        {birthdayMessage1 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+         <div
+              style={{
+                width: '45%',
+                height: '45%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.birthdayCard} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+             {/*NON-DEFAULT 2ND*/}
+           { birthdayMessage2 && (paragraphs.firstParagraph||paragraphs.secondParagraph||paragraphs.thirdParagraph) &&
+            <div
+              style={{
+                width: '45%',
+                height: '45%',
+                background: 'white',
+                borderRadius: '4px',
+                marginTop: '18px',
+                padding: '42px 12px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <img src={defaultCards && defaultCards.birthdayCard2} alt="Birthday Card" style={{ maxWidth: '100%', maxHeight: '100%' }} />
+            </div>
+        }
+
+         </>
+          }
 
 
       </div>
