@@ -76,7 +76,7 @@ let onlyEventsMessagesData = [];
 //console.log("WHAT IS ALL CONTACTS DATA,ON DASHBOARD THAT IS-->",allContacts)
 if (allContacts.length > 0) {
   let allMessages = [];
-  allContacts.forEach(contact => {
+  allContacts.filter((contact)=>(contact.frequency !=="None")).forEach(contact => {
     if (Array.isArray(contact.messageQueue)) {
       allMessages = allMessages.concat(
         contact.messageQueue.map(msg => ({
@@ -147,7 +147,7 @@ onlyEventsMessagesData = allMessages.filter((item)=>((item.messageType === 'Even
 
 let recentContacts = [];
 if (allContacts.length > 0) {
-  recentContacts = [...allContacts]
+  recentContacts = [...allContacts.filter((contact)=>(contact.frequency !== "None"))]
     .sort((a, b) => {
       if (a.createdAt && b.createdAt) {
         return b.createdAt - a.createdAt;
