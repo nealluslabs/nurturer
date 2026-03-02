@@ -524,11 +524,12 @@ function CandidateApp(props) {
                     
                   }}>
                   <div 
-                    key={item.id} 
+                    key={item.id}
                     style={{ 
-                      display: "flex", 
-                      alignItems: "center", 
-                      justifyContent: "space-between", 
+                      display: "grid",
+                      gridTemplateColumns: "minmax(0, 1fr) auto",
+                      alignItems: "center",
+                      columnGap: "8px",
 
                       //marginBottom: "8px" ,
                      
@@ -542,18 +543,19 @@ function CandidateApp(props) {
                      
                     }}
                   >
-                    <div style={{ display: "flex", alignItems: "center" }}>
+                    <div style={{ display: "flex", alignItems: "center", minWidth: 0 }}>
                       <MailIcon 
                         sx={{ 
                           width: 16, 
                           height: 16, 
                           marginRight: "6px", 
-                          color: '#1976d2' 
+                          color: '#1976d2',
+                          flexShrink: 0,
                         }} 
                       />
-                      <div>
-                        <p style={{ fontSize: "11px", fontWeight: "bold" }}>{item.subject && item.subject}</p>
-                        <p style={{ fontSize: "12px" }}>{" "}</p>
+                      <div style={{ minWidth: 0 }}>
+                        <p style={{ fontSize: "11px", fontWeight: "bold", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", margin: 0, }}>{item.subject && item.subject}</p>
+                        <p style={{ fontSize: "12px", margin: 0 }}>{" "}</p>
                       </div>
                     </div>
                     <p 
@@ -561,7 +563,10 @@ function CandidateApp(props) {
                         padding: "4px 12px", 
                         background: 'yellow', 
                         color: item.statusColor, 
-                        borderRadius: "4px" 
+                        borderRadius: "4px",
+                        flexShrink: 0,
+                        whiteSpace: "nowrap",
+                        margin: 0,
                       }}
                     >
                       {item.messageStatus?item.messageStatus:"Pending"}
