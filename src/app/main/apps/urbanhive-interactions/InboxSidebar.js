@@ -296,7 +296,10 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
 
                               <div className="flex items-center justify-end whitespace-nowrap">
                                   <Typography className="font-medium text-12 mr-14" color="textSecondary">
-                                    {formatSentDate(interaction.createdAt)}
+                                    {//logic for date used -start
+                                    formatSentDate(interaction.messageStatus === "Pending" ? interaction.createdAt:interaction.messageStatus === "Cancelled"? interaction.cancelledAt:interaction.messageStatus === "Sent"? interaction.sentAt:interaction.createdAt )
+                                    //logic for date used -end
+                                    }
                                   </Typography>
                                   <Typography className="font-medium text-14" color="textSecondary">
                                     {interaction.messageStatus || 'N/A'}
