@@ -141,7 +141,7 @@ onlyEventsMessagesData = allMessages.filter((item)=>((item.messageType === 'Even
     iconColor: '#1976d2',
     uid:msg.uid
   }));
-}
+} 
 
 
 
