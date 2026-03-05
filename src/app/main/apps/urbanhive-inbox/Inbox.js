@@ -1205,7 +1205,7 @@ label={<Typography fontSize="14px">
             */}
 
 
-{/*             
+          
            { 
              
              <IoIosSend  onClick={()=>{
@@ -1218,12 +1218,12 @@ label={<Typography fontSize="14px">
               }
               else{
                   //notifyInviteCustom("Email has been sent out!")
-                dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom,user,cardType))
+                dispatch(sendEmailToContact(selectedChatUser,notifyInviteCustom,notifySkipCustom,user,cardType,paragraphs && paragraphs.bulletPoints))
               }
             }} 
               
               style={{position:"absolute",top:"2rem",right:"8rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
-             } */}
+             } 
            
 
             
@@ -1248,13 +1248,13 @@ label={<Typography fontSize="14px">
             
           //   style={{position:"absolute",top:"2rem",right:"20rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} /> */}
 
-          {/* <RiAiGenerate2 
+          { <RiAiGenerate2 
             onClick={(e) => {setShowAiMenu(true)
                console.log('ai button clicked============>>>>>>>>>>');
               e.stopPropagation();
             }} 
             style={{ position: "absolute", top: "2rem", right: "20rem", fontSize: "2.4rem", color: "grey", cursor: "pointer" }} 
-          /> */}
+          /> }
 
           {showAiMenu && (
             <div 
@@ -1308,21 +1308,21 @@ label={<Typography fontSize="14px">
      
 
 
-            {/* {
+            {
            
            <FaRegEdit onClick={(ev)=>{sendUpdate(ev) }}
            
             
             style={{position:"absolute",top:"1.9rem",right:"16rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
-           } */}
+           } 
 
 
-          {/* {
+           {
            
            <FaStopCircle onClick={()=>{ dispatch(stopMessageSending(notifyInviteCustom,selectedChatUser))}}
             
             style={{position:"absolute",top:"1.9rem",right:"12rem",fontSize:"2.4rem",color:"grey",cursor:"pointer"}} />
-           } */}
+           } 
 
 
 

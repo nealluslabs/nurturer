@@ -549,7 +549,7 @@ function Inbox3(props) {
                     {onlyPendingMessages && onlyPendingMessages.length > 0 &&
                       <>
                         <><br /></>
-                        {paragraphs && !(paragraphs.messageType === 'Holiday') && !(paragraphs.messageType === 'Birthday') && !(paragraphs.messageType === 'Event') && paragraphs.bulletPoints && paragraphs.bulletPoints.map((point,index)=>(
+                        {paragraphs && !(paragraphs.messageType === 'Holiday') && !(paragraphs.messageType === 'Birthday') && !(paragraphs.messageType === 'Event') && paragraphs.sentBulletPoints && paragraphs.sentBulletPoints.map((point,index)=>(
                           <div key={point.id || index}>
                             <br />
                             • <b>{point.bulletPointBold}</b>

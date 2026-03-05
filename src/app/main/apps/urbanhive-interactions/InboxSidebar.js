@@ -294,14 +294,23 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                                 secondary={interaction.subject}
                               />
 
-                              <div className="flex items-center justify-end whitespace-nowrap">
-                                  <Typography className="font-medium text-12 mr-14" color="textSecondary">
+                              <div className="flex items-center " style={{justifyContent:"space-between",minWidth:"15rem"}}>
+                                  <Typography className="font-medium text-14 mr-14" color="textSecondary">
                                     {//logic for date used -start
-                                    formatSentDate(interaction.messageStatus === "Pending" ? interaction.createdAt:interaction.messageStatus === "Cancelled"? interaction.cancelledAt:interaction.messageStatus === "Sent"? interaction.sentAt:interaction.createdAt )
+                                    formatSentDate(interaction.messageStatus === "Pending" ?
+                                     interaction.createdAt:interaction.messageStatus === "Cancelled"? 
+                                     interaction.cancelledAt:interaction.messageStatus === "Sent"? interaction.sentAt:interaction.createdAt 
+                                    )
                                     //logic for date used -end
                                     }
                                   </Typography>
-                                  <Typography className="font-medium text-14" color="textSecondary">
+                                  <Typography   style={{
+                                         padding: "4px 12px",
+                                         background: "yellow",
+                                         color: "black",
+                                         borderRadius: "4px"
+                                       }}
+                                   className="font-medium text-14" color="textSecondary">
                                     {interaction.messageStatus || 'N/A'}
                                   </Typography>
                               </div>

@@ -402,7 +402,7 @@ export const stopMessageSending = (notifyInvite, selectedChatUser) => async (dis
   }
 };
 
-export const sendEmailToContact = (data,notifyInvite,notifySkip,user,cardType) => async (dispatch) => {
+export const sendEmailToContact = (data,notifyInvite,notifySkip,user,cardType,bulletPointChoice) => async (dispatch) => {
   console.log("WE ARE IN THE SEND EMAIL TO CONTACT BLOCK, WHAT IS DATA, WHAT IS CARD TYPE?",user,cardType)
    
   let cardImage = "";
@@ -440,8 +440,8 @@ switch (cardType) {
       <ul>
       ${
         (latest.messageType !== "Holiday" && latest.messageType !== "Birthday") &&
-        latest?.bulletPoints
-          ? latest.bulletPoints
+        bulletPointChoice
+          ? bulletPointChoice
               .slice(0, 2)
               .map(
                 (bp) => `
@@ -538,6 +538,7 @@ switch (cardType) {
       updatedMessageQueue[msgIndex] = {
         ...updatedMessageQueue[msgIndex],
         messageStatus: "Sent",
+        sentBulletPoints:bulletPointChoice,
         sentAt: new Date().toISOString(),
         
       };
