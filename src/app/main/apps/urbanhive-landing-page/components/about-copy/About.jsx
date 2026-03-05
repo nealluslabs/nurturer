@@ -1,6 +1,7 @@
 import React from 'react'
 import './about.css'
 import mobileAndWeb from 'src/images/3(1).png'
+import everyTouchpointIsPersonal from 'src/images/EveryTouchpointIsPersonal.png'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 //import { useNavigate } from 'react-router-dom'
 
@@ -25,7 +26,7 @@ const DummyAbout = () => {
     {<div className='aboutCTA1'>
     
  
-    <img  className='CTAboximg1' src={mobileAndWeb} alt="search image"/>
+    <img  className='CTAboximg1' src={everyTouchpointIsPersonal} alt="search image"/>
     
        
         

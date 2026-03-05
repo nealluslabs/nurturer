@@ -40,12 +40,11 @@
      z-index: 100;
  }
 
- .CTAboximg2{
+.CTAboximg2{
  border-radius: 5%;
- width:450px;
-  height:250px;
- aspect-ratio: 1 /1;
- }
+ width:550px;
+ height:450px;
+}
  
  .btn-place{
      position: relative;

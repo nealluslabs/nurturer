@@ -2,6 +2,7 @@ import React from 'react'
 import './about3.css'
 //import mobileAndWeb from 'src/assets/images/mobile&web.png'
 import officeresearch from 'src/images/5(2).png'
+import strikeWhentheTimingsRight from 'src/images/StrikeWhentheTimingsRight.png'
 import {AiOutlineArrowRight} from 'react-icons/ai'
 //import { useNavigate } from 'react-router-dom'
 
@@ -26,7 +27,7 @@ const DummyAbout3 = () => {
     {<div className='aboutCTA1'>
     
  
-    <img  className='CTAboximg1' src={officeresearch} alt="search image"/>
+    <img  className='CTAboximg1' src={strikeWhentheTimingsRight} alt="search image"/>
     
        
         
