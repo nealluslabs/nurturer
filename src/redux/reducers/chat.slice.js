@@ -20,6 +20,7 @@ const initialState = {
   isLoading: false,
   chatStarted: true,
   selectedChatUser: null,
+  messageInFocus:[],
   message: '',
   error: '',
 };
@@ -47,6 +48,9 @@ const chatSlice = createSlice({
        state.selectedChatUser = null;
        state.selectedChatUser = action.payload;
     },
+    setMessageInFocus: (state, action) => {
+      state.messageInFocus = action.payload;
+   },
     clearChat: (state) => {
       return {
         ...initialState,
@@ -65,6 +69,7 @@ export const {
  fetchChatsSuccess,
  fetchChatsFailed,
  setCurrentChat,
+ setMessageInFocus,
  clearCurrentChat,
  clearChat,
 } = actions;

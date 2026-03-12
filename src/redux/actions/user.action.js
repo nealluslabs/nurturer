@@ -462,7 +462,7 @@ switch (cardType) {
      
       <br/><br/>
       <p>Warm Regards,</p>
-      <p>– ${user.name && user.name}</p>
+      <p> ${user.name && user.name}</p>
 
 
 
@@ -488,11 +488,11 @@ switch (cardType) {
 
     <br/><br/>
     
-    <p style="text-align:center; font-size:12px; color:#888; margin:20px 0;">
+    <p style="text-align:center; font-size:16px; color:#888; margin:20px 0;">
         <a 
           href="https://nurturer.ai" 
           target="_blank"
-          style="color:#888; text-decoration:none;"
+          style="color:black; text-decoration:none;"
         >
           Powered by Nurturer
         </a>

@@ -31,7 +31,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FuseLoading from '@fuse/core/FuseLoading';
 import { deleteCandidate } from 'redux/actions/user.action';
 import { MdEvent, MdBolt, MdTouchApp } from "react-icons/md";
-import { setCurrentChat } from 'redux/reducers/chat.slice';
+import { setCurrentChat,setMessageInFocus } from 'redux/reducers/chat.slice';
 
 
 
@@ -520,9 +520,30 @@ function CandidateApp(props) {
                     justifyContent: "space-between", 
                     flexDirection:"column",
                     position:"relative",
-                      top:"-3.5rem"
+                      top:"-3.5rem",
+                      cursor:"pointer"
                     
-                  }}>
+                  }}
+                  
+                  onClick= {()=>{
+                    dispatch(
+                      
+                      setMessageInFocus(
+                        [{
+                      ...candidateInFocus,
+                      messageQueue:[
+                        {...item}
+                      ]
+                    }] 
+                    
+                    ));
+                    setTimeout(()=>{ 
+                    // history.push('/apps/inbox')
+                    history.push('/message-view')
+                  },300)
+                }
+                  }
+                  >
                   <div 
                     key={item.id}
                     style={{ 

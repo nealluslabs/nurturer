@@ -60,6 +60,10 @@ function InboxSidebar(props) {
   const [userUid, setUserUid] = useState(null);
   const { user } = useSelector((state) => state.login);
   const { allUsers, connectedUsers, filteredContacts,aiTrigger, connects, connects2, isLoading,selectedChatUser,subjectChangeTriggerAfterEmailIsSent, candidateInFocus } = useSelector((state) => state.user);
+  const {messageInFocus} = useSelector((state) => state.chat);
+
+
+
 
   const formatSentDate = (createdAt) => {
     if (!createdAt) {
@@ -77,7 +81,7 @@ function InboxSidebar(props) {
     }
 
     if (Number.isNaN(parsedDate.getTime())) {
-      return "2.27.2026";
+      return " ";
     }
 
     return `${parsedDate.getMonth() + 1}.${parsedDate.getDate()}.${parsedDate.getFullYear()}`;
@@ -160,7 +164,7 @@ console.log("DATA ON INBOX SIDEBAR--->",data)
   const interactions = data.filter(
     (item) => item.messageStatus === "Sent" || item.messageStatus === "Cancelled" || item.messageStatus === "Canceled"
   );
-console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
+//console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
 
   const connectsById = Object.fromEntries(
     connects2.map(({ user1, type, status, invited_amt, skipped_amt }) => [user1, { type, status, invited_amt, skipped_amt }])
@@ -169,7 +173,7 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
 
 
         // Use filteredContacts from Firebase instead of connectedUsers
-    let connectedUsersOutput = filteredContacts && filteredContacts/*.filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) )*/.filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).filter((item) => (item.uid !== user.uid))
+    let connectedUsersOutput = messageInFocus && messageInFocus/*.filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).filter((item) => (item.uid !== user.uid))
     .sort((a, b) => {
       const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
       const bDate = b.sendDate === "None" ? Infinity : Number(b.sendDate) || 1000;
@@ -183,15 +187,15 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
         companyName, jobTitle, interests, frequency,frequencyInDays,
         daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
       ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-    }));
+    }));*/
 
-  const [connUsers,setConnUsers] = useState([...connectedUsersOutput]/*.filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) )*/.filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).sort((a, b) => {
+  const [connUsers,setConnUsers] = useState([...connectedUsersOutput]/*.filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) ).filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).sort((a, b) => {
     const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
     const bDate = b.sendDate === "None" ? Infinity : Number(b.sendDate) || 1000;
     return aDate - bDate;
-}))
+}*/)
 
-  console.log("CONN USERS-->",connUsers)
+  console.log("CONN USERS MESSAGE IN FOCUS-->",messageInFocus)
 
       useEffect(()=>{
 
@@ -251,16 +255,16 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
              {connectedUsersOutput.length > 0 && (
                   <motion.div variants={item}>
                     <Typography className="font-medium text-20 px-16 py-24" style={{color:"#21C9CF"}}>
-                      Touches | Events
+                      Message
                     </Typography>
                   </motion.div>
                 )}
-                  {interactions ? (
+                  {connUsers.messageQueue? (
                     <>
                     
                     {
-                      interactions && interactions.length ? (
-                        interactions.map((interaction, idx) => {
+                      connUsers.messageQueue && connUsers.messageQueue.length>0 ? (
+                        connUsers.messageQueue.map((interaction, idx) => {
 
                           return (
                             <ListItem
@@ -294,7 +298,7 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                                 secondary={interaction.subject}
                               />
 
-                              <div className="flex items-center " style={{justifyContent:"flex-start",minWidth:"15rem",gap:"0",}}>
+                              <div className="flex items-center " style={{justifyContent:"flex-start",minWidth:"15rem",backgroundColor:"pink"}}>
                                   <Typography className="font-medium text-14 mr-14" color="textSecondary" style={{flex:1}}>
                                     {//logic for date used -start
                                     formatSentDate(interaction.messageStatus === "Pending" ?
@@ -309,16 +313,9 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                                          background: "yellow",
                                          color: "black",
                                          borderRadius: "4px",
-                                         flex:1,
-                                         background:"yellow",
-                                         width:"7.8rem",
-                                         justifyContent:"center",
-                                         alignItems:"center",
-                                         display:"flex"
-                                         
-                                        
+                                         flex:1
                                        }}
-                                   className="font-medium text-12" color="textSecondary" >
+                                   className="font-medium text-14" color="textSecondary">
                                     {interaction.messageStatus || 'N/A'}
                                   </Typography>
                               </div>
@@ -328,7 +325,7 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                       ) : (
                         <div className="container">
                           <center>
-                            <p className="center">No Sent or Cancelled Touches/Events available</p>
+                            <p className="center">No Message Available</p>
                           </center>
                         </div>
                       )
@@ -353,7 +350,7 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                           })
                         ) : (
                           <div className="container">
-                              <center><p className="center">No Touches/Events available yet</p></center>
+                              <center><p className="center">No Message Selected</p></center>
                           </div>
                         )
                     }
