@@ -142,12 +142,36 @@ setTimeout(()=>{
         secondary: 'truncate',
       }}
       primary={props.user.name}
-      secondary={`${onlyPendingMessages && onlyPendingMessages[onlyPendingMessages.length-1 && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1].subject ? onlyPendingMessages[onlyPendingMessages.length-1].subject:" "}`  }
+      
+      secondary={
+     
+
+      <>
+       <Typography variant="caption" color="textSecondary">
+        {props.user.companyName && props.user.companyName}
+      </Typography>
+      <br/>
+        <Typography variant="caption" color="textSecondary">
+      {onlyPendingMessages && onlyPendingMessages[onlyPendingMessages.length-1 && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1].subject ? 
+      (//conditional for removing emoji for all messages that arent of type birthday
+       (onlyPendingMessages[onlyPendingMessages.length-1].messageType === "Birthday" || onlyPendingMessages[onlyPendingMessages.length-1].messageType === "Holiday")?
+       onlyPendingMessages[onlyPendingMessages.length-1].subject
+       :
+       onlyPendingMessages[onlyPendingMessages.length-1].subject.substring(0,onlyPendingMessages[onlyPendingMessages.length-1].subject.length-2)
+        
+      
+      )
+        :" "}
+      </Typography>
+
+     
+    </>
+     }
       // secondary={props.contact.mood}
     />
 
     {/* {props.contact.chatId && ( */}
-      <div className="flex flex-col justify-center items-end">
+      <div className="flex flex-col justify-start items-end" style={{marginTop:"-24px"}}>
       {/* {props.contact.lastMessageTime && ( */}
         <Typography
           className="whitespace-nowrap mb-8 font-medium text-12"

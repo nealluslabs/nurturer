@@ -84,7 +84,8 @@ if (allContacts.length > 0) {
           contactName: contact.name,
           contactId: contact.id||contact.uid,
           uid:contact.uid,
-          sendDate:contact.sendDate? contact.sendDate:90
+          sendDate:contact.sendDate? contact.sendDate:90,
+          companyName:contact.companyName?contact.companyName:"Boeing",
         }))
       );
     }
@@ -103,6 +104,7 @@ onlyTouchpointMessagesData = allMessages.filter((item)=>(item.messageStatus === 
   status: (msg.status && msg.status.toLowerCase() === 'pending') ? 'Pending' : (msg.messageStatus || ''),
   messageType:msg.messageType,
   sendDate:msg.sendDate? msg.sendDate:90,
+  companyName:msg.companyName?msg.companyName:"Boeing",
   statusColor: 'grey',
   statusBackground: 'yellow',
   icon: Mail,
@@ -918,7 +920,7 @@ if (allContacts.length > 0) {
                             })()
                         )}
                      </p>
-                        {<p style={{ fontSize: "12px" }}>{item.subtitle}</p>}
+                        {<p style={{ fontSize: "12px" }}>{item.subtitle} - {item.companyName}</p>}
                       </div>
                     </div>
 

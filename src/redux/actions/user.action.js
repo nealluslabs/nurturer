@@ -469,7 +469,7 @@ switch (cardType) {
 
       <ul>
       ${
-        (latest.messageType === "Holiday" || latest.messageType === "Birthday") &&
+        (latest.messageType === "Holiday" || latest.messageType === "Birthday") ?
          `
             <li style="list-style: none;">
               <img 
@@ -481,8 +481,22 @@ switch (cardType) {
               />
             </li>
           `
+          :
+          ``
       }
     </ul>
+
+    <br/><br/>
+    
+    <p style="text-align:center; font-size:12px; color:#888; margin:20px 0;">
+        <a 
+          href="https://nurturer.ai" 
+          target="_blank"
+          style="color:#888; text-decoration:none;"
+        >
+          Powered by Nurturer
+        </a>
+    </p>
     
     `;
     
