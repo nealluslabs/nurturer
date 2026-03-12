@@ -510,7 +510,12 @@ switch (cardType) {
         /* "https://nurturer-sendgrid-backend-production.up.railway.app/send-email",*/
        {
          to: data.email, // or 'devs@nurturer.ai'
-         subject: latest.subject ? latest.subject : "",
+         subject: latest.subject ? 
+         ( 
+          (latest.messageType === "Holiday" || latest.messageType === "Birthday") ?latest.subject
+          :
+          latest.subject.substring(0,latest.subject.length-2)
+        ) : "",
          htmlMessage: emailHTML,
          name:user.name && user.name,
          userEmail:user.email && user.email

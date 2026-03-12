@@ -525,24 +525,24 @@ function CandidateApp(props) {
                     
                   }}
                   
-                  onClick= {()=>{
-                    dispatch(
-                      
-                      setMessageInFocus(
-                        [{
-                      ...candidateInFocus,
-                      messageQueue:[
-                        {...item}
-                      ]
-                    }] 
-                    
-                    ));
-                    setTimeout(()=>{ 
-                    // history.push('/apps/inbox')
-                    history.push('/message-view')
-                  },300)
-                }
-                  }
+                 // onClick= {()=>{
+                 //   dispatch(
+                 //     
+                 //     setMessageInFocus(
+                 //       [{
+                 //     ...candidateInFocus,
+                 //     messageQueue:[
+                 //       {...item}
+                 //     ]
+                 //   }] 
+                 //   
+                 //   ));
+                 //   setTimeout(()=>{ 
+                 //  
+                 //   history.push('/message-view')
+                 // },300)
+                 //  }
+                 // }
                   >
                   <div 
                     key={item.id}

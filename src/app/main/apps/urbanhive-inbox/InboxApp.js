@@ -35,7 +35,7 @@ import {
 
 import UserSidebar from './UserSidebar';
 import { fetchRealTimeConnections, fetchRealTimeConnections2, fetchRealTimeUsers } from 'src/redux/actions/user.action';
-import { setCurrentChat } from 'redux/reducers/chat.slice';
+import { setCurrentChat,clearCurrentChat } from 'redux/reducers/chat.slice';
 import { saveCandidateInFocus, saveFilteredContacts } from 'redux/reducers/user.slice';
 
 const drawerWidth = 400;
@@ -167,7 +167,10 @@ setTimeout(()=>{
 
  }
 
-
+useEffect(()=>{
+  //we need this cus we dont want to land on an empty message
+dispatch(clearCurrentChat())
+},[])
 
   const selectedContact = useSelector((state) =>
     selectContactById(state, state.chatApp.contacts.selectedContactId)
