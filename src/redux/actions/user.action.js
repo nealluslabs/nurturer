@@ -5,7 +5,7 @@ import {fetchUsersPending, fetchUsersSuccess, fetchUsersFailed, fetchContactsSuc
 import { sendChat } from './chat.action';
 import { result } from 'lodash';
 import { clearChat } from 'src/redux/reducers/chat.slice';
-import { setCurrentChat } from 'redux/reducers/chat.slice';
+import { setCurrentChat,clearCurrentChat } from 'redux/reducers/chat.slice';
 import { saveChatGptAnswer, saveEditedParagraphs,saveAiTrigger, saveCandidateInFocus,subjectChangeTriggerAfterEmailSent, saveSubjectChangeTriggerAfterEmailIsSent } from 'redux/reducers/user.slice';
 import axios from 'axios';
 
@@ -567,7 +567,10 @@ switch (cardType) {
 
 
     await db.collection("contacts").doc(data && data.uid).get().then(async(doc)=>{
-      dispatch(setCurrentChat(doc.data()))
+     // dispatch(setCurrentChat(doc.data())) we want no more blank messages- so we are clearing current chat - mar -12 -2026 dagogo
+
+      await dispatch(fetchAllContactForOneUser(user.uid &&user.uid ))
+      dispatch(clearCurrentChat())
       dispatch(saveSubjectChangeTriggerAfterEmailIsSent(new Date().toISOString()))
      
 
@@ -841,7 +844,8 @@ const prompt =
     //you can put anything into ai trigger
    
      dispatch(saveAiTrigger(fullJobDetailsResponse && {...fullJobDetailsResponse,dateString:toDateString(new Date())}))
-     dispatch(fetchAllContactForOneUser())
+     dispatch(fetchAllContactForOneUser(user.uid && user.uid))
+     
 
      //I NEED THIS TO TRIGGER THE SUBJECT TO CHANGE ON THE TOUCHES INBOX - SO DONT DELETE
      dispatch(saveSubjectChangeTriggerAfterEmailIsSent( fullJobDetailsResponse && {...fullJobDetailsResponse,dateString:toDateString(new Date())} ))

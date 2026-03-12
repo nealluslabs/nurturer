@@ -57,7 +57,7 @@ const chatSlice = createSlice({
       };
     },
     clearCurrentChat: (state) => {
-      state.selectedChatUser = {};
+      state.selectedChatUser = null;
     },
   },
 });

@@ -138,21 +138,47 @@ function InboxSidebar(props) {
 
 
         // Use filteredContacts from Firebase instead of connectedUsers
-    let connectedUsersOutput = filteredContacts && filteredContacts.filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) ).filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).filter((item) => (item.uid !== user.uid))
+    let [connectedUsersOutput,setConnectedUsersOutput] = useState(filteredContacts && filteredContacts.filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) ).filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).filter((item) => (item.uid !== user.uid))
     .sort((a, b) => {
       const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
       const bDate = b.sendDate === "None" ? Infinity : Number(b.sendDate) || 1000;
       return aDate - bDate;
   })
+  .map(({ uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
+    lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,frequencyInDays,messageQueue,sendDate},index) => ({
+      uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
+      lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
+      companyName, jobTitle, interests, frequency,frequencyInDays,
+      daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
+   // ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+  }))
+)
+
+
+  useEffect(()=>{
+
+   setConnectedUsersOutput(
+    filteredContacts && filteredContacts.filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) ).filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).filter((item) => (item.uid !== user.uid))
+    .sort((a, b) => {
+      const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
+      const bDate = b.sendDate === "None" ? Infinity : Number(b.sendDate) || 1000;
+      return aDate - bDate;
+  })
+  .map(({ uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
+    lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,frequencyInDays,messageQueue,sendDate},index) => ({
+      uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
+      lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
+      companyName, jobTitle, interests, frequency,frequencyInDays,
+      daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
+   // ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
+  }))
+   )
+
+  },[filteredContacts,subjectChangeTriggerAfterEmailIsSent])
+
   
-    .map(({ uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
-      lookingFor, lastActive, isTechnical, photoUrl, password, message, companyName, jobTitle, interests, frequency,frequencyInDays,messageQueue,sendDate},index) => ({
-        uid, name, email, city, intro, skillset, skills_needed,touchesAlert,eventsAlert,
-        lookingFor, lastActive, isTechnical, photoUrl, password, message,messageQueue,sendDate,
-        companyName, jobTitle, interests, frequency,frequencyInDays,
-        daysTo:(3 +3*(index+1)).toString()+ " " + "Days" ,
-      ...(connectsById[uid] || { type: '', status: '', invited_amt: '', skipped_amt: ''})
-    }));
+  
+  
 
   const [connUsers,setConnUsers] = useState([...connectedUsersOutput].filter((a)=>(a.messageQueue && a.messageQueue.some((msg)=>(msg.messageStatus === "Pending"))) ).filter((item)=>(item.frequency !== "None" && item.sendDate && Number(item.sendDate) > 0 )).sort((a, b) => {
     const aDate = a.sendDate === "None" ? Infinity : Number(a.sendDate) || 1000;
