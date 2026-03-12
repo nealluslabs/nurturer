@@ -287,11 +287,78 @@ console.log("INTERACTIONS ON INBOX SIDEBAR--->",interactions)
                               <ListItemText
                                 classes={{
                                   root: 'min-w-px px-16',
-                                  primary: 'font-medium text-14',
+                                  primary: 'font-medium text-12',
                                   secondary: 'truncate',
                                 }}
-                                primary={candidateInFocus?.name}
-                                secondary={interaction.subject}
+                                primary={
+
+                                  <Typography  variant="body1"
+                                  color="textPrimary"
+                                  className="font-bold text-12">
+                                {interaction && interaction.subject ? 
+                                (//conditional for removing emoji for all messages that arent of type birthday
+                                 (interaction.messageType === "Birthday" || interaction.messageType === "Holiday")?
+                                ( 
+
+                                  interaction.subject &&
+                                    (interaction.subject.length < 18
+                                      ? interaction.subject
+                                      : (() => {
+                                          const words = interaction.subject.split(" ");
+                                          let result = "";
+                                          for (let word of words) {
+                                            if ((result + (result ? " " : "") + word).length > 18) break;
+                                            result += (result ? " " : "") + word;
+                                          }
+                                          return result +" "+interaction.subject.slice(interaction.subject.length-2,interaction.subject.length) ;
+                                        })()
+                                    )
+
+
+                                )
+                                 :
+                                 
+
+                                 interaction.subject &&
+                                  (interaction.subject.length < 18
+                                    ? interaction.subject.substring(0,interaction.subject.length-2)
+                                    : (() => {
+                                        const words = interaction.subject.split(" ");
+                                        let result = "";
+                                        for (let word of words) {
+                                          if ((result + (result ? " " : "") + word).length > 18) break;
+                                          result += (result ? " " : "") + word;
+                                        }
+                                        return result/* +" "+interaction.subject.slice(interaction.subject.length-2,interaction.subject.length)*/ ;
+                                      })()
+                                  )
+                                  
+                                
+                                )
+                                  :" "}
+                                </Typography>
+                                }
+                                
+                                
+                                secondary={
+
+                                  <>
+
+                                  <Typography variant="caption" color="textSecondary">
+                                    {candidateInFocus.name && candidateInFocus.name}
+                                  </Typography>
+                            
+                                  &nbsp; - &nbsp;
+                                 
+                            
+                                  <Typography variant="caption" color="textSecondary">
+                                    {candidateInFocus.companyName && candidateInFocus.companyName}
+                                  </Typography>
+                                   
+                            
+                                 
+                                </>
+                                }
                               />
 
                               <div className="flex items-center " style={{justifyContent:"flex-start",minWidth:"15rem",gap:"0",}}>

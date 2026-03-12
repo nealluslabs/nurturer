@@ -138,20 +138,14 @@ setTimeout(()=>{
     <ListItemText
       classes={{
         root: 'min-w-px px-16',
-        primary: 'font-medium text-14',
+        primary: 'text-14 font-bold',
         secondary: 'truncate',
       }}
-      primary={props.user.name}
-      
-      secondary={
-     
-
-      <>
-       <Typography variant="caption" color="textSecondary">
-        {props.user.companyName && props.user.companyName}
-      </Typography>
-      <br/>
-        <Typography variant="caption" color="textSecondary">
+      primary={
+        
+        <Typography  variant="body1"
+        color="textPrimary"
+        className="font-bold text-14">
       {onlyPendingMessages && onlyPendingMessages[onlyPendingMessages.length-1 && onlyPendingMessages.length-1] && onlyPendingMessages[onlyPendingMessages.length-1].subject ? 
       (//conditional for removing emoji for all messages that arent of type birthday
        (onlyPendingMessages[onlyPendingMessages.length-1].messageType === "Birthday" || onlyPendingMessages[onlyPendingMessages.length-1].messageType === "Holiday")?
@@ -163,6 +157,25 @@ setTimeout(()=>{
       )
         :" "}
       </Typography>
+      
+      }
+      
+      secondary={
+     
+
+      <>
+
+      <Typography variant="caption" color="textSecondary">
+        {props.user.name && props.user.name}
+      </Typography>
+
+      &nbsp; - &nbsp;
+     
+
+      <Typography variant="caption" color="textSecondary">
+        {props.user.companyName && props.user.companyName}
+      </Typography>
+       
 
      
     </>

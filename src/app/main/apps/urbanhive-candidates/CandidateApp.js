@@ -106,7 +106,7 @@ function CandidateApp(props) {
 
     dispatch(saveCandidateInFocus(firstContact && firstContact))
 
-  setTouchpointData(firstContact && firstContact.messageQueue && firstContact.messageQueue.length > 0  && firstContact.messageQueue.slice(0,4))
+  setTouchpointData(firstContact && firstContact.messageQueue && firstContact.messageQueue.length > 0  && firstContact.messageQueue.slice(0,4).reverse()  )
 
   setCandidateTriggersAlert(firstContact && firstContact.triggersAlert)
   setCandidateTouchesAlert(firstContact && firstContact.touchesAlert)
@@ -230,7 +230,7 @@ function CandidateApp(props) {
 
    if(candidateInFocus && candidateInFocus.name){
 
-    setTouchpointData(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0  && candidateInFocus.messageQueue.slice(0,4))
+    setTouchpointData(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0  && candidateInFocus.messageQueue.slice(0,4).reverse())
 
     setCandidateNotes(candidateInFocus && candidateInFocus.notes)
     }
@@ -250,7 +250,7 @@ function CandidateApp(props) {
   },[candidateInFocus])
 
 
-  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0?candidateInFocus.messageQueue.slice(0,4):[
+  const [touchpointData,setTouchpointData] = useState(candidateInFocus && candidateInFocus.messageQueue && candidateInFocus.messageQueue.length > 0?candidateInFocus.messageQueue.slice(0,4).reverse():[
     {
       id: 1,
       subject: 'Catch Up Email',

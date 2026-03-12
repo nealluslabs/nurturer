@@ -488,7 +488,7 @@ switch (cardType) {
 
     <br/><br/>
     
-    <p style="text-align:center; font-size:16px; color:#888; margin:20px 0;">
+    <p style="text-align:center; font-size:14px; color:#888; margin:20px 0;">
         <a 
           href="https://nurturer.ai" 
           target="_blank"
